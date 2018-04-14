@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>ThrowANewException.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>
+<body>
+<h4>ThrowANewException.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
+<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
+<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">public class ThrowANewException {</td></tr>
+<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;">	void someMethod1() {</td></tr>
+<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;">		throw new NullPointerException();</td></tr>
+<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;">	}</td></tr>
+<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">	void someMethod2() {</td></tr>
+<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;">		NullPointerException npe = new NullPointerException();</td></tr>
+<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;">		throw npe;</td></tr>
+<tr><td class="ln">    12</td><td style="padding-left:5px;padding-right:5px;">	}</td></tr>
+<tr><td class="ln">    13</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">    14</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="list" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vgAAADQAFwoABQATBwAUCgACABMHABUHABYBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAKkxjb20vaWNlYmVyZ2pkL2V4YW1wbGUvVGhyb3dBTmV3RXhjZXB0aW9uOwEAC3NvbWVNZXRob2QxAQALc29tZU1ldGhvZDIBAANucGUBACBMamF2YS9sYW5nL051bGxQb2ludGVyRXhjZXB0aW9uOwEAClNvdXJjZUZpbGUBABdUaHJvd0FOZXdFeGNlcHRpb24uamF2YQwABgAHAQAeamF2YS9sYW5nL051bGxQb2ludGVyRXhjZXB0aW9uAQAoY29tL2ljZWJlcmdqZC9leGFtcGxlL1Rocm93QU5ld0V4Y2VwdGlvbgEAEGphdmEvbGFuZy9PYmplY3QAIQAEAAUAAAAAAAMAAQAGAAcAAQAIAAAALwABAAEAAAAFKrcAAbEAAAACAAkAAAAGAAEAAAADAAoAAAAMAAEAAAAFAAsADAAAAAAADQAHAAEACAAAADIAAgABAAAACLsAAlm3AAO/AAAAAgAJAAAABgABAAAABgAKAAAADAABAAAACAALAAwAAAAAAA4ABwABAAgAAABCAAIAAgAAAAq7AAJZtwADTCu/AAAAAgAJAAAACgACAAAACgAIAAsACgAAABYAAgAAAAoACwAMAAAACAACAA8AEAABAAEAEQAAAAIAEg==", true);
+</script>
+<br/>Java compiler version: <b>1.8.0_161</b><br/>
+<br/><a href="..\examples\index.html">Other examples</a>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

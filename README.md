@@ -1,1 +1,5 @@
 # iceberg
+
+Iceberg is Java disassembler. It writen in JavaScript/HTML/CSS and works in Web browser. Disassembling is performed only by browser JavaScript, no any server calls are used. It means that during work with Iceberg your Java class files are not transferred outside of your computer.
+
+https://dmitriy-gulyaev.github.io/iceberg/

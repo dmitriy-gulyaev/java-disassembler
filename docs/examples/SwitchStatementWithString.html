@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>SwitchStatementWithString.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>
+<body>
+<h4>SwitchStatementWithString.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
+<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
+<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">public class SwitchStatementWithString {</td></tr>
+<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;">  public int stringToInt(String str) {</td></tr>
+<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;">    int returnValue;</td></tr>
+<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;">    switch (str) {</td></tr>
+<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;">    case "one":</td></tr>
+<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">      returnValue = 1;</td></tr>
+<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;">      break;</td></tr>
+<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;">    case "two":</td></tr>
+<tr><td class="ln">    12</td><td style="padding-left:5px;padding-right:5px;">    case "TWO":</td></tr>
+<tr><td class="ln">    13</td><td style="padding-left:5px;padding-right:5px;">      returnValue = 2;</td></tr>
+<tr><td class="ln">    14</td><td style="padding-left:5px;padding-right:5px;">      break;</td></tr>
+<tr><td class="ln">    15</td><td style="padding-left:5px;padding-right:5px;">      default:</td></tr>
+<tr><td class="ln">    16</td><td style="padding-left:5px;padding-right:5px;">        returnValue = 100;</td></tr>
+<tr><td class="ln">    17</td><td style="padding-left:5px;padding-right:5px;">    }</td></tr>
+<tr><td class="ln">    18</td><td style="padding-left:5px;padding-right:5px;">    return returnValue;</td></tr>
+<tr><td class="ln">    19</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
+<tr><td class="ln">    20</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
+<tr><td class="ln">    21</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
+<tr><td class="ln">    22</td><td style="padding-left:5px;padding-right:5px;">// title = Switch statement with strings</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="list" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vgAAADQAKQoACAAbCgAcAB0IAB4KABwAHwgAIAgAIQcAIgcAIwEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAxTGNvbS9pY2ViZXJnamQvZXhhbXBsZS9Td2l0Y2hTdGF0ZW1lbnRXaXRoU3RyaW5nOwEAC3N0cmluZ1RvSW50AQAVKExqYXZhL2xhbmcvU3RyaW5nOylJAQALcmV0dXJuVmFsdWUBAAFJAQADc3RyAQASTGphdmEvbGFuZy9TdHJpbmc7AQANU3RhY2tNYXBUYWJsZQcAJAcAIgEAClNvdXJjZUZpbGUBAB5Td2l0Y2hTdGF0ZW1lbnRXaXRoU3RyaW5nLmphdmEMAAkACgcAJAwAJQAmAQADb25lDAAnACgBAAN0d28BAANUV08BAC9jb20vaWNlYmVyZ2pkL2V4YW1wbGUvU3dpdGNoU3RhdGVtZW50V2l0aFN0cmluZwEAEGphdmEvbGFuZy9PYmplY3QBABBqYXZhL2xhbmcvU3RyaW5nAQAIaGFzaENvZGUBAAMoKUkBAAZlcXVhbHMBABUoTGphdmEvbGFuZy9PYmplY3Q7KVoAIQAHAAgAAAAAAAIAAQAJAAoAAQALAAAALwABAAEAAAAFKrcAAbEAAAACAAwAAAAGAAEAAAADAA0AAAAMAAEAAAAFAA4ADwAAAAEAEAARAAEACwAAAREAAgAFAAAAgytOAjYELbYAAqsAAAAAAE0AAAADAAFGLAAAAEEAAa5mAAAAIwABwkwAAAAyLRIDtgAEmQAkAzYEpwAeLRIFtgAEmQAVBDYEpwAPLRIGtgAEmQAGBTYEFQSqAAAAAAAAJgAAAAAAAAACAAAAHAAAACEAAAAhBD2nAAsFPacABhBkPRysAAAAAwAMAAAAHgAHAAAABwB0AAkAdgAKAHkADQB7AA4AfgAQAIEAEgANAAAANAAFAHYAAwASABMAAgB7AAMAEgATAAIAAACDAA4ADwAAAAAAgwAUABUAAQCBAAIAEgATAAIAFgAAAB4ACP4ALAAHABcBDg4LHQQE/wACAAMHABgHABcBAAAAAQAZAAAAAgAa", true);
+</script>
+<br/>Java compiler version: <b>1.8.0_161</b><br/>
+<br/><a href="..\examples\index.html">Other examples</a>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

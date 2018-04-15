@@ -8,29 +8,29 @@
 <body>
 <h4>Generic.class</h4><hr/>
 <h3>Source code</h3>
-<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
-<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
-<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">import java.util.Collections;</td></tr>
-<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;">import java.util.List;</td></tr>
-<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;">public class Generic&lt;GEN extends Number> {</td></tr>
-<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;">  byte someMethod1(GEN t) {</td></tr>
-<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">    return t.byteValue();</td></tr>
-<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    12</td><td style="padding-left:5px;padding-right:5px;">  List&lt;GEN> someMethod2(GEN t) {</td></tr>
-<tr><td class="ln">    13</td><td style="padding-left:5px;padding-right:5px;">    return Collections.singletonList(t);</td></tr>
-<tr><td class="ln">    14</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    15</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    16</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">import java.util.Collections;</td></tr>
+<tr><td class="ln">4</td><td class="cl">import java.util.List;</td></tr>
+<tr><td class="ln">5</td><td class="cl"></td></tr>
+<tr><td class="ln">6</td><td class="cl">public class Generic&lt;GEN extends Number> {</td></tr>
+<tr><td class="ln">7</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">  byte m1(GEN t) {</td></tr>
+<tr><td class="ln">9</td><td class="cl">    return t.byteValue();</td></tr>
+<tr><td class="ln">10</td><td class="cl">  }</td></tr>
+<tr><td class="ln">11</td><td class="cl"></td></tr>
+<tr><td class="ln">12</td><td class="cl">  List&lt;GEN> m2(GEN t) {</td></tr>
+<tr><td class="ln">13</td><td class="cl">    return Collections.singletonList(t);</td></tr>
+<tr><td class="ln">14</td><td class="cl">  }</td></tr>
+<tr><td class="ln">15</td><td class="cl"></td></tr>
+<tr><td class="ln">16</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAKQoABQAcCgAdAB4KAB8AIAcAIQcAIgEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAfTGNvbS9pY2ViZXJnamQvZXhhbXBsZS9HZW5lcmljOwEAFkxvY2FsVmFyaWFibGVUeXBlVGFibGUBACZMY29tL2ljZWJlcmdqZC9leGFtcGxlL0dlbmVyaWM8VEdFTjs+OwEAC3NvbWVNZXRob2QxAQAVKExqYXZhL2xhbmcvTnVtYmVyOylCAQABdAEAEkxqYXZhL2xhbmcvTnVtYmVyOwEABVRHRU47AQAJU2lnbmF0dXJlAQAIKFRHRU47KUIBAAtzb21lTWV0aG9kMgEAJChMamF2YS9sYW5nL051bWJlcjspTGphdmEvdXRpbC9MaXN0OwEAHihUR0VOOylMamF2YS91dGlsL0xpc3Q8VEdFTjs+OwEAKjxHRU46TGphdmEvbGFuZy9OdW1iZXI7PkxqYXZhL2xhbmcvT2JqZWN0OwEAClNvdXJjZUZpbGUBAAxHZW5lcmljLmphdmEMAAYABwcAIwwAJAAlBwAmDAAnACgBAB1jb20vaWNlYmVyZ2pkL2V4YW1wbGUvR2VuZXJpYwEAEGphdmEvbGFuZy9PYmplY3QBABBqYXZhL2xhbmcvTnVtYmVyAQAJYnl0ZVZhbHVlAQADKClCAQAVamF2YS91dGlsL0NvbGxlY3Rpb25zAQANc2luZ2xldG9uTGlzdAEAJChMamF2YS9sYW5nL09iamVjdDspTGphdmEvdXRpbC9MaXN0OwAhAAQABQAAAAAAAwABAAYABwABAAgAAABBAAEAAQAAAAUqtwABsQAAAAMACQAAAAYAAQAAAAYACgAAAAwAAQAAAAUACwAMAAAADQAAAAwAAQAAAAUACwAOAAAAAAAPABAAAgAIAAAAVQABAAIAAAAFK7YAAqwAAAADAAkAAAAGAAEAAAAJAAoAAAAWAAIAAAAFAAsADAAAAAAABQARABIAAQANAAAAFgACAAAABQALAA4AAAAAAAUAEQATAAEAFAAAAAIAFQAAABYAFwACAAgAAABVAAEAAgAAAAUruAADsAAAAAMACQAAAAYAAQAAAA0ACgAAABYAAgAAAAUACwAMAAAAAAAFABEAEgABAA0AAAAWAAIAAAAFAAsADgAAAAAABQARABMAAQAUAAAAAgAYAAIAFAAAAAIAGQAaAAAAAgAb", true);
+main("yv66vgAAADQAKQoABQAcCgAdAB4KAB8AIAcAIQcAIgEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAdTGNvbS9leGFtcGxlL2ljZWJlcmcvR2VuZXJpYzsBABZMb2NhbFZhcmlhYmxlVHlwZVRhYmxlAQAkTGNvbS9leGFtcGxlL2ljZWJlcmcvR2VuZXJpYzxUR0VOOz47AQACbTEBABUoTGphdmEvbGFuZy9OdW1iZXI7KUIBAAF0AQASTGphdmEvbGFuZy9OdW1iZXI7AQAFVEdFTjsBAAlTaWduYXR1cmUBAAgoVEdFTjspQgEAAm0yAQAkKExqYXZhL2xhbmcvTnVtYmVyOylMamF2YS91dGlsL0xpc3Q7AQAeKFRHRU47KUxqYXZhL3V0aWwvTGlzdDxUR0VOOz47AQAqPEdFTjpMamF2YS9sYW5nL051bWJlcjs+TGphdmEvbGFuZy9PYmplY3Q7AQAKU291cmNlRmlsZQEADEdlbmVyaWMuamF2YQwABgAHBwAjDAAkACUHACYMACcAKAEAG2NvbS9leGFtcGxlL2ljZWJlcmcvR2VuZXJpYwEAEGphdmEvbGFuZy9PYmplY3QBABBqYXZhL2xhbmcvTnVtYmVyAQAJYnl0ZVZhbHVlAQADKClCAQAVamF2YS91dGlsL0NvbGxlY3Rpb25zAQANc2luZ2xldG9uTGlzdAEAJChMamF2YS9sYW5nL09iamVjdDspTGphdmEvdXRpbC9MaXN0OwAhAAQABQAAAAAAAwABAAYABwABAAgAAABBAAEAAQAAAAUqtwABsQAAAAMACQAAAAYAAQAAAAYACgAAAAwAAQAAAAUACwAMAAAADQAAAAwAAQAAAAUACwAOAAAAAAAPABAAAgAIAAAAVQABAAIAAAAFK7YAAqwAAAADAAkAAAAGAAEAAAAJAAoAAAAWAAIAAAAFAAsADAAAAAAABQARABIAAQANAAAAFgACAAAABQALAA4AAAAAAAUAEQATAAEAFAAAAAIAFQAAABYAFwACAAgAAABVAAEAAgAAAAUruAADsAAAAAMACQAAAAYAAQAAAA0ACgAAABYAAgAAAAUACwAMAAAAAAAFABEAEgABAA0AAAAWAAIAAAAFAAsADgAAAAAABQARABMAAQAUAAAAAgAYAAIAFAAAAAIAGQAaAAAAAgAb", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

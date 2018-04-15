@@ -8,27 +8,27 @@
 <body>
 <h4>AssertStatement.class</h4><hr/>
 <h3>Source code</h3>
-<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
-<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
-<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">public class AssertStatement {</td></tr>
-<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;">  short someMethod(Long argument) {</td></tr>
-<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;">    assert argument != null;</td></tr>
-<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;">    assert argument > 10;</td></tr>
-<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;">    assert argument > 70 : argument &lt; 90;</td></tr>
-<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">    return argument.shortValue();</td></tr>
-<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    12</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
-<tr><td class="ln">    13</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    14</td><td style="padding-left:5px;padding-right:5px;">// jls8 = jls-14.html#jls-14.10</td></tr>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">public class AssertStatement {</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl">  short m(Long argument) {</td></tr>
+<tr><td class="ln">6</td><td class="cl">    assert argument != null;</td></tr>
+<tr><td class="ln">7</td><td class="cl">    assert argument > 10;</td></tr>
+<tr><td class="ln">8</td><td class="cl">    assert argument > 70 : argument &lt; 90;</td></tr>
+<tr><td class="ln">9</td><td class="cl">    return argument.shortValue();</td></tr>
+<tr><td class="ln">10</td><td class="cl">  }</td></tr>
+<tr><td class="ln">11</td><td class="cl"></td></tr>
+<tr><td class="ln">12</td><td class="cl">}</td></tr>
+<tr><td class="ln">13</td><td class="cl"></td></tr>
+<tr><td class="ln">14</td><td class="cl">// jls8 = jls-14.html#jls-14.10</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAOAoAEAAkCQAOACUHACYKAAMAJAoAJwAoBQAAAAAAAAAKBQAAAAAAAABGBQAAAAAAAABaCgADACkKACcAKgcAKwoALAAtBwAuAQATJGFzc2VydGlvbnNEaXNhYmxlZAEAAVoBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAJ0xjb20vaWNlYmVyZ2pkL2V4YW1wbGUvQXNzZXJ0U3RhdGVtZW50OwEACnNvbWVNZXRob2QBABMoTGphdmEvbGFuZy9Mb25nOylTAQAIYXJndW1lbnQBABBMamF2YS9sYW5nL0xvbmc7AQANU3RhY2tNYXBUYWJsZQcAKwcALwEACDxjbGluaXQ+AQAKU291cmNlRmlsZQEAFEFzc2VydFN0YXRlbWVudC5qYXZhDAATABQMABEAEgEAGGphdmEvbGFuZy9Bc3NlcnRpb25FcnJvcgcALwwAMAAxDAATADIMADMANAEAJWNvbS9pY2ViZXJnamQvZXhhbXBsZS9Bc3NlcnRTdGF0ZW1lbnQHADUMADYANwEAEGphdmEvbGFuZy9PYmplY3QBAA5qYXZhL2xhbmcvTG9uZwEACWxvbmdWYWx1ZQEAAygpSgEABChaKVYBAApzaG9ydFZhbHVlAQADKClTAQAPamF2YS9sYW5nL0NsYXNzAQAWZGVzaXJlZEFzc2VydGlvblN0YXR1cwEAAygpWgAhAA4AEAAAAAEQGAARABIAAAADAAEAEwAUAAEAFQAAAC8AAQABAAAABSq3AAGxAAAAAgAWAAAABgABAAAAAwAXAAAADAABAAAABQAYABkAAAAAABoAGwABABUAAADLAAYAAgAAAFmyAAKaAA8rxwALuwADWbcABL+yAAKaABYrtgAFFAAGlJ0AC7sAA1m3AAS/sgACmgAmK7YABRQACJSdABu7AANZK7YABRQACpScAAcEpwAEA7cADL8rtgANrAAAAAMAFgAAABIABAAAAAYAEgAHACsACABUAAkAFwAAABYAAgAAAFkAGAAZAAAAAABZABwAHQABAB4AAAAsAAUSGP8AIwACBwAfBwAgAAIIADwIADz/AAAAAgcAHwcAIAADCAA8CAA8AQMACAAhABQAAQAVAAAANAABAAAAAAAREg62AA+aAAcEpwAEA7MAArEAAAACABYAAAAGAAEAAAADAB4AAAAFAAIMQAEAAQAiAAAAAgAj", true);
+main("yv66vgAAADQAOAoAEAAkCQAOACUHACYKAAMAJAoAJwAoBQAAAAAAAAAKBQAAAAAAAABGBQAAAAAAAABaCgADACkKACcAKgcAKwoALAAtBwAuAQATJGFzc2VydGlvbnNEaXNhYmxlZAEAAVoBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAJUxjb20vZXhhbXBsZS9pY2ViZXJnL0Fzc2VydFN0YXRlbWVudDsBAAFtAQATKExqYXZhL2xhbmcvTG9uZzspUwEACGFyZ3VtZW50AQAQTGphdmEvbGFuZy9Mb25nOwEADVN0YWNrTWFwVGFibGUHACsHAC8BAAg8Y2xpbml0PgEAClNvdXJjZUZpbGUBABRBc3NlcnRTdGF0ZW1lbnQuamF2YQwAEwAUDAARABIBABhqYXZhL2xhbmcvQXNzZXJ0aW9uRXJyb3IHAC8MADAAMQwAEwAyDAAzADQBACNjb20vZXhhbXBsZS9pY2ViZXJnL0Fzc2VydFN0YXRlbWVudAcANQwANgA3AQAQamF2YS9sYW5nL09iamVjdAEADmphdmEvbGFuZy9Mb25nAQAJbG9uZ1ZhbHVlAQADKClKAQAEKFopVgEACnNob3J0VmFsdWUBAAMoKVMBAA9qYXZhL2xhbmcvQ2xhc3MBABZkZXNpcmVkQXNzZXJ0aW9uU3RhdHVzAQADKClaACEADgAQAAAAARAYABEAEgAAAAMAAQATABQAAQAVAAAALwABAAEAAAAFKrcAAbEAAAACABYAAAAGAAEAAAADABcAAAAMAAEAAAAFABgAGQAAAAAAGgAbAAEAFQAAAMsABgACAAAAWbIAApoADyvHAAu7AANZtwAEv7IAApoAFiu2AAUUAAaUnQALuwADWbcABL+yAAKaACYrtgAFFAAIlJ0AG7sAA1krtgAFFAAKlJwABwSnAAQDtwAMvyu2AA2sAAAAAwAWAAAAEgAEAAAABgASAAcAKwAIAFQACQAXAAAAFgACAAAAWQAYABkAAAAAAFkAHAAdAAEAHgAAACwABRIY/wAjAAIHAB8HACAAAggAPAgAPP8AAAACBwAfBwAgAAMIADwIADwBAwAIACEAFAABABUAAAA0AAEAAAAAABESDrYAD5oABwSnAAQDswACsQAAAAIAFgAAAAYAAQAAAAMAHgAAAAUAAgxAAQABACIAAAACACM=", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

@@ -8,24 +8,24 @@
 <body>
 <h4>InstanceOf.class</h4><hr/>
 <h3>Source code</h3>
-<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
-<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
-<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">public class InstanceOf {</td></tr>
-<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;">  public void someMethod(Object o) {</td></tr>
-<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;">    if (o instanceof Number) {</td></tr>
-<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;">      ((Number) o).doubleValue();</td></tr>
-<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;">    }</td></tr>
-<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">public class InstanceOf {</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl">  public void m(Object o) {</td></tr>
+<tr><td class="ln">6</td><td class="cl">    if (o instanceof Number) {</td></tr>
+<tr><td class="ln">7</td><td class="cl">      ((Number) o).doubleValue();</td></tr>
+<tr><td class="ln">8</td><td class="cl">    }</td></tr>
+<tr><td class="ln">9</td><td class="cl">  }</td></tr>
+<tr><td class="ln">10</td><td class="cl"></td></tr>
+<tr><td class="ln">11</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAGwoABQAUBwAVCgACABYHABcHABgBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAIkxjb20vaWNlYmVyZ2pkL2V4YW1wbGUvSW5zdGFuY2VPZjsBAApzb21lTWV0aG9kAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWAQABbwEAEkxqYXZhL2xhbmcvT2JqZWN0OwEADVN0YWNrTWFwVGFibGUBAApTb3VyY2VGaWxlAQAPSW5zdGFuY2VPZi5qYXZhDAAGAAcBABBqYXZhL2xhbmcvTnVtYmVyDAAZABoBACBjb20vaWNlYmVyZ2pkL2V4YW1wbGUvSW5zdGFuY2VPZgEAEGphdmEvbGFuZy9PYmplY3QBAAtkb3VibGVWYWx1ZQEAAygpRAAhAAQABQAAAAAAAgABAAYABwABAAgAAAAvAAEAAQAAAAUqtwABsQAAAAIACQAAAAYAAQAAAAMACgAAAAwAAQAAAAUACwAMAAAAAQANAA4AAQAIAAAAVQACAAIAAAAQK8EAApkACyvAAAK2AANYsQAAAAMACQAAAA4AAwAAAAYABwAHAA8ACQAKAAAAFgACAAAAEAALAAwAAAAAABAADwAQAAEAEQAAAAMAAQ8AAQASAAAAAgAT", true);
+main("yv66vgAAADQAGwoABQAUBwAVCgACABYHABcHABgBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAIExjb20vZXhhbXBsZS9pY2ViZXJnL0luc3RhbmNlT2Y7AQABbQEAFShMamF2YS9sYW5nL09iamVjdDspVgEAAW8BABJMamF2YS9sYW5nL09iamVjdDsBAA1TdGFja01hcFRhYmxlAQAKU291cmNlRmlsZQEAD0luc3RhbmNlT2YuamF2YQwABgAHAQAQamF2YS9sYW5nL051bWJlcgwAGQAaAQAeY29tL2V4YW1wbGUvaWNlYmVyZy9JbnN0YW5jZU9mAQAQamF2YS9sYW5nL09iamVjdAEAC2RvdWJsZVZhbHVlAQADKClEACEABAAFAAAAAAACAAEABgAHAAEACAAAAC8AAQABAAAABSq3AAGxAAAAAgAJAAAABgABAAAAAwAKAAAADAABAAAABQALAAwAAAABAA0ADgABAAgAAABVAAIAAgAAABArwQACmQALK8AAArYAA1ixAAAAAwAJAAAADgADAAAABgAHAAcADwAJAAoAAAAWAAIAAAAQAAsADAAAAAAAEAAPABAAAQARAAAAAwABDwABABIAAAACABM=", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

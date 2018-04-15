@@ -8,34 +8,34 @@
 <body>
 <h4>VarArgs.class</h4><hr/>
 <h3>Source code</h3>
-<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
-<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
-<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">import java.util.Arrays;</td></tr>
-<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;">public class VarArgs {</td></tr>
-<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;">    public static void printVarArgs(String... args) {</td></tr>
-<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;">        System.out.println(Arrays.toString(args));</td></tr>
-<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">    }</td></tr>
-<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;">    public static void print(int i) {</td></tr>
-<tr><td class="ln">    12</td><td style="padding-left:5px;padding-right:5px;">        String.format("Value of i = %s.", i);</td></tr>
-<tr><td class="ln">    13</td><td style="padding-left:5px;padding-right:5px;">    }</td></tr>
-<tr><td class="ln">    14</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    15</td><td style="padding-left:5px;padding-right:5px;">    private void doPrint() {</td></tr>
-<tr><td class="ln">    16</td><td style="padding-left:5px;padding-right:5px;">        printVarArgs("one", "two");</td></tr>
-<tr><td class="ln">    17</td><td style="padding-left:5px;padding-right:5px;">        printVarArgs(null);</td></tr>
-<tr><td class="ln">    18</td><td style="padding-left:5px;padding-right:5px;">        printVarArgs();</td></tr>
-<tr><td class="ln">    19</td><td style="padding-left:5px;padding-right:5px;">    }</td></tr>
-<tr><td class="ln">    20</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    21</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">import java.util.Arrays;</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl">public class VarArgs {</td></tr>
+<tr><td class="ln">6</td><td class="cl"></td></tr>
+<tr><td class="ln">7</td><td class="cl">    public static void printVarArgs(String... args) {</td></tr>
+<tr><td class="ln">8</td><td class="cl">        System.out.println(Arrays.toString(args));</td></tr>
+<tr><td class="ln">9</td><td class="cl">    }</td></tr>
+<tr><td class="ln">10</td><td class="cl"></td></tr>
+<tr><td class="ln">11</td><td class="cl">    public static void print(int i) {</td></tr>
+<tr><td class="ln">12</td><td class="cl">        String.format("Value of i = %s.", i);</td></tr>
+<tr><td class="ln">13</td><td class="cl">    }</td></tr>
+<tr><td class="ln">14</td><td class="cl"></td></tr>
+<tr><td class="ln">15</td><td class="cl">    private void doPrint() {</td></tr>
+<tr><td class="ln">16</td><td class="cl">        printVarArgs("one", "two");</td></tr>
+<tr><td class="ln">17</td><td class="cl">        printVarArgs(null);</td></tr>
+<tr><td class="ln">18</td><td class="cl">        printVarArgs();</td></tr>
+<tr><td class="ln">19</td><td class="cl">    }</td></tr>
+<tr><td class="ln">20</td><td class="cl"></td></tr>
+<tr><td class="ln">21</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAPwoABgAgCQAhACIKACMAJAoAJQAmCAAnBwAoCgApACoKAAkAKwcALAgALQgALgoADQAvBwAwAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAB9MY29tL2ljZWJlcmdqZC9leGFtcGxlL1ZhckFyZ3M7AQAMcHJpbnRWYXJBcmdzAQAWKFtMamF2YS9sYW5nL1N0cmluZzspVgEABGFyZ3MBABNbTGphdmEvbGFuZy9TdHJpbmc7AQAFcHJpbnQBAAQoSSlWAQABaQEAAUkBAAdkb1ByaW50AQAKU291cmNlRmlsZQEADFZhckFyZ3MuamF2YQwADgAPBwAxDAAyADMHADQMADUANgcANwwAOAA5AQAQVmFsdWUgb2YgaSA9ICVzLgEAEGphdmEvbGFuZy9PYmplY3QHADoMADsAPAwAPQA+AQAQamF2YS9sYW5nL1N0cmluZwEAA29uZQEAA3R3bwwAFQAWAQAdY29tL2ljZWJlcmdqZC9leGFtcGxlL1ZhckFyZ3MBABBqYXZhL2xhbmcvU3lzdGVtAQADb3V0AQAVTGphdmEvaW8vUHJpbnRTdHJlYW07AQAQamF2YS91dGlsL0FycmF5cwEACHRvU3RyaW5nAQAnKFtMamF2YS9sYW5nL09iamVjdDspTGphdmEvbGFuZy9TdHJpbmc7AQATamF2YS9pby9QcmludFN0cmVhbQEAB3ByaW50bG4BABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7AQAGZm9ybWF0AQA5KExqYXZhL2xhbmcvU3RyaW5nO1tMamF2YS9sYW5nL09iamVjdDspTGphdmEvbGFuZy9TdHJpbmc7ACEADQAGAAAAAAAEAAEADgAPAAEAEAAAAC8AAQABAAAABSq3AAGxAAAAAgARAAAABgABAAAABQASAAAADAABAAAABQATABQAAACJABUAFgABABAAAAA5AAIAAQAAAAuyAAIquAADtgAEsQAAAAIAEQAAAAoAAgAAAAgACgAJABIAAAAMAAEAAAALABcAGAAAAAkAGQAaAAEAEAAAAEAABQABAAAAEhIFBL0ABlkDGrgAB1O4AAhXsQAAAAIAEQAAAAoAAgAAAAwAEQANABIAAAAMAAEAAAASABsAHAAAAAIAHQAPAAEAEAAAAFMABAABAAAAHQW9AAlZAxIKU1kEEgtTuAAMAbgADAO9AAm4AAyxAAAAAgARAAAAEgAEAAAAEAARABEAFQASABwAEwASAAAADAABAAAAHQATABQAAAABAB4AAAACAB8=", true);
+main("yv66vgAAADQAPwoABgAgCQAhACIKACMAJAoAJQAmCAAnBwAoCgApACoKAAkAKwcALAgALQgALgoADQAvBwAwAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAB1MY29tL2V4YW1wbGUvaWNlYmVyZy9WYXJBcmdzOwEADHByaW50VmFyQXJncwEAFihbTGphdmEvbGFuZy9TdHJpbmc7KVYBAARhcmdzAQATW0xqYXZhL2xhbmcvU3RyaW5nOwEABXByaW50AQAEKEkpVgEAAWkBAAFJAQAHZG9QcmludAEAClNvdXJjZUZpbGUBAAxWYXJBcmdzLmphdmEMAA4ADwcAMQwAMgAzBwA0DAA1ADYHADcMADgAOQEAEFZhbHVlIG9mIGkgPSAlcy4BABBqYXZhL2xhbmcvT2JqZWN0BwA6DAA7ADwMAD0APgEAEGphdmEvbGFuZy9TdHJpbmcBAANvbmUBAAN0d28MABUAFgEAG2NvbS9leGFtcGxlL2ljZWJlcmcvVmFyQXJncwEAEGphdmEvbGFuZy9TeXN0ZW0BAANvdXQBABVMamF2YS9pby9QcmludFN0cmVhbTsBABBqYXZhL3V0aWwvQXJyYXlzAQAIdG9TdHJpbmcBACcoW0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS9sYW5nL1N0cmluZzsBABNqYXZhL2lvL1ByaW50U3RyZWFtAQAHcHJpbnRsbgEAFShMamF2YS9sYW5nL1N0cmluZzspVgEAEWphdmEvbGFuZy9JbnRlZ2VyAQAHdmFsdWVPZgEAFihJKUxqYXZhL2xhbmcvSW50ZWdlcjsBAAZmb3JtYXQBADkoTGphdmEvbGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS9sYW5nL1N0cmluZzsAIQANAAYAAAAAAAQAAQAOAA8AAQAQAAAALwABAAEAAAAFKrcAAbEAAAACABEAAAAGAAEAAAAFABIAAAAMAAEAAAAFABMAFAAAAIkAFQAWAAEAEAAAADkAAgABAAAAC7IAAiq4AAO2AASxAAAAAgARAAAACgACAAAACAAKAAkAEgAAAAwAAQAAAAsAFwAYAAAACQAZABoAAQAQAAAAQAAFAAEAAAASEgUEvQAGWQMauAAHU7gACFexAAAAAgARAAAACgACAAAADAARAA0AEgAAAAwAAQAAABIAGwAcAAAAAgAdAA8AAQAQAAAAUwAEAAEAAAAdBb0ACVkDEgpTWQQSC1O4AAwBuAAMA70ACbgADLEAAAACABEAAAASAAQAAAAQABEAEQAVABIAHAATABIAAAAMAAEAAAAdABMAFAAAAAEAHgAAAAIAHw==", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

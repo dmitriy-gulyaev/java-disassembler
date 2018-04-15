@@ -1,9 +1,10 @@
 body {
-	font-family: Helvetica Neue,Segoe UI,Helvetica,Arial,sans-serif;
+	font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
 }
 
 table {
-	word-wrap:break-word;	font-size: 12px;
+	word-wrap: break-word;
+	font-size: 12px;
 }
 
 tr:hov--er {
@@ -11,40 +12,110 @@ tr:hov--er {
 }
 
 td {
-	vertical-align:top;
+	vertical-align: top;
 }
 
 span {
-    border-radius: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    /*font-weight: bold;*/
-    color:black;
-    border: 1px #bbbbbb solid;
-    font-family: Courier;
+	border-radius: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	/*font-weight: bold;*/
+	color: black;
+	border: 1px #bbbbbb solid;
+	font-family: Courier;
 }
 
-#list { 
-    font-family: monospace;
+#list {
+	font-family: monospace;
 }
 
+.field {
+	background: #99ff33;
+	color: #000000;
+}
 
-.field {background: #99ff33; color: #000000;}
-.method {background: #66ffff; color: #000000;}
-.access {background: #eeeeee; color: #000000; padding-right:5px; padding-left:5px}
+.method {
+	background: #66ffff;
+	color: #000000;
+}
 
-.oc {float: left;width: 95px; text-align:center;     border: 1px #777777 solid;}
+.access {
+	background: #eeeeee;
+	color: #000000;
+	padding-right: 5px;
+	padding-left: 5px
+}
 
-.oc-cons {background: #999999; color:#ffffff}
-.oc-load {background: #AAFFFF;}
-.oc-stor {background: #800000; color:#ffffff}
-.oc-stac {background: #00FFFF;}
-.oc-math {background: #808000; color:#ffffff}
-.oc-conv {background: #00FF00;}
-.oc-comp {background: #008000; color:#ffffff}
-.oc-refe {background: #FFFFAA;}
-.oc-cont {background: #008080; color:#ffffff}
-.oc-exte {background: #0000FF; color:#ffffff}
+.oc {
+	float: left;
+	width: 95px;
+	text-align: center;
+	border: 1px #777777 solid;
+}
 
-.ln {background: #eeeeee; color:#555555; text-align:right; font-family: monospace; width:50px; padding-right:5px; border-right: 1px solid #aaaaaa}
+.oc-cons {
+	background: #999999;
+	color: #ffffff
+}
 
+.oc-load {
+	background: #AAFFFF;
+}
+
+.oc-stor {
+	background: #800000;
+	color: #ffffff
+}
+
+.oc-stac {
+	background: #00FFFF;
+}
+
+.oc-math {
+	background: #808000;
+	color: #ffffff
+}
+
+.oc-conv {
+	background: #00FF00;
+}
+
+.oc-comp {
+	background: #008000;
+	color: #ffffff
+}
+
+.oc-refe {
+	background: #FFFFAA;
+}
+
+.oc-cont {
+	background: #008080;
+	color: #ffffff
+}
+
+.oc-exte {
+	background: #0000FF;
+	color: #ffffff
+}
+
+.ln {
+	background: #eeeeee;
+	color: #555555;
+	text-align: right;
+	font-family: monospace;
+	width: 50px;
+	padding-right: 5px;
+	border-right: 1px solid #aaaaaa
+}
+
+.cl {
+	padding-left:5px;
+}
+
+.ct {
+	border:1px solid #000000;
+	white-space: pre;
+	font-family: monospace;
+	border-spacing: 0;
+}

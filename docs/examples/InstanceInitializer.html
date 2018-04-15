@@ -8,37 +8,37 @@
 <body>
 <h4>InstanceInitializer.class</h4><hr/>
 <h3>Source code</h3>
-<table width=100% cellspacing=0 border=0 style="border:1px solid #000000; white-space: pre; font-family: monospace;">
-<tr><td class="ln">     1</td><td style="padding-left:5px;padding-right:5px;">package com.icebergjd.example;</td></tr>
-<tr><td class="ln">     2</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     3</td><td style="padding-left:5px;padding-right:5px;">public class InstanceInitializer {</td></tr>
-<tr><td class="ln">     4</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     5</td><td style="padding-left:5px;padding-right:5px;">  int x = 2000;</td></tr>
-<tr><td class="ln">     6</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">     7</td><td style="padding-left:5px;padding-right:5px;">  {</td></tr>
-<tr><td class="ln">     8</td><td style="padding-left:5px;padding-right:5px;">    y = 30;</td></tr>
-<tr><td class="ln">     9</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    10</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    11</td><td style="padding-left:5px;padding-right:5px;">  int y = this.x + 100;</td></tr>
-<tr><td class="ln">    12</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    13</td><td style="padding-left:5px;padding-right:5px;">  int z;</td></tr>
-<tr><td class="ln">    14</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    15</td><td style="padding-left:5px;padding-right:5px;">  public InstanceInitializer(String str) {</td></tr>
-<tr><td class="ln">    16</td><td style="padding-left:5px;padding-right:5px;">    this.z = Integer.parseInt(str);</td></tr>
-<tr><td class="ln">    17</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    18</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    19</td><td style="padding-left:5px;padding-right:5px;">  public InstanceInitializer(Long lng) {</td></tr>
-<tr><td class="ln">    20</td><td style="padding-left:5px;padding-right:5px;">    this.z = lng.intValue();</td></tr>
-<tr><td class="ln">    21</td><td style="padding-left:5px;padding-right:5px;">  }</td></tr>
-<tr><td class="ln">    22</td><td style="padding-left:5px;padding-right:5px;"></td></tr>
-<tr><td class="ln">    23</td><td style="padding-left:5px;padding-right:5px;">  public InstanceInitializer() {}</td></tr>
-<tr><td class="ln">    24</td><td style="padding-left:5px;padding-right:5px;">}</td></tr>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">public class InstanceInitializer {</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl">  int x = 2000;</td></tr>
+<tr><td class="ln">6</td><td class="cl"></td></tr>
+<tr><td class="ln">7</td><td class="cl">  {</td></tr>
+<tr><td class="ln">8</td><td class="cl">    y = 30;</td></tr>
+<tr><td class="ln">9</td><td class="cl">  }</td></tr>
+<tr><td class="ln">10</td><td class="cl"></td></tr>
+<tr><td class="ln">11</td><td class="cl">  int y = this.x + 100;</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">  int z;</td></tr>
+<tr><td class="ln">14</td><td class="cl"></td></tr>
+<tr><td class="ln">15</td><td class="cl">  public InstanceInitializer(String str) {</td></tr>
+<tr><td class="ln">16</td><td class="cl">    this.z = Integer.parseInt(str);</td></tr>
+<tr><td class="ln">17</td><td class="cl">  }</td></tr>
+<tr><td class="ln">18</td><td class="cl"></td></tr>
+<tr><td class="ln">19</td><td class="cl">  public InstanceInitializer(Long lng) {</td></tr>
+<tr><td class="ln">20</td><td class="cl">    this.z = lng.intValue();</td></tr>
+<tr><td class="ln">21</td><td class="cl">  }</td></tr>
+<tr><td class="ln">22</td><td class="cl"></td></tr>
+<tr><td class="ln">23</td><td class="cl">  public InstanceInitializer() {}</td></tr>
+<tr><td class="ln">24</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQALAoACAAcCQAHAB0JAAcAHgoAHwAgCQAHACEKACIAIwcAJAcAJQEAAXgBAAFJAQABeQEAAXoBAAY8aW5pdD4BABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAK0xjb20vaWNlYmVyZ2pkL2V4YW1wbGUvSW5zdGFuY2VJbml0aWFsaXplcjsBAANzdHIBABJMamF2YS9sYW5nL1N0cmluZzsBABMoTGphdmEvbGFuZy9Mb25nOylWAQADbG5nAQAQTGphdmEvbGFuZy9Mb25nOwEAAygpVgEAClNvdXJjZUZpbGUBABhJbnN0YW5jZUluaXRpYWxpemVyLmphdmEMAA0AGQwACQAKDAALAAoHACYMACcAKAwADAAKBwApDAAqACsBACljb20vaWNlYmVyZ2pkL2V4YW1wbGUvSW5zdGFuY2VJbml0aWFsaXplcgEAEGphdmEvbGFuZy9PYmplY3QBABFqYXZhL2xhbmcvSW50ZWdlcgEACHBhcnNlSW50AQAVKExqYXZhL2xhbmcvU3RyaW5nOylJAQAOamF2YS9sYW5nL0xvbmcBAAhpbnRWYWx1ZQEAAygpSQAhAAcACAAAAAMAAAAJAAoAAAAAAAsACgAAAAAADAAKAAAAAwABAA0ADgABAA8AAABtAAMAAgAAACUqtwABKhEH0LUAAioQHrUAAyoqtAACEGRgtQADKiu4AAS1AAWxAAAAAgAQAAAAGgAGAAAADwAEAAUACwAIABEACwAcABAAJAARABEAAAAWAAIAAAAlABIAEwAAAAAAJQAUABUAAQABAA0AFgABAA8AAABtAAMAAgAAACUqtwABKhEH0LUAAioQHrUAAyoqtAACEGRgtQADKiu2AAa1AAWxAAAAAgAQAAAAGgAGAAAAEwAEAAUACwAIABEACwAcABQAJAAVABEAAAAWAAIAAAAlABIAEwAAAAAAJQAXABgAAQABAA0AGQABAA8AAABXAAMAAQAAAB0qtwABKhEH0LUAAioQHrUAAyoqtAACEGRgtQADsQAAAAIAEAAAABYABQAAABcABAAFAAsACAARAAsAHAAXABEAAAAMAAEAAAAdABIAEwAAAAEAGgAAAAIAGw==", true);
+main("yv66vgAAADQALAoACAAcCQAHAB0JAAcAHgoAHwAgCQAHACEKACIAIwcAJAcAJQEAAXgBAAFJAQABeQEAAXoBAAY8aW5pdD4BABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAKUxjb20vZXhhbXBsZS9pY2ViZXJnL0luc3RhbmNlSW5pdGlhbGl6ZXI7AQADc3RyAQASTGphdmEvbGFuZy9TdHJpbmc7AQATKExqYXZhL2xhbmcvTG9uZzspVgEAA2xuZwEAEExqYXZhL2xhbmcvTG9uZzsBAAMoKVYBAApTb3VyY2VGaWxlAQAYSW5zdGFuY2VJbml0aWFsaXplci5qYXZhDAANABkMAAkACgwACwAKBwAmDAAnACgMAAwACgcAKQwAKgArAQAnY29tL2V4YW1wbGUvaWNlYmVyZy9JbnN0YW5jZUluaXRpYWxpemVyAQAQamF2YS9sYW5nL09iamVjdAEAEWphdmEvbGFuZy9JbnRlZ2VyAQAIcGFyc2VJbnQBABUoTGphdmEvbGFuZy9TdHJpbmc7KUkBAA5qYXZhL2xhbmcvTG9uZwEACGludFZhbHVlAQADKClJACEABwAIAAAAAwAAAAkACgAAAAAACwAKAAAAAAAMAAoAAAADAAEADQAOAAEADwAAAG0AAwACAAAAJSq3AAEqEQfQtQACKhAetQADKiq0AAIQZGC1AAMqK7gABLUABbEAAAACABAAAAAaAAYAAAAPAAQABQALAAgAEQALABwAEAAkABEAEQAAABYAAgAAACUAEgATAAAAAAAlABQAFQABAAEADQAWAAEADwAAAG0AAwACAAAAJSq3AAEqEQfQtQACKhAetQADKiq0AAIQZGC1AAMqK7YABrUABbEAAAACABAAAAAaAAYAAAATAAQABQALAAgAEQALABwAFAAkABUAEQAAABYAAgAAACUAEgATAAAAAAAlABcAGAABAAEADQAZAAEADwAAAFcAAwABAAAAHSq3AAEqEQfQtQACKhAetQADKiq0AAIQZGC1AAOxAAAAAgAQAAAAFgAFAAAAFwAEAAUACwAIABEACwAcABcAEQAAAAwAAQAAAB0AEgATAAAAAQAaAAAAAgAb", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

@@ -13,11 +13,11 @@
 <tr><td class="ln">2</td><td class="cl"></td></tr>
 <tr><td class="ln">3</td><td class="cl">public class LoopEnumeration {</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">	void m() {</td></tr>
-<tr><td class="ln">6</td><td class="cl">		for (Enumeration enm : Enumeration.values()) {</td></tr>
-<tr><td class="ln">7</td><td class="cl">			System.out.println(enm);</td></tr>
-<tr><td class="ln">8</td><td class="cl">		}</td></tr>
-<tr><td class="ln">9</td><td class="cl">	}</td></tr>
+<tr><td class="ln">5</td><td class="cl">  void m() {</td></tr>
+<tr><td class="ln">6</td><td class="cl">    for (Enumeration enm : Enumeration.values()) {</td></tr>
+<tr><td class="ln">7</td><td class="cl">      enm.hashCode();</td></tr>
+<tr><td class="ln">8</td><td class="cl">    }</td></tr>
+<tr><td class="ln">9</td><td class="cl">  }</td></tr>
 <tr><td class="ln">10</td><td class="cl"></td></tr>
 <tr><td class="ln">11</td><td class="cl">}</td></tr>
 </table>
@@ -25,7 +25,7 @@
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAKAoABgAVCgAWABcJABgAGQoAGgAbBwAcBwAdAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACVMY29tL2V4YW1wbGUvaWNlYmVyZy9Mb29wRW51bWVyYXRpb247AQABbQEAA2VubQEAIUxjb20vZXhhbXBsZS9pY2ViZXJnL0VudW1lcmF0aW9uOwEADVN0YWNrTWFwVGFibGUHAB4BAApTb3VyY2VGaWxlAQAUTG9vcEVudW1lcmF0aW9uLmphdmEMAAcACAcAHwwAIAAhBwAiDAAjACQHACUMACYAJwEAI2NvbS9leGFtcGxlL2ljZWJlcmcvTG9vcEVudW1lcmF0aW9uAQAQamF2YS9sYW5nL09iamVjdAEAIltMY29tL2V4YW1wbGUvaWNlYmVyZy9FbnVtZXJhdGlvbjsBAB9jb20vZXhhbXBsZS9pY2ViZXJnL0VudW1lcmF0aW9uAQAGdmFsdWVzAQAkKClbTGNvbS9leGFtcGxlL2ljZWJlcmcvRW51bWVyYXRpb247AQAQamF2YS9sYW5nL1N5c3RlbQEAA291dAEAFUxqYXZhL2lvL1ByaW50U3RyZWFtOwEAE2phdmEvaW8vUHJpbnRTdHJlYW0BAAdwcmludGxuAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWACEABQAGAAAAAAACAAEABwAIAAEACQAAAC8AAQABAAAABSq3AAGxAAAAAgAKAAAABgABAAAAAwALAAAADAABAAAABQAMAA0AAAAAAA4ACAABAAkAAAB1AAIABQAAACK4AAJMK749Az4dHKIAFisdMjoEsgADGQS2AASEAwGn/+uxAAAAAwAKAAAAEgAEAAAABgATAAcAGwAGACEACQALAAAAFgACABMACAAPABAABAAAACIADAANAAAAEQAAAA0AAv4ACQcAEgEB+AAXAAEAEwAAAAIAFA==", true);
+main("yv66vgAAADQAIAoABQAUCgAVABYKABUAFwcAGAcAGQEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAlTGNvbS9leGFtcGxlL2ljZWJlcmcvTG9vcEVudW1lcmF0aW9uOwEAAW0BAANlbm0BACFMY29tL2V4YW1wbGUvaWNlYmVyZy9FbnVtZXJhdGlvbjsBAA1TdGFja01hcFRhYmxlBwAaAQAKU291cmNlRmlsZQEAFExvb3BFbnVtZXJhdGlvbi5qYXZhDAAGAAcHABsMABwAHQwAHgAfAQAjY29tL2V4YW1wbGUvaWNlYmVyZy9Mb29wRW51bWVyYXRpb24BABBqYXZhL2xhbmcvT2JqZWN0AQAiW0xjb20vZXhhbXBsZS9pY2ViZXJnL0VudW1lcmF0aW9uOwEAH2NvbS9leGFtcGxlL2ljZWJlcmcvRW51bWVyYXRpb24BAAZ2YWx1ZXMBACQoKVtMY29tL2V4YW1wbGUvaWNlYmVyZy9FbnVtZXJhdGlvbjsBAAhoYXNoQ29kZQEAAygpSQAhAAQABQAAAAAAAgABAAYABwABAAgAAAAvAAEAAQAAAAUqtwABsQAAAAIACQAAAAYAAQAAAAMACgAAAAwAAQAAAAUACwAMAAAAAAANAAcAAQAIAAAAcwACAAUAAAAguAACTCu+PQM+HRyiABQrHTI6BBkEtgADV4QDAaf/7bEAAAADAAkAAAASAAQAAAAGABMABwAZAAYAHwAJAAoAAAAWAAIAEwAGAA4ADwAEAAAAIAALAAwAAAAQAAAADQAC/gAJBwARAQH4ABUAAQASAAAAAgAT", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

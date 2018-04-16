@@ -7,3 +7,8 @@ https://dmitriy-gulyaev.github.io/iceberg/
 Project contains **Examples** section with examples of disassembled classes. This section demonstrate representation in bytecode of various Java language constructions.
 
 https://dmitriy-gulyaev.github.io/iceberg/examples/
+
+# Current limitations (TODO)
+
+- Processing of invokedynamic instruction.
+- Processing of RuntimeVisibleAnnotations attribute.

@@ -48,9 +48,10 @@ span {
 
 .oc {
 	float: left;
-	width: 95px;
+	width: 125px;
 	text-align: center;
 	border: 1px #777777 solid;
+	font-weight: bold;
 }
 
 .oc-cons {

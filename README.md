@@ -8,7 +8,7 @@ Project contains **Examples** section with examples of disassembled classes. Thi
 
 https://dmitriy-gulyaev.github.io/iceberg/examples/
 
-# Current limitations (TODO)
+### Current limitations (ToDo)
 
 - Processing of invokedynamic instruction.
 - Processing of RuntimeVisibleAnnotations attribute.

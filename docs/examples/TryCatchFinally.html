@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>TryCatchFinally.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>
+<body>
+<h4>TryCatchFinally.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">import java.io.File;</td></tr>
+<tr><td class="ln">4</td><td class="cl">import java.io.IOException;</td></tr>
+<tr><td class="ln">5</td><td class="cl"></td></tr>
+<tr><td class="ln">6</td><td class="cl">public class TryCatchFinally {</td></tr>
+<tr><td class="ln">7</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">  void m(File file) throws IOException {</td></tr>
+<tr><td class="ln">9</td><td class="cl">    String str = "string";</td></tr>
+<tr><td class="ln">10</td><td class="cl">    try {</td></tr>
+<tr><td class="ln">11</td><td class="cl">      str.charAt(111);</td></tr>
+<tr><td class="ln">12</td><td class="cl">    } catch (Exception e) {</td></tr>
+<tr><td class="ln">13</td><td class="cl">      e.getMessage();</td></tr>
+<tr><td class="ln">14</td><td class="cl">    } finally {</td></tr>
+<tr><td class="ln">15</td><td class="cl">      str.hashCode();</td></tr>
+<tr><td class="ln">16</td><td class="cl">      str.isEmpty();</td></tr>
+<tr><td class="ln">17</td><td class="cl">    }</td></tr>
+<tr><td class="ln">18</td><td class="cl">  }</td></tr>
+<tr><td class="ln">19</td><td class="cl"></td></tr>
+<tr><td class="ln">20</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="list" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vgAAADQAOQoACQAjCAAkCgAlACYKACUAJwoAJQAoBwApCgAGACoHACsHACwBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAJUxjb20vZXhhbXBsZS9pY2ViZXJnL1RyeUNhdGNoRmluYWxseTsBAAFtAQARKExqYXZhL2lvL0ZpbGU7KVYBAAFlAQAVTGphdmEvbGFuZy9FeGNlcHRpb247AQAEZmlsZQEADkxqYXZhL2lvL0ZpbGU7AQADc3RyAQASTGphdmEvbGFuZy9TdHJpbmc7AQANU3RhY2tNYXBUYWJsZQcAKwcALQcALgcAKQcALwEACkV4Y2VwdGlvbnMHADABAApTb3VyY2VGaWxlAQAUVHJ5Q2F0Y2hGaW5hbGx5LmphdmEMAAoACwEABnN0cmluZwcALgwAMQAyDAAzADQMADUANgEAE2phdmEvbGFuZy9FeGNlcHRpb24MADcAOAEAI2NvbS9leGFtcGxlL2ljZWJlcmcvVHJ5Q2F0Y2hGaW5hbGx5AQAQamF2YS9sYW5nL09iamVjdAEADGphdmEvaW8vRmlsZQEAEGphdmEvbGFuZy9TdHJpbmcBABNqYXZhL2xhbmcvVGhyb3dhYmxlAQATamF2YS9pby9JT0V4Y2VwdGlvbgEABmNoYXJBdAEABChJKUMBAAhoYXNoQ29kZQEAAygpSQEAB2lzRW1wdHkBAAMoKVoBAApnZXRNZXNzYWdlAQAUKClMamF2YS9sYW5nL1N0cmluZzsAIQAIAAkAAAAAAAIAAQAKAAsAAQAMAAAALwABAAEAAAAFKrcAAbEAAAACAA0AAAAGAAEAAAAGAA4AAAAMAAEAAAAFAA8AEAAAAAAAEQASAAIADAAAAPYAAgAFAAAAOhICTSwQb7YAA1cstgAEVyy2AAVXpwAlTi22AAdXLLYABFcstgAFV6cAEjoELLYABFcstgAFVxkEv7EABAADAAoAFwAGAAMACgAqAAAAFwAdACoAAAAqACwAKgAAAAMADQAAADoADgAAAAkAAwALAAoADwAPABAAFAARABcADAAYAA0AHQAPACIAEAAnABEAKgAPADEAEAA2ABEAOQASAA4AAAAqAAQAGAAFABMAFAADAAAAOgAPABAAAAAAADoAFQAWAAEAAwA3ABcAGAACABkAAAAaAAP/ABcAAwcAGgcAGwcAHAABBwAdUgcAHg4AHwAAAAQAAQAgAAEAIQAAAAIAIg==", true);
+</script>
+<br/>Java compiler version: <b>1.8.0_161</b><br/>
+<br/><a href="..\examples\index.html">Other examples</a>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

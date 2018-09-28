@@ -16,3 +16,4 @@ https://dmitriy-gulyaev.github.io/iceberg/examples/
 
 - Processing of `invokedynamic` instruction.
 - Processing of `RuntimeVisibleAnnotations` attribute.
+- Parameter types in methods list.

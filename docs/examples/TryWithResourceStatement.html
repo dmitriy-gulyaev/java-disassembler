@@ -9,16 +9,16 @@
 <h4>TryWithResourceStatement.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">import java.io.BufferedReader;</td></tr>
-<tr><td class="ln">4</td><td class="cl">import java.io.IOException;</td></tr>
-<tr><td class="ln">5</td><td class="cl">import java.io.Reader;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.io.BufferedReader;</td></tr>
+<tr><td class="ln">4</td><td class="cl"><b class="keyword">import</b> java.io.IOException;</td></tr>
+<tr><td class="ln">5</td><td class="cl"><b class="keyword">import</b> java.io.Reader;</td></tr>
 <tr><td class="ln">6</td><td class="cl"></td></tr>
-<tr><td class="ln">7</td><td class="cl">public class TryWithResourceStatement {</td></tr>
+<tr><td class="ln">7</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> TryWithResourceStatement {</td></tr>
 <tr><td class="ln">8</td><td class="cl"></td></tr>
-<tr><td class="ln">9</td><td class="cl">    void m(Reader reader) throws IOException {</td></tr>
-<tr><td class="ln">10</td><td class="cl">        try (BufferedReader br = new BufferedReader(reader)) {</td></tr>
+<tr><td class="ln">9</td><td class="cl">    <b class="keyword">void</b> m(Reader reader) <b class="keyword">throws</b> IOException {</td></tr>
+<tr><td class="ln">10</td><td class="cl">        <b class="keyword">try</b> (BufferedReader br = <b class="keyword">new</b> BufferedReader(reader)) {</td></tr>
 <tr><td class="ln">11</td><td class="cl">            br.toString();</td></tr>
 <tr><td class="ln">12</td><td class="cl">        }</td></tr>
 <tr><td class="ln">13</td><td class="cl">    }</td></tr>

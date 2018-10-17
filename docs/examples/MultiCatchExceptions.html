@@ -9,48 +9,48 @@
 <h4>MultiCatchExceptions.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl">package com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">import java.net.MalformedURLException;</td></tr>
-<tr><td class="ln">4</td><td class="cl">import java.net.URL;</td></tr>
-<tr><td class="ln">5</td><td class="cl">import java.text.ParseException;</td></tr>
-<tr><td class="ln">6</td><td class="cl">import java.text.SimpleDateFormat;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.net.MalformedURLException;</td></tr>
+<tr><td class="ln">4</td><td class="cl"><b class="keyword">import</b> java.net.URL;</td></tr>
+<tr><td class="ln">5</td><td class="cl"><b class="keyword">import</b> java.text.ParseException;</td></tr>
+<tr><td class="ln">6</td><td class="cl"><b class="keyword">import</b> java.text.SimpleDateFormat;</td></tr>
 <tr><td class="ln">7</td><td class="cl"></td></tr>
-<tr><td class="ln">8</td><td class="cl">public class MultiCatchExceptions {</td></tr>
+<tr><td class="ln">8</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> MultiCatchExceptions {</td></tr>
 <tr><td class="ln">9</td><td class="cl"></td></tr>
 <tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">  void catchMalformedURLExceptionAndParseException() {</td></tr>
-<tr><td class="ln">12</td><td class="cl">    try {</td></tr>
+<tr><td class="ln">11</td><td class="cl">  <b class="keyword">void</b> catchMalformedURLExceptionAndParseException() {</td></tr>
+<tr><td class="ln">12</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
 <tr><td class="ln">13</td><td class="cl">      malformedURLException();</td></tr>
 <tr><td class="ln">14</td><td class="cl">      parseException();</td></tr>
-<tr><td class="ln">15</td><td class="cl">    } catch (MalformedURLException | ParseException exception) {</td></tr>
+<tr><td class="ln">15</td><td class="cl">    } <b class="keyword">catch</b> (MalformedURLException | ParseException exception) {</td></tr>
 <tr><td class="ln">16</td><td class="cl">      exception.hashCode();</td></tr>
 <tr><td class="ln">17</td><td class="cl">    }</td></tr>
 <tr><td class="ln">18</td><td class="cl">  }</td></tr>
 <tr><td class="ln">19</td><td class="cl"></td></tr>
-<tr><td class="ln">20</td><td class="cl">  void catchMalformedURLException() {</td></tr>
-<tr><td class="ln">21</td><td class="cl">    try {</td></tr>
+<tr><td class="ln">20</td><td class="cl">  <b class="keyword">void</b> catchMalformedURLException() {</td></tr>
+<tr><td class="ln">21</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
 <tr><td class="ln">22</td><td class="cl">      malformedURLException();</td></tr>
-<tr><td class="ln">23</td><td class="cl">    } catch (MalformedURLException exception) {</td></tr>
+<tr><td class="ln">23</td><td class="cl">    } <b class="keyword">catch</b> (MalformedURLException exception) {</td></tr>
 <tr><td class="ln">24</td><td class="cl">      exception.hashCode();</td></tr>
 <tr><td class="ln">25</td><td class="cl">    }</td></tr>
 <tr><td class="ln">26</td><td class="cl">  }</td></tr>
 <tr><td class="ln">27</td><td class="cl"></td></tr>
-<tr><td class="ln">28</td><td class="cl">  void catchParseException() {</td></tr>
-<tr><td class="ln">29</td><td class="cl">    try {</td></tr>
+<tr><td class="ln">28</td><td class="cl">  <b class="keyword">void</b> catchParseException() {</td></tr>
+<tr><td class="ln">29</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
 <tr><td class="ln">30</td><td class="cl">      parseException();</td></tr>
-<tr><td class="ln">31</td><td class="cl">    } catch (ParseException exception) {</td></tr>
+<tr><td class="ln">31</td><td class="cl">    } <b class="keyword">catch</b> (ParseException exception) {</td></tr>
 <tr><td class="ln">32</td><td class="cl">      exception.hashCode();</td></tr>
 <tr><td class="ln">33</td><td class="cl">    }</td></tr>
 <tr><td class="ln">34</td><td class="cl">  }</td></tr>
 <tr><td class="ln">35</td><td class="cl"></td></tr>
 <tr><td class="ln">36</td><td class="cl"></td></tr>
-<tr><td class="ln">37</td><td class="cl">  void malformedURLException() throws MalformedURLException {</td></tr>
-<tr><td class="ln">38</td><td class="cl">    new URL("");</td></tr>
+<tr><td class="ln">37</td><td class="cl">  <b class="keyword">void</b> malformedURLException() <b class="keyword">throws</b> MalformedURLException {</td></tr>
+<tr><td class="ln">38</td><td class="cl">    <b class="keyword">new</b> URL("");</td></tr>
 <tr><td class="ln">39</td><td class="cl">  }</td></tr>
 <tr><td class="ln">40</td><td class="cl"></td></tr>
-<tr><td class="ln">41</td><td class="cl">  void parseException() throws ParseException {</td></tr>
-<tr><td class="ln">42</td><td class="cl">    new SimpleDateFormat("").parse("");</td></tr>
+<tr><td class="ln">41</td><td class="cl">  <b class="keyword">void</b> parseException() <b class="keyword">throws</b> ParseException {</td></tr>
+<tr><td class="ln">42</td><td class="cl">    <b class="keyword">new</b> SimpleDateFormat("").parse("");</td></tr>
 <tr><td class="ln">43</td><td class="cl">  }</td></tr>
 <tr><td class="ln">44</td><td class="cl"></td></tr>
 <tr><td class="ln">45</td><td class="cl">}</td></tr>

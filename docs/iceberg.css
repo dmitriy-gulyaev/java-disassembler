@@ -120,3 +120,7 @@ span {
 	font-family: monospace;
 	border-spacing: 0;
 }
+
+.keyword {
+    color: #7f0055;
+}

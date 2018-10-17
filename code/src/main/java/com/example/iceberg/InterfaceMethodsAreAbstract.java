@@ -2,8 +2,8 @@ package com.example.iceberg;
 
 interface InterfaceMethodsAreAbstract {
 
-	void m1();
+    void m1();
 
-	int m2();
+    int m2();
 
 }

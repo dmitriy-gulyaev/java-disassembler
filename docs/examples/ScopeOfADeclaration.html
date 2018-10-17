@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>ScopeOfADeclaration.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>
+<body>
+<h4>ScopeOfADeclaration.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> ScopeOfADeclaration {</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">static</b> Integer varr = 1;</td></tr>
+<tr><td class="ln">6</td><td class="cl"></td></tr>
+<tr><td class="ln">7</td><td class="cl">    <b class="keyword">static</b> <b class="keyword">void</b> m() {</td></tr>
+<tr><td class="ln">8</td><td class="cl">        String varr = "23";</td></tr>
+<tr><td class="ln">9</td><td class="cl">        varr.hashCode();</td></tr>
+<tr><td class="ln">10</td><td class="cl">        ScopeOfADeclaration.varr.hashCode();</td></tr>
+<tr><td class="ln">11</td><td class="cl">    }</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="list" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vgAAADQAJgcAAgEAJ2NvbS9leGFtcGxlL2ljZWJlcmcvU2NvcGVPZkFEZWNsYXJhdGlvbgcABAEAEGphdmEvbGFuZy9PYmplY3QBAAR2YXJyAQATTGphdmEvbGFuZy9JbnRlZ2VyOwEACDxjbGluaXQ+AQADKClWAQAEQ29kZQoACwANBwAMAQARamF2YS9sYW5nL0ludGVnZXIMAA4ADwEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7CQABABEMAAUABgEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABjxpbml0PgoAAwAWDAAUAAgBAAR0aGlzAQApTGNvbS9leGFtcGxlL2ljZWJlcmcvU2NvcGVPZkFEZWNsYXJhdGlvbjsBAAFtCAAbAQACMjMKAB0AHwcAHgEAEGphdmEvbGFuZy9TdHJpbmcMACAAIQEACGhhc2hDb2RlAQADKClJCgALAB8BABJMamF2YS9sYW5nL1N0cmluZzsBAApTb3VyY2VGaWxlAQAYU2NvcGVPZkFEZWNsYXJhdGlvbi5qYXZhACEAAQADAAAAAQAIAAUABgAAAAMACAAHAAgAAQAJAAAAKAABAAAAAAAIBLgACrMAELEAAAACABIAAAAGAAEAAAAFABMAAAACAAAAAQAUAAgAAQAJAAAALwABAAEAAAAFKrcAFbEAAAACABIAAAAGAAEAAAADABMAAAAMAAEAAAAFABcAGAAAAAgAGQAIAAEACQAAAEYAAQABAAAAEBIaSyq2ABxXsgAQtgAiV7EAAAACABIAAAASAAQAAAAIAAMACQAIAAoADwALABMAAAAMAAEAAwANAAUAIwAAAAEAJAAAAAIAJQ==", true);
+</script>
+<br/>Java compiler version: <b>1.8.0_161</b><br/>
+<br/><a href="..\examples\index.html">Other examples</a>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

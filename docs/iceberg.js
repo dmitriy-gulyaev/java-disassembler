@@ -668,16 +668,16 @@ function main(dataView, isEmbedded) {
                                         break;
                                     }
                                 case OFFSET_16: {
-                                        var v1 = code[oc + 1];
-                                        var v2 = code[oc + 2];
-                                        offset = (v1 << 8) | v2;
-                                        if ((offset + ocPlace) > 65536) {
-                                            offset = offset - 65536;
-                                        }
-                                        oc += 2;
-                                        operandType = "Offset";
-                                        break;
-                                    }
+                                	var v1 = code[oc + 1];
+                                	var v2 = code[oc + 2];
+                                	offset = (v1 << 8) | v2;
+                                	if ((offset + ocPlace) > 0xFFFF) {
+                                		offset = offset - 65536;
+                                	}
+                                	oc += 2;
+                                	operandType = "Offset";
+                                	break;
+                                }
                                 case IINC_16: {
                                         // TODO
                                         var varIndex = "?",

@@ -13,29 +13,33 @@
 <tr><td class="ln">2</td><td class="cl"></td></tr>
 <tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> MultidimensionalArray {</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">  <b class="keyword">public</b> int[][] m1() {</td></tr>
-<tr><td class="ln">6</td><td class="cl">    <b class="keyword">return</b> <b class="keyword">new</b> int[10][20];</td></tr>
-<tr><td class="ln">7</td><td class="cl">  }</td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">public</b> int[][] m0() {</td></tr>
+<tr><td class="ln">6</td><td class="cl">        <b class="keyword">return</b> <b class="keyword">new</b> int[10][];</td></tr>
+<tr><td class="ln">7</td><td class="cl">    }</td></tr>
 <tr><td class="ln">8</td><td class="cl"></td></tr>
-<tr><td class="ln">9</td><td class="cl">  <b class="keyword">public</b> int[][][][][][][][][][] m2() {</td></tr>
-<tr><td class="ln">10</td><td class="cl">    <b class="keyword">return</b> <b class="keyword">new</b> int[10][20][10][20][10][20][10][20][10][20];</td></tr>
-<tr><td class="ln">11</td><td class="cl">  }</td></tr>
+<tr><td class="ln">9</td><td class="cl">    <b class="keyword">public</b> int[][] m1() {</td></tr>
+<tr><td class="ln">10</td><td class="cl">        <b class="keyword">return</b> <b class="keyword">new</b> int[10][20];</td></tr>
+<tr><td class="ln">11</td><td class="cl">    }</td></tr>
 <tr><td class="ln">12</td><td class="cl"></td></tr>
-<tr><td class="ln">13</td><td class="cl">  <b class="keyword">public</b> <b class="keyword">int</b> m3(int[][] ia) {</td></tr>
-<tr><td class="ln">14</td><td class="cl">    <b class="keyword">return</b> ia[80][50];</td></tr>
-<tr><td class="ln">15</td><td class="cl">  }</td></tr>
+<tr><td class="ln">13</td><td class="cl">    <b class="keyword">public</b> int[][][][][][][][][][] m2() {</td></tr>
+<tr><td class="ln">14</td><td class="cl">        <b class="keyword">return</b> <b class="keyword">new</b> int[10][20][10][20][10][20][10][20][10][20];</td></tr>
+<tr><td class="ln">15</td><td class="cl">    }</td></tr>
 <tr><td class="ln">16</td><td class="cl"></td></tr>
-<tr><td class="ln">17</td><td class="cl">  <b class="keyword">public</b> <b class="keyword">int</b> m4(int[][][] ia) {</td></tr>
-<tr><td class="ln">18</td><td class="cl">    <b class="keyword">return</b> ia[80][50][10];</td></tr>
-<tr><td class="ln">19</td><td class="cl">  }</td></tr>
+<tr><td class="ln">17</td><td class="cl">    <b class="keyword">public</b> <b class="keyword">int</b> m3(int[][] ia) {</td></tr>
+<tr><td class="ln">18</td><td class="cl">        <b class="keyword">return</b> ia[80][50];</td></tr>
+<tr><td class="ln">19</td><td class="cl">    }</td></tr>
 <tr><td class="ln">20</td><td class="cl"></td></tr>
-<tr><td class="ln">21</td><td class="cl">}</td></tr>
+<tr><td class="ln">21</td><td class="cl">    <b class="keyword">public</b> <b class="keyword">int</b> m4(int[][][] ia) {</td></tr>
+<tr><td class="ln">22</td><td class="cl">        <b class="keyword">return</b> ia[80][50][10];</td></tr>
+<tr><td class="ln">23</td><td class="cl">    }</td></tr>
+<tr><td class="ln">24</td><td class="cl"></td></tr>
+<tr><td class="ln">25</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAHgoABQAaBwAUBwAbBwAcBwAdAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACtMY29tL2V4YW1wbGUvaWNlYmVyZy9NdWx0aWRpbWVuc2lvbmFsQXJyYXk7AQACbTEBAAUoKVtbSQEAAm0yAQANKClbW1tbW1tbW1tbSQEAAm0zAQAGKFtbSSlJAQACaWEBAANbW0kBAAJtNAEAByhbW1tJKUkBAARbW1tJAQAKU291cmNlRmlsZQEAGk11bHRpZGltZW5zaW9uYWxBcnJheS5qYXZhDAAGAAcBAAtbW1tbW1tbW1tbSQEAKWNvbS9leGFtcGxlL2ljZWJlcmcvTXVsdGlkaW1lbnNpb25hbEFycmF5AQAQamF2YS9sYW5nL09iamVjdAAhAAQABQAAAAAABQABAAYABwABAAgAAAAvAAEAAQAAAAUqtwABsQAAAAIACQAAAAYAAQAAAAMACgAAAAwAAQAAAAUACwAMAAAAAQANAA4AAQAIAAAAMwACAAEAAAAJEAoQFMUAAgKwAAAAAgAJAAAABgABAAAABgAKAAAADAABAAAACQALAAwAAAABAA8AEAABAAgAAABDAAoAAQAAABkQChAUEAoQFBAKEBQQChAUEAoQFMUAAwqwAAAAAgAJAAAABgABAAAACgAKAAAADAABAAAAGQALAAwAAAABABEAEgABAAgAAAA8AAIAAgAAAAgrEFAyEDIurAAAAAIACQAAAAYAAQAAAA4ACgAAABYAAgAAAAgACwAMAAAAAAAIABMAFAABAAEAFQAWAAEACAAAAD8AAgACAAAACysQUDIQMjIQCi6sAAAAAgAJAAAABgABAAAAEgAKAAAAFgACAAAACwALAAwAAAAAAAsAEwAXAAEAAQAYAAAAAgAZ", true);
+main("yv66vgAAADQAIQoABgAcBwAdBwAWBwAeBwAfBwAgAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACtMY29tL2V4YW1wbGUvaWNlYmVyZy9NdWx0aWRpbWVuc2lvbmFsQXJyYXk7AQACbTABAAUoKVtbSQEAAm0xAQACbTIBAA0oKVtbW1tbW1tbW1tJAQACbTMBAAYoW1tJKUkBAAJpYQEAA1tbSQEAAm00AQAHKFtbW0kpSQEABFtbW0kBAApTb3VyY2VGaWxlAQAaTXVsdGlkaW1lbnNpb25hbEFycmF5LmphdmEMAAcACAEAAltJAQALW1tbW1tbW1tbW0kBACljb20vZXhhbXBsZS9pY2ViZXJnL011bHRpZGltZW5zaW9uYWxBcnJheQEAEGphdmEvbGFuZy9PYmplY3QAIQAFAAYAAAAAAAYAAQAHAAgAAQAJAAAALwABAAEAAAAFKrcAAbEAAAACAAoAAAAGAAEAAAADAAsAAAAMAAEAAAAFAAwADQAAAAEADgAPAAEACQAAADAAAQABAAAABhAKvQACsAAAAAIACgAAAAYAAQAAAAYACwAAAAwAAQAAAAYADAANAAAAAQAQAA8AAQAJAAAAMwACAAEAAAAJEAoQFMUAAwKwAAAAAgAKAAAABgABAAAACgALAAAADAABAAAACQAMAA0AAAABABEAEgABAAkAAABDAAoAAQAAABkQChAUEAoQFBAKEBQQChAUEAoQFMUABAqwAAAAAgAKAAAABgABAAAADgALAAAADAABAAAAGQAMAA0AAAABABMAFAABAAkAAAA8AAIAAgAAAAgrEFAyEDIurAAAAAIACgAAAAYAAQAAABIACwAAABYAAgAAAAgADAANAAAAAAAIABUAFgABAAEAFwAYAAEACQAAAD8AAgACAAAACysQUDIQMjIQCi6sAAAAAgAKAAAABgABAAAAFgALAAAAFgACAAAACwAMAA0AAAAAAAsAFQAZAAEAAQAaAAAAAgAb", true);
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

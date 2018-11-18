@@ -21,6 +21,19 @@ function main(dataView, isEmbedded) {
     var TABLE_WIDTH = "900px";
 
     /** @const */
+    var BYTECODE_BEHAVIORS_FOR_METHOD_HANDLES = [
+	null,
+	"REF_getField",
+	"REF_getStatic",
+	"REF_putField",
+	"REF_putStatic",
+	"REF_invokeVirtual",
+	"REF_invokeStatic",
+	"REF_invokeSpecial",
+	"REF_newInvokeSpecial",
+	"REF_invokeInterface"];
+
+    /** @const */
     var ACC_PUBLIC = ["PUBLIC", 0x0001];
     /** @const */
     var ACC_PRIVATE = ["PRIVATE", 0x0002];
@@ -195,7 +208,7 @@ function main(dataView, isEmbedded) {
 
     var opcodes = new Array(256);
 
-    var opCodeMnemonics = "nop|aconst_null|iconst_m1|iconst_0|iconst_1|iconst_2|iconst_3|iconst_4|iconst_5|lconst_0|lconst_1|fconst_0|fconst_1|fconst_2|dconst_0|dconst_1|bipush|sipush|ldc|ldc_w|ldc2_w|iload|lload|fload|dload|aload|iload_0|iload_1|iload_2|iload_3|lload_0|lload_1|lload_2|lload_3|fload_0|fload_1|fload_2|fload_3|dload_0 |dload_1 |dload_2 |dload_3 |aload_0|aload_1|aload_2|aload_3|iaload|laload|faload|daload|aaload|baload|caload|saload|istore|lstore|fstore|dstore|astore|istore_0|istore_1|istore_2|istore_3|lstore_0|lstore_1|lstore_2|lstore_3|fstore_0|fstore_1|fstore_2|fstore_3|dstore_0|dstore_1|dstore_2|dstore_3|astore_0|astore_1|astore_2|astore_3|iastore|lastore|fastore|dastore|aastore|bastore|castore|sastore|pop|pop2|dup|dup_x1|dup_x2|dup2|dup2_x1|dup2_x2|swap|iadd|ladd|fadd|dadd|isub|lsub|fsub|dsub|imul|lmul|fmul|dmul|idiv|ldiv|fdiv|ddiv|irem|lrem|frem|drem|ineg|lneg|fneg|dneg|ishl|lshl|ishr|lshr|iushr|lushr|iand|land|ior|lor|ixor|lxor|iinc|i2l|i2f|i2d|l2i|l2f|l2d|f2i|f2l|f2d|d2i|d2l|d2f|i2b|i2c|i2s|lcmp|fcmpl|fcmpg|dcmpl|dcmpg|ifeq|ifne|iflt|ifge|ifgt|ifle|if_icmpeq|if_icmpne|if_icmplt|if_icmpge|if_icmpgt|if_icmple|if_acmpeq|if_acmpne|goto|jsr|ret|tableswitch|lookupswitch|ireturn|lreturn|freturn|dreturn|areturn|return|getstatic|putstatic|getfield|putfield|invokevirtual|invokespecial|invokestatic|invoke interface|invokedynamic|new|newarray|anewarray|arraylength|athrow|checkcast|instanceof|monitorenter|monitorexit|wide|multianewarray|ifnull|ifnonnull||||||||||||||||||||||||||||||||||||||||||||||||||||||||".split("|");
+    var opCodeMnemonics = "nop|aconst_null|iconst_m1|iconst_0|iconst_1|iconst_2|iconst_3|iconst_4|iconst_5|lconst_0|lconst_1|fconst_0|fconst_1|fconst_2|dconst_0|dconst_1|bipush|sipush|ldc|ldc_w|ldc2_w|iload|lload|fload|dload|aload|iload_0|iload_1|iload_2|iload_3|lload_0|lload_1|lload_2|lload_3|fload_0|fload_1|fload_2|fload_3|dload_0 |dload_1 |dload_2 |dload_3 |aload_0|aload_1|aload_2|aload_3|iaload|laload|faload|daload|aaload|baload|caload|saload|istore|lstore|fstore|dstore|astore|istore_0|istore_1|istore_2|istore_3|lstore_0|lstore_1|lstore_2|lstore_3|fstore_0|fstore_1|fstore_2|fstore_3|dstore_0|dstore_1|dstore_2|dstore_3|astore_0|astore_1|astore_2|astore_3|iastore|lastore|fastore|dastore|aastore|bastore|castore|sastore|pop|pop2|dup|dup_x1|dup_x2|dup2|dup2_x1|dup2_x2|swap|iadd|ladd|fadd|dadd|isub|lsub|fsub|dsub|imul|lmul|fmul|dmul|idiv|ldiv|fdiv|ddiv|irem|lrem|frem|drem|ineg|lneg|fneg|dneg|ishl|lshl|ishr|lshr|iushr|lushr|iand|land|ior|lor|ixor|lxor|iinc|i2l|i2f|i2d|l2i|l2f|l2d|f2i|f2l|f2d|d2i|d2l|d2f|i2b|i2c|i2s|lcmp|fcmpl|fcmpg|dcmpl|dcmpg|ifeq|ifne|iflt|ifge|ifgt|ifle|if_icmpeq|if_icmpne|if_icmplt|if_icmpge|if_icmpgt|if_icmple|if_acmpeq|if_acmpne|goto|jsr|ret|tableswitch|lookupswitch|ireturn|lreturn|freturn|dreturn|areturn|return|getstatic|putstatic|getfield|putfield|invokevirtual|invokespecial|invokestatic|invokeinterface|invokedynamic|new|newarray|anewarray|arraylength|athrow|checkcast|instanceof|monitorenter|monitorexit|wide|multianewarray|ifnull|ifnonnull||||||||||||||||||||||||||||||||||||||||||||||||||||||||".split("|");
     var opCodeFlags = "||||||||||||||||8|9|2|3|3|6|6|6|6|6|||||||||||||||||||||||||||||6|6|6|6|6||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||7|||||||||||||||||||||4|4|4|4|4|4|4|4|4|4|4|4|4|4|4|4|6|10|11|||||||3|3|3|3|3|3|3|5|5|3|14|3|||3|3|||12|13|4|4||||||||||||||||||||||||||||||||||||||||||||||||||||||||".split("|");
     var opCodeDescs = "Do nothing|null|int constant -1|int constant 0|int constant 1|int constant 2|int constant 3|int constant 4|int constant 5|long constant 0|long constant 1|float 0|float 1|float 2|double 0|double 1|byte|short|item from run-time constant pool|item from run-time constant pool (wide index}|long or double from run-time constant pool (wide index}|int from local variable|long from local variable|float from local variable|double from local variable|reference from local variable|int from local variable 0|int from local variable 1|int from local variable 2|int from local variable 3|long from local variable 0|long from local variable 1|long from local variable 2|long from local variable 3|float from local variable 0|float from local variable 1|float from local variable 2|float from local variable 3|double from local variable 0|double from local variable 1|double from local variable 2|double from local variable 3|reference from local variable 0|reference from local variable 1|reference from local variable 2|reference from local variable 3|int from array|long from array|float from array|double from array|reference from array|byte or boolean from array|char from array|short from array|int into local variable|long into local variable|float into local variable|double into local variable|reference into local variable|int into local variable 0|int into local variable 1|int into local variable 2|int into local variable 3|long 0 into local variable|long 1 into local variable|long 2 into local variable|long 3 into local variable|float 0 into local variable|float 1 into local variable|float 2 into local variable|float 3 into local variable|double 0 into local variable|double 1 into local variable|double 2 into local variable|double 3 into local variable|reference into local variable 0|reference into local variable 1|reference into local variable 2|reference into local variable 3|into int array|into long array|into float array|into double array|into reference array|into byte or boolean array|into char array|into short array|Pop the top operand stack value|Pop the top one or two operand stack values|Duplicate the top operand stack value|Duplicate the top operand stack value and insert two values down|Duplicate the top operand stack value and insert two or three values down|Duplicate the top one or two operand stack values|Duplicate the top one or two operand stack values and insert two or three values down|Duplicate the top one or two operand stack values and insert two, three, or four values down|Swap the top two operand stack values|Add int|Add long|Add float|Add double|Subtract int|Subtract long|Subtract float|Subtract double|Multiply int|Multiply long|Multiply float|Multiply double|Divide int|Divide long|Divide float|Divide double|Remainder int|Remainder long|Remainder float|Remainder double|Negate int|Negate long|Negate float|Negate double|Shift left int|Shift left long|Arithmetic shift right int|Arithmetic shift right long|Logical shift right int|Logical shift right long|Boolean AND int|Boolean AND long|Boolean OR int|Boolean OR long|Boolean XOR int|Boolean XOR long|Increment local variable by constant|int to long|int to float|int to double|long to int|long to float|long to double|float to int|float to long|float to double|double to int|double to long|double to float|int to byte|int to char|int to short|Compare long|Compare float (lower?}|Compare float (greater?}|Compare double|Compare double|||||||||||||Branch if value1 = value2|Branch if value1 != value2|Branch always|Jump subroutine|Return from subroutine|Access jump table by index and jump|Access jump table by key match and jump|Return int from method|Return long from method|Return float from method|Return double from method|Return reference from method|Return void from method|Get static field from class|Set static field in class|Fetch field from object|Set field in object|Invoke instance method; dispatch based on class|Invoke instance method; special handling for superclass, private, and instance initialization method invocations|Invoke a class (static} method|Invoke interface method|Invoke dynamic method|Create new object|Create new array|Create new array of reference|Get length of array|Throw exception or error|Check whether object is of given type|Determine if object is of given type|Enter monitor for object|Exit monitor for object|Extend local variable index by additional bytes|Create new multidimensional array|Branch if reference is null|Branch if reference not null||||||||||||||||||||||||||||||||||||||||||||||||||||||||".split("|");
 
@@ -1130,6 +1143,52 @@ function main(dataView, isEmbedded) {
 
                 switch (cpEntry.tag) {
 
+				case CONSTANT_MethodType:
+					return "MethodType: "+getUTF8(cpEntry.descriptor_index);
+
+				case CONSTANT_MethodHandle: {
+					var methodHandleInfo = cpEntry;
+					var referenceKindStr = BYTECODE_BEHAVIORS_FOR_METHOD_HANDLES[methodHandleInfo.reference_kind];
+
+					var isField;
+					switch (methodHandleInfo.reference_kind) {
+					case REF_getField:
+					case REF_getStatic:
+					case REF_putField:
+					case REF_putStatic: {
+							//CONSTANT_Fieldref_info
+							isField = true;
+							break;
+						}
+					case REF_invokeVirtual:
+					case REF_newInvokeSpecial:
+					case REF_putField:
+					case REF_putStatic: {
+							//CONSTANT_Methodref_info
+							isField = false;
+							break;
+						}
+					case REF_invokeStatic:
+					case REF_invokeSpecial:
+					case REF_putField:
+					case REF_putStatic: {
+							//CONSTANT_Methodref_info
+							isField = false;
+							break;
+						}
+					case REF_invokeInterface: {
+							//CONSTANT_InterfaceMethodref_info
+							isField = false;
+							break;
+						}
+					}
+					var refInfo = classFile.constant_pool[methodHandleInfo.reference_index];
+					var classInfo = classFile.constant_pool[refInfo.class_index];
+					var nameAndTypeInfo = classFile.constant_pool[refInfo.name_and_type_index];
+					var referenceName = getUTF8(classInfo.name_index) + "." + getFieldOrMethodName(nameAndTypeInfo, isField);
+					return "MethodHandle: " + referenceKindStr + ", " + referenceName;
+				}
+
                 case CONSTANT_NameAndType:
                     return "CONSTANT_NameAndType";
 
@@ -1162,8 +1221,10 @@ function main(dataView, isEmbedded) {
                         return formatNumber(s * m * Math.pow(2, e - 150) + "F");
                     }
 
-                case CONSTANT_InvokeDynamic:
-                    return 'in dy';
+                case CONSTANT_InvokeDynamic: {
+					var nameAndTypeInfo = classFile.constant_pool[cpEntry.name_and_type_index];
+                    return "bootstrap method: " + cpEntry.bootstrap_method_attr_index + ", " + getFieldOrMethodName(nameAndTypeInfo, false /** todo method\field switch*/);
+				}
 
                 case CONSTANT_Class:
                     return getClassName(cpIndex, false, true, false);
@@ -1362,23 +1423,34 @@ function main(dataView, isEmbedded) {
                     classAttributeValue = getClassName(classAttr.class_index, false, true, false);
                     var mi = classAttr.method_index;
                     if (mi > 0) {
-                        classAttributeValue = classAttributeValue + "." + getFieldOrMethodName(classFile.constant_pool[mi], true);
+                        classAttributeValue += "." + getFieldOrMethodName(classFile.constant_pool[mi], true);
                     }
                 } else if (ATTRIBUTES_INNR == classAttributeName) {
                     for (var i = 0; i < classAttr.number_of_classes; i++) {
-                        classAttributeValue = classAttributeValue + getClassName(classAttr.classes[i].inner_class_info_index, false, true, false) + "<br/>";
+                        classAttributeValue += getClassName(classAttr.classes[i].inner_class_info_index, false, true, false) + "<br/>";
                     }
                 } else if (ATTRIBUTES_BOOT == classAttributeName) {
-                    classAttributeValue = classAttr.num_bootstrap_methods + " boot method(s)";
-                    //for (var i = 0; i < classAttr.num_bootstrap_methods; i++) {
-                    //var methodName = getUTF8(classAttr.bootstrap_methods[i].bootstrap_method_ref);
-                    //classAttributeValue = classAttributeValue + methodName + "<br/>";
-                    //}
-                } else {
-                    //alert("classAttributeName "+classAttributeName);
-                }
-                addKeyValue(tbody, classAttributeName, classAttributeValue);
-            }
+                    classAttributeValue = "<ol start='0'>";
+                    for (var methodIndex = 0; methodIndex < classAttr.num_bootstrap_methods; methodIndex++) {
+						var bootstrapMethod = classAttr.bootstrap_methods[methodIndex];						
+						var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
+
+                    	var methodArguments = "<ol>";
+						for (var methodArgumentIndex = 0; methodArgumentIndex < bootstrapMethod.num_bootstrap_arguments; methodArgumentIndex++) {
+							methodArguments += "<li>" + getArgumentTypeAndValue(bootstrapMethod.bootstrap_arguments[methodArgumentIndex])+"</li>";
+						}
+						methodArguments += "</ol>";
+						
+						classAttributeValue += "<li>" + 
+						method +
+						",<br/><b>Method arguments:</b> " + 
+						methodArguments +
+						"</li>";
+                    }
+                    classAttributeValue += "</ol>";
+				}
+				addKeyValue(tbody, classAttributeName, classAttributeValue);
+			}
 
             for (var f = 0; f < classFile.fields_count; f++) {
                 var fol;

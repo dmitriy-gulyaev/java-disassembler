@@ -14,6 +14,6 @@ https://dmitriy-gulyaev.github.io/iceberg/examples/
 
 ### Current limitations (ToDo)
 
-- Processing of `invokedynamic` instruction.
+- Support of large `long` numbers.
 - Processing of `RuntimeVisibleAnnotations` attribute.
 - Parameter types in methods list.

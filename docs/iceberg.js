@@ -238,12 +238,16 @@ function main(dataView, isEmbedded) {
             return result;
         }
 
+        function getConstantPoolItem(index){
+            return classFile.constant_pool[index];
+        }
+
         function read_attribute() {
             var attribute_info = new Object();
             attribute_info.attribute_name_index = r2();
             attribute_info.attribute_length = r4();
 
-            var attributeName = classFile.constant_pool[attribute_info.attribute_name_index].bytes;
+            var attributeName = getConstantPoolItem(attribute_info.attribute_name_index).bytes;
             if (ATTRIBUTES_CODE == attributeName) {
                 attribute_info.max_stack = r2();
                 attribute_info.max_locals = r2();
@@ -592,8 +596,7 @@ function main(dataView, isEmbedded) {
                     }
                 }
                 function getOperandType(cpIndex) {
-                    var cpEntry = classFile.constant_pool[cpIndex];
-                    return getTagType(cpEntry.tag);
+                    return getTagType(getConstantPoolItem(cpIndex).tag);
                 }
 
                 function readUINT32FromBuffer(buffer, offset) {
@@ -622,7 +625,7 @@ function main(dataView, isEmbedded) {
 
                 for (var methodAttributes = 0; methodAttributes < method_info.attributes_count; methodAttributes++) {
                     var attributeNameIndex = method_info.attributes[methodAttributes].attribute_name_index;
-                    var attributeName = classFile.constant_pool[attributeNameIndex].bytes;
+                    var attributeName = getConstantPoolItem(attributeNameIndex).bytes;
 
                     var attributeValue = "";
 
@@ -878,7 +881,7 @@ function main(dataView, isEmbedded) {
                         for (var codeAttributes = 0; codeAttributes < method_info.attributes[methodAttributes].attributes_count; codeAttributes++) {
 
                             var attributeNameIndex2 = method_info.attributes[methodAttributes].attributes[codeAttributes].attribute_name_index;
-                            var codeAttributeName = classFile.constant_pool[attributeNameIndex2].bytes;
+                            var codeAttributeName = getConstantPoolItem(attributeNameIndex2).bytes;
                             var codeAttributeValue = "";
                             //addRow3ToTable(tbody, "Code attributes: <b>" + codeAttributeName + "</b>:");
 
@@ -920,11 +923,8 @@ function main(dataView, isEmbedded) {
                             } else {
                                 //alert("codeAttributeName "+codeAttributeName);
                             }
-                            if (isEmbedded) {}
-                            else {
-                                if (codeAttributeValue != "") {
-                                    addKeyValue(tbody, codeAttributeName, codeAttributeValue);
-                                }
+                            if (!isEmbedded && codeAttributeValue != "") {
+                                addKeyValue(tbody, codeAttributeName, codeAttributeValue);
                             }
                         }
 
@@ -988,7 +988,7 @@ function main(dataView, isEmbedded) {
 
             function showField(field_info, tbody) {
                 for (var fa = 0; fa < field_info.attributes_count; fa++) {
-                    var fieldAttributeName = classFile.constant_pool[field_info.attributes[fa].attribute_name_index].bytes;
+                    var fieldAttributeName = getConstantPoolItem(field_info.attributes[fa].attribute_name_index).bytes;
                     var fieldAttributeValue = "";
 
                     if (ATTRIBUTES_CONS == fieldAttributeName) {
@@ -1053,7 +1053,7 @@ function main(dataView, isEmbedded) {
             }
 
             function getUTF8(index) {
-                var cpUtf8Entry = classFile.constant_pool[index];
+                var cpUtf8Entry = getConstantPoolItem(index);
                 return cpUtf8Entry.bytes.replace(new RegExp('<', 'g'), '&lt;');
             }
 
@@ -1103,7 +1103,7 @@ function main(dataView, isEmbedded) {
 
             function getClassName(index, isOnlyName, addClassSuffux, isFullName) {
                 var prefix = "";
-                var cpEntryClass = classFile.constant_pool[index];
+                var cpEntryClass = getConstantPoolItem(index);
                 var className = getUTF8(cpEntryClass.name_index);
                 className = className.replace(SLASH_TO_DOT_REG_EXP, '.');
                 var title = className;
@@ -1139,7 +1139,7 @@ function main(dataView, isEmbedded) {
                     return "";
                 }
 
-                var cpEntry = classFile.constant_pool[cpIndex];
+                var cpEntry = getConstantPoolItem(cpIndex);
 
                 switch (cpEntry.tag) {
 
@@ -1182,9 +1182,9 @@ function main(dataView, isEmbedded) {
 							break;
 						}
 					}
-					var refInfo = classFile.constant_pool[methodHandleInfo.reference_index];
-					var classInfo = classFile.constant_pool[refInfo.class_index];
-					var nameAndTypeInfo = classFile.constant_pool[refInfo.name_and_type_index];
+					var refInfo = getConstantPoolItem(methodHandleInfo.reference_index);
+					var classInfo = getConstantPoolItem(refInfo.class_index);
+					var nameAndTypeInfo = getConstantPoolItem(refInfo.name_and_type_index);
 					var referenceName = getUTF8(classInfo.name_index) + "." + getFieldOrMethodName(nameAndTypeInfo, isField);
 					return "MethodHandle: " + referenceKindStr + ", " + referenceName;
 				}
@@ -1195,7 +1195,14 @@ function main(dataView, isEmbedded) {
                 case CONSTANT_Utf8:
                     return getUTF8(cpIndex);
 
-                case CONSTANT_Long:
+                case CONSTANT_Long:{
+                        var bits = (cpEntry.high_bytes << 32) + cpEntry.low_bytes;
+                        if ((bits >> 63) != 0) {
+                            bits -= 0xFFFFFFFF;
+                        }
+                        return formatNumber(bits + "L");
+                    }
+
                 case CONSTANT_Double: {
                         var bits = (cpEntry.high_bytes << 32) + cpEntry.low_bytes;
                         var s = ((bits >> 63) == 0) ? 1 : -1;
@@ -1222,7 +1229,7 @@ function main(dataView, isEmbedded) {
                     }
 
                 case CONSTANT_InvokeDynamic: {
-					var nameAndTypeInfo = classFile.constant_pool[cpEntry.name_and_type_index];
+					var nameAndTypeInfo = getConstantPoolItem(cpEntry.name_and_type_index);
                     return "bootstrap method: " + cpEntry.bootstrap_method_attr_index + ", " + getFieldOrMethodName(nameAndTypeInfo, false /** todo method\field switch*/);
 				}
 
@@ -1235,8 +1242,8 @@ function main(dataView, isEmbedded) {
                 case CONSTANT_InterfaceMethodref:
                 case CONSTANT_Methodref:
                 case CONSTANT_Fieldref:
-                    var cpEntryClass = classFile.constant_pool[cpEntry.class_index];
-                    var cpEntryNameAndType = classFile.constant_pool[cpEntry.name_and_type_index];
+                    var cpEntryClass = getConstantPoolItem(cpEntry.class_index);
+                    var cpEntryNameAndType = getConstantPoolItem(cpEntry.name_and_type_index);
                     var result = "";
                     var isThis = cpEntry.class_index == classFile.this_class;
                     if (!isThis) {
@@ -1411,7 +1418,7 @@ function main(dataView, isEmbedded) {
 
             for (var cai = 0; cai < classFile.attributes_count; cai++) {
                 var classAttr = classFile.attributes[cai];
-                var classAttributeName = classFile.constant_pool[classAttr.attribute_name_index].bytes;
+                var classAttributeName = getConstantPoolItem(classAttr.attribute_name_index).bytes;
                 var classAttributeValue = "";
 
                 if (ATTRIBUTES_SRCF == classAttributeName) {
@@ -1422,7 +1429,7 @@ function main(dataView, isEmbedded) {
                     classAttributeValue = getClassName(classAttr.class_index, false, true, false);
                     var mi = classAttr.method_index;
                     if (mi > 0) {
-                        classAttributeValue += "." + getFieldOrMethodName(classFile.constant_pool[mi], true);
+                        classAttributeValue += "." + getFieldOrMethodName(getConstantPoolItem(mi), true);
                     }
                 } else if (ATTRIBUTES_INNR == classAttributeName) {
                     for (var i = 0; i < classAttr.number_of_classes; i++) {

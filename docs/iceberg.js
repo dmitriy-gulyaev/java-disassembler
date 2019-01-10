@@ -1,7 +1,7 @@
 /**
-@preserve Copyright 2017-2018 Dmitriy Gulyaev.
+@preserve Copyright 2017-2019 Dmitriy Gulyaev.
  */
-function main(dataView, isEmbedded) {
+function main(dataView, isEmbedded, container) {
 
     if (isEmbedded) {
         dataView = base64ToArrayBuffer(dataView);
@@ -217,7 +217,7 @@ function main(dataView, isEmbedded) {
 
     //-------------------------------code-------------------------------------
 
-    function read_class(dataView) {
+    function read_class(dataView, container) {
         var c = 0;
 
         function r() {
@@ -513,9 +513,9 @@ function main(dataView, isEmbedded) {
             var BRACKET_REG_EXP = new RegExp('\\[', 'g');
 
             function addRowToTable(tbody, row, methodNumber, indexInCodeArray) {
-                var tr = documentcreateElement('tr');
+                var tr = documentCreateElement('tr');
 
-                var tdLN = documentcreateElement('td');
+                var tdLN = documentCreateElement('td');
                 //tdLN.innerHTML = "LN3";
                 tdLN.className = "ln";
                 if (methodNumber != null) {
@@ -525,7 +525,7 @@ function main(dataView, isEmbedded) {
                 appendChild(tr, tdLN);
 
                 for (var hdrc = 0; hdrc < row.length; hdrc++) {
-                    var td = documentcreateElement('td');
+                    var td = documentCreateElement('td');
                     td.innerHTML = row[hdrc];
                     if (hdrc == 0) {
                         td.style.textAlign = 'right';
@@ -890,7 +890,7 @@ function main(dataView, isEmbedded) {
                                 for (var ln = 0; ln < ttt.line_number_table_length; ln++) {
                                     var lineNumberTable = ttt.line_number_table[ln];
                                     var eid = "m-" + methodNumber + "-" + lineNumberTable.start_pc;
-                                    var e = documentgetElementById(eid);
+                                    var e = documentGetElementById(eid);
                                     if (e) {
                                         e.innerHTML = lineNumberTable.line_number;
                                     } else {
@@ -904,12 +904,12 @@ function main(dataView, isEmbedded) {
                                 }
                             } else if (ATTRIBUTES_LCVT == codeAttributeName || ATTRIBUTES_LCTT == codeAttributeName) {
                                 var isATTRIBUTES_LCVT = ATTRIBUTES_LCVT == codeAttributeName;
-                                var ttt = method_info.attributes[methodAttributes].attributes[codeAttributes];
-                                if (ttt.local_variable_table_length > 0) {
+                                var localVariableTableAttribute = method_info.attributes[methodAttributes].attributes[codeAttributes];
+                                if (localVariableTableAttribute.local_variable_table_length > 0) {
                                     var descriptionOrSignature = isATTRIBUTES_LCVT ? "descriptor" : "signature";
                                     codeAttributeValue = codeAttributeValue + "<table style='text-align:center;width:" + TABLE_WIDTH + "' border='1'><tr><th width='50px'>start_pc</th><th width='50px'>length</th><th width='100px'>name</th><th>" + descriptionOrSignature + "</th><th width='50px'>index</th></tr>";
-                                    for (var ln = 0; ln < ttt.local_variable_table_length; ln++) {
-                                        var lvtt = ttt.local_variable_table[ln];
+                                    for (var ln = 0; ln < localVariableTableAttribute.local_variable_table_length; ln++) {
+                                        var lvtt = localVariableTableAttribute.local_variable_table[ln];
                                         codeAttributeValue = codeAttributeValue + "<tr>" +
                                             "<td>" + lvtt.start_pc + "</td>" +
                                             "<td>" + lvtt.length + "</td>" +
@@ -959,7 +959,6 @@ function main(dataView, isEmbedded) {
 
                             addKeyValue(tbody, "Exception table", attributeValue);
                         }
-
                     }
 
                 }
@@ -1004,14 +1003,14 @@ function main(dataView, isEmbedded) {
             }
 
             function addRow3ToTable(tbody, txt) {
-                var tr = documentcreateElement('tr');
+                var tr = documentCreateElement('tr');
 
-                var tdLN0 = documentcreateElement('td');
+                var tdLN0 = documentCreateElement('td');
                 //tdLN0.innerHTML = "LN0";
                 tdLN0.className = "ln";
                 appendChild(tr, tdLN0);
 
-                var td = documentcreateElement('td');
+                var td = documentCreateElement('td');
                 td.innerHTML = txt;
                 td.colSpan = 5;
                 //td.style.backgroundColor = '#ffff00';
@@ -1249,9 +1248,8 @@ function main(dataView, isEmbedded) {
                     if (!isThis) {
                         result += getClassName(cpEntry.class_index, false, false, false) + ".";
                     }
-                    //var desc = cpEntry.tag != CONSTANT_Fieldref ? getUTF8(cpEntryNameAndType.descriptor_index) : "";
-                    //var desc = getUTF8(cpEntryNameAndType.descriptor_index);
-                    result = result + getFieldOrMethodName(cpEntryNameAndType, cpEntry.tag == CONSTANT_Fieldref);
+
+                    result += getFieldOrMethodName(cpEntryNameAndType, cpEntry.tag == CONSTANT_Fieldref);
                     if (cpEntry.tag != CONSTANT_Fieldref) {
                         result +=  "()";
                     }
@@ -1274,11 +1272,11 @@ function main(dataView, isEmbedded) {
                 return result;
             }
 
-            function documentcreateElement(el) {
+            function documentCreateElement(el) {
                 return document.createElement(el);
             }
 
-            function documentgetElementById(id) {
+            function documentGetElementById(id) {
                 return document.getElementById(id);
             }
 
@@ -1287,45 +1285,41 @@ function main(dataView, isEmbedded) {
             }
 
             function createTable(prnt) {
-                var tablearea = documentgetElementById(prnt);
+                var tablearea = documentGetElementById(prnt);
                 removeAllChilds(tablearea);
 
-                var table = documentcreateElement('table');
-                //table.setAttribute("border", 1);
+                var table = documentCreateElement('table');
                 table.setAttribute("cellSpacing", "0");
-                //table.style.width = '500px';
 
-                var tbody = documentcreateElement('tbody');
+                var tbody = documentCreateElement('tbody');
                 appendChild(table, tbody);
-
                 appendChild(tablearea, table);
-
                 return tbody;
 
             }
 
             function addFirstRow(tbody, type, entityName, anchorName, accessFlags) {
 
-                var tr0 = documentcreateElement('tr');
+                var tr0 = documentCreateElement('tr');
 
-                var tdLN6 = documentcreateElement('td');
+                var tdLN6 = documentCreateElement('td');
                 tdLN6.className = "ln";
                 appendChild(tr0, tdLN6);
 
-                var tdf = documentcreateElement('td');
+                var tdf = documentCreateElement('td');
                 tdf.colSpan = 5;
                 tdf.innerHTML = '&nbsp;';
                 appendChild(tr0, tdf);
                 appendChild(tbody, tr0);
 
-                var tr = documentcreateElement('tr');
+                var tr = documentCreateElement('tr');
                 tr.style.fontWeight = 'bold';
 
-                var tdLN = documentcreateElement('td');
+                var tdLN = documentCreateElement('td');
                 tdLN.className = "ln";
                 appendChild(tr, tdLN);
 
-                var td0 = documentcreateElement('td');
+                var td0 = documentCreateElement('td');
                 //td0.innerHTML = "&#9711;";
                 //td0.innerHTML = "&#9724;&#9899;&#9670;";
 
@@ -1343,7 +1337,7 @@ function main(dataView, isEmbedded) {
                 td0.style.color = 'blue';
                 appendChild(tr, td0);
 
-                var td2 = documentcreateElement('td');
+                var td2 = documentCreateElement('td');
                 td2.innerHTML = (anchorName) ? "<a name='" + anchorName + "'>" + entityName + "</a>" : entityName;
                 td2.colSpan = 4;
                 appendChild(tr, td2);
@@ -1352,15 +1346,15 @@ function main(dataView, isEmbedded) {
             }
 
             function addKeyValue(tbody, key, value) {
-                var tr = documentcreateElement('tr');
+                var tr = documentCreateElement('tr');
                 //tr.style.backgroundColor = '#ffdd00';
 
-                var tdLN = documentcreateElement('td');
+                var tdLN = documentCreateElement('td');
                 //tdLN.innerHTML = "LN2";
                 tdLN.className = "ln";
                 appendChild(tr, tdLN);
 
-                var td1 = documentcreateElement('td');
+                var td1 = documentCreateElement('td');
                 td1.innerHTML = "<b>" + key + " :</b>";
                 td1.colSpan = 2;
                 td1.style.textAlign = 'right';
@@ -1368,10 +1362,10 @@ function main(dataView, isEmbedded) {
                 //td1.style.wordWrap = "normal"
                 appendChild(tr, td1);
 
-                var td = documentcreateElement('td');
+                var td = documentCreateElement('td');
                 appendChild(tr, td);
 
-                var td2 = documentcreateElement('td');
+                var td2 = documentCreateElement('td');
                 td2.innerHTML = value;
                 td2.colSpan = 2;
                 //td2.style.backgroundColor = '#ffffff';
@@ -1380,10 +1374,10 @@ function main(dataView, isEmbedded) {
                 appendChild(tbody, tr);
             }
 
-            //var cn = documentgetElementById('cn');
+            //var cn = documentGetElementById('cn');
             //cn.innerHTML = getArgumentTypeAndValue(classFile.this_class) ;
 
-            var tbody = createTable("list");
+            var tbody = createTable(container ? container : "list");
 
             function printAccessFlags(accessFlagsString) {
                 if (accessFlagsString != "") {
@@ -1466,8 +1460,8 @@ function main(dataView, isEmbedded) {
                 printAccessFlags(getFieldAccessModifiers(field_info.access_flags));
                 showField(field_info, tbody);
                 if (f == 0) {
-                    fol = documentcreateElement('ol');
-                    var tempBElement = documentcreateElement('b');
+                    fol = documentCreateElement('ol');
+                    var tempBElement = documentCreateElement('b');
                     tempBElement.innerHTML = "Fields:";
                     if (!isEmbedded) {
                         outline.appendChild(tempBElement);
@@ -1486,8 +1480,8 @@ function main(dataView, isEmbedded) {
                 printAccessFlags(getMethodAccessModifiers(method_info.access_flags));
                 showMethod(method_info, tbody, m);
                 if (m == 0) {
-                    mol = documentcreateElement('ol');
-                    var tempBElement = documentcreateElement('b');
+                    mol = documentCreateElement('ol');
+                    var tempBElement = documentCreateElement('b');
                     tempBElement.innerHTML = "Methods:";
                     if (!isEmbedded) {
                         outline.appendChild(tempBElement);
@@ -1501,7 +1495,7 @@ function main(dataView, isEmbedded) {
             var anchorName = "c" + cpIterator;
             var s = getArgumentTypeAndValue(cpIterator+1);
 
-            var li = documentcreateElement('li');
+            var li = documentCreateElement('li');
             clist.appendChild(li);
 
             var anchorTag = document.createElement('a');
@@ -1513,10 +1507,10 @@ function main(dataView, isEmbedded) {
 
             function addItemToFMList(info, anchorName, olElement) {
                 var name = getFieldOrMethodPlainName(info);
-                var li = documentcreateElement('li');
+                var li = documentCreateElement('li');
                 olElement.appendChild(li);
 
-                var anchorTag = documentcreateElement('a');
+                var anchorTag = documentCreateElement('a');
                 anchorTag.setAttribute('href', "#" + anchorName);
                 anchorTag.innerHTML = name;
                 li.appendChild(anchorTag);
@@ -1579,7 +1573,7 @@ function main(dataView, isEmbedded) {
     //---end  read_class
 
 
-    read_class(dataView);
+    read_class(dataView, container);
     window.scrollTo(0, 0);
     //showClass();
 

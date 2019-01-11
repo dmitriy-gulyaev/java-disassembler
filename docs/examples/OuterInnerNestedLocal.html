@@ -11,48 +11,67 @@
 <table width=100% class="ct">
 <tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> OuterInnerNestedLocal {</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">class</b> OuterInnerNestedLocal {</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">    String fieldO = "";</td></tr>
+<tr><td class="ln">5</td><td class="cl">    Integer fieldOuter = <b class="keyword">new</b> Integer(10000);</td></tr>
 <tr><td class="ln">6</td><td class="cl"></td></tr>
 <tr><td class="ln">7</td><td class="cl">    <b class="keyword">class</b> Inner {</td></tr>
-<tr><td class="ln">8</td><td class="cl">        <b class="keyword">void</b> mI() {</td></tr>
-<tr><td class="ln">9</td><td class="cl">            fieldO.hashCode();</td></tr>
+<tr><td class="ln">8</td><td class="cl">        <b class="keyword">void</b> methodInner() {</td></tr>
+<tr><td class="ln">9</td><td class="cl">            fieldOuter.hashCode();</td></tr>
 <tr><td class="ln">10</td><td class="cl">        }</td></tr>
 <tr><td class="ln">11</td><td class="cl">    }</td></tr>
 <tr><td class="ln">12</td><td class="cl"></td></tr>
 <tr><td class="ln">13</td><td class="cl">    <b class="keyword">static</b> <b class="keyword">class</b> Nested {</td></tr>
-<tr><td class="ln">14</td><td class="cl">    }</td></tr>
-<tr><td class="ln">15</td><td class="cl"></td></tr>
+<tr><td class="ln">14</td><td class="cl">        <b class="keyword">void</b> methodNested() {}</td></tr>
+<tr><td class="ln">15</td><td class="cl">    }</td></tr>
 <tr><td class="ln">16</td><td class="cl"></td></tr>
-<tr><td class="ln">17</td><td class="cl">    <b class="keyword">void</b> mO() {</td></tr>
-<tr><td class="ln">18</td><td class="cl">        <b class="keyword">class</b> Local {</td></tr>
-<tr><td class="ln">19</td><td class="cl">            <b class="keyword">void</b> mL() {</td></tr>
-<tr><td class="ln">20</td><td class="cl">                fieldO.hashCode();</td></tr>
-<tr><td class="ln">21</td><td class="cl">            }</td></tr>
-<tr><td class="ln">22</td><td class="cl">        }</td></tr>
-<tr><td class="ln">23</td><td class="cl">    }</td></tr>
-<tr><td class="ln">24</td><td class="cl"></td></tr>
-<tr><td class="ln">25</td><td class="cl">}</td></tr>
-<tr><td class="ln">26</td><td class="cl"></td></tr>
+<tr><td class="ln">17</td><td class="cl"></td></tr>
+<tr><td class="ln">18</td><td class="cl">    <b class="keyword">void</b> methodOuter() {</td></tr>
+<tr><td class="ln">19</td><td class="cl">        Integer fieldLocal = <b class="keyword">new</b> Integer(80000);</td></tr>
+<tr><td class="ln">20</td><td class="cl">        <b class="keyword">final</b> <b class="keyword">int</b> fieldLocalFinal = 90000;</td></tr>
+<tr><td class="ln">21</td><td class="cl"></td></tr>
+<tr><td class="ln">22</td><td class="cl">        <b class="keyword">class</b> Local {</td></tr>
+<tr><td class="ln">23</td><td class="cl">            <b class="keyword">void</b> methodLocal() {}</td></tr>
+<tr><td class="ln">24</td><td class="cl">        }</td></tr>
+<tr><td class="ln">25</td><td class="cl"></td></tr>
+<tr><td class="ln">26</td><td class="cl">        <b class="keyword">class</b> LocalWithAccesToOuter {</td></tr>
+<tr><td class="ln">27</td><td class="cl">            <b class="keyword">void</b> methodLocalWithAccesToOuter() {</td></tr>
+<tr><td class="ln">28</td><td class="cl">                fieldLocal.hashCode();</td></tr>
+<tr><td class="ln">29</td><td class="cl">                <b class="keyword">new</b> Integer(fieldLocalFinal);</td></tr>
+<tr><td class="ln">30</td><td class="cl">            }</td></tr>
+<tr><td class="ln">31</td><td class="cl">        }</td></tr>
+<tr><td class="ln">32</td><td class="cl"></td></tr>
+<tr><td class="ln">33</td><td class="cl">        <b class="keyword">new</b> Inner().methodInner();</td></tr>
+<tr><td class="ln">34</td><td class="cl">        <b class="keyword">new</b> Nested().methodNested();</td></tr>
+<tr><td class="ln">35</td><td class="cl">        <b class="keyword">new</b> Local().methodLocal();</td></tr>
+<tr><td class="ln">36</td><td class="cl">        <b class="keyword">new</b> LocalWithAccesToOuter().methodLocalWithAccesToOuter();</td></tr>
+<tr><td class="ln">37</td><td class="cl"></td></tr>
+<tr><td class="ln">38</td><td class="cl">    }</td></tr>
+<tr><td class="ln">39</td><td class="cl">}</td></tr>
+<tr><td class="ln">40</td><td class="cl"></td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <h4>Bytecode of inner classes</h4>
 <div id="OuterInnerNestedLocal$1Local.class" style="border:1px solid #000000"></div><br/>
+<div id="OuterInnerNestedLocal$1LocalWithAccesToOuter.class" style="border:1px solid #000000"></div><br/>
 <div id="OuterInnerNestedLocal$Inner.class" style="border:1px solid #000000"></div><br/>
 <div id="OuterInnerNestedLocal$Nested.class" style="border:1px solid #000000"></div><br/>
 <h4>Comment</h4>
-Inner and local classes are similar to each other, with the exception of <tt>EnclosingMethod</tt>
-attribute in local class. Both classes have single constructor with one parameter - reference to
-outer class.
+Inner and local classes are similar to each other, with the exception of <tt
+class='keyword'>EnclosingMethod</tt> attribute in local class. Both classes have single
+constructor with one parameter - reference to outer class. Reference is saved as 
+synthetic instance variable <tt class='keyword'>this$0</tt> and may be used further for access to
+outer class. Reference to outer class is passed as constructor parameter and saved even if
+inner/local don't use it (according to source code).
 <br/><br/>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAIQoABQAZCAAaCQAEABsHABwHAB0HAB4BAAZOZXN0ZWQBAAxJbm5lckNsYXNzZXMHAB8BAAVJbm5lcgcAIAEABUxvY2FsAQAGZmllbGRPAQASTGphdmEvbGFuZy9TdHJpbmc7AQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACtMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWw7AQACbU8BAApTb3VyY2VGaWxlAQAaT3V0ZXJJbm5lck5lc3RlZExvY2FsLmphdmEMAA8AEAEAAAwADQAOAQApY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwBABBqYXZhL2xhbmcvT2JqZWN0AQAwY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkTmVzdGVkAQAvY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkSW5uZXIBADBjb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbCQxTG9jYWwAIQAEAAUAAAABAAAADQAOAAAAAgABAA8AEAABABEAAAA5AAIAAQAAAAsqtwABKhICtQADsQAAAAIAEgAAAAoAAgAAAAMABAAFABMAAAAMAAEAAAALABQAFQAAAAAAFgAQAAEAEQAAACsAAAABAAAAAbEAAAACABIAAAAGAAEAAAAXABMAAAAMAAEAAAABABQAFQAAAAIAFwAAAAIAGAAIAAAAGgADAAYABAAHAAgACQAEAAoAAAALAAAADAAA", true, "list");
-main("yv66vgAAADQAJwkABQAZCgAGABoJABcAGwoAHAAdBwAeBwAfAQAGdGhpcyQwAQArTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsOwEABjxpbml0PgEALihMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWw7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEABUxvY2FsAQAMSW5uZXJDbGFzc2VzAQAyTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJDFMb2NhbDsBAAJtTAEAAygpVgEAClNvdXJjZUZpbGUBABpPdXRlcklubmVyTmVzdGVkTG9jYWwuamF2YQEAD0VuY2xvc2luZ01ldGhvZAcAIAwAIQATDAAHAAgMAAkAEwwAIgAjBwAkDAAlACYBADBjb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbCQxTG9jYWwBABBqYXZhL2xhbmcvT2JqZWN0AQApY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwBAAJtTwEABmZpZWxkTwEAEkxqYXZhL2xhbmcvU3RyaW5nOwEAEGphdmEvbGFuZy9TdHJpbmcBAAhoYXNoQ29kZQEAAygpSQAgAAUABgAAAAEQEAAHAAgAAAACAAAACQAKAAEACwAAAD4AAgACAAAACiortQABKrcAArEAAAACAAwAAAAGAAEAAAASAA0AAAAWAAIAAAAKAA4AEQAAAAAACgAHAAgAAQAAABIAEwABAAsAAAA6AAEAAQAAAAwqtAABtAADtgAEV7EAAAACAAwAAAAKAAIAAAAUAAsAFQANAAAADAABAAAADAAOABEAAAADABQAAAACABUAFgAAAAQAFwAYABAAAAAKAAEABQAAAA8AAA==", true, "OuterInnerNestedLocal$1Local.class");
-main("yv66vgAAADQAJAkABQAWCgAGABcJABgAGQoAGgAbBwAcBwAdAQAGdGhpcyQwAQArTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsOwEABjxpbml0PgEALihMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWw7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEABUlubmVyAQAMSW5uZXJDbGFzc2VzAQAxTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJElubmVyOwEAAm1JAQADKClWAQAKU291cmNlRmlsZQEAGk91dGVySW5uZXJOZXN0ZWRMb2NhbC5qYXZhDAAHAAgMAAkAEwcAHgwAHwAgBwAhDAAiACMBAC9jb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbCRJbm5lcgEAEGphdmEvbGFuZy9PYmplY3QBACljb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbAEABmZpZWxkTwEAEkxqYXZhL2xhbmcvU3RyaW5nOwEAEGphdmEvbGFuZy9TdHJpbmcBAAhoYXNoQ29kZQEAAygpSQAgAAUABgAAAAEQEAAHAAgAAAACAAAACQAKAAEACwAAAD4AAgACAAAACiortQABKrcAArEAAAACAAwAAAAGAAEAAAAHAA0AAAAWAAIAAAAKAA4AEQAAAAAACgAHAAgAAQAAABIAEwABAAsAAAA6AAEAAQAAAAwqtAABtAADtgAEV7EAAAACAAwAAAAKAAIAAAAJAAsACgANAAAADAABAAAADAAOABEAAAACABQAAAACABUAEAAAAAoAAQAFABgADwAA", true, "OuterInnerNestedLocal$Inner.class");
-main("yv66vgAAADQAFAoAAwAPBwARBwASAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAAZOZXN0ZWQBAAxJbm5lckNsYXNzZXMBADJMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkTmVzdGVkOwEAClNvdXJjZUZpbGUBABpPdXRlcklubmVyTmVzdGVkTG9jYWwuamF2YQwABAAFBwATAQAwY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkTmVzdGVkAQAQamF2YS9sYW5nL09iamVjdAEAKWNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsACAAAgADAAAAAAABAAAABAAFAAEABgAAAC8AAQABAAAABSq3AAGxAAAAAgAHAAAABgABAAAADQAIAAAADAABAAAABQAJAAwAAAACAA0AAAACAA4ACwAAAAoAAQACABAACgAI", true, "OuterInnerNestedLocal$Nested.class");
+main("yv66vgAAADQAQAcAAgEAKWNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsBwAEAQAQamF2YS9sYW5nL09iamVjdAEACmZpZWxkT3V0ZXIBABNMamF2YS9sYW5nL0ludGVnZXI7AQAGPGluaXQ+AQADKClWAQAEQ29kZQoAAwALDAAHAAgHAA0BABFqYXZhL2xhbmcvSW50ZWdlcgoADAAPDAAHABABAAQoSSlWCQABABIMAAUABgEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACtMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWw7AQALbWV0aG9kT3V0ZXIDAAE4gAMAAV+QBwAbAQAvY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkSW5uZXIKABoAHQwABwAeAQAuKExjb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbDspVgoAGgAgDAAhAAgBAAttZXRob2RJbm5lcgcAIwEAMGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJE5lc3RlZAoAIgALCgAiACYMACcACAEADG1ldGhvZE5lc3RlZAcAKQEAMGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJDFMb2NhbAoAKAAdCgAoACwMAC0ACAEAC21ldGhvZExvY2FsBwAvAQBAY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkMUxvY2FsV2l0aEFjY2VzVG9PdXRlcgoALgAxDAAHADIBAEEoTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsO0xqYXZhL2xhbmcvSW50ZWdlcjspVgoALgA0DAA1AAgBABttZXRob2RMb2NhbFdpdGhBY2Nlc1RvT3V0ZXIBAApmaWVsZExvY2FsAQAPZmllbGRMb2NhbEZpbmFsAQABSQEAClNvdXJjZUZpbGUBABpPdXRlcklubmVyTmVzdGVkTG9jYWwuamF2YQEADElubmVyQ2xhc3NlcwEABUxvY2FsAQAVTG9jYWxXaXRoQWNjZXNUb091dGVyAQAFSW5uZXIBAAZOZXN0ZWQAIAABAAMAAAABAAAABQAGAAAAAgAAAAcACAABAAkAAABFAAQAAQAAABMqtwAKKrsADFkRJxC3AA61ABGxAAAAAgATAAAADgADAAAAAwAEAAUAEgADABQAAAAMAAEAAAATABUAFgAAAAAAFwAIAAEACQAAAJAABAADAAAAOrsADFkSGLcADkwSGT27ABpZKrcAHLYAH7sAIlm3ACS2ACW7AChZKrcAKrYAK7sALlkqK7cAMLYAM7EAAAACABMAAAAeAAcAAAATAAoAFAANACEAGAAiACIAIwAtACQAOQAmABQAAAAgAAMAAAA6ABUAFgAAAAoAMAA2AAYAAQANAC0ANwA4AAIAAgA5AAAAAgA6ADsAAAAiAAQAKAAAADwAAAAuAAAAPQAAABoAAQA+AAAAIgABAD8ACA==", true, "list");
+main("yv66vgAAADQAHQcAAgEAMGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJDFMb2NhbAcABAEAEGphdmEvbGFuZy9PYmplY3QBAAZ0aGlzJDABACtMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWw7AQAGPGluaXQ+AQAuKExjb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbDspVgEABENvZGUJAAEACwwABQAGCgADAA0MAAcADgEAAygpVgEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBADJMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkMUxvY2FsOwEAC21ldGhvZExvY2FsAQAKU291cmNlRmlsZQEAGk91dGVySW5uZXJOZXN0ZWRMb2NhbC5qYXZhAQAPRW5jbG9zaW5nTWV0aG9kBwAYAQApY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwMABoADgEAC21ldGhvZE91dGVyAQAMSW5uZXJDbGFzc2VzAQAFTG9jYWwAIAABAAMAAAABEBAABQAGAAAAAgAAAAcACAABAAkAAAA0AAIAAgAAAAoqK7UACiq3AAyxAAAAAgAPAAAABgABAAAAFgAQAAAADAABAAAACgARABIAAAAAABMADgABAAkAAAArAAAAAQAAAAGxAAAAAgAPAAAABgABAAAAFwAQAAAADAABAAAAAQARABIAAAADABQAAAACABUAFgAAAAQAFwAZABsAAAAKAAEAAQAAABwAAA==", true, "OuterInnerNestedLocal$1Local.class");
+main("yv66vgAAADQAKwcAAgEAQGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJDFMb2NhbFdpdGhBY2Nlc1RvT3V0ZXIHAAQBABBqYXZhL2xhbmcvT2JqZWN0AQAGdGhpcyQwAQArTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsOwEADnZhbCRmaWVsZExvY2FsAQATTGphdmEvbGFuZy9JbnRlZ2VyOwEABjxpbml0PgEAQShMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWw7TGphdmEvbGFuZy9JbnRlZ2VyOylWAQAEQ29kZQkAAQANDAAFAAYJAAEADwwABwAICgADABEMAAkAEgEAAygpVgEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAEJMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkMUxvY2FsV2l0aEFjY2VzVG9PdXRlcjsBABttZXRob2RMb2NhbFdpdGhBY2Nlc1RvT3V0ZXIKABkAGwcAGgEAEWphdmEvbGFuZy9JbnRlZ2VyDAAcAB0BAAhoYXNoQ29kZQEAAygpSQMAAV+QCgAZACAMAAkAIQEABChJKVYBAApTb3VyY2VGaWxlAQAaT3V0ZXJJbm5lck5lc3RlZExvY2FsLmphdmEBAA9FbmNsb3NpbmdNZXRob2QHACYBACljb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbAwAKAASAQALbWV0aG9kT3V0ZXIBAAxJbm5lckNsYXNzZXMBABVMb2NhbFdpdGhBY2Nlc1RvT3V0ZXIAIAABAAMAAAACEBAABQAGAAAQEgAHAAgAAAACAAAACQAKAAEACwAAADkAAgADAAAADyortQAMKiy1AA4qtwAQsQAAAAIAEwAAAAYAAQAAABoAFAAAAAwAAQAAAA8AFQAWAAAAAAAXABIAAQALAAAAQwACAAEAAAARKrQADrYAGFe7ABkSHrcAH7EAAAACABMAAAAOAAMAAAAcAAgAHQAQAB4AFAAAAAwAAQAAABEAFQAWAAAAAwAiAAAAAgAjACQAAAAEACUAJwApAAAACgABAAEAAAAqAAA=", true, "OuterInnerNestedLocal$1LocalWithAccesToOuter.class");
+main("yv66vgAAADQAJAcAAgEAL2NvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJElubmVyBwAEAQAQamF2YS9sYW5nL09iamVjdAEABnRoaXMkMAEAK0xjb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbDsBAAY8aW5pdD4BAC4oTGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsOylWAQAEQ29kZQkAAQALDAAFAAYKAAMADQwABwAOAQADKClWAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAMUxjb20vZXhhbXBsZS9pY2ViZXJnL091dGVySW5uZXJOZXN0ZWRMb2NhbCRJbm5lcjsBAAttZXRob2RJbm5lcgkAFQAXBwAWAQApY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwMABgAGQEACmZpZWxkT3V0ZXIBABNMamF2YS9sYW5nL0ludGVnZXI7CgAbAB0HABwBABFqYXZhL2xhbmcvSW50ZWdlcgwAHgAfAQAIaGFzaENvZGUBAAMoKUkBAApTb3VyY2VGaWxlAQAaT3V0ZXJJbm5lck5lc3RlZExvY2FsLmphdmEBAAxJbm5lckNsYXNzZXMBAAVJbm5lcgAgAAEAAwAAAAEQEAAFAAYAAAACAAAABwAIAAEACQAAADQAAgACAAAACiortQAKKrcADLEAAAACAA8AAAAGAAEAAAAHABAAAAAMAAEAAAAKABEAEgAAAAAAEwAOAAEACQAAADoAAQABAAAADCq0AAq0ABS2ABpXsQAAAAIADwAAAAoAAgAAAAkACwAKABAAAAAMAAEAAAAMABEAEgAAAAIAIAAAAAIAIQAiAAAACgABAAEAFQAjAAA=", true, "OuterInnerNestedLocal$Inner.class");
+main("yv66vgAAADQAFQcAAgEAMGNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsJE5lc3RlZAcABAEAEGphdmEvbGFuZy9PYmplY3QBAAY8aW5pdD4BAAMoKVYBAARDb2RlCgADAAkMAAUABgEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBADJMY29tL2V4YW1wbGUvaWNlYmVyZy9PdXRlcklubmVyTmVzdGVkTG9jYWwkTmVzdGVkOwEADG1ldGhvZE5lc3RlZAEAClNvdXJjZUZpbGUBABpPdXRlcklubmVyTmVzdGVkTG9jYWwuamF2YQEADElubmVyQ2xhc3NlcwcAEwEAKWNvbS9leGFtcGxlL2ljZWJlcmcvT3V0ZXJJbm5lck5lc3RlZExvY2FsAQAGTmVzdGVkACAAAQADAAAAAAACAAAABQAGAAEABwAAAC8AAQABAAAABSq3AAixAAAAAgAKAAAABgABAAAADQALAAAADAABAAAABQAMAA0AAAAAAA4ABgABAAcAAAArAAAAAQAAAAGxAAAAAgAKAAAABgABAAAADgALAAAADAABAAAAAQAMAA0AAAACAA8AAAACABAAEQAAAAoAAQABABIAFAAI", true, "OuterInnerNestedLocal$Nested.class");
 </script>
 <br/>Java compiler version: <b>1.8.0_161</b><br/>
 <br/><a href="..\examples\index.html">Other examples</a>

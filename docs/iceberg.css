@@ -123,4 +123,7 @@ span {
 
 .keyword {
     color: #7f0055;
+    background: #eeeeee;
+    padding-left: 2px;
+    padding-right: 2px;
 }

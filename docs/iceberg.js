@@ -632,7 +632,7 @@ function main(dataView, isEmbedded, container) {
                     if (ATTRIBUTES_CODE == attributeName) {
                         var codeAttributeRecord = method_info.attributes[methodAttributes];
                         attributeValue = "max_stack = <b>" + codeAttributeRecord.max_stack + "</b>, max_locals = <b>" + codeAttributeRecord.max_locals + "</b>";
-                        addKeyValue(tbody, attributeName, attributeValue);
+                        addKeyValue(tbody, attributeName, attributeValue, null);
 
                         var isWide = false;
                         var code = method_info.attributes[methodAttributes].code;
@@ -924,7 +924,7 @@ function main(dataView, isEmbedded, container) {
                                 //alert("codeAttributeName "+codeAttributeName);
                             }
                             if (!isEmbedded && codeAttributeValue != "") {
-                                addKeyValue(tbody, codeAttributeName, codeAttributeValue);
+                                addKeyValue(tbody, codeAttributeName, codeAttributeValue, null);
                             }
                         }
 
@@ -939,7 +939,7 @@ function main(dataView, isEmbedded, container) {
                     }
 
                     if (attributeName != ATTRIBUTES_CODE) {
-                        addKeyValue(tbody, attributeName, attributeValue);
+                        addKeyValue(tbody, attributeName, attributeValue, null);
                     } else {
                         if (codeAttributeRecord.exception_table_length > 0) {
                             attributeValue = "";
@@ -957,7 +957,7 @@ function main(dataView, isEmbedded, container) {
                             }
                             attributeValue += "</table>";
 
-                            addKeyValue(tbody, "Exception table", attributeValue);
+                            addKeyValue(tbody, "Exception table", attributeValue, null);
                         }
                     }
 
@@ -998,7 +998,7 @@ function main(dataView, isEmbedded, container) {
                     } else {
                         //addRow3ToTable(tbody, "Field attribute, <b>" + fieldAttributeName + "</b>:");
                     }
-                    addKeyValue(tbody, fieldAttributeName, fieldAttributeValue);
+                    addKeyValue(tbody, fieldAttributeName, fieldAttributeValue, null);
                 }
             }
 
@@ -1160,17 +1160,13 @@ function main(dataView, isEmbedded, container) {
 							break;
 						}
 					case REF_invokeVirtual:
-					case REF_newInvokeSpecial:
-					case REF_putField:
-					case REF_putStatic: {
+					case REF_newInvokeSpecial: {
 							//CONSTANT_Methodref_info
 							isField = false;
 							break;
 						}
 					case REF_invokeStatic:
-					case REF_invokeSpecial:
-					case REF_putField:
-					case REF_putStatic: {
+					case REF_invokeSpecial: {
 							//CONSTANT_Methodref_info
 							isField = false;
 							break;
@@ -1345,7 +1341,7 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tbody, tr);
             }
 
-            function addKeyValue(tbody, key, value) {
+            function addKeyValue(tbody, key, value, keyComment) {
                 var tr = documentCreateElement('tr');
                 //tr.style.backgroundColor = '#ffdd00';
 
@@ -1355,7 +1351,12 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tr, tdLN);
 
                 var td1 = documentCreateElement('td');
-                td1.innerHTML = "<b>" + key + " :</b>";
+                var td1InnerHTML = "<b>";
+                if (keyComment) {
+                    td1InnerHTML = "<b title ='" + keyComment + "'>";
+                }
+
+                td1.innerHTML += td1InnerHTML + key + " :</b>";
                 td1.colSpan = 2;
                 td1.style.textAlign = 'right';
                 td1.style.color = '#0000dd';
@@ -1381,7 +1382,7 @@ function main(dataView, isEmbedded, container) {
 
             function printAccessFlags(accessFlagsString) {
                 if (accessFlagsString != "") {
-                    addKeyValue(tbody, "Access flags", accessFlagsString);
+                    addKeyValue(tbody, "Access flags", accessFlagsString, null);
                 }
             }
 
@@ -1395,40 +1396,44 @@ function main(dataView, isEmbedded, container) {
 
             addFirstRow(tbody, "Class", getArgumentTypeAndValue(classFile.this_class), null, classFile.access_flags);
             //addKeyValue(tbody, "This class",  getArgumentTypeAndValue(classFile.this_class));
-            addKeyValue(tbody, "Major version", classFile.major_version + " (" + jdkv + ")");
+            addKeyValue(tbody, "Major version", classFile.major_version + " (" + jdkv + ")", null);
             if (classFile.minor_version != 0) {
-                addKeyValue(tbody, "Minor version", classFile.minor_version);
+                addKeyValue(tbody, "Minor version", classFile.minor_version, null);
             }
             printAccessFlags(getClassAccessModifiers(classFile.access_flags));
-            addKeyValue(tbody, "Super class", getArgumentTypeAndValue(classFile.super_class));
+            addKeyValue(tbody, "Super class", getArgumentTypeAndValue(classFile.super_class), null);
 
             if (classFile.interfaces_count > 0) {
                 var intf = "";
                 for (var i = 0; i < classFile.interfaces_count; i++) {
                     intf += getArgumentTypeAndValue(classFile.interfaces[i]);
                 }
-                addKeyValue(tbody, "Interfaces", intf);
+                addKeyValue(tbody, "Interfaces", intf, null);
             }
 
             for (var cai = 0; cai < classFile.attributes_count; cai++) {
                 var classAttr = classFile.attributes[cai];
                 var classAttributeName = getConstantPoolItem(classAttr.attribute_name_index).bytes;
                 var classAttributeValue = "";
+                var attributeComment = null;
 
                 if (ATTRIBUTES_SRCF == classAttributeName) {
                     classAttributeValue = getUTF8(classAttr.sourcefile_index);
                 } else if (ATTRIBUTES_SIGN == classAttributeName) {
                     classAttributeValue = getUTF8AsSignature(classAttr.signature_index);
+                    attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
                 } else if (ATTRIBUTES_ENCL == classAttributeName) {
                     classAttributeValue = getClassName(classAttr.class_index, false, true, false);
                     var mi = classAttr.method_index;
                     if (mi > 0) {
                         classAttributeValue += "." + getFieldOrMethodName(getConstantPoolItem(mi), true);
                     }
+                    attributeComment = "JVMS: A class must have an EnclosingMethod attribute if and only if it represents a local class or an anonymous class";
                 } else if (ATTRIBUTES_INNR == classAttributeName) {
                     for (var i = 0; i < classAttr.number_of_classes; i++) {
                         classAttributeValue += getClassName(classAttr.classes[i].inner_class_info_index, false, true, false) + "<br/>";
                     }
+                    attributeComment = "JVMS: If the constant pool of a class or interface C contains at least one CONSTANT_Class_info entry (§4.4.1) which represents a class or interface that is not a member of a package, then there must be exactly one InnerClasses attribute in the attributes table of the ClassFile structure for C.";
                 } else if (ATTRIBUTES_BOOT == classAttributeName) {
                     classAttributeValue = "<ol start='0'>";
                     for (var methodIndex = 0; methodIndex < classAttr.num_bootstrap_methods; methodIndex++) {
@@ -1448,8 +1453,9 @@ function main(dataView, isEmbedded, container) {
 						"</li>";
                     }
                     classAttributeValue += "</ol>";
+                    attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
 				}
-				addKeyValue(tbody, classAttributeName, classAttributeValue);
+				addKeyValue(tbody, classAttributeName, classAttributeValue, attributeComment);
 			}
 
             for (var f = 0; f < classFile.fields_count; f++) {
@@ -1597,7 +1603,7 @@ if (window.FileReader) {
         var reader = new FileReader();
 
         reader.onload = function (progressEvent) {
-            main(new DataView(reader.result), false);
+            main(new DataView(reader.result), false, null);
         };
         reader.readAsArrayBuffer(f);
     }

@@ -22,16 +22,16 @@ function main(dataView, isEmbedded, container) {
 
     /** @const */
     var BYTECODE_BEHAVIORS_FOR_METHOD_HANDLES = [
-	null,
-	"REF_getField",
-	"REF_getStatic",
-	"REF_putField",
-	"REF_putStatic",
-	"REF_invokeVirtual",
-	"REF_invokeStatic",
-	"REF_invokeSpecial",
-	"REF_newInvokeSpecial",
-	"REF_invokeInterface"];
+        null,
+        "REF_getField",
+        "REF_getStatic",
+        "REF_putField",
+        "REF_putStatic",
+        "REF_invokeVirtual",
+        "REF_invokeStatic",
+        "REF_invokeSpecial",
+        "REF_newInvokeSpecial",
+        "REF_invokeInterface"];
 
     /** @const */
     var ACC_PUBLIC = ["PUBLIC", 0x0001];
@@ -50,6 +50,9 @@ function main(dataView, isEmbedded, container) {
     /** @const */
     var ACC_ENUM = ["ENUM", 0x4000];
     /** @const */
+    var ACC_MODULE = ["MODULE", 0x8000];
+
+    /** @const */
     var ACCESS_CLASS = [
         ACC_PUBLIC,
         ACC_FINAL,
@@ -59,7 +62,8 @@ function main(dataView, isEmbedded, container) {
         ACC_ABSTRACT,
         ACC_SYNTHETIC,
         ["ANNOTATION", 0x2000],
-        ACC_ENUM
+        ACC_ENUM,
+        ACC_MODULE
     ];
     /** @const */
     var ACCESS_METHOD = [
@@ -118,6 +122,10 @@ function main(dataView, isEmbedded, container) {
     var CONSTANT_MethodType = 16;
     /** @const */
     var CONSTANT_InvokeDynamic = 18;
+    /** @const */
+    var CONSTANT_Module = 19;
+    /** @const */
+    var CONSTANT_Package = 20;
 
     /** @const */
     var ATTRIBUTES_ANNT = "AnnotationDefault";
@@ -159,6 +167,8 @@ function main(dataView, isEmbedded, container) {
     var ATTRIBUTES_STAK = "StackMapTable";
     /** @const */
     var ATTRIBUTES_SYNT = "Synthetic";
+    /** @const */
+    var ATTRIBUTES_MODL = "Module";
 
     //https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html
 
@@ -240,7 +250,7 @@ function main(dataView, isEmbedded, container) {
             return result;
         }
 
-        function getConstantPoolItem(index){
+        function getConstantPoolItem(index) {
             return classFile.constant_pool[index];
         }
 
@@ -363,8 +373,56 @@ function main(dataView, isEmbedded, container) {
             else if (ATTRIBUTES_SRCF == attributeName) {
                 attribute_info.sourcefile_index = r2();
                 return attribute_info;
-            } else {
-                //alert("Unhandled attribute: "+attributeName);
+            } else if (ATTRIBUTES_MODL == attributeName) {
+                attribute_info.module_name_index = r2();
+                attribute_info.module_flags = r2();
+                attribute_info.module_version_index = r2();
+
+                attribute_info.requires_count = r2();
+                attribute_info.requires = new Array(attribute_info.requires_count);
+                for (var amr = 0; amr < attribute_info.requires_count; amr++) {
+                    var require = new Object();
+                    require.requires_index = r2();
+                    require.requires_flags = r2();
+                    require.requires_version_index = r2();
+                    attribute_info.requires[amr] = require;
+                }
+
+                attribute_info.exports_count = r2();
+                attribute_info.exports = new Array(attribute_info.exports_count);
+                for (var amr = 0; amr < attribute_info.exports_count; amr++) {
+                    var exprt = new Object();
+                    exprt.exports_index = r2();
+                    exprt.exports_flags = r2();
+                    exprt.exports_to_count = r2();
+                    exprt.exports_to_index = readIndexArray(exprt.exports_to_count);
+                    attribute_info.exports[amr] = exprt;
+                }
+
+                attribute_info.opens_count = r2();
+                attribute_info.opens = new Array(attribute_info.opens_count);
+                for (var amr = 0; amr < attribute_info.opens_count; amr++) {
+                    var opn = new Object();
+                    opn.opens_index = r2();
+                    opn.opens_flags = r2();
+                    opn.opens_to_count = r2();
+                    opn.opens_to_index = readIndexArray(opn.opens_to_count);
+                    attribute_info.opens[amr] = opn;
+                }
+
+                attribute_info.uses_count = r2();
+                attribute_info.uses_index = readIndexArray(attribute_info.uses_count);
+
+                attribute_info.provides_count = r2();
+                attribute_info.provides = new Array(attribute_info.provides_count);
+                for (var amr = 0; amr < attribute_info.provides_count; amr++) {
+                    var provide = new Object();
+                    provide.provides_index = r2();
+                    provide.provides_with_count = r2();
+                    provide.provides_with_index = readIndexArray(provide.provides_with_count);
+                    attribute_info.provides[amr] = provide;
+                }
+                return attribute_info;
             }
 
             //alert(attribute_info.attribute_length);
@@ -372,6 +430,14 @@ function main(dataView, isEmbedded, container) {
                 r();
             }
             return attribute_info;
+        }
+        
+        function readIndexArray(count) {
+            var indxArray = new Array(count);
+            for (var i = 0; i < count; i++) {
+                indxArray[i] = r2();
+            }
+            return indxArray;
         }
 
         function readFields() {
@@ -423,6 +489,8 @@ function main(dataView, isEmbedded, container) {
                 switch (tag) {
 
                 case CONSTANT_Class:
+                case CONSTANT_Module:
+                case CONSTANT_Package:
                     cpInfo.name_index = r2();
                     break;
 
@@ -688,16 +756,16 @@ function main(dataView, isEmbedded, container) {
                                         break;
                                     }
                                 case OFFSET_16: {
-                                	var v1 = code[oc + 1];
-                                	var v2 = code[oc + 2];
-                                	offset = (v1 << 8) | v2;
-                                	if ((offset + ocPlace) > 0xFFFF) {
-                                		offset = offset - 65536;
-                                	}
-                                	oc += 2;
-                                	operandType = "Offset";
-                                	break;
-                                }
+                                        var v1 = code[oc + 1];
+                                        var v2 = code[oc + 2];
+                                        offset = (v1 << 8) | v2;
+                                        if ((offset + ocPlace) > 0xFFFF) {
+                                            offset = offset - 65536;
+                                        }
+                                        oc += 2;
+                                        operandType = "Offset";
+                                        break;
+                                    }
                                 case IINC_16: {
                                         // TODO
                                         var varIndex = "?",
@@ -951,11 +1019,11 @@ function main(dataView, isEmbedded, container) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
                                 var classOfException = lvtt.catch_type == 0 ? "For all exceptions" : getClassName(lvtt.catch_type, false, true, false);
                                 attributeValue += "<tr>" +
-                                    "<td>" + lvtt.start_pc + "</td>" +
-                                    "<td>" + lvtt.end_pc + "</td>" +
-                                    "<td>" + lvtt.handler_pc + "</td>" +
-                                    "<td style='text-align:left'>" + classOfException + "</td>" +
-                                    "</tr>";
+                                "<td>" + lvtt.start_pc + "</td>" +
+                                "<td>" + lvtt.end_pc + "</td>" +
+                                "<td>" + lvtt.handler_pc + "</td>" +
+                                "<td style='text-align:left'>" + classOfException + "</td>" +
+                                "</tr>";
                             }
                             attributeValue += "</table>";
 
@@ -1144,47 +1212,47 @@ function main(dataView, isEmbedded, container) {
 
                 switch (cpEntry.tag) {
 
-				case CONSTANT_MethodType:
-					return "MethodType: " + getUTF8(cpEntry.descriptor_index);
+                case CONSTANT_MethodType:
+                    return "MethodType: " + getUTF8(cpEntry.descriptor_index);
 
-				case CONSTANT_MethodHandle: {
-					var methodHandleInfo = cpEntry;
-					var referenceKindStr = BYTECODE_BEHAVIORS_FOR_METHOD_HANDLES[methodHandleInfo.reference_kind];
+                case CONSTANT_MethodHandle: {
+                        var methodHandleInfo = cpEntry;
+                        var referenceKindStr = BYTECODE_BEHAVIORS_FOR_METHOD_HANDLES[methodHandleInfo.reference_kind];
 
-					var isField;
-					switch (methodHandleInfo.reference_kind) {
-					case REF_getField:
-					case REF_getStatic:
-					case REF_putField:
-					case REF_putStatic: {
-							//CONSTANT_Fieldref_info
-							isField = true;
-							break;
-						}
-					case REF_invokeVirtual:
-					case REF_newInvokeSpecial: {
-							//CONSTANT_Methodref_info
-							isField = false;
-							break;
-						}
-					case REF_invokeStatic:
-					case REF_invokeSpecial: {
-							//CONSTANT_Methodref_info
-							isField = false;
-							break;
-						}
-					case REF_invokeInterface: {
-							//CONSTANT_InterfaceMethodref_info
-							isField = false;
-							break;
-						}
-					}
-					var refInfo = getConstantPoolItem(methodHandleInfo.reference_index);
-					var classInfo = getConstantPoolItem(refInfo.class_index);
-					var nameAndTypeInfo = getConstantPoolItem(refInfo.name_and_type_index);
-					var referenceName = getUTF8(classInfo.name_index) + "." + getFieldOrMethodName(nameAndTypeInfo, isField);
-					return "MethodHandle: " + referenceKindStr + ", " + referenceName;
-				}
+                        var isField;
+                        switch (methodHandleInfo.reference_kind) {
+                        case REF_getField:
+                        case REF_getStatic:
+                        case REF_putField:
+                        case REF_putStatic: {
+                                //CONSTANT_Fieldref_info
+                                isField = true;
+                                break;
+                            }
+                        case REF_invokeVirtual:
+                        case REF_newInvokeSpecial: {
+                                //CONSTANT_Methodref_info
+                                isField = false;
+                                break;
+                            }
+                        case REF_invokeStatic:
+                        case REF_invokeSpecial: {
+                                //CONSTANT_Methodref_info
+                                isField = false;
+                                break;
+                            }
+                        case REF_invokeInterface: {
+                                //CONSTANT_InterfaceMethodref_info
+                                isField = false;
+                                break;
+                            }
+                        }
+                        var refInfo = getConstantPoolItem(methodHandleInfo.reference_index);
+                        var classInfo = getConstantPoolItem(refInfo.class_index);
+                        var nameAndTypeInfo = getConstantPoolItem(refInfo.name_and_type_index);
+                        var referenceName = getUTF8(classInfo.name_index) + "." + getFieldOrMethodName(nameAndTypeInfo, isField);
+                        return "MethodHandle: " + referenceKindStr + ", " + referenceName;
+                    }
 
                 case CONSTANT_NameAndType:
                     return "CONSTANT_NameAndType";
@@ -1192,7 +1260,7 @@ function main(dataView, isEmbedded, container) {
                 case CONSTANT_Utf8:
                     return getUTF8(cpIndex);
 
-                case CONSTANT_Long:{
+                case CONSTANT_Long: {
                         var bits = (cpEntry.high_bytes << 32) + cpEntry.low_bytes;
                         if ((bits >> 63) != 0) {
                             bits -= 0xFFFFFFFF;
@@ -1207,14 +1275,14 @@ function main(dataView, isEmbedded, container) {
                         var m = (e == 0) ? (bits & 0xfffffffffffff) << 1 : (bits & 0xfffffffffffff) | 0x10000000000000;
                         return formatNumber(s * m * Math.pow(2, e - 1075) + "D");
                     }
-/*
-                case CONSTANT_Long: {
-                        var high_bytes_str = int2hex8chars(cpEntry.high_bytes);
-                        var low_bytes_str = int2hex8chars(cpEntry.low_bytes);
-                        var hexStr = high_bytes_str + low_bytes_str;
-                        return formatNumber(getNumberPrefix(cpEntry) + convertBase(hexStr, 16, 10) + "L");
+                    /*
+                    case CONSTANT_Long: {
+                    var high_bytes_str = int2hex8chars(cpEntry.high_bytes);
+                    var low_bytes_str = int2hex8chars(cpEntry.low_bytes);
+                    var hexStr = high_bytes_str + low_bytes_str;
+                    return formatNumber(getNumberPrefix(cpEntry) + convertBase(hexStr, 16, 10) + "L");
                     }
-*/
+                     */
                 case CONSTANT_Integer:
                     return formatNumber(cpEntry.bytes);
                 case CONSTANT_Float: {
@@ -1226,9 +1294,9 @@ function main(dataView, isEmbedded, container) {
                     }
 
                 case CONSTANT_InvokeDynamic: {
-					var nameAndTypeInfo = getConstantPoolItem(cpEntry.name_and_type_index);
-                    return "bootstrap method: " + cpEntry.bootstrap_method_attr_index + ", " + getFieldOrMethodName(nameAndTypeInfo, false /** todo method\field switch*/);
-				}
+                        var nameAndTypeInfo = getConstantPoolItem(cpEntry.name_and_type_index);
+                        return "bootstrap method: " + cpEntry.bootstrap_method_attr_index + ", " + getFieldOrMethodName(nameAndTypeInfo, false /** todo method\field switch*/);
+                    }
 
                 case CONSTANT_Class:
                     return getClassName(cpIndex, false, true, false);
@@ -1249,7 +1317,7 @@ function main(dataView, isEmbedded, container) {
 
                     result += getFieldOrMethodName(cpEntryNameAndType, cpEntry.tag == CONSTANT_Fieldref);
                     if (cpEntry.tag != CONSTANT_Fieldref) {
-                        result +=  "()";
+                        result += "()";
                     }
 
                     return result;
@@ -1439,26 +1507,29 @@ function main(dataView, isEmbedded, container) {
                 } else if (ATTRIBUTES_BOOT == classAttributeName) {
                     classAttributeValue = "<ol start='0'>";
                     for (var methodIndex = 0; methodIndex < classAttr.num_bootstrap_methods; methodIndex++) {
-						var bootstrapMethod = classAttr.bootstrap_methods[methodIndex];						
-						var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
+                        var bootstrapMethod = classAttr.bootstrap_methods[methodIndex];
+                        var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
 
-                    	var methodArguments = "<ol>";
-						for (var methodArgumentIndex = 0; methodArgumentIndex < bootstrapMethod.num_bootstrap_arguments; methodArgumentIndex++) {
-							methodArguments += "<li>" + getArgumentTypeAndValue(bootstrapMethod.bootstrap_arguments[methodArgumentIndex])+"</li>";
-						}
-						methodArguments += "</ol>";
-						
-						classAttributeValue += "<li>" + 
-						method +
-						",<br/><b>Method arguments:</b> " + 
-						methodArguments +
-						"</li>";
+                        var methodArguments = "<ol>";
+                        for (var methodArgumentIndex = 0; methodArgumentIndex < bootstrapMethod.num_bootstrap_arguments; methodArgumentIndex++) {
+                            methodArguments += "<li>" + getArgumentTypeAndValue(bootstrapMethod.bootstrap_arguments[methodArgumentIndex]) + "</li>";
+                        }
+                        methodArguments += "</ol>";
+
+                        classAttributeValue += "<li>" +
+                        method +
+                        ",<br/><b>Method arguments:</b> " +
+                        methodArguments +
+                        "</li>";
                     }
                     classAttributeValue += "</ol>";
                     attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
-				}
-				addKeyValue(tbody, classAttributeName, classAttributeValue, attributeComment);
-			}
+                } else if (ATTRIBUTES_MODL == classAttributeName) {
+                    var e = getConstantPoolItem(classAttr.module_name_index);
+                    classAttributeValue = getUTF8(e.name_index);
+                }
+                addKeyValue(tbody, classAttributeName, classAttributeValue, attributeComment);
+            }
 
             for (var f = 0; f < classFile.fields_count; f++) {
                 var fol;

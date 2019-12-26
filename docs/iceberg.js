@@ -169,6 +169,8 @@ function main(dataView, isEmbedded, container) {
     var ATTRIBUTES_SYNT = "Synthetic";
     /** @const */
     var ATTRIBUTES_MODL = "Module";
+    /** @const */
+    var ATTRIBUTES_RCRD = "Record";
 
     //https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html
 
@@ -421,6 +423,26 @@ function main(dataView, isEmbedded, container) {
                     provide.provides_with_count = r2();
                     provide.provides_with_index = readIndexArray(provide.provides_with_count);
                     attribute_info.provides[amr] = provide;
+                }
+                return attribute_info;
+            } else if (ATTRIBUTES_RCRD == attributeName) {
+                //https://bugs.openjdk.java.net/browse/JDK-8225058
+                attribute_info.components_count = r2();
+                attribute_info.components = new Array(attribute_info.components_count);
+                for (var aln = 0; aln < attribute_info.components_count; aln++) {
+                    var component_info = new Object();
+                    component_info.name_index = r2();
+                    component_info.descriptor_index = r2();
+                    component_info.attributes_count = r2();
+                    component_info.attributes = new Array(component_info.attributes_count);
+                    for (var atr = 0; atr < component_info.attributes_count; atr++) {
+                        var attribute_info = new Object();
+                        attribute_info.attribute_name_index = r2();
+                        attribute_info.attribute_length = r4();
+                        for (var a = 0; a < attribute_info.attribute_length; a++) {r();}
+                        component_info.attributes[atr] = attribute_info;
+                    }
+                    attribute_info.components[aln] = component_info;
                 }
                 return attribute_info;
             }
@@ -1458,7 +1480,7 @@ function main(dataView, isEmbedded, container) {
 
             var mv = classFile.major_version;
             var jdkv = '';
-            if (mv >= 49 && mv <= 55) {
+            if (mv >= 49 && mv <= 58) {
                 jdkv = 'Java ' + (mv - 44);
             } else if (mv >= 46 && mv <= 48) {
                 jdkv = 'Java 1.' + (mv - 44);
@@ -1527,6 +1549,13 @@ function main(dataView, isEmbedded, container) {
                 } else if (ATTRIBUTES_MODL == classAttributeName) {
                     var e = getConstantPoolItem(classAttr.module_name_index);
                     classAttributeValue = getUTF8(e.name_index);
+                } else if (ATTRIBUTES_RCRD == classAttributeName) {
+                    for (var componentIndex = 0; componentIndex < classAttr.components_count; componentIndex++) {
+                        var component = classAttr.components[componentIndex];
+                        var componentName = getUTF8(component.name_index);
+                        var componentDesc = getUTF8(component.descriptor_index);
+                        classAttributeValue += " "+componentName+":"+componentDesc;
+                    }
                 }
                 addKeyValue(tbody, classAttributeName, classAttributeValue, attributeComment);
             }

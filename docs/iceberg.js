@@ -1,5 +1,5 @@
 /**
-@preserve Copyright 2017-2019 Dmitriy Gulyaev.
+@preserve Copyright 2017-2020 Dmitriy Gulyaev.
  */
 function main(dataView, isEmbedded, container) {
 
@@ -436,11 +436,13 @@ function main(dataView, isEmbedded, container) {
                     component_info.attributes_count = r2();
                     component_info.attributes = new Array(component_info.attributes_count);
                     for (var atr = 0; atr < component_info.attributes_count; atr++) {
-                        var attribute_info = new Object();
-                        attribute_info.attribute_name_index = r2();
-                        attribute_info.attribute_length = r4();
-                        for (var a = 0; a < attribute_info.attribute_length; a++) {r();}
-                        component_info.attributes[atr] = attribute_info;
+                        var attribute_info2 = new Object();
+                        attribute_info2.attribute_name_index = r2();
+                        attribute_info2.attribute_length = r4();
+                        for (var a = 0; a < attribute_info2.attribute_length; a++) {
+                            r();
+                        }
+                        component_info.attributes[atr] = attribute_info2;
                     }
                     attribute_info.components[aln] = component_info;
                 }

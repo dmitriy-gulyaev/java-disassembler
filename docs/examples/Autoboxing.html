@@ -9,29 +9,27 @@
 <h4>Autoboxing.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> Autoboxing {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> Autoboxing {</td></tr>
-<tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">  <b class="keyword">int</b> m1(String str) {</td></tr>
-<tr><td class="ln">6</td><td class="cl">    Integer v = str.hashCode();</td></tr>
-<tr><td class="ln">7</td><td class="cl">    <b class="keyword">return</b> v;</td></tr>
-<tr><td class="ln">8</td><td class="cl">  }</td></tr>
-<tr><td class="ln">9</td><td class="cl"></td></tr>
-<tr><td class="ln">10</td><td class="cl">  <b class="keyword">int</b> m2(String str) {</td></tr>
-<tr><td class="ln">11</td><td class="cl">    <b class="keyword">int</b> v = str.hashCode();</td></tr>
-<tr><td class="ln">12</td><td class="cl">    <b class="keyword">return</b> v;</td></tr>
-<tr><td class="ln">13</td><td class="cl">  }</td></tr>
-<tr><td class="ln">14</td><td class="cl"></td></tr>
-<tr><td class="ln">15</td><td class="cl">}</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">int</b> m1(String str) {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    Integer v = str.hashCode();</td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">return</b> v;</td></tr>
+<tr><td class="ln">6</td><td class="cl">  }</td></tr>
+<tr><td class="ln">7</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">  <b class="keyword">int</b> m2(String str) {</td></tr>
+<tr><td class="ln">9</td><td class="cl">    <b class="keyword">int</b> v = str.hashCode();</td></tr>
+<tr><td class="ln">10</td><td class="cl">    <b class="keyword">return</b> v;</td></tr>
+<tr><td class="ln">11</td><td class="cl">  }</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAJwoABgAYCgAZABoKABsAHAoAGwAdBwAeBwAfAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACBMY29tL2V4YW1wbGUvaWNlYmVyZy9BdXRvYm94aW5nOwEAAm0xAQAVKExqYXZhL2xhbmcvU3RyaW5nOylJAQADc3RyAQASTGphdmEvbGFuZy9TdHJpbmc7AQABdgEAE0xqYXZhL2xhbmcvSW50ZWdlcjsBAAJtMgEAAUkBAApTb3VyY2VGaWxlAQAPQXV0b2JveGluZy5qYXZhDAAHAAgHACAMACEAIgcAIwwAJAAlDAAmACIBAB5jb20vZXhhbXBsZS9pY2ViZXJnL0F1dG9ib3hpbmcBABBqYXZhL2xhbmcvT2JqZWN0AQAQamF2YS9sYW5nL1N0cmluZwEACGhhc2hDb2RlAQADKClJAQARamF2YS9sYW5nL0ludGVnZXIBAAd2YWx1ZU9mAQAWKEkpTGphdmEvbGFuZy9JbnRlZ2VyOwEACGludFZhbHVlACEABQAGAAAAAAADAAEABwAIAAEACQAAAC8AAQABAAAABSq3AAGxAAAAAgAKAAAABgABAAAAAwALAAAADAABAAAABQAMAA0AAAAAAA4ADwABAAkAAABPAAEAAwAAAA0rtgACuAADTSy2AASsAAAAAgAKAAAACgACAAAABgAIAAcACwAAACAAAwAAAA0ADAANAAAAAAANABAAEQABAAgABQASABMAAgAAABQADwABAAkAAABJAAEAAwAAAAcrtgACPRysAAAAAgAKAAAACgACAAAACwAFAAwACwAAACAAAwAAAAcADAANAAAAAAAHABAAEQABAAUAAgASABUAAgABABYAAAACABc=", true, "list");
+main("yv66vgAAADQAJwoABgAYCgAZABoKABsAHAoAGwAdBwAeBwAfAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAAxMQXV0b2JveGluZzsBAAJtMQEAFShMamF2YS9sYW5nL1N0cmluZzspSQEAA3N0cgEAEkxqYXZhL2xhbmcvU3RyaW5nOwEAAXYBABNMamF2YS9sYW5nL0ludGVnZXI7AQACbTIBAAFJAQAKU291cmNlRmlsZQEAD0F1dG9ib3hpbmcuamF2YQwABwAIBwAgDAAhACIHACMMACQAJQwAJgAiAQAKQXV0b2JveGluZwEAEGphdmEvbGFuZy9PYmplY3QBABBqYXZhL2xhbmcvU3RyaW5nAQAIaGFzaENvZGUBAAMoKUkBABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7AQAIaW50VmFsdWUAIAAFAAYAAAAAAAMAAAAHAAgAAQAJAAAALwABAAEAAAAFKrcAAbEAAAACAAoAAAAGAAEAAAABAAsAAAAMAAEAAAAFAAwADQAAAAAADgAPAAEACQAAAE8AAQADAAAADSu2AAK4AANNLLYABKwAAAACAAoAAAAKAAIAAAAEAAgABQALAAAAIAADAAAADQAMAA0AAAAAAA0AEAARAAEACAAFABIAEwACAAAAFAAPAAEACQAAAEkAAQADAAAAByu2AAI9HKwAAAACAAoAAAAKAAIAAAAJAAUACgALAAAAIAADAAAABwAMAA0AAAAAAAcAEAARAAEABQACABIAFQACAAEAFgAAAAIAFw==", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

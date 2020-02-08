@@ -9,59 +9,55 @@
 <h4>MultiCatchExceptions.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
-<tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.net.MalformedURLException;</td></tr>
-<tr><td class="ln">4</td><td class="cl"><b class="keyword">import</b> java.net.URL;</td></tr>
-<tr><td class="ln">5</td><td class="cl"><b class="keyword">import</b> java.text.ParseException;</td></tr>
-<tr><td class="ln">6</td><td class="cl"><b class="keyword">import</b> java.text.SimpleDateFormat;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">import</b> java.net.Mal<b class="keyword">for</b>medURLException;</td></tr>
+<tr><td class="ln">2</td><td class="cl"><b class="keyword">import</b> java.net.URL;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.text.ParseException;</td></tr>
+<tr><td class="ln">4</td><td class="cl"><b class="keyword">import</b> java.text.SimpleDateFormat;</td></tr>
+<tr><td class="ln">5</td><td class="cl"></td></tr>
+<tr><td class="ln">6</td><td class="cl"><b class="keyword">class</b> MultiCatchExceptions {</td></tr>
 <tr><td class="ln">7</td><td class="cl"></td></tr>
-<tr><td class="ln">8</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> MultiCatchExceptions {</td></tr>
-<tr><td class="ln">9</td><td class="cl"></td></tr>
-<tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">  <b class="keyword">void</b> catchMalformedURLExceptionAndParseException() {</td></tr>
-<tr><td class="ln">12</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
-<tr><td class="ln">13</td><td class="cl">      malformedURLException();</td></tr>
-<tr><td class="ln">14</td><td class="cl">      parseException();</td></tr>
-<tr><td class="ln">15</td><td class="cl">    } <b class="keyword">catch</b> (MalformedURLException | ParseException exception) {</td></tr>
-<tr><td class="ln">16</td><td class="cl">      exception.hashCode();</td></tr>
-<tr><td class="ln">17</td><td class="cl">    }</td></tr>
-<tr><td class="ln">18</td><td class="cl">  }</td></tr>
-<tr><td class="ln">19</td><td class="cl"></td></tr>
-<tr><td class="ln">20</td><td class="cl">  <b class="keyword">void</b> catchMalformedURLException() {</td></tr>
-<tr><td class="ln">21</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
-<tr><td class="ln">22</td><td class="cl">      malformedURLException();</td></tr>
-<tr><td class="ln">23</td><td class="cl">    } <b class="keyword">catch</b> (MalformedURLException exception) {</td></tr>
-<tr><td class="ln">24</td><td class="cl">      exception.hashCode();</td></tr>
-<tr><td class="ln">25</td><td class="cl">    }</td></tr>
-<tr><td class="ln">26</td><td class="cl">  }</td></tr>
-<tr><td class="ln">27</td><td class="cl"></td></tr>
-<tr><td class="ln">28</td><td class="cl">  <b class="keyword">void</b> catchParseException() {</td></tr>
-<tr><td class="ln">29</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
-<tr><td class="ln">30</td><td class="cl">      parseException();</td></tr>
-<tr><td class="ln">31</td><td class="cl">    } <b class="keyword">catch</b> (ParseException exception) {</td></tr>
-<tr><td class="ln">32</td><td class="cl">      exception.hashCode();</td></tr>
-<tr><td class="ln">33</td><td class="cl">    }</td></tr>
-<tr><td class="ln">34</td><td class="cl">  }</td></tr>
-<tr><td class="ln">35</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">  <b class="keyword">void</b> <b class="keyword">catch</b>Mal<b class="keyword">for</b>medURLExceptionAndParseException() {</td></tr>
+<tr><td class="ln">9</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
+<tr><td class="ln">10</td><td class="cl">      mal<b class="keyword">for</b>medURLException();</td></tr>
+<tr><td class="ln">11</td><td class="cl">      parseException();</td></tr>
+<tr><td class="ln">12</td><td class="cl">    } <b class="keyword">catch</b> (Mal<b class="keyword">for</b>medURLException | ParseException exception) {</td></tr>
+<tr><td class="ln">13</td><td class="cl">      exception.hashCode();</td></tr>
+<tr><td class="ln">14</td><td class="cl">    }</td></tr>
+<tr><td class="ln">15</td><td class="cl">  }</td></tr>
+<tr><td class="ln">16</td><td class="cl"></td></tr>
+<tr><td class="ln">17</td><td class="cl">  <b class="keyword">void</b> <b class="keyword">catch</b>Mal<b class="keyword">for</b>medURLException() {</td></tr>
+<tr><td class="ln">18</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
+<tr><td class="ln">19</td><td class="cl">      mal<b class="keyword">for</b>medURLException();</td></tr>
+<tr><td class="ln">20</td><td class="cl">    } <b class="keyword">catch</b> (Mal<b class="keyword">for</b>medURLException exception) {</td></tr>
+<tr><td class="ln">21</td><td class="cl">      exception.hashCode();</td></tr>
+<tr><td class="ln">22</td><td class="cl">    }</td></tr>
+<tr><td class="ln">23</td><td class="cl">  }</td></tr>
+<tr><td class="ln">24</td><td class="cl"></td></tr>
+<tr><td class="ln">25</td><td class="cl">  <b class="keyword">void</b> <b class="keyword">catch</b>ParseException() {</td></tr>
+<tr><td class="ln">26</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
+<tr><td class="ln">27</td><td class="cl">      parseException();</td></tr>
+<tr><td class="ln">28</td><td class="cl">    } <b class="keyword">catch</b> (ParseException exception) {</td></tr>
+<tr><td class="ln">29</td><td class="cl">      exception.hashCode();</td></tr>
+<tr><td class="ln">30</td><td class="cl">    }</td></tr>
+<tr><td class="ln">31</td><td class="cl">  }</td></tr>
+<tr><td class="ln">32</td><td class="cl"></td></tr>
+<tr><td class="ln">33</td><td class="cl">  <b class="keyword">void</b> mal<b class="keyword">for</b>medURLException() <b class="keyword">throw</b>s Mal<b class="keyword">for</b>medURLException {</td></tr>
+<tr><td class="ln">34</td><td class="cl">    <b class="keyword">new</b> URL("");</td></tr>
+<tr><td class="ln">35</td><td class="cl">  }</td></tr>
 <tr><td class="ln">36</td><td class="cl"></td></tr>
-<tr><td class="ln">37</td><td class="cl">  <b class="keyword">void</b> malformedURLException() <b class="keyword">throws</b> MalformedURLException {</td></tr>
-<tr><td class="ln">38</td><td class="cl">    <b class="keyword">new</b> URL("");</td></tr>
+<tr><td class="ln">37</td><td class="cl">  <b class="keyword">void</b> parseException() <b class="keyword">throw</b>s ParseException {</td></tr>
+<tr><td class="ln">38</td><td class="cl">    <b class="keyword">new</b> SimpleDateFormat("").parse("");</td></tr>
 <tr><td class="ln">39</td><td class="cl">  }</td></tr>
 <tr><td class="ln">40</td><td class="cl"></td></tr>
-<tr><td class="ln">41</td><td class="cl">  <b class="keyword">void</b> parseException() <b class="keyword">throws</b> ParseException {</td></tr>
-<tr><td class="ln">42</td><td class="cl">    <b class="keyword">new</b> SimpleDateFormat("").parse("");</td></tr>
-<tr><td class="ln">43</td><td class="cl">  }</td></tr>
-<tr><td class="ln">44</td><td class="cl"></td></tr>
-<tr><td class="ln">45</td><td class="cl">}</td></tr>
+<tr><td class="ln">41</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAOQoADgAmCgANACcKAA0AKAcAKQcAKgoADgArBwAsCAAtCgAHAC4HAC8KAAoALgoACgAwBwAxBwAyAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBACpMY29tL2V4YW1wbGUvaWNlYmVyZy9NdWx0aUNhdGNoRXhjZXB0aW9uczsBACtjYXRjaE1hbGZvcm1lZFVSTEV4Y2VwdGlvbkFuZFBhcnNlRXhjZXB0aW9uAQAJZXhjZXB0aW9uAQAVTGphdmEvbGFuZy9FeGNlcHRpb247AQANU3RhY2tNYXBUYWJsZQcAMwEAGmNhdGNoTWFsZm9ybWVkVVJMRXhjZXB0aW9uAQAgTGphdmEvbmV0L01hbGZvcm1lZFVSTEV4Y2VwdGlvbjsHACkBABNjYXRjaFBhcnNlRXhjZXB0aW9uAQAaTGphdmEvdGV4dC9QYXJzZUV4Y2VwdGlvbjsHACoBABVtYWxmb3JtZWRVUkxFeGNlcHRpb24BAApFeGNlcHRpb25zAQAOcGFyc2VFeGNlcHRpb24BAApTb3VyY2VGaWxlAQAZTXVsdGlDYXRjaEV4Y2VwdGlvbnMuamF2YQwADwAQDAAhABAMACMAEAEAHmphdmEvbmV0L01hbGZvcm1lZFVSTEV4Y2VwdGlvbgEAGGphdmEvdGV4dC9QYXJzZUV4Y2VwdGlvbgwANAA1AQAMamF2YS9uZXQvVVJMAQAADAAPADYBABpqYXZhL3RleHQvU2ltcGxlRGF0ZUZvcm1hdAwANwA4AQAoY29tL2V4YW1wbGUvaWNlYmVyZy9NdWx0aUNhdGNoRXhjZXB0aW9ucwEAEGphdmEvbGFuZy9PYmplY3QBABNqYXZhL2xhbmcvRXhjZXB0aW9uAQAIaGFzaENvZGUBAAMoKUkBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBAAVwYXJzZQEAJChMamF2YS9sYW5nL1N0cmluZzspTGphdmEvdXRpbC9EYXRlOwAhAA0ADgAAAAAABgABAA8AEAABABEAAAAvAAEAAQAAAAUqtwABsQAAAAIAEgAAAAYAAQAAAAgAEwAAAAwAAQAAAAUAFAAVAAAAAAAWABAAAQARAAAAdwABAAIAAAASKrYAAiq2AAOnAAlMK7YABlexAAIAAAAIAAsABAAAAAgACwAFAAMAEgAAABoABgAAAA0ABAAOAAgAEQALAA8ADAAQABEAEgATAAAAFgACAAwABQAXABgAAQAAABIAFAAVAAAAGQAAAAcAAksHABoFAAAAGwAQAAEAEQAAAGcAAQACAAAADiq2AAKnAAlMK7YABlexAAEAAAAEAAcABAADABIAAAAWAAUAAAAWAAQAGQAHABcACAAYAA0AGgATAAAAFgACAAgABQAXABwAAQAAAA4AFAAVAAAAGQAAAAcAAkcHAB0FAAAAHgAQAAEAEQAAAGcAAQACAAAADiq2AAOnAAlMK7YABlexAAEAAAAEAAcABQADABIAAAAWAAUAAAAeAAQAIQAHAB8ACAAgAA0AIgATAAAAFgACAAgABQAXAB8AAQAAAA4AFAAVAAAAGQAAAAcAAkcHACAFAAAAIQAQAAIAEQAAADkAAwABAAAAC7sAB1kSCLcACVexAAAAAgASAAAACgACAAAAJgAKACcAEwAAAAwAAQAAAAsAFAAVAAAAIgAAAAQAAQAEAAAAIwAQAAIAEQAAAD4AAwABAAAAELsAClkSCLcACxIItgAMV7EAAAACABIAAAAKAAIAAAAqAA8AKwATAAAADAABAAAAEAAUABUAAAAiAAAABAABAAUAAQAkAAAAAgAl", true, "list");
+main("yv66vgAAADQAOQoADgAmCgANACcKAA0AKAcAKQcAKgoADgArBwAsCAAtCgAHAC4HAC8KAAoALgoACgAwBwAxBwAyAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABZMTXVsdGlDYXRjaEV4Y2VwdGlvbnM7AQArY2F0Y2hNYWxmb3JtZWRVUkxFeGNlcHRpb25BbmRQYXJzZUV4Y2VwdGlvbgEACWV4Y2VwdGlvbgEAFUxqYXZhL2xhbmcvRXhjZXB0aW9uOwEADVN0YWNrTWFwVGFibGUHADMBABpjYXRjaE1hbGZvcm1lZFVSTEV4Y2VwdGlvbgEAIExqYXZhL25ldC9NYWxmb3JtZWRVUkxFeGNlcHRpb247BwApAQATY2F0Y2hQYXJzZUV4Y2VwdGlvbgEAGkxqYXZhL3RleHQvUGFyc2VFeGNlcHRpb247BwAqAQAVbWFsZm9ybWVkVVJMRXhjZXB0aW9uAQAKRXhjZXB0aW9ucwEADnBhcnNlRXhjZXB0aW9uAQAKU291cmNlRmlsZQEAGU11bHRpQ2F0Y2hFeGNlcHRpb25zLmphdmEMAA8AEAwAIQAQDAAjABABAB5qYXZhL25ldC9NYWxmb3JtZWRVUkxFeGNlcHRpb24BABhqYXZhL3RleHQvUGFyc2VFeGNlcHRpb24MADQANQEADGphdmEvbmV0L1VSTAEAAAwADwA2AQAaamF2YS90ZXh0L1NpbXBsZURhdGVGb3JtYXQMADcAOAEAFE11bHRpQ2F0Y2hFeGNlcHRpb25zAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BAAhoYXNoQ29kZQEAAygpSQEAFShMamF2YS9sYW5nL1N0cmluZzspVgEABXBhcnNlAQAkKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS91dGlsL0RhdGU7ACAADQAOAAAAAAAGAAAADwAQAAEAEQAAAC8AAQABAAAABSq3AAGxAAAAAgASAAAABgABAAAABgATAAAADAABAAAABQAUABUAAAAAABYAEAABABEAAAB3AAEAAgAAABIqtgACKrYAA6cACUwrtgAGV7EAAgAAAAgACwAEAAAACAALAAUAAwASAAAAGgAGAAAACgAEAAsACAAOAAsADAAMAA0AEQAPABMAAAAWAAIADAAFABcAGAABAAAAEgAUABUAAAAZAAAABwACSwcAGgUAAAAbABAAAQARAAAAZwABAAIAAAAOKrYAAqcACUwrtgAGV7EAAQAAAAQABwAEAAMAEgAAABYABQAAABMABAAWAAcAFAAIABUADQAXABMAAAAWAAIACAAFABcAHAABAAAADgAUABUAAAAZAAAABwACRwcAHQUAAAAeABAAAQARAAAAZwABAAIAAAAOKrYAA6cACUwrtgAGV7EAAQAAAAQABwAFAAMAEgAAABYABQAAABsABAAeAAcAHAAIAB0ADQAfABMAAAAWAAIACAAFABcAHwABAAAADgAUABUAAAAZAAAABwACRwcAIAUAAAAhABAAAgARAAAAOQADAAEAAAALuwAHWRIItwAJV7EAAAACABIAAAAKAAIAAAAiAAoAIwATAAAADAABAAAACwAUABUAAAAiAAAABAABAAQAAAAjABAAAgARAAAAPgADAAEAAAAQuwAKWRIItwALEgi2AAxXsQAAAAIAEgAAAAoAAgAAACYADwAnABMAAAAMAAEAAAAQABQAFQAAACIAAAAEAAEABQABACQAAAACACU=", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

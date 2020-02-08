@@ -9,35 +9,33 @@
 <h4>VarArgs.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">import</b> java.util.Arrays;</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.util.Arrays;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">class</b> VarArgs {</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> VarArgs {</td></tr>
-<tr><td class="ln">6</td><td class="cl"></td></tr>
-<tr><td class="ln">7</td><td class="cl">    <b class="keyword">public</b> <b class="keyword">static</b> <b class="keyword">void</b> printVarArgs(String... args) {</td></tr>
-<tr><td class="ln">8</td><td class="cl">        System.out.println(Arrays.toString(args));</td></tr>
-<tr><td class="ln">9</td><td class="cl">    }</td></tr>
-<tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">    <b class="keyword">public</b> <b class="keyword">static</b> <b class="keyword">void</b> print(<b class="keyword">int</b> i) {</td></tr>
-<tr><td class="ln">12</td><td class="cl">        String.format("Value of i = %s.", i);</td></tr>
-<tr><td class="ln">13</td><td class="cl">    }</td></tr>
-<tr><td class="ln">14</td><td class="cl"></td></tr>
-<tr><td class="ln">15</td><td class="cl">    <b class="keyword">private</b> <b class="keyword">void</b> doPrint() {</td></tr>
-<tr><td class="ln">16</td><td class="cl">        printVarArgs("one", "two");</td></tr>
-<tr><td class="ln">17</td><td class="cl">        printVarArgs(<b class="keyword">null</b>);</td></tr>
-<tr><td class="ln">18</td><td class="cl">        printVarArgs();</td></tr>
-<tr><td class="ln">19</td><td class="cl">    }</td></tr>
-<tr><td class="ln">20</td><td class="cl"></td></tr>
-<tr><td class="ln">21</td><td class="cl">}</td></tr>
+<tr><td class="ln">5</td><td class="cl">  <b class="keyword">static</b> <b class="keyword">void</b> pr<b class="keyword">int</b>VarArgs(String... args) {</td></tr>
+<tr><td class="ln">6</td><td class="cl">    System.out.pr<b class="keyword">int</b>ln(Arrays.toString(args));</td></tr>
+<tr><td class="ln">7</td><td class="cl">  }</td></tr>
+<tr><td class="ln">8</td><td class="cl"></td></tr>
+<tr><td class="ln">9</td><td class="cl">  <b class="keyword">static</b> <b class="keyword">void</b> pr<b class="keyword">int</b>(<b class="keyword">int</b> i) {</td></tr>
+<tr><td class="ln">10</td><td class="cl">    String.<b class="keyword">for</b>mat("Value of i = %s.", i);</td></tr>
+<tr><td class="ln">11</td><td class="cl">  }</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">  <b class="keyword">private</b> <b class="keyword">void</b> <b class="keyword">do</b>Pr<b class="keyword">int</b>() {</td></tr>
+<tr><td class="ln">14</td><td class="cl">    pr<b class="keyword">int</b>VarArgs("one", "two");</td></tr>
+<tr><td class="ln">15</td><td class="cl">    pr<b class="keyword">int</b>VarArgs(null);</td></tr>
+<tr><td class="ln">16</td><td class="cl">    pr<b class="keyword">int</b>VarArgs();</td></tr>
+<tr><td class="ln">17</td><td class="cl">  }</td></tr>
+<tr><td class="ln">18</td><td class="cl"></td></tr>
+<tr><td class="ln">19</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAPwoABgAgCQAhACIKACMAJAoAJQAmCAAnBwAoCgApACoKAAkAKwcALAgALQgALgoADQAvBwAwAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAB1MY29tL2V4YW1wbGUvaWNlYmVyZy9WYXJBcmdzOwEADHByaW50VmFyQXJncwEAFihbTGphdmEvbGFuZy9TdHJpbmc7KVYBAARhcmdzAQATW0xqYXZhL2xhbmcvU3RyaW5nOwEABXByaW50AQAEKEkpVgEAAWkBAAFJAQAHZG9QcmludAEAClNvdXJjZUZpbGUBAAxWYXJBcmdzLmphdmEMAA4ADwcAMQwAMgAzBwA0DAA1ADYHADcMADgAOQEAEFZhbHVlIG9mIGkgPSAlcy4BABBqYXZhL2xhbmcvT2JqZWN0BwA6DAA7ADwMAD0APgEAEGphdmEvbGFuZy9TdHJpbmcBAANvbmUBAAN0d28MABUAFgEAG2NvbS9leGFtcGxlL2ljZWJlcmcvVmFyQXJncwEAEGphdmEvbGFuZy9TeXN0ZW0BAANvdXQBABVMamF2YS9pby9QcmludFN0cmVhbTsBABBqYXZhL3V0aWwvQXJyYXlzAQAIdG9TdHJpbmcBACcoW0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS9sYW5nL1N0cmluZzsBABNqYXZhL2lvL1ByaW50U3RyZWFtAQAHcHJpbnRsbgEAFShMamF2YS9sYW5nL1N0cmluZzspVgEAEWphdmEvbGFuZy9JbnRlZ2VyAQAHdmFsdWVPZgEAFihJKUxqYXZhL2xhbmcvSW50ZWdlcjsBAAZmb3JtYXQBADkoTGphdmEvbGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS9sYW5nL1N0cmluZzsAIQANAAYAAAAAAAQAAQAOAA8AAQAQAAAALwABAAEAAAAFKrcAAbEAAAACABEAAAAGAAEAAAAFABIAAAAMAAEAAAAFABMAFAAAAIkAFQAWAAEAEAAAADkAAgABAAAAC7IAAiq4AAO2AASxAAAAAgARAAAACgACAAAACAAKAAkAEgAAAAwAAQAAAAsAFwAYAAAACQAZABoAAQAQAAAAQAAFAAEAAAASEgUEvQAGWQMauAAHU7gACFexAAAAAgARAAAACgACAAAADAARAA0AEgAAAAwAAQAAABIAGwAcAAAAAgAdAA8AAQAQAAAAUwAEAAEAAAAdBb0ACVkDEgpTWQQSC1O4AAwBuAAMA70ACbgADLEAAAACABEAAAASAAQAAAAQABEAEQAVABIAHAATABIAAAAMAAEAAAAdABMAFAAAAAEAHgAAAAIAHw==", true, "list");
+main("yv66vgAAADQAPwoABgAgCQAhACIKACMAJAoAJQAmCAAnBwAoCgApACoKAAkAKwcALAgALQgALgoADQAvBwAwAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAAlMVmFyQXJnczsBAAxwcmludFZhckFyZ3MBABYoW0xqYXZhL2xhbmcvU3RyaW5nOylWAQAEYXJncwEAE1tMamF2YS9sYW5nL1N0cmluZzsBAAVwcmludAEABChJKVYBAAFpAQABSQEAB2RvUHJpbnQBAApTb3VyY2VGaWxlAQAMVmFyQXJncy5qYXZhDAAOAA8HADEMADIAMwcANAwANQA2BwA3DAA4ADkBABBWYWx1ZSBvZiBpID0gJXMuAQAQamF2YS9sYW5nL09iamVjdAcAOgwAOwA8DAA9AD4BABBqYXZhL2xhbmcvU3RyaW5nAQADb25lAQADdHdvDAAVABYBAAdWYXJBcmdzAQAQamF2YS9sYW5nL1N5c3RlbQEAA291dAEAFUxqYXZhL2lvL1ByaW50U3RyZWFtOwEAEGphdmEvdXRpbC9BcnJheXMBAAh0b1N0cmluZwEAJyhbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvU3RyaW5nOwEAE2phdmEvaW8vUHJpbnRTdHJlYW0BAAdwcmludGxuAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQARamF2YS9sYW5nL0ludGVnZXIBAAd2YWx1ZU9mAQAWKEkpTGphdmEvbGFuZy9JbnRlZ2VyOwEABmZvcm1hdAEAOShMamF2YS9sYW5nL1N0cmluZztbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvU3RyaW5nOwAgAA0ABgAAAAAABAAAAA4ADwABABAAAAAvAAEAAQAAAAUqtwABsQAAAAIAEQAAAAYAAQAAAAMAEgAAAAwAAQAAAAUAEwAUAAAAiAAVABYAAQAQAAAAOQACAAEAAAALsgACKrgAA7YABLEAAAACABEAAAAKAAIAAAAGAAoABwASAAAADAABAAAACwAXABgAAAAIABkAGgABABAAAABAAAUAAQAAABISBQS9AAZZAxq4AAdTuAAIV7EAAAACABEAAAAKAAIAAAAKABEACwASAAAADAABAAAAEgAbABwAAAACAB0ADwABABAAAABTAAQAAQAAAB0FvQAJWQMSClNZBBILU7gADAG4AAwDvQAJuAAMsQAAAAIAEQAAABIABAAAAA4AEQAPABUAEAAcABEAEgAAAAwAAQAAAB0AEwAUAAAAAQAeAAAAAgAf", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

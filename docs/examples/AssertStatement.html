@@ -9,30 +9,25 @@
 <h4>AssertStatement.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> AssertStatement {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> AssertStatement {</td></tr>
-<tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">  <b class="keyword">short</b> m(Long argument) {</td></tr>
-<tr><td class="ln">6</td><td class="cl">    <b class="keyword">assert</b> argument != <b class="keyword">null</b>;</td></tr>
-<tr><td class="ln">7</td><td class="cl">    <b class="keyword">assert</b> argument > 10;</td></tr>
-<tr><td class="ln">8</td><td class="cl">    <b class="keyword">assert</b> argument > 70 : argument &lt; 90;</td></tr>
-<tr><td class="ln">9</td><td class="cl">    <b class="keyword">return</b> argument.shortValue();</td></tr>
-<tr><td class="ln">10</td><td class="cl">  }</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">short</b> m(Long argument) {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    <b class="keyword">assert</b> argument != null;</td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">assert</b> argument > 10;</td></tr>
+<tr><td class="ln">6</td><td class="cl">    <b class="keyword">assert</b> argument > 70 : argument &lt; 90;</td></tr>
+<tr><td class="ln">7</td><td class="cl">    <b class="keyword">return</b> argument.<b class="keyword">short</b>Value();</td></tr>
+<tr><td class="ln">8</td><td class="cl">  }</td></tr>
+<tr><td class="ln">9</td><td class="cl"></td></tr>
+<tr><td class="ln">10</td><td class="cl">}</td></tr>
 <tr><td class="ln">11</td><td class="cl"></td></tr>
-<tr><td class="ln">12</td><td class="cl">}</td></tr>
-<tr><td class="ln">13</td><td class="cl"></td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
-<h4>Comment</h4>
-jls8 = jls-14.html#jls-14.10
-<br/><br/>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAOAoAEAAkCQAOACUHACYKAAMAJAoAJwAoBQAAAAAAAAAKBQAAAAAAAABGBQAAAAAAAABaCgADACkKACcAKgcAKwoALAAtBwAuAQATJGFzc2VydGlvbnNEaXNhYmxlZAEAAVoBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAJUxjb20vZXhhbXBsZS9pY2ViZXJnL0Fzc2VydFN0YXRlbWVudDsBAAFtAQATKExqYXZhL2xhbmcvTG9uZzspUwEACGFyZ3VtZW50AQAQTGphdmEvbGFuZy9Mb25nOwEADVN0YWNrTWFwVGFibGUHACsHAC8BAAg8Y2xpbml0PgEAClNvdXJjZUZpbGUBABRBc3NlcnRTdGF0ZW1lbnQuamF2YQwAEwAUDAARABIBABhqYXZhL2xhbmcvQXNzZXJ0aW9uRXJyb3IHAC8MADAAMQwAEwAyDAAzADQBACNjb20vZXhhbXBsZS9pY2ViZXJnL0Fzc2VydFN0YXRlbWVudAcANQwANgA3AQAQamF2YS9sYW5nL09iamVjdAEADmphdmEvbGFuZy9Mb25nAQAJbG9uZ1ZhbHVlAQADKClKAQAEKFopVgEACnNob3J0VmFsdWUBAAMoKVMBAA9qYXZhL2xhbmcvQ2xhc3MBABZkZXNpcmVkQXNzZXJ0aW9uU3RhdHVzAQADKClaACEADgAQAAAAARAYABEAEgAAAAMAAQATABQAAQAVAAAALwABAAEAAAAFKrcAAbEAAAACABYAAAAGAAEAAAADABcAAAAMAAEAAAAFABgAGQAAAAAAGgAbAAEAFQAAAMsABgACAAAAWbIAApoADyvHAAu7AANZtwAEv7IAApoAFiu2AAUUAAaUnQALuwADWbcABL+yAAKaACYrtgAFFAAIlJ0AG7sAA1krtgAFFAAKlJwABwSnAAQDtwAMvyu2AA2sAAAAAwAWAAAAEgAEAAAABgASAAcAKwAIAFQACQAXAAAAFgACAAAAWQAYABkAAAAAAFkAHAAdAAEAHgAAACwABRIY/wAjAAIHAB8HACAAAggAPAgAPP8AAAACBwAfBwAgAAMIADwIADwBAwAIACEAFAABABUAAAA0AAEAAAAAABESDrYAD5oABwSnAAQDswACsQAAAAIAFgAAAAYAAQAAAAMAHgAAAAUAAgxAAQABACIAAAACACM=", true, "list");
+main("yv66vgAAADQAOAoAEAAkCQAOACUHACYKAAMAJAoAJwAoBQAAAAAAAAAKBQAAAAAAAABGBQAAAAAAAABaCgADACkKACcAKgcAKwoALAAtBwAuAQATJGFzc2VydGlvbnNEaXNhYmxlZAEAAVoBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAEUxBc3NlcnRTdGF0ZW1lbnQ7AQABbQEAEyhMamF2YS9sYW5nL0xvbmc7KVMBAAhhcmd1bWVudAEAEExqYXZhL2xhbmcvTG9uZzsBAA1TdGFja01hcFRhYmxlBwArBwAvAQAIPGNsaW5pdD4BAApTb3VyY2VGaWxlAQAUQXNzZXJ0U3RhdGVtZW50LmphdmEMABMAFAwAEQASAQAYamF2YS9sYW5nL0Fzc2VydGlvbkVycm9yBwAvDAAwADEMABMAMgwAMwA0AQAPQXNzZXJ0U3RhdGVtZW50BwA1DAA2ADcBABBqYXZhL2xhbmcvT2JqZWN0AQAOamF2YS9sYW5nL0xvbmcBAAlsb25nVmFsdWUBAAMoKUoBAAQoWilWAQAKc2hvcnRWYWx1ZQEAAygpUwEAD2phdmEvbGFuZy9DbGFzcwEAFmRlc2lyZWRBc3NlcnRpb25TdGF0dXMBAAMoKVoAIAAOABAAAAABEBgAEQASAAAAAwAAABMAFAABABUAAAAvAAEAAQAAAAUqtwABsQAAAAIAFgAAAAYAAQAAAAEAFwAAAAwAAQAAAAUAGAAZAAAAAAAaABsAAQAVAAAAywAGAAIAAABZsgACmgAPK8cAC7sAA1m3AAS/sgACmgAWK7YABRQABpSdAAu7AANZtwAEv7IAApoAJiu2AAUUAAiUnQAbuwADWSu2AAUUAAqUnAAHBKcABAO3AAy/K7YADawAAAADABYAAAASAAQAAAAEABIABQArAAYAVAAHABcAAAAWAAIAAABZABgAGQAAAAAAWQAcAB0AAQAeAAAALAAFEhj/ACMAAgcAHwcAIAACCAA8CAA8/wAAAAIHAB8HACAAAwgAPAgAPAEDAAgAIQAUAAEAFQAAADQAAQAAAAAAERIOtgAPmgAHBKcABAOzAAKxAAAAAgAWAAAABgABAAAAAQAeAAAABQACDEABAAEAIgAAAAIAIw==", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

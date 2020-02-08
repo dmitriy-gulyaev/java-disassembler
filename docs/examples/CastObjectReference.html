@@ -9,30 +9,23 @@
 <h4>CastObjectReference.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> CastObjectReference {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">class</b> CastObjectReference {</td></tr>
-<tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">    <b class="keyword">void</b> m() {</td></tr>
-<tr><td class="ln">6</td><td class="cl">        Integer integer = <b class="keyword">new</b> Integer(0);</td></tr>
-<tr><td class="ln">7</td><td class="cl">        Object object = integer;</td></tr>
-<tr><td class="ln">8</td><td class="cl">        Integer otherReference = (Integer) object;</td></tr>
-<tr><td class="ln">9</td><td class="cl">    }</td></tr>
-<tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">}</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">void</b> m() {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    Integer <b class="keyword">int</b>eger = <b class="keyword">new</b> Integer(0);</td></tr>
+<tr><td class="ln">5</td><td class="cl">    Object object = <b class="keyword">int</b>eger;</td></tr>
+<tr><td class="ln">6</td><td class="cl">    Integer otherReference = (Integer) object;</td></tr>
+<tr><td class="ln">7</td><td class="cl">  }</td></tr>
+<tr><td class="ln">8</td><td class="cl"></td></tr>
+<tr><td class="ln">9</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
-<h4>Comment</h4>
-Cast expression is transformed to execution of check that the reference belongs to specified
-type. Check is performed using <code><b>checkcast</b></code> instruction. Instruction <code>checkcast</code> may throw
-runtime exception ClassCastException if check had failed.
-<br/><br/>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAGwoABQAVBwAWCgACABcHABgHABkBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAKUxjb20vZXhhbXBsZS9pY2ViZXJnL0Nhc3RPYmplY3RSZWZlcmVuY2U7AQABbQEAB2ludGVnZXIBABNMamF2YS9sYW5nL0ludGVnZXI7AQAGb2JqZWN0AQASTGphdmEvbGFuZy9PYmplY3Q7AQAOb3RoZXJSZWZlcmVuY2UBAApTb3VyY2VGaWxlAQAYQ2FzdE9iamVjdFJlZmVyZW5jZS5qYXZhDAAGAAcBABFqYXZhL2xhbmcvSW50ZWdlcgwABgAaAQAnY29tL2V4YW1wbGUvaWNlYmVyZy9DYXN0T2JqZWN0UmVmZXJlbmNlAQAQamF2YS9sYW5nL09iamVjdAEABChJKVYAIAAEAAUAAAAAAAIAAAAGAAcAAQAIAAAALwABAAEAAAAFKrcAAbEAAAACAAkAAAAGAAEAAAADAAoAAAAMAAEAAAAFAAsADAAAAAAADQAHAAEACAAAAGUAAwAEAAAAEbsAAlkDtwADTCtNLMAAAk6xAAAAAgAJAAAAEgAEAAAABgAJAAcACwAIABAACQAKAAAAKgAEAAAAEQALAAwAAAAJAAgADgAPAAEACwAGABAAEQACABAAAQASAA8AAwABABMAAAACABQ=", true, "list");
+main("yv66vgAAADQAGwoABQAVBwAWCgACABcHABgHABkBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAFUxDYXN0T2JqZWN0UmVmZXJlbmNlOwEAAW0BAAdpbnRlZ2VyAQATTGphdmEvbGFuZy9JbnRlZ2VyOwEABm9iamVjdAEAEkxqYXZhL2xhbmcvT2JqZWN0OwEADm90aGVyUmVmZXJlbmNlAQAKU291cmNlRmlsZQEAGENhc3RPYmplY3RSZWZlcmVuY2UuamF2YQwABgAHAQARamF2YS9sYW5nL0ludGVnZXIMAAYAGgEAE0Nhc3RPYmplY3RSZWZlcmVuY2UBABBqYXZhL2xhbmcvT2JqZWN0AQAEKEkpVgAgAAQABQAAAAAAAgAAAAYABwABAAgAAAAvAAEAAQAAAAUqtwABsQAAAAIACQAAAAYAAQAAAAEACgAAAAwAAQAAAAUACwAMAAAAAAANAAcAAQAIAAAAZQADAAQAAAARuwACWQO3AANMK00swAACTrEAAAACAAkAAAASAAQAAAAEAAkABQALAAYAEAAHAAoAAAAqAAQAAAARAAsADAAAAAkACAAOAA8AAQALAAYAEAARAAIAEAABABIADwADAAEAEwAAAAIAFA==", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

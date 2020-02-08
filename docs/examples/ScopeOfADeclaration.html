@@ -9,27 +9,25 @@
 <h4>ScopeOfADeclaration.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> ScopeOfADeclaration {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> ScopeOfADeclaration {</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">static</b> Integer varr = 1;</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">    <b class="keyword">static</b> Integer varr = 1;</td></tr>
-<tr><td class="ln">6</td><td class="cl"></td></tr>
-<tr><td class="ln">7</td><td class="cl">    <b class="keyword">static</b> <b class="keyword">void</b> m() {</td></tr>
-<tr><td class="ln">8</td><td class="cl">        String varr = "23";</td></tr>
-<tr><td class="ln">9</td><td class="cl">        varr.hashCode();</td></tr>
-<tr><td class="ln">10</td><td class="cl">        ScopeOfADeclaration.varr.hashCode();</td></tr>
-<tr><td class="ln">11</td><td class="cl">    }</td></tr>
-<tr><td class="ln">12</td><td class="cl"></td></tr>
-<tr><td class="ln">13</td><td class="cl">}</td></tr>
+<tr><td class="ln">5</td><td class="cl">  <b class="keyword">static</b> <b class="keyword">void</b> m() {</td></tr>
+<tr><td class="ln">6</td><td class="cl">    String varr = "23";</td></tr>
+<tr><td class="ln">7</td><td class="cl">    varr.hashCode();</td></tr>
+<tr><td class="ln">8</td><td class="cl">    ScopeOfADeclaration.varr.hashCode();</td></tr>
+<tr><td class="ln">9</td><td class="cl">  }</td></tr>
+<tr><td class="ln">10</td><td class="cl"></td></tr>
+<tr><td class="ln">11</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAJgoACAAXCAAYCgAZABoJAAcAGwoAHAAaCgAcAB0HAB4HAB8BAAR2YXJyAQATTGphdmEvbGFuZy9JbnRlZ2VyOwEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQApTGNvbS9leGFtcGxlL2ljZWJlcmcvU2NvcGVPZkFEZWNsYXJhdGlvbjsBAAFtAQASTGphdmEvbGFuZy9TdHJpbmc7AQAIPGNsaW5pdD4BAApTb3VyY2VGaWxlAQAYU2NvcGVPZkFEZWNsYXJhdGlvbi5qYXZhDAALAAwBAAIyMwcAIAwAIQAiDAAJAAoHACMMACQAJQEAJ2NvbS9leGFtcGxlL2ljZWJlcmcvU2NvcGVPZkFEZWNsYXJhdGlvbgEAEGphdmEvbGFuZy9PYmplY3QBABBqYXZhL2xhbmcvU3RyaW5nAQAIaGFzaENvZGUBAAMoKUkBABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7ACEABwAIAAAAAQAIAAkACgAAAAMAAQALAAwAAQANAAAALwABAAEAAAAFKrcAAbEAAAACAA4AAAAGAAEAAAADAA8AAAAMAAEAAAAFABAAEQAAAAgAEgAMAAEADQAAAEYAAQABAAAAEBICSyq2AANXsgAEtgAFV7EAAAACAA4AAAASAAQAAAAIAAMACQAIAAoADwALAA8AAAAMAAEAAwANAAkAEwAAAAgAFAAMAAEADQAAACAAAQAAAAAACAS4AAazAASxAAAAAQAOAAAABgABAAAABQABABUAAAACABY=", true, "list");
+main("yv66vgAAADQAJgoACAAXCAAYCgAZABoJAAcAGwoAHAAaCgAcAB0HAB4HAB8BAAR2YXJyAQATTGphdmEvbGFuZy9JbnRlZ2VyOwEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAVTFNjb3BlT2ZBRGVjbGFyYXRpb247AQABbQEAEkxqYXZhL2xhbmcvU3RyaW5nOwEACDxjbGluaXQ+AQAKU291cmNlRmlsZQEAGFNjb3BlT2ZBRGVjbGFyYXRpb24uamF2YQwACwAMAQACMjMHACAMACEAIgwACQAKBwAjDAAkACUBABNTY29wZU9mQURlY2xhcmF0aW9uAQAQamF2YS9sYW5nL09iamVjdAEAEGphdmEvbGFuZy9TdHJpbmcBAAhoYXNoQ29kZQEAAygpSQEAEWphdmEvbGFuZy9JbnRlZ2VyAQAHdmFsdWVPZgEAFihJKUxqYXZhL2xhbmcvSW50ZWdlcjsAIAAHAAgAAAABAAgACQAKAAAAAwAAAAsADAABAA0AAAAvAAEAAQAAAAUqtwABsQAAAAIADgAAAAYAAQAAAAEADwAAAAwAAQAAAAUAEAARAAAACAASAAwAAQANAAAARgABAAEAAAAQEgJLKrYAA1eyAAS2AAVXsQAAAAIADgAAABIABAAAAAYAAwAHAAgACAAPAAkADwAAAAwAAQADAA0ACQATAAAACAAUAAwAAQANAAAAIAABAAAAAAAIBLgABrMABLEAAAABAA4AAAAGAAEAAAADAAEAFQAAAAIAFg==", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

@@ -9,29 +9,27 @@
 <h4>TryWithResourceStatement.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
-<tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.io.BufferedReader;</td></tr>
-<tr><td class="ln">4</td><td class="cl"><b class="keyword">import</b> java.io.IOException;</td></tr>
-<tr><td class="ln">5</td><td class="cl"><b class="keyword">import</b> java.io.Reader;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">import</b> java.io.BufferedReader;</td></tr>
+<tr><td class="ln">2</td><td class="cl"><b class="keyword">import</b> java.io.IOException;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.io.Reader;</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl"><b class="keyword">class</b> TryWithResourceStatement {</td></tr>
 <tr><td class="ln">6</td><td class="cl"></td></tr>
-<tr><td class="ln">7</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> TryWithResourceStatement {</td></tr>
-<tr><td class="ln">8</td><td class="cl"></td></tr>
-<tr><td class="ln">9</td><td class="cl">    <b class="keyword">void</b> m(Reader reader) <b class="keyword">throws</b> IOException {</td></tr>
-<tr><td class="ln">10</td><td class="cl">        <b class="keyword">try</b> (BufferedReader br = <b class="keyword">new</b> BufferedReader(reader)) {</td></tr>
-<tr><td class="ln">11</td><td class="cl">            br.toString();</td></tr>
-<tr><td class="ln">12</td><td class="cl">        }</td></tr>
-<tr><td class="ln">13</td><td class="cl">    }</td></tr>
-<tr><td class="ln">14</td><td class="cl"></td></tr>
-<tr><td class="ln">15</td><td class="cl">}</td></tr>
+<tr><td class="ln">7</td><td class="cl">  <b class="keyword">void</b> m(Reader reader) <b class="keyword">throw</b>s IOException {</td></tr>
+<tr><td class="ln">8</td><td class="cl">    <b class="keyword">try</b> (BufferedReader br = <b class="keyword">new</b> BufferedReader(reader)) {</td></tr>
+<tr><td class="ln">9</td><td class="cl">      br.toString();</td></tr>
+<tr><td class="ln">10</td><td class="cl">    }</td></tr>
+<tr><td class="ln">11</td><td class="cl">  }</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAMAoACQAgBwAhCgACACIKAAkAIwoAAgAkBwAlCgAGACYHACcHACgBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEALkxjb20vZXhhbXBsZS9pY2ViZXJnL1RyeVdpdGhSZXNvdXJjZVN0YXRlbWVudDsBAAFtAQATKExqYXZhL2lvL1JlYWRlcjspVgEAAmJyAQAYTGphdmEvaW8vQnVmZmVyZWRSZWFkZXI7AQAGcmVhZGVyAQAQTGphdmEvaW8vUmVhZGVyOwEADVN0YWNrTWFwVGFibGUHACcHACkHACEHACUBAApFeGNlcHRpb25zBwAqAQAKU291cmNlRmlsZQEAHVRyeVdpdGhSZXNvdXJjZVN0YXRlbWVudC5qYXZhDAAKAAsBABZqYXZhL2lvL0J1ZmZlcmVkUmVhZGVyDAAKABIMACsALAwALQALAQATamF2YS9sYW5nL1Rocm93YWJsZQwALgAvAQAsY29tL2V4YW1wbGUvaWNlYmVyZy9UcnlXaXRoUmVzb3VyY2VTdGF0ZW1lbnQBABBqYXZhL2xhbmcvT2JqZWN0AQAOamF2YS9pby9SZWFkZXIBABNqYXZhL2lvL0lPRXhjZXB0aW9uAQAIdG9TdHJpbmcBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEABWNsb3NlAQANYWRkU3VwcHJlc3NlZAEAGChMamF2YS9sYW5nL1Rocm93YWJsZTspVgAhAAgACQAAAAAAAgABAAoACwABAAwAAAAvAAEAAQAAAAUqtwABsQAAAAIADQAAAAYAAQAAAAcADgAAAAwAAQAAAAUADwAQAAAAAAARABIAAgAMAAABJwADAAcAAABduwACWSu3AANNAU4stgAEVyzGAEstxgAVLLYABacAQDoELRkEtgAHpwA1LLYABacALjoEGQROGQS/OgUsxgAdLcYAFSy2AAWnABI6Bi0ZBrYAB6cAByy2AAUZBb+xAAUAGAAcAB8ABgALABAAMQAGAAsAEAA5AAAAQwBHAEoABgAxADsAOQAAAAMADQAAABoABgAAAAoACwALABAADAAxAAoAOQAMAFwADQAOAAAAIAADAAkAUwATABQAAgAAAF0ADwAQAAAAAABdABUAFgABABcAAABKAAj/AB8ABAcAGAcAGQcAGgcAGwABBwAbCkYHABtHBwAb/wAQAAYHABgHABkHABoHABsABwAbAAEHABsKA/8AAgACBwAYBwAZAAAAHAAAAAQAAQAdAAEAHgAAAAIAHw==", true, "list");
+main("yv66vgAAADQAMAoACQAgBwAhCgACACIKAAkAIwoAAgAkBwAlCgAGACYHACcHACgBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAGkxUcnlXaXRoUmVzb3VyY2VTdGF0ZW1lbnQ7AQABbQEAEyhMamF2YS9pby9SZWFkZXI7KVYBAAJicgEAGExqYXZhL2lvL0J1ZmZlcmVkUmVhZGVyOwEABnJlYWRlcgEAEExqYXZhL2lvL1JlYWRlcjsBAA1TdGFja01hcFRhYmxlBwAnBwApBwAhBwAlAQAKRXhjZXB0aW9ucwcAKgEAClNvdXJjZUZpbGUBAB1UcnlXaXRoUmVzb3VyY2VTdGF0ZW1lbnQuamF2YQwACgALAQAWamF2YS9pby9CdWZmZXJlZFJlYWRlcgwACgASDAArACwMAC0ACwEAE2phdmEvbGFuZy9UaHJvd2FibGUMAC4ALwEAGFRyeVdpdGhSZXNvdXJjZVN0YXRlbWVudAEAEGphdmEvbGFuZy9PYmplY3QBAA5qYXZhL2lvL1JlYWRlcgEAE2phdmEvaW8vSU9FeGNlcHRpb24BAAh0b1N0cmluZwEAFCgpTGphdmEvbGFuZy9TdHJpbmc7AQAFY2xvc2UBAA1hZGRTdXBwcmVzc2VkAQAYKExqYXZhL2xhbmcvVGhyb3dhYmxlOylWACAACAAJAAAAAAACAAAACgALAAEADAAAAC8AAQABAAAABSq3AAGxAAAAAgANAAAABgABAAAABQAOAAAADAABAAAABQAPABAAAAAAABEAEgACAAwAAAEnAAMABwAAAF27AAJZK7cAA00BTiy2AARXLMYASy3GABUstgAFpwBAOgQtGQS2AAenADUstgAFpwAuOgQZBE4ZBL86BSzGAB0txgAVLLYABacAEjoGLRkGtgAHpwAHLLYABRkFv7EABQAYABwAHwAGAAsAEAAxAAYACwAQADkAAABDAEcASgAGADEAOwA5AAAAAwANAAAAGgAGAAAACAALAAkAEAAKADEACAA5AAoAXAALAA4AAAAgAAMACQBTABMAFAACAAAAXQAPABAAAAAAAF0AFQAWAAEAFwAAAEoACP8AHwAEBwAYBwAZBwAaBwAbAAEHABsKRgcAG0cHABv/ABAABgcAGAcAGQcAGgcAGwAHABsAAQcAGwoD/wACAAIHABgHABkAAAAcAAAABAABAB0AAQAeAAAAAgAf", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

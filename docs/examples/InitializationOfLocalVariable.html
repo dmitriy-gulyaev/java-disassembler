@@ -9,30 +9,27 @@
 <h4>InitializationOfLocalVariable.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> InitializationOfLocalVariable {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> InitializationOfLocalVariable {</td></tr>
-<tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">    <b class="keyword">void</b> initialized() {</td></tr>
-<tr><td class="ln">6</td><td class="cl">        <b class="keyword">int</b> localVar = 89;</td></tr>
-<tr><td class="ln">7</td><td class="cl">        <b class="keyword">this</b>.hashCode();</td></tr>
-<tr><td class="ln">8</td><td class="cl">    }</td></tr>
-<tr><td class="ln">9</td><td class="cl"></td></tr>
-<tr><td class="ln">10</td><td class="cl">    <b class="keyword">void</b> notInitialized() {</td></tr>
-<tr><td class="ln">11</td><td class="cl">        <b class="keyword">int</b> localVar;</td></tr>
-<tr><td class="ln">12</td><td class="cl">        <b class="keyword">this</b>.hashCode();</td></tr>
-<tr><td class="ln">13</td><td class="cl">    }</td></tr>
-<tr><td class="ln">14</td><td class="cl"></td></tr>
-<tr><td class="ln">15</td><td class="cl"></td></tr>
-<tr><td class="ln">16</td><td class="cl">}</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">void</b> initialized() {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    <b class="keyword">int</b> localVar = 89;</td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">this</b>.hashCode();</td></tr>
+<tr><td class="ln">6</td><td class="cl">  }</td></tr>
+<tr><td class="ln">7</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">  <b class="keyword">void</b> notInitialized() {</td></tr>
+<tr><td class="ln">9</td><td class="cl">    <b class="keyword">int</b> localVar;</td></tr>
+<tr><td class="ln">10</td><td class="cl">    <b class="keyword">this</b>.hashCode();</td></tr>
+<tr><td class="ln">11</td><td class="cl">  }</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAGAoABAASCgAEABMHABQHABUBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAM0xjb20vZXhhbXBsZS9pY2ViZXJnL0luaXRpYWxpemF0aW9uT2ZMb2NhbFZhcmlhYmxlOwEAC2luaXRpYWxpemVkAQAIbG9jYWxWYXIBAAFJAQAObm90SW5pdGlhbGl6ZWQBAApTb3VyY2VGaWxlAQAiSW5pdGlhbGl6YXRpb25PZkxvY2FsVmFyaWFibGUuamF2YQwABQAGDAAWABcBADFjb20vZXhhbXBsZS9pY2ViZXJnL0luaXRpYWxpemF0aW9uT2ZMb2NhbFZhcmlhYmxlAQAQamF2YS9sYW5nL09iamVjdAEACGhhc2hDb2RlAQADKClJACEAAwAEAAAAAAADAAEABQAGAAEABwAAAC8AAQABAAAABSq3AAGxAAAAAgAIAAAABgABAAAAAwAJAAAADAABAAAABQAKAAsAAAAAAAwABgABAAcAAABFAAEAAgAAAAkQWTwqtgACV7EAAAACAAgAAAAOAAMAAAAGAAMABwAIAAgACQAAABYAAgAAAAkACgALAAAAAwAGAA0ADgABAAAADwAGAAEABwAAADQAAQACAAAABiq2AAJXsQAAAAIACAAAAAoAAgAAAAwABQANAAkAAAAMAAEAAAAGAAoACwAAAAEAEAAAAAIAEQ==", true, "list");
+main("yv66vgAAADQAGAoABAASCgAEABMHABQHABUBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAH0xJbml0aWFsaXphdGlvbk9mTG9jYWxWYXJpYWJsZTsBAAtpbml0aWFsaXplZAEACGxvY2FsVmFyAQABSQEADm5vdEluaXRpYWxpemVkAQAKU291cmNlRmlsZQEAIkluaXRpYWxpemF0aW9uT2ZMb2NhbFZhcmlhYmxlLmphdmEMAAUABgwAFgAXAQAdSW5pdGlhbGl6YXRpb25PZkxvY2FsVmFyaWFibGUBABBqYXZhL2xhbmcvT2JqZWN0AQAIaGFzaENvZGUBAAMoKUkAIAADAAQAAAAAAAMAAAAFAAYAAQAHAAAALwABAAEAAAAFKrcAAbEAAAACAAgAAAAGAAEAAAABAAkAAAAMAAEAAAAFAAoACwAAAAAADAAGAAEABwAAAEUAAQACAAAACRBZPCq2AAJXsQAAAAIACAAAAA4AAwAAAAQAAwAFAAgABgAJAAAAFgACAAAACQAKAAsAAAADAAYADQAOAAEAAAAPAAYAAQAHAAAANAABAAIAAAAGKrYAAlexAAAAAgAIAAAACgACAAAACgAFAAsACQAAAAwAAQAAAAYACgALAAAAAQAQAAAAAgAR", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

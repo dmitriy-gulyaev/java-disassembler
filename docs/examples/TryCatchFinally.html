@@ -9,31 +9,28 @@
 <h4>TryCatchFinally.class</h4><hr/>
 <h3>Source code</h3>
 <table width=100% class="ct">
-<tr><td class="ln">1</td><td class="cl"><b class="keyword">package</b> com.example.iceberg;</td></tr>
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> TryCatchFinally {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl"><b class="keyword">public</b> <b class="keyword">class</b> TryCatchFinally {</td></tr>
-<tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">  <b class="keyword">void</b> m() {</td></tr>
-<tr><td class="ln">6</td><td class="cl">    String str = "string";</td></tr>
-<tr><td class="ln">7</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
-<tr><td class="ln">8</td><td class="cl">      str.charAt(111);</td></tr>
-<tr><td class="ln">9</td><td class="cl">    } <b class="keyword">catch</b> (StringIndexOutOfBoundsException e) {</td></tr>
-<tr><td class="ln">10</td><td class="cl">      e.getMessage();</td></tr>
-<tr><td class="ln">11</td><td class="cl">    } <b class="keyword">finally</b> {</td></tr>
-<tr><td class="ln">12</td><td class="cl">      str.hashCode();</td></tr>
-<tr><td class="ln">13</td><td class="cl">      str.isEmpty();</td></tr>
-<tr><td class="ln">14</td><td class="cl">    }</td></tr>
-<tr><td class="ln">15</td><td class="cl">  }</td></tr>
-<tr><td class="ln">16</td><td class="cl"></td></tr>
-<tr><td class="ln">17</td><td class="cl">}</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">void</b> m() {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    String str = "string";</td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
+<tr><td class="ln">6</td><td class="cl">      str.<b class="keyword">char</b>At(111);</td></tr>
+<tr><td class="ln">7</td><td class="cl">    } <b class="keyword">catch</b> (StringIndexOutOfBoundsException e) {</td></tr>
+<tr><td class="ln">8</td><td class="cl">      e.getMessage();</td></tr>
+<tr><td class="ln">9</td><td class="cl">    } <b class="keyword">final</b>ly {</td></tr>
+<tr><td class="ln">10</td><td class="cl">      str.hashCode();</td></tr>
+<tr><td class="ln">11</td><td class="cl">    }</td></tr>
+<tr><td class="ln">12</td><td class="cl">  }</td></tr>
+<tr><td class="ln">13</td><td class="cl"></td></tr>
+<tr><td class="ln">14</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAMQoACQAdCAAeCgAfACAKAB8AIQoAHwAiBwAjCgAGACQHACUHACYBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAJUxjb20vZXhhbXBsZS9pY2ViZXJnL1RyeUNhdGNoRmluYWxseTsBAAFtAQABZQEAK0xqYXZhL2xhbmcvU3RyaW5nSW5kZXhPdXRPZkJvdW5kc0V4Y2VwdGlvbjsBAANzdHIBABJMamF2YS9sYW5nL1N0cmluZzsBAA1TdGFja01hcFRhYmxlBwAlBwAnBwAjBwAoAQAKU291cmNlRmlsZQEAFFRyeUNhdGNoRmluYWxseS5qYXZhDAAKAAsBAAZzdHJpbmcHACcMACkAKgwAKwAsDAAtAC4BAClqYXZhL2xhbmcvU3RyaW5nSW5kZXhPdXRPZkJvdW5kc0V4Y2VwdGlvbgwALwAwAQAjY29tL2V4YW1wbGUvaWNlYmVyZy9UcnlDYXRjaEZpbmFsbHkBABBqYXZhL2xhbmcvT2JqZWN0AQAQamF2YS9sYW5nL1N0cmluZwEAE2phdmEvbGFuZy9UaHJvd2FibGUBAAZjaGFyQXQBAAQoSSlDAQAIaGFzaENvZGUBAAMoKUkBAAdpc0VtcHR5AQADKClaAQAKZ2V0TWVzc2FnZQEAFCgpTGphdmEvbGFuZy9TdHJpbmc7ACEACAAJAAAAAAACAAEACgALAAEADAAAAC8AAQABAAAABSq3AAGxAAAAAgANAAAABgABAAAAAwAOAAAADAABAAAABQAPABAAAAAAABEACwABAAwAAADfAAIABAAAADgSAkwrEG+2AANXK7YABFcrtgAFV6cAI00stgAHVyu2AARXK7YABVenABBOK7YABFcrtgAFVy2/sQADAAMACgAXAAYAAwAKACoAAAAXAB0AKgAAAAMADQAAADoADgAAAAYAAwAIAAoADAAPAA0AFAAOABcACQAYAAoAHQAMACIADQAnAA4AKgAMADAADQA1AA4ANwAPAA4AAAAgAAMAGAAFABIAEwACAAAAOAAPABAAAAADADUAFAAVAAEAFgAAABcAA/8AFwACBwAXBwAYAAEHABlSBwAaDAABABsAAAACABw=", true, "list");
+main("yv66vgAAADQALQoACAAcCAAdCgAeAB8KAB4AIAcAIQoABQAiBwAjBwAkAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABFMVHJ5Q2F0Y2hGaW5hbGx5OwEAAW0BAAFlAQArTGphdmEvbGFuZy9TdHJpbmdJbmRleE91dE9mQm91bmRzRXhjZXB0aW9uOwEAA3N0cgEAEkxqYXZhL2xhbmcvU3RyaW5nOwEADVN0YWNrTWFwVGFibGUHACMHACUHACEHACYBAApTb3VyY2VGaWxlAQAUVHJ5Q2F0Y2hGaW5hbGx5LmphdmEMAAkACgEABnN0cmluZwcAJQwAJwAoDAApACoBAClqYXZhL2xhbmcvU3RyaW5nSW5kZXhPdXRPZkJvdW5kc0V4Y2VwdGlvbgwAKwAsAQAPVHJ5Q2F0Y2hGaW5hbGx5AQAQamF2YS9sYW5nL09iamVjdAEAEGphdmEvbGFuZy9TdHJpbmcBABNqYXZhL2xhbmcvVGhyb3dhYmxlAQAGY2hhckF0AQAEKEkpQwEACGhhc2hDb2RlAQADKClJAQAKZ2V0TWVzc2FnZQEAFCgpTGphdmEvbGFuZy9TdHJpbmc7ACAABwAIAAAAAAACAAAACQAKAAEACwAAAC8AAQABAAAABSq3AAGxAAAAAgAMAAAABgABAAAAAQANAAAADAABAAAABQAOAA8AAAAAABAACgABAAsAAADEAAIABAAAACkSAkwrEG+2AANXK7YABFenABlNLLYABlcrtgAEV6cAC04rtgAEVy2/sQADAAMACgASAAUAAwAKACAAAAASABgAIAAAAAMADAAAAC4ACwAAAAQAAwAGAAoACgAPAAsAEgAHABMACAAYAAoAHQALACAACgAmAAsAKAAMAA0AAAAgAAMAEwAFABEAEgACAAAAKQAOAA8AAAADACYAEwAUAAEAFQAAABcAA/8AEgACBwAWBwAXAAEHABhNBwAZBwABABoAAAACABs=", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_161</b><br/>
-<br/><a href="..\examples\index.html">Other examples</a>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

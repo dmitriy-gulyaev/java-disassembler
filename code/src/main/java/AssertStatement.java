@@ -1,12 +1,21 @@
 class AssertStatement {
 
-  short m(Long argument) {
-    assert argument != null;
+  void m1(int argument) {
     assert argument > 10;
-    assert argument > 70 : argument < 90;
-    return argument.shortValue();
+  }
+
+  void m2(int argument) {
+    assert argument > 20 : "abc";
+  }
+
+  void m3(int argument) {
+    assert argument > 30 : 123;
+  }
+
+  void m4(int argument) {
+    assert argument > 40 : new java.util.concurrent.DelayQueue();
   }
 
 }
 
-// jls8 = jls-14.html#jls-14.10
+// Assert statement in method m2 results in invoke of AssertionError(Object) constructor since AssertionError(String) although exists but is private.

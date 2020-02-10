@@ -11,23 +11,32 @@
 <table width=100% class="ct">
 <tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> AssertStatement {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">  <b class="keyword">short</b> m(Long argument) {</td></tr>
-<tr><td class="ln">4</td><td class="cl">    <b class="keyword">assert</b> argument != null;</td></tr>
-<tr><td class="ln">5</td><td class="cl">    <b class="keyword">assert</b> argument > 10;</td></tr>
-<tr><td class="ln">6</td><td class="cl">    <b class="keyword">assert</b> argument > 70 : argument &lt; 90;</td></tr>
-<tr><td class="ln">7</td><td class="cl">    <b class="keyword">return</b> argument.<b class="keyword">short</b>Value();</td></tr>
-<tr><td class="ln">8</td><td class="cl">  }</td></tr>
-<tr><td class="ln">9</td><td class="cl"></td></tr>
-<tr><td class="ln">10</td><td class="cl">}</td></tr>
-<tr><td class="ln">11</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">void</b> m1(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    <b class="keyword">assert</b> argument > 10;</td></tr>
+<tr><td class="ln">5</td><td class="cl">  }</td></tr>
+<tr><td class="ln">6</td><td class="cl"></td></tr>
+<tr><td class="ln">7</td><td class="cl">  <b class="keyword">void</b> m2(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">8</td><td class="cl">    <b class="keyword">assert</b> argument > 20 : "abc";</td></tr>
+<tr><td class="ln">9</td><td class="cl">  }</td></tr>
+<tr><td class="ln">10</td><td class="cl"></td></tr>
+<tr><td class="ln">11</td><td class="cl">  <b class="keyword">void</b> m3(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">12</td><td class="cl">    <b class="keyword">assert</b> argument > 30 : 123;</td></tr>
+<tr><td class="ln">13</td><td class="cl">  }</td></tr>
+<tr><td class="ln">14</td><td class="cl"></td></tr>
+<tr><td class="ln">15</td><td class="cl">  <b class="keyword">void</b> m4(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">16</td><td class="cl">    <b class="keyword">assert</b> argument > 40 : <b class="keyword">new</b> java.util.concurrent.DelayQueue();</td></tr>
+<tr><td class="ln">17</td><td class="cl">  }</td></tr>
+<tr><td class="ln">18</td><td class="cl"></td></tr>
+<tr><td class="ln">19</td><td class="cl">}</td></tr>
+<tr><td class="ln">20</td><td class="cl"></td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="list" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vgAAADQAOAoAEAAkCQAOACUHACYKAAMAJAoAJwAoBQAAAAAAAAAKBQAAAAAAAABGBQAAAAAAAABaCgADACkKACcAKgcAKwoALAAtBwAuAQATJGFzc2VydGlvbnNEaXNhYmxlZAEAAVoBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAEUxBc3NlcnRTdGF0ZW1lbnQ7AQABbQEAEyhMamF2YS9sYW5nL0xvbmc7KVMBAAhhcmd1bWVudAEAEExqYXZhL2xhbmcvTG9uZzsBAA1TdGFja01hcFRhYmxlBwArBwAvAQAIPGNsaW5pdD4BAApTb3VyY2VGaWxlAQAUQXNzZXJ0U3RhdGVtZW50LmphdmEMABMAFAwAEQASAQAYamF2YS9sYW5nL0Fzc2VydGlvbkVycm9yBwAvDAAwADEMABMAMgwAMwA0AQAPQXNzZXJ0U3RhdGVtZW50BwA1DAA2ADcBABBqYXZhL2xhbmcvT2JqZWN0AQAOamF2YS9sYW5nL0xvbmcBAAlsb25nVmFsdWUBAAMoKUoBAAQoWilWAQAKc2hvcnRWYWx1ZQEAAygpUwEAD2phdmEvbGFuZy9DbGFzcwEAFmRlc2lyZWRBc3NlcnRpb25TdGF0dXMBAAMoKVoAIAAOABAAAAABEBgAEQASAAAAAwAAABMAFAABABUAAAAvAAEAAQAAAAUqtwABsQAAAAIAFgAAAAYAAQAAAAEAFwAAAAwAAQAAAAUAGAAZAAAAAAAaABsAAQAVAAAAywAGAAIAAABZsgACmgAPK8cAC7sAA1m3AAS/sgACmgAWK7YABRQABpSdAAu7AANZtwAEv7IAApoAJiu2AAUUAAiUnQAbuwADWSu2AAUUAAqUnAAHBKcABAO3AAy/K7YADawAAAADABYAAAASAAQAAAAEABIABQArAAYAVAAHABcAAAAWAAIAAABZABgAGQAAAAAAWQAcAB0AAQAeAAAALAAFEhj/ACMAAgcAHwcAIAACCAA8CAA8/wAAAAIHAB8HACAAAwgAPAgAPAEDAAgAIQAUAAEAFQAAADQAAQAAAAAAERIOtgAPmgAHBKcABAOzAAKxAAAAAgAWAAAABgABAAAAAQAeAAAABQACDEABAAEAIgAAAAIAIw==", true);
+main("yv66vgAAADQAMAoADAAhCQAKACIHACMKAAMAIQgAJAoAAwAlCgADACYHACcKAAgAIQcAKAoAKQAqBwArAQATJGFzc2VydGlvbnNEaXNhYmxlZAEAAVoBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAEUxBc3NlcnRTdGF0ZW1lbnQ7AQACbTEBAAQoSSlWAQAIYXJndW1lbnQBAAFJAQANU3RhY2tNYXBUYWJsZQEAAm0yAQACbTMBAAJtNAEACDxjbGluaXQ+AQAKU291cmNlRmlsZQEAFEFzc2VydFN0YXRlbWVudC5qYXZhDAAPABAMAA0ADgEAGGphdmEvbGFuZy9Bc3NlcnRpb25FcnJvcgEAA2FiYwwADwAsDAAPABcBAB9qYXZhL3V0aWwvY29uY3VycmVudC9EZWxheVF1ZXVlAQAPQXNzZXJ0U3RhdGVtZW50BwAtDAAuAC8BABBqYXZhL2xhbmcvT2JqZWN0AQAVKExqYXZhL2xhbmcvT2JqZWN0OylWAQAPamF2YS9sYW5nL0NsYXNzAQAWZGVzaXJlZEFzc2VydGlvblN0YXR1cwEAAygpWgAgAAoADAAAAAEQGAANAA4AAAAGAAAADwAQAAEAEQAAAC8AAQABAAAABSq3AAGxAAAAAgASAAAABgABAAAAAQATAAAADAABAAAABQAUABUAAAAAABYAFwABABEAAABWAAIAAgAAABWyAAKaABEbEAqjAAu7AANZtwAEv7EAAAADABIAAAAKAAIAAAAEABQABQATAAAAFgACAAAAFQAUABUAAAAAABUAGAAZAAEAGgAAAAMAARQAAAAbABcAAQARAAAAWAADAAIAAAAXsgACmgATGxAUowANuwADWRIFtwAGv7EAAAADABIAAAAKAAIAAAAIABYACQATAAAAFgACAAAAFwAUABUAAAAAABcAGAAZAAEAGgAAAAMAARYAAAAcABcAAQARAAAAWAADAAIAAAAXsgACmgATGxAeowANuwADWRB7twAHv7EAAAADABIAAAAKAAIAAAAMABYADQATAAAAFgACAAAAFwAUABUAAAAAABcAGAAZAAEAGgAAAAMAARYAAAAdABcAAQARAAAAXQAEAAIAAAAcsgACmgAYGxAoowASuwADWbsACFm3AAm3AAa/sQAAAAMAEgAAAAoAAgAAABAAGwARABMAAAAWAAIAAAAcABQAFQAAAAAAHAAYABkAAQAaAAAAAwABGwAIAB4AEAABABEAAAA0AAEAAAAAABESCrYAC5oABwSnAAQDswACsQAAAAIAEgAAAAYAAQAAAAEAGgAAAAUAAgxAAQABAB8AAAACACA=", true);
 </script>
-<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/>Java compiler version: <b>1.8.0_231</b><br/>
 <br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>
 </body></html>

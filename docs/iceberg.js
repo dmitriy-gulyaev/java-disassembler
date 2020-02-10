@@ -1041,13 +1041,25 @@ function main(dataView, isEmbedded, container) {
                             attributeValue = "<table style='text-align:center;width:" + TABLE_WIDTH + "' border='1'><tr><th width='50px'>start_pc</th><th width='50px'>end_pc</th><th width='100px'>handler_pc</th><th>catch_type</th</tr>";
                             for (var ln = 0; ln < codeAttributeRecord.exception_table_length; ln++) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
-                                var classOfException = lvtt.catch_type == 0 ? "For all exceptions" : getClassName(lvtt.catch_type, false, true, false);
+                                var classOfException = lvtt.catch_type == 0 ? "any" : getClassName(lvtt.catch_type, false, true, false);
                                 attributeValue += "<tr>" +
                                 "<td>" + lvtt.start_pc + "</td>" +
                                 "<td>" + lvtt.end_pc + "</td>" +
                                 "<td>" + lvtt.handler_pc + "</td>" +
                                 "<td style='text-align:left'>" + classOfException + "</td>" +
                                 "</tr>";
+                                for (var pc = lvtt.start_pc; pc <= lvtt.end_pc; pc++) {
+                                  var trye = documentGetElementById("m-" + methodNumber + "-" + pc);
+                                  if (trye) {
+                                      trye.classList.add("extry");
+                                  }
+                                }
+                                var exhandlerid = "m-" + methodNumber + "-" + lvtt.handler_pc;
+                                var exhandler = documentGetElementById(exhandlerid);
+                                if (exhandler) {
+                                    exhandler.classList.add("exhandler");
+                                }
+
                             }
                             attributeValue += "</table>";
 
@@ -1415,9 +1427,11 @@ function main(dataView, isEmbedded, container) {
 
                 //if ((accessFlags & array[m][1]) != 0) {}
                 if (isMaskSet(accessFlags, ACC_PUBLIC)) {
-                    td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="6" stroke="green" stroke-width="1" fill="red" /></svg>';
+                    td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="green" stroke-width="1" fill="#006400"><title>public</title></circle></svg>';
                 } else if (isMaskSet(accessFlags, ACC_PRIVATE)) {
-                    td0.innerHTML = '<svg width="16" height="16"><rect x="2" y="2" width="12" height="12" style="fill:red;stroke-width:1;stroke:green" /></svg>';
+                    td0.innerHTML = '<svg width="16" height="16"><rect x="2" y="2" width="10" height="10" style="fill:#8b0000;stroke-width:1;stroke:#ff0000"><title>private</title></rect></svg>';
+                } else if (isMaskSet(accessFlags, ACC_PROTECTED)){
+                    td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="#dddddd" stroke-width="1" fill="#ffff00"><title>protected</title></circle></svg>';
                 } else {
                     td0.innerHTML = '<svg width="16" height="16"><polygon points="2,14 8,3 14,14" fill="rgb(34,104,165)" stroke="purple" stroke-width="1" /></svg>';
                 }

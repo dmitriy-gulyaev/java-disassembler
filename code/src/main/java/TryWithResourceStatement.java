@@ -4,10 +4,27 @@ import java.io.Reader;
 
 class TryWithResourceStatement {
 
-  void m(Reader reader) throws IOException {
-    try (BufferedReader br = new BufferedReader(reader)) {
-      br.toString();
+  void m1() throws E {
+    try (A a = new A()) {
+      a.hashCode();
     }
+  }
+
+  void m2() throws E {
+    try (A a = new A()) {
+      a.hashCode();
+    } catch (Exception e) {
+        throw e;
+    }
+  }
+
+  class A implements AutoCloseable {
+    public void close() throws E{
+      throw new E();
+    }
+  }
+
+  class E extends Exception {
   }
 
 }

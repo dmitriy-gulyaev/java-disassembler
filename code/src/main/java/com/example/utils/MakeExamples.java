@@ -61,6 +61,7 @@ public class MakeExamples {
       ow("<h4>" + file.getName() + "</h4><hr/>");
 
       File srcFile = new File(srcDir, file.getName().replace(".class", ".java"));
+      StringBuilder comment = new StringBuilder();
 
       if (srcFile.exists()) {
         ow("<h3>Source code</h3>");
@@ -71,6 +72,8 @@ public class MakeExamples {
           while ((line = br.readLine()) != null) {
             lineCounter++;
             if (line.startsWith("//")) {
+              comment.append(line.substring(2));
+              comment.append(' ');
               continue;
             }
 
@@ -91,15 +94,20 @@ public class MakeExamples {
       ow("<script src=\"../iceberg-min.js\"></script>");
       ow("<script>");
 
-      FileInputStream fis = new FileInputStream(file);
-      byte[] b = new byte[(int) file.length()];
-      fis.read(b);
-      fis.close();
+      try (FileInputStream fis = new FileInputStream(file)) {
+        byte[] b = new byte[(int) file.length()];
+        fis.read(b);
+        String code = Base64.getEncoder().encodeToString(b);
+        ow("main(\"" + code + "\", true);");
+      }
 
-      String code = Base64.getEncoder().encodeToString(b);
-
-      ow("main(\"" + code + "\", true);");
       ow("</script>");
+
+      if (comment.length() > 0) {
+        ow("<h3>Comment</h3>");
+        ow(comment.toString());
+        ow("<br/>");
+      }
 
       ow("<br/>Java compiler version: <b>" + version + "</b><br/>");
 

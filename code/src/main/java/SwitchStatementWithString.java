@@ -17,4 +17,3 @@ class SwitchStatementWithString {
   }
 
 }
-// title = Switch statement with strings

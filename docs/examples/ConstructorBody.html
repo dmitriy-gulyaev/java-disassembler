@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>ConstructorBody.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>
+<body>
+<h4>ConstructorBody.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> ConstructorBody <b class="keyword">extends</b> AssertionError {</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">  ConstructorBody(<b class="keyword">int</b> param) {</td></tr>
+<tr><td class="ln">4</td><td class="cl">  }</td></tr>
+<tr><td class="ln">5</td><td class="cl"></td></tr>
+<tr><td class="ln">6</td><td class="cl">  ConstructorBody(<b class="keyword">char</b> param) {</td></tr>
+<tr><td class="ln">7</td><td class="cl">    super(param);</td></tr>
+<tr><td class="ln">8</td><td class="cl">  }</td></tr>
+<tr><td class="ln">9</td><td class="cl"></td></tr>
+<tr><td class="ln">10</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="list" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vgAAADQAFwoABAASCgAEABMHABQHABUBAAY8aW5pdD4BAAQoSSlWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABFMQ29uc3RydWN0b3JCb2R5OwEABXBhcmFtAQABSQEABChDKVYBAAFDAQAKU291cmNlRmlsZQEAFENvbnN0cnVjdG9yQm9keS5qYXZhDAAFABYMAAUADgEAD0NvbnN0cnVjdG9yQm9keQEAGGphdmEvbGFuZy9Bc3NlcnRpb25FcnJvcgEAAygpVgAgAAMABAAAAAAAAgAAAAUABgABAAcAAAA9AAEAAgAAAAUqtwABsQAAAAIACAAAAAoAAgAAAAMABAAEAAkAAAAWAAIAAAAFAAoACwAAAAAABQAMAA0AAQAAAAUADgABAAcAAAA+AAIAAgAAAAYqG7cAArEAAAACAAgAAAAKAAIAAAAHAAUACAAJAAAAFgACAAAABgAKAAsAAAAAAAYADAAPAAEAAQAQAAAAAgAR", true);
+</script>
+<h3>Comment</h3>
+ If a constructor body does not begin with an explicit constructor invocation, then the constructor body implicitly begins with a superclass constructor invocation "super();", even if superclass has constructor with the same signature. 
+<br/>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

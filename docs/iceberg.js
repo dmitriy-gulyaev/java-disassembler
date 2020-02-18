@@ -1058,6 +1058,7 @@ function main(dataView, isEmbedded, container) {
                                 var exhandler = documentGetElementById(exhandlerid);
                                 if (exhandler) {
                                     exhandler.classList.add("exhandler");
+                                    exhandler.title = "Exception handler (" + lvtt.start_pc + "-" + lvtt.end_pc + ")";
                                 }
 
                             }

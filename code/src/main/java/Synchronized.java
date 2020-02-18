@@ -1,5 +1,4 @@
-
-public class Synchronized {
+class Synchronized {
 
   synchronized void m1() {
     this.hashCode();

@@ -27,7 +27,7 @@ public class CyclicBarrierVisualization extends Thread {
 	private static Map<Integer, Integer>[] ma = new Map[5];
 
 	public CyclicBarrierVisualization(long sleepTime) {
-		this.sleepTime = new Random().nextInt(70);
+		this.sleepTime = new Random().nextInt(90);
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -72,7 +72,8 @@ public class CyclicBarrierVisualization extends Thread {
 			Map<Integer, Integer> map = ma[j];
 			String name = a[j].getName();
 
-			out.println("#div" + name + " {width: 80px; height: 80px; top:" + (TOP + j * 90)
+			out.println("#div" + name + " {border-radius: 7px; left: 0px; width: 80px; height: 80px; top:"
+					+ (TOP + j * 90)
 					+ "px; background: #aaaaaa; animation-timing-function: linear; position: absolute ; animation: "
 					+ name + " " + duration + "ms;}");
 
@@ -93,12 +94,14 @@ public class CyclicBarrierVisualization extends Thread {
 		out.println("<body>");
 
 		out.println(
-				"<div id='barrier' style='border:1px solid; background: #000000; position: absolute; width:3px; height:450px; left:580px; top: "
-						+ TOP + "px'></div>");
+				"<div id='barrier' style='border:1px solid; background: #000000; position: absolute; width:3px; height:460px; left:580px; top: "
+						+ (TOP - 10) + "px'></div>");
 
-		for (CyclicBarrierVisualization cyclicBarrierEx : a) {
-			out.println("<div style='text-align: center' id='div" + cyclicBarrierEx.getName() + "'>"
-					+ cyclicBarrierEx.getName() + "</div>");
+		for (int j = 0; j < a.length; j++) {
+			out.println("<div style='text-align: center' id='div" + a[j].getName() + "'>" + a[j].getName() + "</div>");
+
+			out.println("<div style='border:1px dotted; position: absolute; width:1000px; height:0px; left:0px; top:"
+					+ (TOP + 40 + j * 90) + "px'></div>");
 		}
 
 		out.println("</body>");

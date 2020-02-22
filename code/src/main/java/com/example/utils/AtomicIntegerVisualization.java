@@ -51,7 +51,7 @@ public class AtomicIntegerVisualization extends Thread {
 
     
     out.print("<span>Array of Integer</span>");
-    out.print("<table cellspacing=1 border=0>");
+    out.print("<table width=100% cellspacing=1 border=0>");
     for (int row = 0; row < 99; row++) {
       out.print("<tr>");
       for (int col = 0; col < 99; col++) {
@@ -62,7 +62,7 @@ public class AtomicIntegerVisualization extends Thread {
     out.print("</table>");
 
     out.print("<span>Array of AtomicInteger</span>");
-    out.print("<table cellspacing=1 border=0>");
+    out.print("<table width=100% cellspacing=1 border=0>");
     for (int row = 0; row < 99; row++) {
       out.print("<tr>");
       for (int col = 0; col < 99; col++) {

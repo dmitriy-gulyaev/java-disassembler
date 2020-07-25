@@ -256,35 +256,175 @@ function main(dataView, isEmbedded, container) {
             return classFile.constant_pool[index];
         }
 
+        function read_ATTRIBUTES_CODE(attribute_info) {
+            attribute_info.max_stack = r2();
+            attribute_info.max_locals = r2();
+            attribute_info.code_length = r4();
+            attribute_info.code = new Array(attribute_info.code_length);
+            for (var c = 0; c < attribute_info.code_length; c++) {
+                attribute_info.code[c] = r();
+            }
+            attribute_info.exception_table_length = r2();
+            attribute_info.exception_table = new Array(attribute_info.exception_table_length);
+            for (var e = 0; e < attribute_info.exception_table_length; e++) {
+                var exception_table_entry = new Object();
+                exception_table_entry.start_pc = r2();
+                exception_table_entry.end_pc = r2();
+                exception_table_entry.handler_pc = r2();
+                exception_table_entry.catch_type = r2();
+                attribute_info.exception_table[e] = exception_table_entry;
+            }
+            attribute_info.attributes_count = r2();
+            attribute_info.attributes = new Array(attribute_info.attributes_count);
+            for (var a = 0; a < attribute_info.attributes_count; a++) {
+                attribute_info.attributes[a] = read_attribute();
+            }
+        }
+
+        function read_ATTRIBUTES_INNR(attribute_info) {
+            //attribute_info.signature_index = r2();
+            attribute_info.number_of_classes = r2();
+            attribute_info.classes = new Array(attribute_info.number_of_classes);
+            for (var innr = 0; innr < attribute_info.number_of_classes; innr++) {
+                var iClass = {};
+                iClass.inner_class_info_index = r2();
+                iClass.outer_class_info_index = r2();
+                iClass.inner_name_index = r2();
+                iClass.inner_class_access_flags = r2();
+                attribute_info.classes[innr] = iClass;
+            }
+        }
+
+        function read_ATTRIBUTES_LINE(attribute_info) {
+            attribute_info.line_number_table_length = r2();
+            attribute_info.line_number_table = new Array(attribute_info.line_number_table_length);
+            for (var aln = 0; aln < attribute_info.line_number_table_length; aln++) {
+                var line_number_tableEntry = new Object();
+                line_number_tableEntry.start_pc = r2();
+                line_number_tableEntry.line_number = r2();
+                attribute_info.line_number_table[aln] = line_number_tableEntry;
+            }
+        }
+
+        function read_ATTRIBUTES_EXCP(attribute_info) {
+            attribute_info.number_of_exceptions = r2();
+            attribute_info.exception_index_table = new Array(attribute_info.number_of_exceptions);
+            for (var aln = 0; aln < attribute_info.number_of_exceptions; aln++) {
+                attribute_info.exception_index_table[aln] = r2();
+            }
+        }
+        function read_ATTRIBUTES_LCVT_LCTT(attribute_info) {
+            attribute_info.local_variable_table_length = r2();
+            attribute_info.local_variable_table = new Array(attribute_info.local_variable_table_length);
+            for (var aln = 0; aln < attribute_info.local_variable_table_length; aln++) {
+                var local_variable_tableEntry = new Object();
+                local_variable_tableEntry.start_pc = r2();
+                local_variable_tableEntry.length = r2();
+                local_variable_tableEntry.name_index = r2();
+                local_variable_tableEntry.descriptor_OR_signature_index = r2();
+                local_variable_tableEntry.index = r2();
+                attribute_info.local_variable_table[aln] = local_variable_tableEntry;
+            }
+        }
+
+        function read_ATTRIBUTES_BOOT(attribute_info) {
+            attribute_info.num_bootstrap_methods = r2();
+            attribute_info.bootstrap_methods = new Array(attribute_info.num_bootstrap_methods);
+            for (var a = 0; a < attribute_info.num_bootstrap_methods; a++) {
+                var bootstrap_method = new Object();
+                bootstrap_method.bootstrap_method_ref = r2();
+                bootstrap_method.num_bootstrap_arguments = r2();
+                bootstrap_method.bootstrap_arguments = new Array(bootstrap_method.num_bootstrap_arguments);
+                for (var args = 0; args < bootstrap_method.num_bootstrap_arguments; args++) {
+                    bootstrap_method.bootstrap_arguments[args] = r2();
+                }
+                attribute_info.bootstrap_methods[a] = bootstrap_method;
+            }
+        }
+
+        function read_ATTRIBUTES_MODL(attribute_info) {
+            attribute_info.module_name_index = r2();
+            attribute_info.module_flags = r2();
+            attribute_info.module_version_index = r2();
+
+            attribute_info.requires_count = r2();
+            attribute_info.requires = new Array(attribute_info.requires_count);
+            for (var amr = 0; amr < attribute_info.requires_count; amr++) {
+                var require = new Object();
+                require.requires_index = r2();
+                require.requires_flags = r2();
+                require.requires_version_index = r2();
+                attribute_info.requires[amr] = require;
+            }
+
+            attribute_info.exports_count = r2();
+            attribute_info.exports = new Array(attribute_info.exports_count);
+            for (var amr = 0; amr < attribute_info.exports_count; amr++) {
+                var exprt = new Object();
+                exprt.exports_index = r2();
+                exprt.exports_flags = r2();
+                exprt.exports_to_count = r2();
+                exprt.exports_to_index = readIndexArray(exprt.exports_to_count);
+                attribute_info.exports[amr] = exprt;
+            }
+
+            attribute_info.opens_count = r2();
+            attribute_info.opens = new Array(attribute_info.opens_count);
+            for (var amr = 0; amr < attribute_info.opens_count; amr++) {
+                var opn = new Object();
+                opn.opens_index = r2();
+                opn.opens_flags = r2();
+                opn.opens_to_count = r2();
+                opn.opens_to_index = readIndexArray(opn.opens_to_count);
+                attribute_info.opens[amr] = opn;
+            }
+
+            attribute_info.uses_count = r2();
+            attribute_info.uses_index = readIndexArray(attribute_info.uses_count);
+
+            attribute_info.provides_count = r2();
+            attribute_info.provides = new Array(attribute_info.provides_count);
+            for (var amr = 0; amr < attribute_info.provides_count; amr++) {
+                var provide = new Object();
+                provide.provides_index = r2();
+                provide.provides_with_count = r2();
+                provide.provides_with_index = readIndexArray(provide.provides_with_count);
+                attribute_info.provides[amr] = provide;
+            }
+        }
+
+        function read_ATTRIBUTES_RCRD(attribute_info) {
+            //https://bugs.openjdk.java.net/browse/JDK-8225058
+            attribute_info.components_count = r2();
+            attribute_info.components = new Array(attribute_info.components_count);
+            for (var aln = 0; aln < attribute_info.components_count; aln++) {
+                var component_info = new Object();
+                component_info.name_index = r2();
+                component_info.descriptor_index = r2();
+                component_info.attributes_count = r2();
+                component_info.attributes = new Array(component_info.attributes_count);
+                for (var atr = 0; atr < component_info.attributes_count; atr++) {
+                    var attribute_info2 = new Object();
+                    attribute_info2.attribute_name_index = r2();
+                    attribute_info2.attribute_length = r4();
+                    for (var a = 0; a < attribute_info2.attribute_length; a++) {
+                        r();
+                    }
+                    component_info.attributes[atr] = attribute_info2;
+                }
+                attribute_info.components[aln] = component_info;
+            }
+        }
+
         function read_attribute() {
             var attribute_info = new Object();
             attribute_info.attribute_name_index = r2();
             attribute_info.attribute_length = r4();
 
             var attributeName = getConstantPoolItem(attribute_info.attribute_name_index).bytes;
+
             if (ATTRIBUTES_CODE == attributeName) {
-                attribute_info.max_stack = r2();
-                attribute_info.max_locals = r2();
-                attribute_info.code_length = r4();
-                attribute_info.code = new Array(attribute_info.code_length);
-                for (var c = 0; c < attribute_info.code_length; c++) {
-                    attribute_info.code[c] = r();
-                }
-                attribute_info.exception_table_length = r2();
-                attribute_info.exception_table = new Array(attribute_info.exception_table_length);
-                for (var e = 0; e < attribute_info.exception_table_length; e++) {
-                    var exception_table_entry = new Object();
-                    exception_table_entry.start_pc = r2();
-                    exception_table_entry.end_pc = r2();
-                    exception_table_entry.handler_pc = r2();
-                    exception_table_entry.catch_type = r2();
-                    attribute_info.exception_table[e] = exception_table_entry;
-                }
-                attribute_info.attributes_count = r2();
-                attribute_info.attributes = new Array(attribute_info.attributes_count);
-                for (var a = 0; a < attribute_info.attributes_count; a++) {
-                    attribute_info.attributes[a] = read_attribute();
-                }
+                read_ATTRIBUTES_CODE(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_CONS == attributeName) {
                 attribute_info.constantvalue_index = r2();
@@ -297,155 +437,28 @@ function main(dataView, isEmbedded, container) {
                 attribute_info.method_index = r2();
                 return attribute_info;
             } else if (ATTRIBUTES_BOOT == attributeName) {
-                attribute_info.num_bootstrap_methods = r2();
-                attribute_info.bootstrap_methods = new Array(attribute_info.num_bootstrap_methods);
-                for (var a = 0; a < attribute_info.num_bootstrap_methods; a++) {
-                    var bootstrap_method = new Object();
-                    bootstrap_method.bootstrap_method_ref = r2();
-                    bootstrap_method.num_bootstrap_arguments = r2();
-                    bootstrap_method.bootstrap_arguments = new Array(bootstrap_method.num_bootstrap_arguments);
-                    for (var args = 0; args < bootstrap_method.num_bootstrap_arguments; args++) {
-                        bootstrap_method.bootstrap_arguments[args] = r2();
-                    }
-                    attribute_info.bootstrap_methods[a] = bootstrap_method;
-                }
+                read_ATTRIBUTES_BOOT(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_INNR == attributeName) {
-                //attribute_info.signature_index = r2();
-                attribute_info.number_of_classes = r2();
-                attribute_info.classes = new Array(attribute_info.number_of_classes);
-                for (var innr = 0; innr < attribute_info.number_of_classes; innr++) {
-                    var iClass = {};
-                    iClass.inner_class_info_index = r2();
-                    iClass.outer_class_info_index = r2();
-                    iClass.inner_name_index = r2();
-                    iClass.inner_class_access_flags = r2();
-                    attribute_info.classes[innr] = iClass;
-                }
+                read_ATTRIBUTES_INNR(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_EXCP == attributeName) {
-                attribute_info.number_of_exceptions = r2();
-                attribute_info.exception_index_table = new Array(attribute_info.number_of_exceptions);
-                for (var aln = 0; aln < attribute_info.number_of_exceptions; aln++) {
-                    attribute_info.exception_index_table[aln] = r2();
-                }
+                read_ATTRIBUTES_EXCP(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_LINE == attributeName) {
-                attribute_info.line_number_table_length = r2();
-                attribute_info.line_number_table = new Array(attribute_info.line_number_table_length);
-                for (var aln = 0; aln < attribute_info.line_number_table_length; aln++) {
-                    var line_number_tableEntry = new Object();
-                    line_number_tableEntry.start_pc = r2();
-                    line_number_tableEntry.line_number = r2();
-                    attribute_info.line_number_table[aln] = line_number_tableEntry;
-                }
+                read_ATTRIBUTES_LINE(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_LCVT == attributeName || ATTRIBUTES_LCTT == attributeName) {
-                var isATTRIBUTES_LCVT = ATTRIBUTES_LCVT == attributeName;
-                attribute_info.local_variable_table_length = r2();
-                attribute_info.local_variable_table = new Array(attribute_info.local_variable_table_length);
-                for (var aln = 0; aln < attribute_info.local_variable_table_length; aln++) {
-                    var local_variable_tableEntry = new Object();
-                    local_variable_tableEntry.start_pc = r2();
-                    local_variable_tableEntry.length = r2();
-                    local_variable_tableEntry.name_index = r2();
-                    local_variable_tableEntry.descriptor_OR_signature_index = r2();
-                    local_variable_tableEntry.index = r2();
-                    attribute_info.local_variable_table[aln] = local_variable_tableEntry;
-                }
+                read_ATTRIBUTES_LCVT_LCTT(attribute_info);
                 return attribute_info;
-
-            }
-            /*else if (ATTRIBUTES_LCTT == attributeName) {
-            // todo mix with ATTRIBUTES_LCVT
-            attribute_info.local_variable_type_table_length = r2();
-            attribute_info.local_variable_type_table = new Array(attribute_info.local_variable_type_table_length);
-            for (var aln = 0; aln < attribute_info.local_variable_type_table_length; aln++) {
-            var local_variable_tableEntry = new Object();
-            local_variable_tableEntry.start_pc = r2();
-            local_variable_tableEntry.length = r2();
-            local_variable_tableEntry.name_index = r2();
-            local_variable_tableEntry.signature_index = r2();
-            local_variable_tableEntry.index = r2();
-            attribute_info.local_variable_type_table[aln] = local_variable_tableEntry;
-            }
-            return attribute_info;
-
-            }*/
-            else if (ATTRIBUTES_SRCF == attributeName) {
+            } else if (ATTRIBUTES_SRCF == attributeName) {
                 attribute_info.sourcefile_index = r2();
                 return attribute_info;
             } else if (ATTRIBUTES_MODL == attributeName) {
-                attribute_info.module_name_index = r2();
-                attribute_info.module_flags = r2();
-                attribute_info.module_version_index = r2();
-
-                attribute_info.requires_count = r2();
-                attribute_info.requires = new Array(attribute_info.requires_count);
-                for (var amr = 0; amr < attribute_info.requires_count; amr++) {
-                    var require = new Object();
-                    require.requires_index = r2();
-                    require.requires_flags = r2();
-                    require.requires_version_index = r2();
-                    attribute_info.requires[amr] = require;
-                }
-
-                attribute_info.exports_count = r2();
-                attribute_info.exports = new Array(attribute_info.exports_count);
-                for (var amr = 0; amr < attribute_info.exports_count; amr++) {
-                    var exprt = new Object();
-                    exprt.exports_index = r2();
-                    exprt.exports_flags = r2();
-                    exprt.exports_to_count = r2();
-                    exprt.exports_to_index = readIndexArray(exprt.exports_to_count);
-                    attribute_info.exports[amr] = exprt;
-                }
-
-                attribute_info.opens_count = r2();
-                attribute_info.opens = new Array(attribute_info.opens_count);
-                for (var amr = 0; amr < attribute_info.opens_count; amr++) {
-                    var opn = new Object();
-                    opn.opens_index = r2();
-                    opn.opens_flags = r2();
-                    opn.opens_to_count = r2();
-                    opn.opens_to_index = readIndexArray(opn.opens_to_count);
-                    attribute_info.opens[amr] = opn;
-                }
-
-                attribute_info.uses_count = r2();
-                attribute_info.uses_index = readIndexArray(attribute_info.uses_count);
-
-                attribute_info.provides_count = r2();
-                attribute_info.provides = new Array(attribute_info.provides_count);
-                for (var amr = 0; amr < attribute_info.provides_count; amr++) {
-                    var provide = new Object();
-                    provide.provides_index = r2();
-                    provide.provides_with_count = r2();
-                    provide.provides_with_index = readIndexArray(provide.provides_with_count);
-                    attribute_info.provides[amr] = provide;
-                }
+                read_ATTRIBUTES_MODL(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_RCRD == attributeName) {
-                //https://bugs.openjdk.java.net/browse/JDK-8225058
-                attribute_info.components_count = r2();
-                attribute_info.components = new Array(attribute_info.components_count);
-                for (var aln = 0; aln < attribute_info.components_count; aln++) {
-                    var component_info = new Object();
-                    component_info.name_index = r2();
-                    component_info.descriptor_index = r2();
-                    component_info.attributes_count = r2();
-                    component_info.attributes = new Array(component_info.attributes_count);
-                    for (var atr = 0; atr < component_info.attributes_count; atr++) {
-                        var attribute_info2 = new Object();
-                        attribute_info2.attribute_name_index = r2();
-                        attribute_info2.attribute_length = r4();
-                        for (var a = 0; a < attribute_info2.attribute_length; a++) {
-                            r();
-                        }
-                        component_info.attributes[atr] = attribute_info2;
-                    }
-                    attribute_info.components[aln] = component_info;
-                }
+                read_ATTRIBUTES_RCRD(ATTRIBUTES_RCRD);
                 return attribute_info;
             }
 
@@ -455,7 +468,7 @@ function main(dataView, isEmbedded, container) {
             }
             return attribute_info;
         }
-        
+
         function readIndexArray(count) {
             var indxArray = new Array(count);
             for (var i = 0; i < count; i++) {
@@ -1049,10 +1062,10 @@ function main(dataView, isEmbedded, container) {
                                 "<td style='text-align:left'>" + classOfException + "</td>" +
                                 "</tr>";
                                 for (var pc = lvtt.start_pc; pc <= lvtt.end_pc; pc++) {
-                                  var trye = documentGetElementById("m-" + methodNumber + "-" + pc);
-                                  if (trye) {
-                                      trye.classList.add("extry");
-                                  }
+                                    var trye = documentGetElementById("m-" + methodNumber + "-" + pc);
+                                    if (trye) {
+                                        trye.classList.add("extry");
+                                    }
                                 }
                                 var exhandlerid = "m-" + methodNumber + "-" + lvtt.handler_pc;
                                 var exhandler = documentGetElementById(exhandlerid);
@@ -1431,7 +1444,7 @@ function main(dataView, isEmbedded, container) {
                     td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="green" stroke-width="1" fill="#006400"><title>public</title></circle></svg>';
                 } else if (isMaskSet(accessFlags, ACC_PRIVATE)) {
                     td0.innerHTML = '<svg width="16" height="16"><rect x="2" y="2" width="10" height="10" style="fill:#8b0000;stroke-width:1;stroke:#ff0000"><title>private</title></rect></svg>';
-                } else if (isMaskSet(accessFlags, ACC_PROTECTED)){
+                } else if (isMaskSet(accessFlags, ACC_PROTECTED)) {
                     td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="#dddddd" stroke-width="1" fill="#ffff00"><title>protected</title></circle></svg>';
                 } else {
                     td0.innerHTML = '<svg width="16" height="16"><polygon points="2,14 8,3 14,14" fill="rgb(34,104,165)" stroke="purple" stroke-width="1" /></svg>';
@@ -1571,7 +1584,7 @@ function main(dataView, isEmbedded, container) {
                         var component = classAttr.components[componentIndex];
                         var componentName = getUTF8(component.name_index);
                         var componentDesc = getUTF8(component.descriptor_index);
-                        classAttributeValue += " "+componentName+":"+componentDesc;
+                        classAttributeValue += " " + componentName + ":" + componentDesc;
                     }
                 }
                 addKeyValue(tbody, classAttributeName, classAttributeValue, attributeComment);

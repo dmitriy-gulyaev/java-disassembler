@@ -416,6 +416,63 @@ function main(dataView, isEmbedded, container) {
             }
         }
 
+        function read_ATTRIBUTES_RVAN(attribute_info) {
+            attribute_info.num_annotations = r2();
+            var annotations = new Array(attribute_info.num_annotations);
+            for (var i = 0; i < attribute_info.num_annotations; i++) {
+                var annotation = new Object();
+                annotation.type_index = r2();
+                annotation.num_element_value_pairs = r2();
+                annotation.element_value_pairs = new Array(annotation.num_element_value_pairs);
+                for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+                    var valuePair = new Object();
+                    valuePair.element_name_index = r2();
+
+                    valuePair.value = read_element_value();
+                    //v.class_info_index = r2();
+                    annotation.element_value_pairs[j] = valuePair;
+                }
+                annotations[i] = annotation;
+            }
+            attribute_info.annotations = annotations;
+        }
+
+        function read_element_value() {
+            var value = new Object();
+            value.tag = String.fromCharCode(r());
+
+            switch (value.tag) {
+            case 'e':
+                var ecv = new Object();
+                ecv.type_name_index = r2();
+                ecv.const_name_index = r2();
+                value.enum_const_value = ecv;
+                break;
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'F':
+            case 'I':
+            case 'J':
+            case 'S':
+            case 'Z':
+            case 's':
+                value.const_value_index = r2();
+                break;
+            case '[':
+                value.num_values = r2();
+                var values = new Array(value.num_values);
+                for (var j = 0; j < value.num_values; j++) {
+                    values[j] = read_element_value();
+                }
+                value.values = values;
+                break;
+            default:
+                alert(value.tag);
+            }
+            return value;
+        }
+
         function read_attribute() {
             var attribute_info = new Object();
             attribute_info.attribute_name_index = r2();
@@ -458,7 +515,10 @@ function main(dataView, isEmbedded, container) {
                 read_ATTRIBUTES_MODL(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_RCRD == attributeName) {
-                read_ATTRIBUTES_RCRD(ATTRIBUTES_RCRD);
+                read_ATTRIBUTES_RCRD(attribute_info);
+                return attribute_info;
+            } else if (ATTRIBUTES_RVAN == attributeName) {
+                read_ATTRIBUTES_RVAN(attribute_info);
                 return attribute_info;
             }
 
@@ -730,6 +790,7 @@ function main(dataView, isEmbedded, container) {
                     return "localvar #" + variableIndex;
                 }
 
+                printAttributes(method_info.attributes, method_info.attributes_count);
                 for (var methodAttributes = 0; methodAttributes < method_info.attributes_count; methodAttributes++) {
                     var attributeNameIndex = method_info.attributes[methodAttributes].attribute_name_index;
                     var attributeName = getConstantPoolItem(attributeNameIndex).bytes;
@@ -1035,19 +1096,6 @@ function main(dataView, isEmbedded, container) {
                             }
                         }
 
-                    } else if (ATTRIBUTES_EXCP == attributeName) {
-                        for (var exceptionIndex = 0; exceptionIndex < method_info.attributes[methodAttributes].number_of_exceptions; exceptionIndex++) {
-                            attributeValue = attributeValue + " " + getClassName(method_info.attributes[methodAttributes].exception_index_table[exceptionIndex], false, true, false);
-                        }
-                    } else if (ATTRIBUTES_SIGN == attributeName) {
-                        attributeValue = getUTF8AsSignature(method_info.attributes[methodAttributes].signature_index);
-                    } else {
-                        //alert(attributeName);
-                    }
-
-                    if (attributeName != ATTRIBUTES_CODE) {
-                        addKeyValue(tbody, attributeName, attributeValue, null);
-                    } else {
                         if (codeAttributeRecord.exception_table_length > 0) {
                             attributeValue = "";
 
@@ -1106,19 +1154,103 @@ function main(dataView, isEmbedded, container) {
             }
 
             function showField(field_info, tbody) {
-                for (var fa = 0; fa < field_info.attributes_count; fa++) {
-                    var fieldAttributeName = getConstantPoolItem(field_info.attributes[fa].attribute_name_index).bytes;
-                    var fieldAttributeValue = "";
+                printAttributes(field_info.attributes, field_info.attributes_count);
+            }
 
-                    if (ATTRIBUTES_CONS == fieldAttributeName) {
-                        var cvi = field_info.attributes[fa].constantvalue_index;
-                        fieldAttributeValue = getArgumentTypeAndValue(cvi);
-                    } else if (ATTRIBUTES_SIGN == fieldAttributeName) {
-                        fieldAttributeValue = getUTF8AsSignature(field_info.attributes[fa].signature_index);
-                    } else {
-                        //addRow3ToTable(tbody, "Field attribute, <b>" + fieldAttributeName + "</b>:");
+            function printAttributes(attributes, attributes_count) {
+                for (var attributeIndex = 0; attributeIndex < attributes_count; attributeIndex++) {
+                    var attribute = attributes[attributeIndex];
+
+                    var attributeName = getConstantPoolItem(attribute.attribute_name_index).bytes;
+                    var attributeValue = "";
+                    var attributeComment = null;
+
+                    switch (attributeName) {
+                    case ATTRIBUTES_CONS:
+                        var cvi = attribute.constantvalue_index;
+                        attributeValue = getArgumentTypeAndValue(cvi);
+                        break
+                    case ATTRIBUTES_SIGN:
+                        attributeValue = getUTF8AsSignature(attribute.signature_index);
+                        attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
+                        break;
+                    case ATTRIBUTES_RVAN:
+                        for (var i = 0; i < attribute.num_annotations; i++) {
+                            var annotation = attribute.annotations[i];
+                            var annName = getUTF8(annotation.type_index);
+                            var v = "";
+                            for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+                                var pair = annotation.element_value_pairs[j];
+                                var elementName = getUTF8(pair.element_name_index);
+                                v += elementName + "=";
+                                if (pair.value.tag == 's') {
+                                    var constValue = getUTF8(pair.value.const_value_index);
+                                    v += constValue;
+                                }
+                            }
+                            attributeValue += " " + annName + " " + v + "<br/>";
+                        }
+                        break;
+                    case ATTRIBUTES_SRCF:
+                        attributeValue = getUTF8(attribute.sourcefile_index);
+                        break;
+                    case ATTRIBUTES_INNR:
+                        for (var i = 0; i < attribute.number_of_classes; i++) {
+                            attributeValue += getClassName(attribute.classes[i].inner_class_info_index, false, true, false) + "<br/>";
+                        }
+                        attributeComment = "JVMS: If the constant pool of a class or interface C contains at least one CONSTANT_Class_info entry (§4.4.1) which represents a class or interface that is not a member of a package, then there must be exactly one InnerClasses attribute in the attributes table of the ClassFile structure for C.";
+                        break;
+                    case ATTRIBUTES_ENCL:
+                        attributeValue = getClassName(attribute.class_index, false, true, false);
+                        var mi = attribute.method_index;
+                        if (mi > 0) {
+                            attributeValue += "." + getFieldOrMethodName(getConstantPoolItem(mi), true);
+                        }
+                        attributeComment = "JVMS: A class must have an EnclosingMethod attribute if and only if it represents a local class or an anonymous class";
+                        break;
+                    case ATTRIBUTES_BOOT:
+                        attributeValue = "<ol start='0'>";
+                        for (var methodIndex = 0; methodIndex < attribute.num_bootstrap_methods; methodIndex++) {
+                            var bootstrapMethod = attribute.bootstrap_methods[methodIndex];
+                            var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
+
+                            var methodArguments = "<ol>";
+                            for (var methodArgumentIndex = 0; methodArgumentIndex < bootstrapMethod.num_bootstrap_arguments; methodArgumentIndex++) {
+                                methodArguments += "<li>" + getArgumentTypeAndValue(bootstrapMethod.bootstrap_arguments[methodArgumentIndex]) + "</li>";
+                            }
+                            methodArguments += "</ol>";
+
+                            attributeValue += "<li>" +
+                            method +
+                            ",<br/><b>Method arguments:</b> " +
+                            methodArguments +
+                            "</li>";
+                        }
+                        attributeValue += "</ol>";
+                        attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
+                        break;
+                    case ATTRIBUTES_MODL:
+                        var e = getConstantPoolItem(attribute.module_name_index);
+                        attributeValue = getUTF8(e.name_index);
+                        break;
+                    case ATTRIBUTES_RCRD:
+                        for (var componentIndex = 0; componentIndex < attribute.components_count; componentIndex++) {
+                            var component = attribute.components[componentIndex];
+                            var componentName = getUTF8(component.name_index);
+                            var componentDesc = getUTF8(component.descriptor_index);
+                            attributeValue += " " + componentName + ":" + componentDesc + "<br/>";
+                        }
+                        break;
+                    case ATTRIBUTES_CODE:
+                        continue;
+                    case ATTRIBUTES_EXCP:
+                        for (var exceptionIndex = 0; exceptionIndex < attribute.number_of_exceptions; exceptionIndex++) {
+                            attributeValue = attributeValue + " " + getClassName(attribute.exception_index_table[exceptionIndex], false, true, false);
+                        }
+                        break;
                     }
-                    addKeyValue(tbody, fieldAttributeName, fieldAttributeValue, null);
+
+                    addKeyValue(tbody, attributeName, attributeValue, attributeComment);
                 }
             }
 
@@ -1533,62 +1665,7 @@ function main(dataView, isEmbedded, container) {
                 addKeyValue(tbody, "Interfaces", intf, null);
             }
 
-            for (var cai = 0; cai < classFile.attributes_count; cai++) {
-                var classAttr = classFile.attributes[cai];
-                var classAttributeName = getConstantPoolItem(classAttr.attribute_name_index).bytes;
-                var classAttributeValue = "";
-                var attributeComment = null;
-
-                if (ATTRIBUTES_SRCF == classAttributeName) {
-                    classAttributeValue = getUTF8(classAttr.sourcefile_index);
-                } else if (ATTRIBUTES_SIGN == classAttributeName) {
-                    classAttributeValue = getUTF8AsSignature(classAttr.signature_index);
-                    attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
-                } else if (ATTRIBUTES_ENCL == classAttributeName) {
-                    classAttributeValue = getClassName(classAttr.class_index, false, true, false);
-                    var mi = classAttr.method_index;
-                    if (mi > 0) {
-                        classAttributeValue += "." + getFieldOrMethodName(getConstantPoolItem(mi), true);
-                    }
-                    attributeComment = "JVMS: A class must have an EnclosingMethod attribute if and only if it represents a local class or an anonymous class";
-                } else if (ATTRIBUTES_INNR == classAttributeName) {
-                    for (var i = 0; i < classAttr.number_of_classes; i++) {
-                        classAttributeValue += getClassName(classAttr.classes[i].inner_class_info_index, false, true, false) + "<br/>";
-                    }
-                    attributeComment = "JVMS: If the constant pool of a class or interface C contains at least one CONSTANT_Class_info entry (§4.4.1) which represents a class or interface that is not a member of a package, then there must be exactly one InnerClasses attribute in the attributes table of the ClassFile structure for C.";
-                } else if (ATTRIBUTES_BOOT == classAttributeName) {
-                    classAttributeValue = "<ol start='0'>";
-                    for (var methodIndex = 0; methodIndex < classAttr.num_bootstrap_methods; methodIndex++) {
-                        var bootstrapMethod = classAttr.bootstrap_methods[methodIndex];
-                        var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
-
-                        var methodArguments = "<ol>";
-                        for (var methodArgumentIndex = 0; methodArgumentIndex < bootstrapMethod.num_bootstrap_arguments; methodArgumentIndex++) {
-                            methodArguments += "<li>" + getArgumentTypeAndValue(bootstrapMethod.bootstrap_arguments[methodArgumentIndex]) + "</li>";
-                        }
-                        methodArguments += "</ol>";
-
-                        classAttributeValue += "<li>" +
-                        method +
-                        ",<br/><b>Method arguments:</b> " +
-                        methodArguments +
-                        "</li>";
-                    }
-                    classAttributeValue += "</ol>";
-                    attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
-                } else if (ATTRIBUTES_MODL == classAttributeName) {
-                    var e = getConstantPoolItem(classAttr.module_name_index);
-                    classAttributeValue = getUTF8(e.name_index);
-                } else if (ATTRIBUTES_RCRD == classAttributeName) {
-                    for (var componentIndex = 0; componentIndex < classAttr.components_count; componentIndex++) {
-                        var component = classAttr.components[componentIndex];
-                        var componentName = getUTF8(component.name_index);
-                        var componentDesc = getUTF8(component.descriptor_index);
-                        classAttributeValue += " " + componentName + ":" + componentDesc;
-                    }
-                }
-                addKeyValue(tbody, classAttributeName, classAttributeValue, attributeComment);
-            }
+            printAttributes(classFile.attributes, classFile.attributes_count);
 
             for (var f = 0; f < classFile.fields_count; f++) {
                 var fol;

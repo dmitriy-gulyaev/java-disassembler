@@ -171,6 +171,9 @@ function main(dataView, isEmbedded, container) {
     var ATTRIBUTES_MODL = "Module";
     /** @const */
     var ATTRIBUTES_RCRD = "Record";
+    /** @const */
+    var ATTRIBUTES_NSTH = "NestHost";
+    
 
     //https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html
 
@@ -519,6 +522,9 @@ function main(dataView, isEmbedded, container) {
                 return attribute_info;
             } else if (ATTRIBUTES_RVAN == attributeName) {
                 read_ATTRIBUTES_RVAN(attribute_info);
+                return attribute_info;
+            } else if (ATTRIBUTES_NSTH == attributeName) {
+                attribute_info.host_class_index = r2();
                 return attribute_info;
             }
 
@@ -1198,7 +1204,7 @@ function main(dataView, isEmbedded, container) {
                         for (var i = 0; i < attribute.number_of_classes; i++) {
                             attributeValue += getClassName(attribute.classes[i].inner_class_info_index, false, true, false) + "<br/>";
                         }
-                        attributeComment = "JVMS: If the constant pool of a class or interface C contains at least one CONSTANT_Class_info entry (§4.4.1) which represents a class or interface that is not a member of a package, then there must be exactly one InnerClasses attribute in the attributes table of the ClassFile structure for C.";
+                        attributeComment = "JVMS: If the constant pool of a class or interface C contains at least one CONSTANT_Class_info entry which represents a class or interface that is not a member of a package, then there must be exactly one InnerClasses attribute in the attributes table of the ClassFile structure for C.";
                         break;
                     case ATTRIBUTES_ENCL:
                         attributeValue = getClassName(attribute.class_index, false, true, false);
@@ -1247,6 +1253,10 @@ function main(dataView, isEmbedded, container) {
                         for (var exceptionIndex = 0; exceptionIndex < attribute.number_of_exceptions; exceptionIndex++) {
                             attributeValue = attributeValue + " " + getClassName(attribute.exception_index_table[exceptionIndex], false, true, false);
                         }
+                        break;
+                    case ATTRIBUTES_NSTH:
+                        attributeValue = getClassName(attribute.host_class_index, false, true, false);
+                        attributeComment = "JVMS: The NestHost attribute records the nest host of the nest to which the current class or interface claims to belong";
                         break;
                     }
 

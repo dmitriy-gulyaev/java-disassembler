@@ -93,6 +93,12 @@ function main(dataView, isEmbedded, container) {
         ACC_SYNTHETIC,
         ACC_ENUM
     ];
+    /** @const */
+    var ACCESS_PARAMETER = [
+        ACC_FINAL,
+        ACC_SYNTHETIC,
+        ["MANDATED", 0x8000]
+    ];
 
     /** @const */
     var CONSTANT_Class = 7;
@@ -172,8 +178,9 @@ function main(dataView, isEmbedded, container) {
     /** @const */
     var ATTRIBUTES_RCRD = "Record";
     /** @const */
+    var ATTRIBUTES_MPRS = "MethodParameters";
+    /** @const */
     var ATTRIBUTES_NSTH = "NestHost";
-    
 
     //https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html
 
@@ -277,11 +284,7 @@ function main(dataView, isEmbedded, container) {
                 exception_table_entry.catch_type = r2();
                 attribute_info.exception_table[e] = exception_table_entry;
             }
-            attribute_info.attributes_count = r2();
-            attribute_info.attributes = new Array(attribute_info.attributes_count);
-            for (var a = 0; a < attribute_info.attributes_count; a++) {
-                attribute_info.attributes[a] = read_attribute();
-            }
+            readAttributes(attribute_info);
         }
 
         function read_ATTRIBUTES_INNR(attribute_info) {
@@ -419,6 +422,17 @@ function main(dataView, isEmbedded, container) {
             }
         }
 
+        function read_ATTRIBUTES_MPRS(attribute_info) {
+            attribute_info.parameters_count = r();
+            attribute_info.parameters = new Array(attribute_info.parameters_count);
+            for (var i = 0; i < attribute_info.parameters_count; i++) {
+                var parameter = new Object();
+                parameter.name_index = r2();
+                parameter.access_flags = r2();
+                attribute_info.parameters[i] = parameter;
+            }
+        }
+
         function read_ATTRIBUTES_RVAN(attribute_info) {
             attribute_info.num_annotations = r2();
             var annotations = new Array(attribute_info.num_annotations);
@@ -476,7 +490,7 @@ function main(dataView, isEmbedded, container) {
             return value;
         }
 
-        function read_attribute() {
+        function readAttribute() {
             var attribute_info = new Object();
             attribute_info.attribute_name_index = r2();
             attribute_info.attribute_length = r4();
@@ -526,6 +540,9 @@ function main(dataView, isEmbedded, container) {
             } else if (ATTRIBUTES_NSTH == attributeName) {
                 attribute_info.host_class_index = r2();
                 return attribute_info;
+            } else if (ATTRIBUTES_MPRS == attributeName) {
+                read_ATTRIBUTES_MPRS(attribute_info);
+                return attribute_info;
             }
 
             //alert(attribute_info.attribute_length);
@@ -549,12 +566,7 @@ function main(dataView, isEmbedded, container) {
                 field_info.access_flags = r2();
                 field_info.name_index = r2();
                 field_info.descriptor_index = r2();
-                field_info.attributes_count = r2();
-                field_info.attributes = new Array(field_info.attributes_count);
-
-                for (var a = 0; a < field_info.attributes_count; a++) {
-                    field_info.attributes[a] = read_attribute();
-                }
+                readAttributes(field_info);
                 classFile.fields[f] = field_info;
             }
         }
@@ -565,13 +577,16 @@ function main(dataView, isEmbedded, container) {
                 method_info.access_flags = r2();
                 method_info.name_index = r2();
                 method_info.descriptor_index = r2();
-                method_info.attributes_count = r2();
-                method_info.attributes = new Array(method_info.attributes_count);
-
-                for (var a = 0; a < method_info.attributes_count; a++) {
-                    method_info.attributes[a] = read_attribute();
-                }
+                readAttributes(method_info);
                 classFile.methods[m] = method_info;
+            }
+        }
+
+        function readAttributes(info) {
+            info.attributes_count = r2();
+            info.attributes = new Array(info.attributes_count);
+            for (var a = 0; a < info.attributes_count; a++) {
+                info.attributes[a] = readAttribute();
             }
         }
 
@@ -796,7 +811,7 @@ function main(dataView, isEmbedded, container) {
                     return "localvar #" + variableIndex;
                 }
 
-                printAttributes(method_info.attributes, method_info.attributes_count);
+                printAttributes(method_info);
                 for (var methodAttributes = 0; methodAttributes < method_info.attributes_count; methodAttributes++) {
                     var attributeNameIndex = method_info.attributes[methodAttributes].attribute_name_index;
                     var attributeName = getConstantPoolItem(attributeNameIndex).bytes;
@@ -1160,10 +1175,12 @@ function main(dataView, isEmbedded, container) {
             }
 
             function showField(field_info, tbody) {
-                printAttributes(field_info.attributes, field_info.attributes_count);
+                printAttributes(field_info);
             }
 
-            function printAttributes(attributes, attributes_count) {
+            function printAttributes(info) {
+                var attributes = info.attributes;
+                var attributes_count = info.attributes_count;
                 for (var attributeIndex = 0; attributeIndex < attributes_count; attributeIndex++) {
                     var attribute = attributes[attributeIndex];
 
@@ -1245,6 +1262,14 @@ function main(dataView, isEmbedded, container) {
                             var componentName = getUTF8(component.name_index);
                             var componentDesc = getUTF8(component.descriptor_index);
                             attributeValue += " " + componentName + ":" + componentDesc + "<br/>";
+                        }
+                        break;
+                    case ATTRIBUTES_MPRS:
+                        for (var i = 0; i < attribute.parameters_count; i++) {
+                            var parameter = attribute.parameters[i];
+                            var name = getUTF8(parameter.name_index);
+                            var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
+                            attributeValue += name + " "+accessFlags+"<br/>";
                         }
                         break;
                     case ATTRIBUTES_CODE:
@@ -1675,7 +1700,7 @@ function main(dataView, isEmbedded, container) {
                 addKeyValue(tbody, "Interfaces", intf, null);
             }
 
-            printAttributes(classFile.attributes, classFile.attributes_count);
+            printAttributes(classFile);
 
             for (var f = 0; f < classFile.fields_count; f++) {
                 var fol;
@@ -1787,12 +1812,7 @@ function main(dataView, isEmbedded, container) {
         classFile.methods = new Array(classFile.methods_count);
         readMethods();
 
-        classFile.attributes_count = r2();
-        classFile.attributes = new Array(classFile.attributes_count);
-        for (var a = 0; a < classFile.attributes_count; a++) {
-            classFile.attributes[a] = read_attribute();
-        }
-        //return classFile;
+        readAttributes(classFile);
         showClass();
     }
     //---end  read_class

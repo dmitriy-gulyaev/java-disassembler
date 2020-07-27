@@ -477,12 +477,14 @@ function main(dataView, isEmbedded, container) {
                 value.const_value_index = r2();
                 break;
             case '[':
-                value.num_values = r2();
-                var values = new Array(value.num_values);
-                for (var j = 0; j < value.num_values; j++) {
+                var array_value = new Object();
+                array_value.num_values = r2();
+                var values = new Array(array_value.num_values);
+                for (var j = 0; j < array_value.num_values; j++) {
                     values[j] = read_element_value();
                 }
-                value.values = values;
+                array_value.values = values;
+                value.array_value = array_value;
                 break;
             default:
                 alert(value.tag);
@@ -1178,6 +1180,40 @@ function main(dataView, isEmbedded, container) {
                 printAttributes(field_info);
             }
 
+            function elementValueToString(elementValue) {
+                var v = "";
+                switch (elementValue.tag) {
+                case 'B':
+                case 'C':
+                case 'D':
+                case 'F':
+                case 'I':
+                case 'J':
+                case 'S':
+                case 'Z':
+                case 's':
+                    v += getArgumentTypeAndValue(elementValue.const_value_index);
+                    break;
+                case 'e':
+                    var typeName = getUTF8(elementValue.enum_const_value.type_name_index);
+                    var name = getUTF8(elementValue.enum_const_value.const_name_index);
+                    v += typeName + "." + name;
+                    break;
+                case '[':
+                    var arrayValue = elementValue.array_value;
+                    v += "{<br/>";
+                    for (var j = 0; j < arrayValue.num_values; j++) {
+                        if (j > 0) {
+                            v += ',<br/>';
+                        }
+                        v += elementValueToString(arrayValue.values[j]);
+                    }
+                    v += "<br/>}";
+                    break;
+                }
+                return v;
+            }
+
             function printAttributes(info) {
                 var attributes = info.attributes;
                 var attributes_count = info.attributes_count;
@@ -1206,10 +1242,7 @@ function main(dataView, isEmbedded, container) {
                                 var pair = annotation.element_value_pairs[j];
                                 var elementName = getUTF8(pair.element_name_index);
                                 v += elementName + "=";
-                                if (pair.value.tag == 's') {
-                                    var constValue = getUTF8(pair.value.const_value_index);
-                                    v += constValue;
-                                }
+                                v += elementValueToString(pair.value);
                             }
                             attributeValue += " " + annName + " " + v + "<br/>";
                         }
@@ -1269,7 +1302,7 @@ function main(dataView, isEmbedded, container) {
                             var parameter = attribute.parameters[i];
                             var name = getUTF8(parameter.name_index);
                             var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
-                            attributeValue += name + " "+accessFlags+"<br/>";
+                            attributeValue += name + " " + accessFlags + "<br/>";
                         }
                         break;
                     case ATTRIBUTES_CODE:

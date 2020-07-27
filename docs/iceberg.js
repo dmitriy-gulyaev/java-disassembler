@@ -433,23 +433,25 @@ function main(dataView, isEmbedded, container) {
             }
         }
 
+        function readAnnotation() {
+            var annotation = new Object();
+            annotation.type_index = r2();
+            annotation.num_element_value_pairs = r2();
+            annotation.element_value_pairs = new Array(annotation.num_element_value_pairs);
+            for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+                var valuePair = new Object();
+                valuePair.element_name_index = r2();
+                valuePair.value = read_element_value();
+                annotation.element_value_pairs[j] = valuePair;
+            }
+            return annotation;
+        }
+
         function read_ATTRIBUTES_RVAN(attribute_info) {
             attribute_info.num_annotations = r2();
             var annotations = new Array(attribute_info.num_annotations);
             for (var i = 0; i < attribute_info.num_annotations; i++) {
-                var annotation = new Object();
-                annotation.type_index = r2();
-                annotation.num_element_value_pairs = r2();
-                annotation.element_value_pairs = new Array(annotation.num_element_value_pairs);
-                for (var j = 0; j < annotation.num_element_value_pairs; j++) {
-                    var valuePair = new Object();
-                    valuePair.element_name_index = r2();
-
-                    valuePair.value = read_element_value();
-                    //v.class_info_index = r2();
-                    annotation.element_value_pairs[j] = valuePair;
-                }
-                annotations[i] = annotation;
+                annotations[i] = readAnnotation();
             }
             attribute_info.annotations = annotations;
         }
@@ -460,10 +462,10 @@ function main(dataView, isEmbedded, container) {
 
             switch (value.tag) {
             case 'e':
-                var ecv = new Object();
-                ecv.type_name_index = r2();
-                ecv.const_name_index = r2();
-                value.enum_const_value = ecv;
+                var enumConstValue = new Object();
+                enumConstValue.type_name_index = r2();
+                enumConstValue.const_name_index = r2();
+                value.enum_const_value = enumConstValue;
                 break;
             case 'B':
             case 'C':
@@ -475,6 +477,12 @@ function main(dataView, isEmbedded, container) {
             case 'Z':
             case 's':
                 value.const_value_index = r2();
+                break;
+            case '@':
+                value.annotation_value = readAnnotation();
+                break;
+            case 'c':
+                value.class_info_index = r2();
                 break;
             case '[':
                 var array_value = new Object();
@@ -1194,10 +1202,14 @@ function main(dataView, isEmbedded, container) {
                 case 's':
                     var tempValue = getArgumentTypeAndValue(elementValue.const_value_index);
                     if (elementValue.tag == 's') {
-                        tempValue = "\""+tempValue+"\"";
+                        tempValue = "\"" + tempValue + "\"";
                     }
                     v += tempValue;
                     break;
+                case '@':
+                    return annotationToString(elementValue.annotation_value);
+                case 'c':
+                    return getUTF8(elementValue.class_info_index);
                 case 'e':
                     var typeName = getUTF8(elementValue.enum_const_value.type_name_index);
                     var name = getUTF8(elementValue.enum_const_value.const_name_index);
@@ -1216,6 +1228,20 @@ function main(dataView, isEmbedded, container) {
                     break;
                 }
                 return v;
+            }
+            function annotationToString(annotation) {
+                var annName = getUTF8(annotation.type_index);
+                var v = "";
+                for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+                    if (j > 0) {
+                        v += ", "
+                    }
+                    var pair = annotation.element_value_pairs[j];
+                    var elementName = getUTF8(pair.element_name_index);
+                    v += elementName + "=";
+                    v += elementValueToString(pair.value);
+                }
+                return annName + " " + v;
             }
 
             function printAttributes(info) {
@@ -1240,16 +1266,7 @@ function main(dataView, isEmbedded, container) {
                     case ATTRIBUTES_RVAN:
                         for (var i = 0; i < attribute.num_annotations; i++) {
                             var annotation = attribute.annotations[i];
-                            var annName = getUTF8(annotation.type_index);
-                            var v = "";
-                            for (var j = 0; j < annotation.num_element_value_pairs; j++) {
-                                if (j > 0) {v += ", "}
-                                var pair = annotation.element_value_pairs[j];
-                                var elementName = getUTF8(pair.element_name_index);
-                                v += elementName + "=";
-                                v += elementValueToString(pair.value);
-                            }
-                            attributeValue += " " + annName + " " + v + "<br/>";
+                            attributeValue += " " + annotationToString(annotation) + "<br/>";
                         }
                         break;
                     case ATTRIBUTES_SRCF:

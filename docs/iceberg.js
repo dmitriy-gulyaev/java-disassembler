@@ -1192,7 +1192,11 @@ function main(dataView, isEmbedded, container) {
                 case 'S':
                 case 'Z':
                 case 's':
-                    v += getArgumentTypeAndValue(elementValue.const_value_index);
+                    var tempValue = getArgumentTypeAndValue(elementValue.const_value_index);
+                    if (elementValue.tag == 's') {
+                        tempValue = "\""+tempValue+"\"";
+                    }
+                    v += tempValue;
                     break;
                 case 'e':
                     var typeName = getUTF8(elementValue.enum_const_value.type_name_index);
@@ -1239,6 +1243,7 @@ function main(dataView, isEmbedded, container) {
                             var annName = getUTF8(annotation.type_index);
                             var v = "";
                             for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+                                if (j > 0) {v += ", "}
                                 var pair = annotation.element_value_pairs[j];
                                 var elementName = getUTF8(pair.element_name_index);
                                 v += elementName + "=";

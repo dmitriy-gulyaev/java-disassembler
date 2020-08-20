@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>MethodReference.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>
+<body>
+<h4>MethodReference.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">import</b> java.util.Collections;</td></tr>
+<tr><td class="ln">2</td><td class="cl"><b class="keyword">import</b> java.util.TreeSet;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> java.util.function.BiConsumer;</td></tr>
+<tr><td class="ln">4</td><td class="cl"><b class="keyword">import</b> java.util.function.Supplier;</td></tr>
+<tr><td class="ln">5</td><td class="cl"></td></tr>
+<tr><td class="ln">6</td><td class="cl"><b class="keyword">class</b> MethodReference {</td></tr>
+<tr><td class="ln">7</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">  BiConsumer&lt;TreeSet&lt;Integer>, Integer> biConsumer = TreeSet::add;</td></tr>
+<tr><td class="ln">9</td><td class="cl"></td></tr>
+<tr><td class="ln">10</td><td class="cl">  Supplier&lt;?> supplier = Collections::emptyList;</td></tr>
+<tr><td class="ln">11</td><td class="cl"></td></tr>
+<tr><td class="ln">12</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="list" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vgAAADQARgcAAgEAD01ldGhvZFJlZmVyZW5jZQcABAEAEGphdmEvbGFuZy9PYmplY3QBAApiaUNvbnN1bWVyAQAfTGphdmEvdXRpbC9mdW5jdGlvbi9CaUNvbnN1bWVyOwEACVNpZ25hdHVyZQEAXExqYXZhL3V0aWwvZnVuY3Rpb24vQmlDb25zdW1lcjxMamF2YS91dGlsL1RyZWVTZXQ8TGphdmEvbGFuZy9JbnRlZ2VyOz47TGphdmEvbGFuZy9JbnRlZ2VyOz47AQAIc3VwcGxpZXIBAB1MamF2YS91dGlsL2Z1bmN0aW9uL1N1cHBsaWVyOwEAIExqYXZhL3V0aWwvZnVuY3Rpb24vU3VwcGxpZXI8Kj47AQAGPGluaXQ+AQADKClWAQAEQ29kZQoAAwAQDAAMAA0SAAAAEgwAEwAUAQAGYWNjZXB0AQAhKClMamF2YS91dGlsL2Z1bmN0aW9uL0JpQ29uc3VtZXI7CQABABYMAAUABhIAAQAYDAAZABoBAANnZXQBAB8oKUxqYXZhL3V0aWwvZnVuY3Rpb24vU3VwcGxpZXI7CQABABwMAAkACgEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABFMTWV0aG9kUmVmZXJlbmNlOwEAClNvdXJjZUZpbGUBABRNZXRob2RSZWZlcmVuY2UuamF2YQEAEEJvb3RzdHJhcE1ldGhvZHMKACUAJwcAJgEAImphdmEvbGFuZy9pbnZva2UvTGFtYmRhTWV0YWZhY3RvcnkMACgAKQEAC21ldGFmYWN0b3J5AQDMKExqYXZhL2xhbmcvaW52b2tlL01ldGhvZEhhbmRsZXMkTG9va3VwO0xqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xhbmcvaW52b2tlL01ldGhvZFR5cGU7TGphdmEvbGFuZy9pbnZva2UvTWV0aG9kVHlwZTtMamF2YS9sYW5nL2ludm9rZS9NZXRob2RIYW5kbGU7TGphdmEvbGFuZy9pbnZva2UvTWV0aG9kVHlwZTspTGphdmEvbGFuZy9pbnZva2UvQ2FsbFNpdGU7DwYAJAEAJyhMamF2YS9sYW5nL09iamVjdDtMamF2YS9sYW5nL09iamVjdDspVhAAKwoALgAwBwAvAQARamF2YS91dGlsL1RyZWVTZXQMADEAMgEAA2FkZAEAFShMamF2YS9sYW5nL09iamVjdDspWg8FAC0BACkoTGphdmEvdXRpbC9UcmVlU2V0O0xqYXZhL2xhbmcvSW50ZWdlcjspVhAANAEAFCgpTGphdmEvbGFuZy9PYmplY3Q7EAA2CgA5ADsHADoBABVqYXZhL3V0aWwvQ29sbGVjdGlvbnMMADwAPQEACWVtcHR5TGlzdAEAEigpTGphdmEvdXRpbC9MaXN0Ow8GADgQADYBAAxJbm5lckNsYXNzZXMHAEIBACVqYXZhL2xhbmcvaW52b2tlL01ldGhvZEhhbmRsZXMkTG9va3VwBwBEAQAeamF2YS9sYW5nL2ludm9rZS9NZXRob2RIYW5kbGVzAQAGTG9va3VwACAAAQADAAAAAgAAAAUABgABAAcAAAACAAgAAAAJAAoAAQAHAAAAAgALAAEAAAAMAA0AAQAOAAAATQACAAEAAAAXKrcADyq6ABEAALUAFSq6ABcAALUAG7EAAAACAB0AAAASAAQAAAAGAAQACAANAAoAFgAGAB4AAAAMAAEAAAAXAB8AIAAAAAMAIQAAAAIAIgAjAAAAFgACACoAAwAsADMANQAqAAMANwA+AD8AQAAAAAoAAQBBAEMARQAZ", true);
+</script>
+<br/>Java compiler version: <b>1.8.0_191</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

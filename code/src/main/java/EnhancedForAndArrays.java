@@ -1,13 +1,9 @@
+class EnhancedForAndArrays {
 
-
-public class EnhancedForAndArrays {
-
-  int m(int[] a) {
-    int sum = 0;
+  void m(int[] a) {
     for (int i : a) {
-      sum += i;
+      Integer.valueOf(i);
     }
-    return sum;
   }
 
 }

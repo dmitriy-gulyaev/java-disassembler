@@ -1,16 +1,24 @@
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 class MultiCatchExceptions {
 
-  void catchMalformedURLExceptionAndParseException() {
+  void catchMalformedURLExceptionAndParseException() throws MalformedURLException, ParseException {
     try {
       malformedURLException();
       parseException();
     } catch (MalformedURLException | ParseException exception) {
       exception.hashCode();
+      throw exception;
+    }
+  }
+
+  void catchMalformedURLExceptionAndParseException2() throws MalformedURLException, ParseException {
+    try {
+      malformedURLException();
+      parseException();
+    } catch (Exception exception) {
+      throw exception;
     }
   }
 
@@ -31,11 +39,9 @@ class MultiCatchExceptions {
   }
 
   void malformedURLException() throws MalformedURLException {
-    new URL("");
   }
 
   void parseException() throws ParseException {
-    new SimpleDateFormat("").parse("");
   }
 
 }

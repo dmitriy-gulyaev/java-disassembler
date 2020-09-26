@@ -143,22 +143,27 @@ function main(dataView, isEmbedded, container) {
     /** @const */
     var CONSTANT_Package = 20;
 
-    /** @const */
-    var ATTRIBUTES_ANNT = "AnnotationDefault";
-    /** @const */
-    var ATTRIBUTES_BOOT = "BootstrapMethods";
-    /** @const */
-    var ATTRIBUTES_CODE = "Code";
+    //Table 4.7-A. Predefined class file attributes (by section)
     /** @const */
     var ATTRIBUTES_CONS = "ConstantValue";
     /** @const */
-    var ATTRIBUTES_DEPR = "Deprecated";
+    var ATTRIBUTES_CODE = "Code";
     /** @const */
-    var ATTRIBUTES_ENCL = "EnclosingMethod";
+    var ATTRIBUTES_STAK = "StackMapTable";
     /** @const */
     var ATTRIBUTES_EXCP = "Exceptions";
     /** @const */
     var ATTRIBUTES_INNR = "InnerClasses";
+    /** @const */
+    var ATTRIBUTES_ENCL = "EnclosingMethod";
+    /** @const */
+    var ATTRIBUTES_SYNT = "Synthetic";
+    /** @const */
+    var ATTRIBUTES_SIGN = "Signature";
+    /** @const */
+    var ATTRIBUTES_SRCF = "SourceFile";
+    /** @const */
+    var ATTRIBUTES_SRCD = "SourceDebugExtension";
     /** @const */
     var ATTRIBUTES_LINE = "LineNumberTable";
     /** @const */
@@ -166,33 +171,40 @@ function main(dataView, isEmbedded, container) {
     /** @const */
     var ATTRIBUTES_LCTT = "LocalVariableTypeTable";
     /** @const */
+    var ATTRIBUTES_DEPR = "Deprecated";
+    /** @const */
+    var ATTRIBUTES_RVAN = "RuntimeVisibleAnnotations";
+    /** @const */
     var ATTRIBUTES_RIAN = "RuntimeInvisibleAnnotations";
     /** @const */
     var ATTRIBUTES_RIPA = "RuntimeInvisibleParameterAnnotations";
     /** @const */
-    var ATTRIBUTES_RVAN = "RuntimeVisibleAnnotations";
-    /** @const */
     var ATTRIBUTES_RVPA = "RuntimeVisibleParameterAnnotations";
+
+
+
+
+
+
     /** @const */
-    var ATTRIBUTES_SIGN = "Signature";
+    var ATTRIBUTES_ANNT = "AnnotationDefault";
     /** @const */
-    var ATTRIBUTES_SRCD = "SourceDebugExtension";
-    /** @const */
-    var ATTRIBUTES_SRCF = "SourceFile";
-    /** @const */
-    var ATTRIBUTES_STAK = "StackMapTable";
-    /** @const */
-    var ATTRIBUTES_SYNT = "Synthetic";
-    /** @const */
-    var ATTRIBUTES_MODL = "Module";
-    /** @const */
-    var ATTRIBUTES_RCRD = "Record";
+    var ATTRIBUTES_BOOT = "BootstrapMethods";
     /** @const */
     var ATTRIBUTES_MPRS = "MethodParameters";
     /** @const */
+    var ATTRIBUTES_MODL = "Module";
+    /** @const */
+    var ATTRIBUTES_MDLP = "ModulePackages";
+    /** @const */
+    var ATTRIBUTES_MDLM = "ModuleMainClass";
+    /** @const */
     var ATTRIBUTES_NSTH = "NestHost";
+    /** @const */
+    var ATTRIBUTES_NSTM = "NestMembers";
 
-    //https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html
+    /** @const */
+    var ATTRIBUTES_RCRD = "Record";
 
     /** @const */
     var CPINDX_08 = 2;
@@ -559,6 +571,10 @@ function main(dataView, isEmbedded, container) {
                 return attribute_info;
             } else if (ATTRIBUTES_NSTH == attributeName) {
                 attribute_info.host_class_index = r2();
+                return attribute_info;
+            } else if (ATTRIBUTES_NSTM == attributeName) {
+                attribute_info.number_of_classes = r2();
+                attribute_info.classes = readIndexArray(attribute_info.number_of_classes);
                 return attribute_info;
             } else if (ATTRIBUTES_MPRS == attributeName) {
                 read_ATTRIBUTES_MPRS(attribute_info);
@@ -1351,8 +1367,12 @@ function main(dataView, isEmbedded, container) {
                         attributeValue = getClassName(attribute.host_class_index, false, true, false);
                         attributeComment = "JVMS: The NestHost attribute records the nest host of the nest to which the current class or interface claims to belong";
                         break;
+                    case ATTRIBUTES_NSTM:
+                        for (var d = 0; d < attribute.number_of_classes; d++) {
+                            attributeValue = attributeValue + " " + getClassName(attribute.classes[d], false, true, false);
+                        }
+                        break;
                     }
-
                     addKeyValue(tbody, attributeName, attributeValue, attributeComment);
                 }
             }

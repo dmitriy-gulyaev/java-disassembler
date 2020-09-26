@@ -51,6 +51,10 @@ function main(dataView, isEmbedded, container) {
     var ACC_ENUM = ["ENUM", 0x4000];
     /** @const */
     var ACC_MODULE = ["MODULE", 0x8000];
+    /** @const */
+    var ACC_MANDATED = ["MANDATED", 0x8000];
+    /** @const */
+    var ACC_OPEN = ["OPEN", 0x0020];
 
     /** @const */
     var ACCESS_CLASS = [
@@ -97,7 +101,13 @@ function main(dataView, isEmbedded, container) {
     var ACCESS_PARAMETER = [
         ACC_FINAL,
         ACC_SYNTHETIC,
-        ["MANDATED", 0x8000]
+        ACC_MANDATED
+    ];
+    /** @const */
+    var ACCESS_MODULE = [
+        ACC_OPEN,
+        ACC_SYNTHETIC,
+        ACC_MANDATED
     ];
 
     /** @const */
@@ -1308,8 +1318,11 @@ function main(dataView, isEmbedded, container) {
                         attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
                         break;
                     case ATTRIBUTES_MODL:
-                        var e = getConstantPoolItem(attribute.module_name_index);
-                        attributeValue = getUTF8(e.name_index);
+                        attributeValue = getAccessModifiers(ACCESS_MODULE, attribute.module_flags);
+                        attributeValue += " " + getArgumentTypeAndValue(attribute.module_name_index);
+                        if (attribute.module_version_index > 0) {
+                            attributeValue += ", module version = " + getUTF8(attribute.module_version_index);
+                        }
                         break;
                     case ATTRIBUTES_RCRD:
                         for (var componentIndex = 0; componentIndex < attribute.components_count; componentIndex++) {
@@ -1572,6 +1585,9 @@ function main(dataView, isEmbedded, container) {
 
                 case CONSTANT_Class:
                     return getClassName(cpIndex, false, true, false);
+
+                case CONSTANT_Module:
+                    return getUTF8(cpEntry.name_index);
 
                 case CONSTANT_String:
                     return "<code title='index in CP = " + cpEntry.string_index + "' style='color:#0000ff'>\"" + getUTF8(cpEntry.string_index) + "\"</code>";

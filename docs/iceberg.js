@@ -1127,15 +1127,16 @@ function main(dataView, isEmbedded, container) {
                                 var localVariableTableAttribute = method_info.attributes[methodAttributes].attributes[codeAttributes];
                                 if (localVariableTableAttribute.local_variable_table_length > 0) {
                                     var descriptionOrSignature = isATTRIBUTES_LCVT ? "descriptor" : "signature";
-                                    codeAttributeValue = codeAttributeValue + "<table style='text-align:center;width:" + TABLE_WIDTH + "' border='1'><tr><th width='50px'>index</th><th width='50px'>start_pc</th><th width='50px'>length</th><th width='100px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
+                                    codeAttributeValue = codeAttributeValue + "<table style='text-align:center;width:" + TABLE_WIDTH +
+                                        "' border='1'><tr><th width='50px'>index</th><th width='60px'>start_pc</th><th width='50px'>length</th><th width='120px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
                                     for (var ln = 0; ln < localVariableTableAttribute.local_variable_table_length; ln++) {
                                         var lvtt = localVariableTableAttribute.local_variable_table[ln];
                                         codeAttributeValue = codeAttributeValue + "<tr>" +
                                             "<td>" + lvtt.index + "</td>" +
                                             "<td>" + lvtt.start_pc + "</td>" +
                                             "<td>" + lvtt.length + "</td>" +
-                                            "<td>" + getUTF8AsSignature(lvtt.name_index) + "</td>" +
-                                            "<td style='text-align:left'>" + getUTF8AsSignature(lvtt.descriptor_OR_signature_index) + "</td>" +
+                                            "<td>" + getUTF8AsString(lvtt.name_index) + "</td>" +
+                                            "<td style='text-align:left'>" + getUTF8AsString(lvtt.descriptor_OR_signature_index) + "</td>" +
                                             "</tr>";
                                     }
                                     codeAttributeValue = codeAttributeValue + "</table>";
@@ -1151,11 +1152,13 @@ function main(dataView, isEmbedded, container) {
                         if (codeAttributeRecord.exception_table_length > 0) {
                             attributeValue = "";
 
-                            attributeValue = "<table style='text-align:center;width:" + TABLE_WIDTH + "' border='1'><tr><th width='50px'>start_pc</th><th width='50px'>end_pc</th><th width='100px'>handler_pc</th><th>catch_type</th</tr>";
+                            attributeValue = "<table style='text-align:center;width:" + TABLE_WIDTH +
+                                "' border='1'><tr><th width='50px'/><th width='60px'>start_pc</th><th width='50px'>end_pc</th><th width='120px'>handler_pc</th><th>catch_type</th</tr>";
                             for (var ln = 0; ln < codeAttributeRecord.exception_table_length; ln++) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
                                 var classOfException = lvtt.catch_type == 0 ? "any" : getClassName(lvtt.catch_type, false, true, false);
                                 attributeValue += "<tr>" +
+                                "<td/>" +
                                 "<td>" + lvtt.start_pc + "</td>" +
                                 "<td>" + lvtt.end_pc + "</td>" +
                                 "<td>" + lvtt.handler_pc + "</td>" +
@@ -1223,7 +1226,7 @@ function main(dataView, isEmbedded, container) {
                 case 's':
                     var tempValue = getArgumentTypeAndValue(elementValue.const_value_index);
                     if (elementValue.tag == 's') {
-                        tempValue = "\"" + tempValue + "\"";
+                        tempValue = "<code class='str'>\"" + tempValue + "\"</code>";
                     }
                     v += tempValue;
                     break;
@@ -1277,7 +1280,7 @@ function main(dataView, isEmbedded, container) {
                         attributeValue = getArgumentTypeAndValue(cvi);
                         break
                     case ATTRIBUTES_SIGN:
-                        attributeValue = getUTF8AsSignature(attribute.signature_index);
+                        attributeValue = getUTF8AsString(attribute.signature_index);
                         attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
                         break;
                     case ATTRIBUTES_RVAN:
@@ -1414,11 +1417,9 @@ function main(dataView, isEmbedded, container) {
                 return ((accessFlags & maskArray[1]) != 0);
             }
 
-            function getUTF8AsSignature(index) {
-                var result = getUTF8(index); //.replace(SLASH_TO_DOT_REG_EXP, '.');
-                return "<tt>" + result + "</tt>";
-                //var a = result.split(SLASH_TO_DOT_REG_EXP);
-                //return "<tt>" + a[a.length - 1] + "</tt>";
+            function getUTF8AsString(index) {
+                var result = getUTF8(index);
+                return "<code title='CP index=" + index + "' class='str'>" + result + "</code>";
             }
 
             function getUTF8(index) {
@@ -1586,7 +1587,7 @@ function main(dataView, isEmbedded, container) {
                     return getUTF8(cpEntry.name_index);
 
                 case CONSTANT_String:
-                    return "<code title='index in CP = " + cpEntry.string_index + "' style='color:#0000ff'>\"" + getUTF8(cpEntry.string_index) + "\"</code>";
+                    return getUTF8AsString(cpEntry.string_index);
 
                 case CONSTANT_InterfaceMethodref:
                 case CONSTANT_Methodref:

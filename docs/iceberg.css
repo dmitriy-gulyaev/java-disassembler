@@ -5,6 +5,7 @@ body {
 table {
 	word-wrap: break-word;
 	font-size: 12px;
+    table-layout: fixed;
 }
 
 tr:hov--er {
@@ -13,6 +14,10 @@ tr:hov--er {
 
 td {
 	vertical-align: top;
+}
+
+th {
+	background: #eeeeee;
 }
 
 span {
@@ -134,4 +139,8 @@ span {
 
 .exhandler {
     background: #ffff00;
+}
+
+.str {
+    color: #0000ff;
 }

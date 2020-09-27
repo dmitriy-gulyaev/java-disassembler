@@ -1127,15 +1127,15 @@ function main(dataView, isEmbedded, container) {
                                 var localVariableTableAttribute = method_info.attributes[methodAttributes].attributes[codeAttributes];
                                 if (localVariableTableAttribute.local_variable_table_length > 0) {
                                     var descriptionOrSignature = isATTRIBUTES_LCVT ? "descriptor" : "signature";
-                                    codeAttributeValue = codeAttributeValue + "<table style='text-align:center;width:" + TABLE_WIDTH + "' border='1'><tr><th width='50px'>start_pc</th><th width='50px'>length</th><th width='100px'>name</th><th>" + descriptionOrSignature + "</th><th width='50px'>index</th></tr>";
+                                    codeAttributeValue = codeAttributeValue + "<table style='text-align:center;width:" + TABLE_WIDTH + "' border='1'><tr><th width='50px'>index</th><th width='50px'>start_pc</th><th width='50px'>length</th><th width='100px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
                                     for (var ln = 0; ln < localVariableTableAttribute.local_variable_table_length; ln++) {
                                         var lvtt = localVariableTableAttribute.local_variable_table[ln];
                                         codeAttributeValue = codeAttributeValue + "<tr>" +
+                                            "<td>" + lvtt.index + "</td>" +
                                             "<td>" + lvtt.start_pc + "</td>" +
                                             "<td>" + lvtt.length + "</td>" +
                                             "<td>" + getUTF8AsSignature(lvtt.name_index) + "</td>" +
                                             "<td style='text-align:left'>" + getUTF8AsSignature(lvtt.descriptor_OR_signature_index) + "</td>" +
-                                            "<td>" + lvtt.index + "</td>" +
                                             "</tr>";
                                     }
                                     codeAttributeValue = codeAttributeValue + "</table>";
@@ -1441,29 +1441,7 @@ function main(dataView, isEmbedded, container) {
             }
 
             function formatDescription(d) {
-
-                d = d.replace(SLASH_TO_DOT_REG_EXP, '.');
-                d = d.replace(new RegExp(';L', 'g'), '; L');
-                /*
-                d = d.replace(new RegExp('\\(L', 'g'), '(');
-                d = d.replace(new RegExp('\\)L', 'g'), ')');
-                d = d.replace(new RegExp(';', 'g'), '');
-                d = d.replace(new RegExp('^L', 'g'), '');
-                 */
                 return d;
-                /*
-                var startPos = -1;
-                for (var p = 0; p < d.length; p++) {
-                if (d.charAt(p) == ';') {
-                if (startPos != -1) {
-                return d.substring(startPos, p);
-                }
-                } else if (d.charAt(p) == '/') {
-                startPos = p;
-                }
-                }
-                return d;
-                 */
             }
 
             function formatNumber(v) {

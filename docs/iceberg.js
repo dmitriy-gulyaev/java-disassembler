@@ -181,11 +181,6 @@ function main(dataView, isEmbedded, container) {
     /** @const */
     var ATTRIBUTES_RVPA = "RuntimeVisibleParameterAnnotations";
 
-
-
-
-
-
     /** @const */
     var ATTRIBUTES_ANNT = "AnnotationDefault";
     /** @const */
@@ -1244,17 +1239,13 @@ function main(dataView, isEmbedded, container) {
                 case '[':
                     var arrayValue = elementValue.array_value;
                     v += "{<br/>";
-                    for (var j = 0; j < arrayValue.num_values; j++) {
-                        if (j > 0) {
-                            v += ',<br/>';
-                        }
-                        v += elementValueToString(arrayValue.values[j]);
-                    }
+                    v += array2String(arrayValue.values, (elmnt) => elementValueToString(elmnt));
                     v += "<br/>}";
                     break;
                 }
                 return v;
             }
+
             function annotationToString(annotation) {
                 var annName = getUTF8(annotation.type_index);
                 var v = "";
@@ -1290,18 +1281,13 @@ function main(dataView, isEmbedded, container) {
                         attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
                         break;
                     case ATTRIBUTES_RVAN:
-                        for (var i = 0; i < attribute.num_annotations; i++) {
-                            var annotation = attribute.annotations[i];
-                            attributeValue += " " + annotationToString(annotation) + "<br/>";
-                        }
+                        attributeValue = array2String(attribute.annotations, (elmnt) => annotationToString(elmnt));
                         break;
                     case ATTRIBUTES_SRCF:
                         attributeValue = getUTF8(attribute.sourcefile_index);
                         break;
                     case ATTRIBUTES_INNR:
-                        for (var i = 0; i < attribute.number_of_classes; i++) {
-                            attributeValue += getClassName(attribute.classes[i].inner_class_info_index, false, true, false) + "<br/>";
-                        }
+                        attributeValue = array2String(attribute.classes, (elmnt) => getClassName0(elmnt.inner_class_info_index));
                         attributeComment = "JVMS: If the constant pool of a class or interface C contains at least one CONSTANT_Class_info entry which represents a class or interface that is not a member of a package, then there must be exactly one InnerClasses attribute in the attributes table of the ClassFile structure for C.";
                         break;
                     case ATTRIBUTES_ENCL:
@@ -1341,40 +1327,49 @@ function main(dataView, isEmbedded, container) {
                         }
                         break;
                     case ATTRIBUTES_RCRD:
-                        for (var componentIndex = 0; componentIndex < attribute.components_count; componentIndex++) {
-                            var component = attribute.components[componentIndex];
-                            var componentName = getUTF8(component.name_index);
-                            var componentDesc = getUTF8(component.descriptor_index);
-                            attributeValue += " " + componentName + ":" + componentDesc + "<br/>";
-                        }
+                        attributeValue = array2String(attribute.components, (component) => {
+                                var componentName = getUTF8(component.name_index);
+                                var componentDesc = getUTF8(component.descriptor_index);
+                                return componentName + ": " + componentDesc;
+                            });
                         break;
                     case ATTRIBUTES_MPRS:
-                        for (var i = 0; i < attribute.parameters_count; i++) {
-                            var parameter = attribute.parameters[i];
-                            var name = getUTF8(parameter.name_index);
-                            var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
-                            attributeValue += name + " " + accessFlags + "<br/>";
-                        }
+                        attributeValue = array2String(attribute.parameters, (parameter) => {
+                                var name = getUTF8(parameter.name_index);
+                                var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
+                                return name + " " + accessFlags;
+                            });
+
                         break;
                     case ATTRIBUTES_CODE:
                         continue;
                     case ATTRIBUTES_EXCP:
-                        for (var exceptionIndex = 0; exceptionIndex < attribute.number_of_exceptions; exceptionIndex++) {
-                            attributeValue = attributeValue + " " + getClassName(attribute.exception_index_table[exceptionIndex], false, true, false);
-                        }
+                        attributeValue = array2String(attribute.exception_index_table, (elmnt) => getClassName0(elmnt));
                         break;
                     case ATTRIBUTES_NSTH:
                         attributeValue = getClassName(attribute.host_class_index, false, true, false);
                         attributeComment = "JVMS: The NestHost attribute records the nest host of the nest to which the current class or interface claims to belong";
                         break;
                     case ATTRIBUTES_NSTM:
-                        for (var d = 0; d < attribute.number_of_classes; d++) {
-                            attributeValue = attributeValue + " " + getClassName(attribute.classes[d], false, true, false);
-                        }
+                        attributeValue = array2String(attribute.classes, (elmnt) => getClassName0(elmnt));
                         break;
                     }
                     addKeyValue(tbody, attributeName, attributeValue, attributeComment);
                 }
+            }
+
+            function array2String(arry, fnc) {
+                var result = "";
+                for (let i = 0; i < arry.length; i++) {
+                    var value = arry[i];
+                    if (i > 0) {
+                        //result += ", ";
+                        result += "<br/>";
+                    }
+                    result += "(" + (i + 1) + ") " + fnc(value);
+
+                }
+                return result;
             }
 
             function addRow3ToTable(tbody, txt) {
@@ -1475,6 +1470,9 @@ function main(dataView, isEmbedded, container) {
                 return "<code style='padding-left:5px;padding-right:5px;background:#00dd00;color:#ffffff'>" + v + "</code>";
             }
 
+            function getClassName0(index) {
+                return getClassName(index, false, true, false);
+            }
             function getClassName(index, isOnlyName, addClassSuffux, isFullName) {
                 var prefix = "";
                 var cpEntryClass = getConstantPoolItem(index);

@@ -1745,7 +1745,7 @@ function main(dataView, isEmbedded, container) {
 
             var mv = classFile.major_version;
             var jdkv = '';
-            if (mv >= 49 && mv <= 58) {
+            if (mv >= 49 && mv <= 59) {
                 jdkv = 'Java ' + (mv - 44);
             } else if (mv >= 46 && mv <= 48) {
                 jdkv = 'Java 1.' + (mv - 44);

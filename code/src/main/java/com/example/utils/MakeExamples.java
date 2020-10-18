@@ -32,7 +32,7 @@ public class MakeExamples {
     PrintWriter examplesIndex = new PrintWriter(new File(outDir, "index.html"));
     examplesIndex.write("<html>");
     examplesIndex.write("<head><link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/></head>");
-    examplesIndex.write("<body><h2>Examples</h2><ul>");
+    examplesIndex.write("<body><h2>Examples</h2><ol>");
 
     File dirFile = new File(binDir);
     for (File file : dirFile.listFiles()) {
@@ -45,6 +45,8 @@ public class MakeExamples {
 
       if (!htmlFileName.contains("$")) {
         examplesIndex.write("\n<li><a href=\"" + htmlFileName + "\">" + htmlFileName + "</a></li>");
+      } else {
+        continue;
       }
 
       System.out.println(file);
@@ -119,7 +121,7 @@ public class MakeExamples {
 
     }
 
-    examplesIndex.write("\n</ul>");
+    examplesIndex.write("\n</ol>");
     examplesIndex.write("<a href=\"..\\index.html\">Main page</a>");
     examplesIndex.write("</body></html>");
 

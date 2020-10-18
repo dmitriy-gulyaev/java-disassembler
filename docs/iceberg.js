@@ -197,6 +197,8 @@ function main(dataView, isEmbedded, container) {
     var ATTRIBUTES_NSTH = "NestHost";
     /** @const */
     var ATTRIBUTES_NSTM = "NestMembers";
+    /** @const */
+    var ATTRIBUTES_PSCL = "PermittedSubclasses";
 
     /** @const */
     var ATTRIBUTES_RCRD = "Record";
@@ -567,7 +569,7 @@ function main(dataView, isEmbedded, container) {
             } else if (ATTRIBUTES_NSTH == attributeName) {
                 attribute_info.host_class_index = r2();
                 return attribute_info;
-            } else if (ATTRIBUTES_NSTM == attributeName) {
+            } else if (ATTRIBUTES_NSTM == attributeName || ATTRIBUTES_PSCL == attributeName) {
                 attribute_info.number_of_classes = r2();
                 attribute_info.classes = readIndexArray(attribute_info.number_of_classes);
                 return attribute_info;
@@ -1353,6 +1355,7 @@ function main(dataView, isEmbedded, container) {
                         attributeValue = getClassName(attribute.host_class_index, false, true, false);
                         attributeComment = "JVMS: The NestHost attribute records the nest host of the nest to which the current class or interface claims to belong";
                         break;
+                    case ATTRIBUTES_PSCL:
                     case ATTRIBUTES_NSTM:
                         attributeValue = array2String(attribute.classes, (elmnt) => getClassName0(elmnt));
                         break;

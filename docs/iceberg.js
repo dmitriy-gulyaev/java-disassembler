@@ -1389,7 +1389,6 @@ function main(dataView, isEmbedded, container) {
                 var td = documentCreateElement('td');
                 td.innerHTML = txt;
                 td.colSpan = 5;
-                //td.style.backgroundColor = '#ffff00';
                 appendChild(tr, td);
                 appendChild(tbody, tr);
             }
@@ -1449,7 +1448,7 @@ function main(dataView, isEmbedded, container) {
             }
 
             function formatNumber(v) {
-                return "<code style='padding-left:5px;padding-right:5px;background:#00dd00;color:#ffffff'>" + v + "</code>";
+                return "<code class='nmbr'>" + v + "</code>";
             }
 
             function getClassName0(index) {
@@ -1483,7 +1482,7 @@ function main(dataView, isEmbedded, container) {
                 if (isOnlyName) {
                     return className;
                 } else {
-                    return "<span style='background:#00ffff' title='" + title + "'><code>" + className + "</code></span>";
+                    return "<span class='clzz' title='" + title + "'><code>" + className + "</code></span>";
                 }
             }
 
@@ -1674,10 +1673,7 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tr, tdLN);
 
                 var td0 = documentCreateElement('td');
-                //td0.innerHTML = "&#9711;";
-                //td0.innerHTML = "&#9724;&#9899;&#9670;";
-
-                //if ((accessFlags & array[m][1]) != 0) {}
+ 
                 if (isMaskSet(accessFlags, ACC_PUBLIC)) {
                     td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="green" stroke-width="1" fill="#006400"><title>public</title></circle></svg>';
                 } else if (isMaskSet(accessFlags, ACC_PRIVATE)) {
@@ -1688,9 +1684,7 @@ function main(dataView, isEmbedded, container) {
                     td0.innerHTML = '<svg width="16" height="16"><polygon points="2,14 8,3 14,14" fill="rgb(34,104,165)" stroke="purple" stroke-width="1" /></svg>';
                 }
 
-                //td0.innerHTML = "&#9724;";
                 td0.style.textAlign = 'center';
-                td0.style.color = 'blue';
                 appendChild(tr, td0);
 
                 var td2 = documentCreateElement('td');
@@ -1703,10 +1697,8 @@ function main(dataView, isEmbedded, container) {
 
             function addKeyValue(tbody, key, value, keyComment) {
                 var tr = documentCreateElement('tr');
-                //tr.style.backgroundColor = '#ffdd00';
 
                 var tdLN = documentCreateElement('td');
-                //tdLN.innerHTML = "LN2";
                 tdLN.className = "ln";
                 appendChild(tr, tdLN);
 
@@ -1718,9 +1710,7 @@ function main(dataView, isEmbedded, container) {
 
                 td1.innerHTML += td1InnerHTML + key + " :</b>";
                 td1.colSpan = 2;
-                td1.style.textAlign = 'right';
-                td1.style.color = '#0000dd';
-                //td1.style.wordWrap = "normal"
+                td1.className = 'attr';
                 appendChild(tr, td1);
 
                 var td = documentCreateElement('td');
@@ -1729,14 +1719,10 @@ function main(dataView, isEmbedded, container) {
                 var td2 = documentCreateElement('td');
                 td2.innerHTML = value;
                 td2.colSpan = 2;
-                //td2.style.backgroundColor = '#ffffff';
                 appendChild(tr, td2);
 
                 appendChild(tbody, tr);
             }
-
-            //var cn = documentGetElementById('cn');
-            //cn.innerHTML = getArgumentTypeAndValue(classFile.this_class) ;
 
             var tbody = createTable(container ? container : "list");
 

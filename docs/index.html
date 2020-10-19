@@ -5,38 +5,53 @@
     <meta name="keywords" content="Java, Java disassembler, JVM"/>
     <meta name="description" content="Online Java class file disassembler"/>
     <meta name="google-site-verification" content="1Z7AfvwEAWtyYor_fhRUcH1YuJJ3kAf7_8uA3mtaulI" />
+<style>
+.outline {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+.main {
+  margin-left: 300px;
+  padding: 0px 10px;
+  font-size: 28px;
+}
+
+@media screen and (max-height: 450px) {
+  .outline {padding-top: 15px;}
+}
+
+</style>
   </head>
   <title>Iceberg - Online Java Disassembler</title>
-  <body id="drop_zone" style="background:#ffffff">
-    <b>Iceberg</b><br/>
-    <tt>Online Java Disassembler</tt>
-    <a target="_blank" href="https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-6.html">JVM Instruction Set</a>
-    <a target="_blank" href="https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-4.html">The class File Format</a>
+  <body id="drop_zone">
+        <div class="outline" id="outline">
+        <b>Iceberg</b><br/>
+    Online Java Disassembler    <br/><br/>
+        
+    
+    <a href="examples/index.html">Examples</a>
+        </div>
+        <div class="main" id="list"><div style="margin:100px; width:50%">
+        
+        <h2>Java disassembler</h2>
+        
+        This is online Java disassembler, which transforms compiled Java classes into a set of bytecode instructions, presented in HTML format.<br/><br/>
 
-    <hr/>
-    <table>
-      <tr>
-        <td><input type="file" id="files" name="files[]" multiple  style="background:#ffffff"/></td>
-      </tr>
+        Disassembly is performed in accordance with the <a href="https://docs.oracle.com/javase/specs/jvms/se15/html/index.html">Java® Virtual Machine Specification, Java SE 15 Edition</a>
+        namely<br/><br/><a target="_blank" href="https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-6.html">Chapter 6. The Java Virtual Machine Instruction Set</a> and <br/><a target="_blank" href="https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-4.html">Chapter 4. The class File Format</a>.<br/><br/>
 
-    </table>
-    <hr/>
+        To disassemble compiled Java class file (*.class) <b>drag-and-drop</b> file to this page or choose file using <b><label><input type="file" style="display: none;" id="files"><a style="text-decoration: underline;">this link</a></label></b>.
 
-    <table border="0" width="100%">
-
-      <tr style="vertical-align:top">
-        <td style="width:270px"><div style="overflow: hidden; background-color: #eeeeee; position: fixed; top: 100px;width:270px" id="outline"/></td>
-        <td><div id="list" style="max-width: 62.5em;"><div style="text-align:center;margin-top:100px;font-size: 24px">
-        This is online Java disassembler,<br/>
-        which transforms compiled Java classes<br/>
-        into a set of bytecode instructions,<br/>
-        presented in HTML format.<br/><br/>
-        Disassembly is performed in accordance with the<br/><a href="https://docs.oracle.com/javase/specs/jvms/se15/html/index.html">Java® Virtual Machine Specification, Java SE 15 Edition</a>.<br/><br/>
-        To disassemble compiled Java class file (<b>*.class</b>)<br/>drag-and-drop file to this page<br/>or use <b>"Choose Files"</b> button.<br/><br/>Also see <a href="examples/index.html">examples</a> of disassembled classes.
-            </div></div></td>
-      </tr>
-
-    </table>
+        <br/><br/>Also see <a href="examples/index.html">examples</a> of disassembled classes.
+            </div></div>
 
   </body>
 

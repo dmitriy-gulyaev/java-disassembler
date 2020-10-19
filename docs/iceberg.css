@@ -1,146 +1,93 @@
 body {
-	font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
+  background: #ffffff; color: #000000; font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif
 }
-
 table {
-	word-wrap: break-word;
-	font-size: 12px;
-    table-layout: fixed;
+  word-wrap: break-word;font-size: 12px;table-layout: fixed
 }
-
-tr:hov--er {
-	background: #00ff00;
-}
-
 td {
-	vertical-align: top;
+  vertical-align: top
 }
-
 th {
-	background: #eeeeee;
+  background: #eeeeee; 
 }
-
 span {
-	border-radius: 3px;
-	padding-left: 5px;
-	padding-right: 5px;
-	/*font-weight: bold;*/
-	color: black;
-	border: 1px #bbbbbb solid;
-	font-family: Courier;
+  color: #000000; border-radius: 3px; padding-left: 5px; padding-right: 5px; border: 1px #bbbbbb solid; font-family: Courier;
 }
-
-#list {
-	font-family: monospace;
-}
-
 .field {
-	background: #99ff33;
-	color: #000000;
+  background: #99ff33; color: #000000; 
 }
-
 .method {
-	background: #66ffff;
-	color: #000000;
+  background: #66ffff; color: #000000; 
 }
-
 .access {
-	background: #eeeeee;
-	color: #000000;
-	padding-right: 5px;
-	padding-left: 5px
+  background: #eeeeee; color: #000000; padding-right: 5px; padding-left: 5px;
 }
-
 .oc {
-	float: left;
-	width: 125px;
-	text-align: center;
-	border: 1px #777777 solid;
-	font-weight: bold;
+  float: left; width: 125px; text-align: center; border: 1px #777777 solid; font-weight: bold;
 }
-
 .oc-cons {
-	background: #999999;
-	color: #ffffff
+  background: #999999; color: #000000; 
 }
-
 .oc-load {
-	background: #AAFFFF;
+  background: #aaffff; color: #000000; 
 }
-
 .oc-stor {
-	background: #800000;
-	color: #ffffff
+  background: #800000; color: #000000; 
 }
-
 .oc-stac {
-	background: #00FFFF;
+  background: #00ffff; color: #000000; 
 }
-
 .oc-math {
-	background: #808000;
-	color: #ffffff
+  background: #808000; color: #000000; 
 }
-
 .oc-conv {
-	background: #00FF00;
+  background: #00ff00; color: #000000; 
 }
-
 .oc-comp {
-	background: #008000;
-	color: #ffffff
+  background: #008000; color: #000000; 
 }
-
 .oc-refe {
-	background: #FFFFAA;
+  background: #ffffaa; color: #000000; 
 }
-
 .oc-cont {
-	background: #008080;
-	color: #ffffff
+  background: #008080; color: #000000; 
 }
-
 .oc-exte {
-	background: #0000FF;
-	color: #ffffff
+  background: #0000ff; color: #000000; 
 }
-
+.outline {
+  background: #164a41; color: #ffffff; 
+}
+.outline a {
+  color: #ffffff; 
+}
 .ln {
-	background: #eeeeee;
-	color: #555555;
-	text-align: right;
-	font-family: monospace;
-	width: 50px;
-	padding-right: 5px;
-	border-right: 1px solid #aaaaaa;
+  background: #eeeeee; color: #555555; text-align: right; font-family: monospace; width: 50px; padding-right: 5px; border-right: 1px solid #aaaaaa;
 }
-
 .cl {
-	padding-left:5px;
+  padding-left:5px;
 }
-
 .ct {
-	border:1px solid #000000;
-	white-space: pre;
-	font-family: monospace;
-	border-spacing: 0;
+  border:1px solid #000000; white-space: pre; font-family: monospace; border-spacing: 0;
 }
-
 .keyword {
-    color: #7f0055;
-    background: #eeeeee;
-    padding-left: 2px;
-    padding-right: 2px;
+  background: #eeeeee; color: #7f0055; padding-left: 2px; padding-right: 2px;
 }
-
 .extry {
-    background: #ff6781;
+  background: #ff6781; 
 }
-
 .exhandler {
-    background: #ffff00;
+  background: #ffff00; 
 }
-
 .str {
-    color: #0000ff;
+  color: #0000ff; 
+}
+.attr {
+  color: #0000dd; text-align: right;
+}
+.nmbr {
+  background: #00dd00; color: #ffffff; padding-left:5px; padding-right:5px;
+}
+.clzz {
+  background: #00ffff; 
 }

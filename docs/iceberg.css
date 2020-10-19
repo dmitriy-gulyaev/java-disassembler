@@ -1,9 +1,9 @@
-@media all and (max-width: 800px) {body, table {font-size: x-large;} .tblexvar{display: none;} .oc{width: 155px;}}
+@media(max-width: 980px) {body, table {font-size: 24px;} .tblexvar {display: none;} .oc{width: 195px;}}
 body {
   background: #ffffff; color: #000000; font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif
 }
 table {
-  word-wrap: break-word;font-size: 12px;table-layout: fixed
+  word-wrap: break-word; table-layout: fixed;
 }
 td {
   vertical-align: top

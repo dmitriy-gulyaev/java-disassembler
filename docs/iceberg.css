@@ -1,3 +1,4 @@
+@media all and (max-width: 800px) {body, table {font-size: x-large;} .tblexvar{display: none;} .oc{width: 155px;}}
 body {
   background: #ffffff; color: #000000; font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif
 }
@@ -90,4 +91,7 @@ span {
 }
 .clzz {
   background: #00ffff; 
+}
+.tblexvar {
+  text-align: center; width: 900px;
 }

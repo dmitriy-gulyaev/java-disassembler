@@ -18,9 +18,6 @@ function main(dataView, isEmbedded, container) {
     }
 
     /** @const */
-    var TABLE_WIDTH = "900px";
-
-    /** @const */
     var BYTECODE_BEHAVIORS_FOR_METHOD_HANDLES = [
         null,
         "REF_getField",
@@ -1129,8 +1126,8 @@ function main(dataView, isEmbedded, container) {
                                 var localVariableTableAttribute = method_info.attributes[methodAttributes].attributes[codeAttributes];
                                 if (localVariableTableAttribute.local_variable_table_length > 0) {
                                     var descriptionOrSignature = isATTRIBUTES_LCVT ? "descriptor" : "signature";
-                                    codeAttributeValue = codeAttributeValue + "<table style='text-align:center;width:" + TABLE_WIDTH +
-                                        "' border='1'><tr><th width='50px'>index</th><th width='60px'>start_pc</th><th width='50px'>length</th><th width='120px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
+                                    codeAttributeValue = codeAttributeValue + "<table class='tblexvar' " +
+                                        " border='1'><tr><th width='50px'>index</th><th width='60px'>start_pc</th><th width='50px'>length</th><th width='120px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
                                     for (var ln = 0; ln < localVariableTableAttribute.local_variable_table_length; ln++) {
                                         var lvtt = localVariableTableAttribute.local_variable_table[ln];
                                         codeAttributeValue = codeAttributeValue + "<tr>" +
@@ -1154,8 +1151,8 @@ function main(dataView, isEmbedded, container) {
                         if (codeAttributeRecord.exception_table_length > 0) {
                             attributeValue = "";
 
-                            attributeValue = "<table style='text-align:center;width:" + TABLE_WIDTH +
-                                "' border='1'><tr><th width='50px'/><th width='60px'>start_pc</th><th width='50px'>end_pc</th><th width='120px'>handler_pc</th><th>catch_type</th</tr>";
+                            attributeValue = "<table class='tblexvar' " +
+                                " border='1'><tr><th width='50px'/><th width='60px'>start_pc</th><th width='50px'>end_pc</th><th width='120px'>handler_pc</th><th>catch_type</th</tr>";
                             for (var ln = 0; ln < codeAttributeRecord.exception_table_length; ln++) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
                                 var classOfException = lvtt.catch_type == 0 ? "any" : getClassName(lvtt.catch_type, false, true, false);

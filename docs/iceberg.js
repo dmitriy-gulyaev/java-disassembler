@@ -1437,7 +1437,7 @@ function main(dataView, isEmbedded, container) {
                 var name = getFieldOrMethodPlainName(info);
                 var desc = getUTF8(info.descriptor_index);
                 var className = isField ? 'field' : 'method';
-                return "<span class='" + className + "' title='" + desc + "'>" + name + "</span> <tt>" + formatDescription(desc) + "</tt>";
+                return "<span class='" + className + "' title='" + desc + "'>" + name + "</span> <code>" + formatDescription(desc) + "</code>";
             }
 
             function formatDescription(d) {
@@ -1479,7 +1479,7 @@ function main(dataView, isEmbedded, container) {
                 if (isOnlyName) {
                     return className;
                 } else {
-                    return "<span class='clzz' title='" + title + "'><code>" + className + "</code></span>";
+                    return "<span class='clzz' title='" + title + "'>" + className + "</span>";
                 }
             }
 

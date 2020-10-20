@@ -30,6 +30,8 @@ public class MakeExamples {
     String outDir = "..\\docs\\examples\\";
 
     PrintWriter examplesIndex = new PrintWriter(new File(outDir, "index.html"));
+    
+    examplesIndex.write("<!DOCTYPE html>");
     examplesIndex.write("<html>");
     examplesIndex.write("<head><link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/></head>");
     examplesIndex.write("<body><h2>Examples</h2><ol>");
@@ -51,13 +53,13 @@ public class MakeExamples {
 
       System.out.println(file);
       out = new PrintWriter(new File(outDir, htmlFileName));
+      ow("<!DOCTYPE html>");
       ow("<html>");
       ow("<head>");
       ow("<title>" + file.getName() + "</title>");
       ow("<link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/>");
       ow("<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">");
       ow("</head>");
-      ow("<style>@media all and (min-width:960px) and (max-width: 1024px) {body, table {font-size: x-large;} .oc{width: 155px;}}</style>");
 
       ow("<body>");
       ow("<h4>" + file.getName() + "</h4><hr/>");

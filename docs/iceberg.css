@@ -14,6 +14,9 @@ th {
 span {
   color: #000000; border-radius: 3px; padding-left: 5px; padding-right: 5px; border: 1px #bbbbbb solid; font-family: Courier;
 }
+.list {
+  margin-left: 300px; padding: 0px 10px;
+}
 .field {
   background: #99ff33; color: #000000; 
 }
@@ -56,10 +59,10 @@ span {
 .oc-exte {
   background: #0000ff; color: #000000; 
 }
-.outline {
-  background: #164a41; color: #ffffff; 
+#outline {
+  background: #164a41; color: #ffffff; height: 100%; width: 300px; position: fixed; z-index: 1; top: 0; left: 0; overflow-x: hidden; padding-top: 20px; padding-left: 10px;
 }
-.outline a {
+#outline a {
   color: #ffffff; 
 }
 .ln {

@@ -1090,10 +1090,7 @@ function main(dataView, isEmbedded, container) {
                             addRowToTable(tbody, [
                                     ocPlace,
                                     "<span  class ='oc " + className + "' title='" + title + "'>" + opcodeMnemonic + "</span>",
-                                    /*operandType.charAt(0)*/
-                                    '',
-                                    desc,
-                                    ""], methodNumber, ocPlace);
+                                    desc], methodNumber, ocPlace);
 
                         }
 
@@ -1102,7 +1099,6 @@ function main(dataView, isEmbedded, container) {
                             var attributeNameIndex2 = method_info.attributes[methodAttributes].attributes[codeAttributes].attribute_name_index;
                             var codeAttributeName = getConstantPoolItem(attributeNameIndex2).bytes;
                             var codeAttributeValue = "";
-                            //addRow3ToTable(tbody, "Code attributes: <b>" + codeAttributeName + "</b>:");
 
                             if (ATTRIBUTES_LINE == codeAttributeName) {
                                 var ttt = method_info.attributes[methodAttributes].attributes[codeAttributes];
@@ -1375,21 +1371,6 @@ function main(dataView, isEmbedded, container) {
                 return result;
             }
 
-            function addRow3ToTable(tbody, txt) {
-                var tr = documentCreateElement('tr');
-
-                var tdLN0 = documentCreateElement('td');
-                //tdLN0.innerHTML = "LN0";
-                tdLN0.className = "ln";
-                appendChild(tr, tdLN0);
-
-                var td = documentCreateElement('td');
-                td.innerHTML = txt;
-                td.colSpan = 5;
-                appendChild(tr, td);
-                appendChild(tbody, tr);
-            }
-
             function getClassAccessModifiers(accessFlags) {
                 return getAccessModifiers(ACCESS_CLASS, accessFlags);
             }
@@ -1640,6 +1621,7 @@ function main(dataView, isEmbedded, container) {
 
                 var table = documentCreateElement('table');
                 table.setAttribute("cellSpacing", "0");
+                table.setAttribute("border", "0");
 
                 var tbody = documentCreateElement('tbody');
                 appendChild(table, tbody);
@@ -1657,7 +1639,7 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tr0, tdLN6);
 
                 var tdf = documentCreateElement('td');
-                tdf.colSpan = 5;
+                tdf.colSpan = 4;
                 tdf.innerHTML = '&nbsp;';
                 appendChild(tr0, tdf);
                 appendChild(tbody, tr0);
@@ -1686,7 +1668,7 @@ function main(dataView, isEmbedded, container) {
 
                 var td2 = documentCreateElement('td');
                 td2.innerHTML = (anchorName) ? "<a name='" + anchorName + "'>" + entityName + "</a>" : entityName;
-                td2.colSpan = 4;
+                td2.colSpan = 3;
                 appendChild(tr, td2);
 
                 appendChild(tbody, tr);
@@ -1709,9 +1691,6 @@ function main(dataView, isEmbedded, container) {
                 td1.colSpan = 2;
                 td1.className = 'attr';
                 appendChild(tr, td1);
-
-                var td = documentCreateElement('td');
-                appendChild(tr, td);
 
                 var td2 = documentCreateElement('td');
                 td2.innerHTML = value;

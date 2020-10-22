@@ -11,6 +11,9 @@ td {
 th {
   background: #eeeeee; 
 }
+a {
+  color: #0000ff; 
+}
 span {
   color: #000000; border-radius: 3px; padding-left: 5px; padding-right: 5px; border: 1px #bbbbbb solid; font-family: Courier;
 }
@@ -36,7 +39,7 @@ span {
   background: #aaffff; color: #000000; 
 }
 .oc-stor {
-  background: #800000; color: #000000; 
+  background: #800000; color: #ffffff; 
 }
 .oc-stac {
   background: #00ffff; color: #000000; 
@@ -54,10 +57,10 @@ span {
   background: #ffffaa; color: #000000; 
 }
 .oc-cont {
-  background: #008080; color: #000000; 
+  background: #008080; color: #ffffff; 
 }
 .oc-exte {
-  background: #0000ff; color: #000000; 
+  background: #0000ff; color: #ffffff; 
 }
 #outline {
   background: #164a41; color: #ffffff; height: 100%; width: 300px; position: fixed; z-index: 1; top: 0; left: 0; overflow-x: hidden; padding-top: 20px; padding-left: 10px;

@@ -1,4 +1,3 @@
-sealed class SealedClass permits C1, C2, C3 {}
-final class C1 extends SealedClass {}
-final class C2 extends SealedClass {}
-final class C3 extends SealedClass {}
+sealed class SealedClass permits _SealedClass1, _SealedClass2 {}
+final class _SealedClass1 extends SealedClass {}
+final class _SealedClass2 extends SealedClass {}

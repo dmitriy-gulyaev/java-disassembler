@@ -1,23 +1,18 @@
 class InstanceInitializer {
 
-  int x = 2000;
+    int x = 100;
 
-  {
-    y = 30;
-  }
+    int z;
 
-  int y = this.x + 100;
+    InstanceInitializer(String str) {
+        this.x = Integer.parseInt(str);
+    }
 
-  int z;
+    InstanceInitializer() {
+    }
 
-  InstanceInitializer(String str) {
-    this.z = Integer.parseInt(str);
-  }
-
-  InstanceInitializer(Long lng) {
-    this.z = lng.intValue();
-  }
-
-  InstanceInitializer() {
-  }
+    {x = 30;}
 }
+
+// Initialization of instance fields performed in body of each contructors.
+// If there are several constructors - initialization code is duplicated.

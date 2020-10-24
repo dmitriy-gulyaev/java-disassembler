@@ -11,34 +11,30 @@
 <table width=100% class="ct">
 <tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> InstanceInitializer {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">  <b class="keyword">int</b> x = 2000;</td></tr>
+<tr><td class="ln">3</td><td class="cl">    <b class="keyword">int</b> x = 100;</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">  {</td></tr>
-<tr><td class="ln">6</td><td class="cl">    y = 30;</td></tr>
-<tr><td class="ln">7</td><td class="cl">  }</td></tr>
-<tr><td class="ln">8</td><td class="cl"></td></tr>
-<tr><td class="ln">9</td><td class="cl">  <b class="keyword">int</b> y = this.x + 100;</td></tr>
+<tr><td class="ln">5</td><td class="cl">    <b class="keyword">int</b> z;</td></tr>
+<tr><td class="ln">6</td><td class="cl"></td></tr>
+<tr><td class="ln">7</td><td class="cl">    InstanceInitializer(String str) {</td></tr>
+<tr><td class="ln">8</td><td class="cl">        this.x = Integer.parseInt(str);</td></tr>
+<tr><td class="ln">9</td><td class="cl">    }</td></tr>
 <tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">  <b class="keyword">int</b> z;</td></tr>
-<tr><td class="ln">12</td><td class="cl"></td></tr>
-<tr><td class="ln">13</td><td class="cl">  InstanceInitializer(String str) {</td></tr>
-<tr><td class="ln">14</td><td class="cl">    this.z = Integer.parseInt(str);</td></tr>
-<tr><td class="ln">15</td><td class="cl">  }</td></tr>
+<tr><td class="ln">11</td><td class="cl">    InstanceInitializer() {</td></tr>
+<tr><td class="ln">12</td><td class="cl">    }</td></tr>
+<tr><td class="ln">13</td><td class="cl"></td></tr>
+<tr><td class="ln">14</td><td class="cl">    {x = 30;}</td></tr>
+<tr><td class="ln">15</td><td class="cl">}</td></tr>
 <tr><td class="ln">16</td><td class="cl"></td></tr>
-<tr><td class="ln">17</td><td class="cl">  InstanceInitializer(Long lng) {</td></tr>
-<tr><td class="ln">18</td><td class="cl">    this.z = lng.intValue();</td></tr>
-<tr><td class="ln">19</td><td class="cl">  }</td></tr>
-<tr><td class="ln">20</td><td class="cl"></td></tr>
-<tr><td class="ln">21</td><td class="cl">  InstanceInitializer() {</td></tr>
-<tr><td class="ln">22</td><td class="cl">  }</td></tr>
-<tr><td class="ln">23</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="instanceinitializer_class" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vv//ADsALAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCQAIAAkHAAoMAAsADAEAE0luc3RhbmNlSW5pdGlhbGl6ZXIBAAF4AQABSQkACAAODAAPAAwBAAF5CgARABIHABMMABQAFQEAEWphdmEvbGFuZy9JbnRlZ2VyAQAIcGFyc2VJbnQBABUoTGphdmEvbGFuZy9TdHJpbmc7KUkJAAgAFwwAGAAMAQABegoAGgAbBwAcDAAdAB4BAA5qYXZhL2xhbmcvTG9uZwEACGludFZhbHVlAQADKClJAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABVMSW5zdGFuY2VJbml0aWFsaXplcjsBAANzdHIBABJMamF2YS9sYW5nL1N0cmluZzsBABMoTGphdmEvbGFuZy9Mb25nOylWAQADbG5nAQAQTGphdmEvbGFuZy9Mb25nOwEAClNvdXJjZUZpbGUBABhJbnN0YW5jZUluaXRpYWxpemVyLmphdmEAIAAIAAIAAAADAAAACwAMAAAAAAAPAAwAAAAAABgADAAAAAMAAAAFAB8AAQAgAAAAbQADAAIAAAAlKrcAASoRB9C1AAcqEB61AA0qKrQABxBkYLUADSoruAAQtQAWsQAAAAIAIQAAABoABgAAAA0ABAADAAsABgARAAkAHAAOACQADwAiAAAAFgACAAAAJQAjACQAAAAAACUAJQAmAAEAAAAFACcAAQAgAAAAbQADAAIAAAAlKrcAASoRB9C1AAcqEB61AA0qKrQABxBkYLUADSortgAZtQAWsQAAAAIAIQAAABoABgAAABEABAADAAsABgARAAkAHAASACQAEwAiAAAAFgACAAAAJQAjACQAAAAAACUAKAApAAEAAAAFAAYAAQAgAAAAVwADAAEAAAAdKrcAASoRB9C1AAcqEB61AA0qKrQABxBkYLUADbEAAAACACEAAAAWAAUAAAAVAAQAAwALAAYAEQAJABwAFgAiAAAADAABAAAAHQAjACQAAAABACoAAAACACs=", true,"instanceinitializer_class");
+main("yv66vv//ADsAHgoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCQAIAAkHAAoMAAsADAEAE0luc3RhbmNlSW5pdGlhbGl6ZXIBAAF4AQABSQoADgAPBwAQDAARABIBABFqYXZhL2xhbmcvSW50ZWdlcgEACHBhcnNlSW50AQAVKExqYXZhL2xhbmcvU3RyaW5nOylJAQABegEAFShMamF2YS9sYW5nL1N0cmluZzspVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAVTEluc3RhbmNlSW5pdGlhbGl6ZXI7AQADc3RyAQASTGphdmEvbGFuZy9TdHJpbmc7AQAKU291cmNlRmlsZQEAGEluc3RhbmNlSW5pdGlhbGl6ZXIuamF2YQAgAAgAAgAAAAIAAAALAAwAAAAAABMADAAAAAIAAAAFABQAAQAVAAAAXQACAAIAAAAZKrcAASoQZLUAByoQHrUAByoruAANtQAHsQAAAAIAFgAAABYABQAAAAcABAADAAoADgAQAAgAGAAJABcAAAAWAAIAAAAZABgAGQAAAAAAGQAaABsAAQAAAAUABgABABUAAABHAAIAAQAAABEqtwABKhBktQAHKhAetQAHsQAAAAIAFgAAABIABAAAAAsABAADAAoADgAQAAwAFwAAAAwAAQAAABEAGAAZAAAAAQAcAAAAAgAd", true,"instanceinitializer_class");
 </script>
+<h3>Comment</h3>
+ Initialization of instance fields performed in body of each contructors.  If there are several constructors - initialization code is duplicated. 
+<br/>
 <br/>Java compiler version: <b>15</b><br/>
 <br/><b><a href="..\examples\index.html">Other examples</a></b>
 &nbsp;&nbsp;<a href="..\index.html">Main page</a>

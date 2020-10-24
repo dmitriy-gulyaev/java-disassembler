@@ -2,10 +2,13 @@ package com.example.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
@@ -13,126 +16,164 @@ import java.util.Locale;
 
 public class MakeExamples {
 
-  static PrintWriter out;
+	private static String version = System.getProperty("java.version");
+	private static final String srcDir = "src/main/java/";
+	private static final String binDir = "target/classes/";
+	private static final String outDir = "../docs/examples/";
 
-  static String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+	public static void main(String[] args) throws IOException {
 
-  public static void main(String[] args) throws IOException {
+		if (args.length == 0 || !args[0].equals("from-mvn")) {
+			// return;
+		}
 
-    if (args.length == 0 || !args[0].equals("from-mvn")) {
-      return;
-    }
+		try (PrintWriter examplesIndex = new PrintWriter(Files.newOutputStream(Paths.get(outDir, "index.html")))) {
+			examplesIndex.println("<!DOCTYPE html>");
+			examplesIndex.println("<html>");
+			examplesIndex.println("<head><link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/></head>");
+			examplesIndex.println("<body><h2>Examples</h2><ol>");
+			Files.list(Paths.get(binDir)).forEach(path -> each(path, examplesIndex));
+			examplesIndex.println("\n</ol>");
+			examplesIndex.println("<a href=\"..\\index.html\">Main page</a>");
+			examplesIndex.println("</body></html>");
+		}
 
-    String version = System.getProperty("java.version");
+	}
 
-    String srcDir = "src\\main\\java\\";
-    String binDir = "target\\classes\\";
-    String outDir = "..\\docs\\examples\\";
+	private static void each(Path binClassPath, PrintWriter examplesIndex) {
+		try {
+			if (Files.isDirectory(binClassPath)) {
+				return;
+			}
 
-    PrintWriter examplesIndex = new PrintWriter(new File(outDir, "index.html"));
-    
-    examplesIndex.write("<!DOCTYPE html>");
-    examplesIndex.write("<html>");
-    examplesIndex.write("<head><link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/></head>");
-    examplesIndex.write("<body><h2>Examples</h2><ol>");
+			String htmlFileName = binClassPath.getFileName().toString().replace(".class", ".html");
 
-    File dirFile = new File(binDir);
-    for (File file : dirFile.listFiles()) {
+			if (htmlFileName.startsWith("_")) {
+				return;
+			}
 
-      if (file.isDirectory()) {
-        continue;
-      }
+			if (!htmlFileName.contains("$")) {
+				examplesIndex.write("\n<li><a href=\"" + htmlFileName + "\">" + htmlFileName + "</a></li>");
+			} else {
+				return;
+			}
 
-      String htmlFileName = file.getName().replace(".class", ".html");
+			System.out.println(binClassPath);
+			File srcFile = new File(srcDir, binClassPath.getFileName().toString().replace(".class", ".java"));
 
-      if (!htmlFileName.contains("$")) {
-        examplesIndex.write("\n<li><a href=\"" + htmlFileName + "\">" + htmlFileName + "</a></li>");
-      } else {
-        continue;
-      }
+			SourceFile sourceFile = getSourceFile(srcFile);
+			if (sourceFile == null) {
+				return;
+			}
 
-      System.out.println(file);
-      out = new PrintWriter(new File(outDir, htmlFileName));
-      ow("<!DOCTYPE html>");
-      ow("<html>");
-      ow("<head>");
-      ow("<title>" + file.getName() + "</title>");
-      ow("<link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/>");
-      ow("<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">");
-      ow("</head>");
+			PrintWriter out = new PrintWriter(new File(outDir, htmlFileName));
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>" + binClassPath.getFileName() + "</title>");
+			out.println("<link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/>");
+			out.println("<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">");
+			out.println("</head>");
 
-      ow("<body>");
-      ow("<h4>" + file.getName() + "</h4><hr/>");
+			out.println("<body>");
+			out.println("<h4>" + binClassPath.getFileName() + "</h4><hr/>");
 
-      File srcFile = new File(srcDir, file.getName().replace(".class", ".java"));
-      StringBuilder comment = new StringBuilder();
+			out.println(sourceFile.lines);
 
-      if (srcFile.exists()) {
-        ow("<h3>Source code</h3>");
-        ow("<table width=100% class=\"ct\">");
-        int lineCounter = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(srcFile))) {
-          String line;
-          while ((line = br.readLine()) != null) {
-            lineCounter++;
-            if (line.startsWith("//")) {
-              comment.append(line.substring(2));
-              comment.append(' ');
-              continue;
-            }
+			out.println("<h3>Bytecode</h3>");
 
-            line = line.replace("<", "&lt;").replace("<", "&gt;");
-            line = line.replaceAll(
-                "(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while) ",
-                "<b class=\"keyword\">$1</b> ");
+			printBinClass(out, binClassPath);
+			String className = binClassPath.getFileName().toString().replace(".class", "");
+			Class<?> clazz = MakeIndex.class.getClassLoader().loadClass(className);
 
-            ow(String.format("<tr><td class=\"ln\">%s</td><td class=\"cl\">%s</td></tr>", lineCounter, line));
-          }
-        }
+			if (clazz.getNestMembers().length > 1) {
 
-        ow("</table>");
-      }
+				for (Class<?> nested : clazz.getNestMembers()) {
 
-      ow("<h3>Bytecode</h3>");
-      ow("<div id=\"list\" style=\"border:1px solid #000000\"></div>");
-      ow("<script src=\"../iceberg-min.js\"></script>");
-      ow("<script>");
+					if (!nested.getName().contains("$")) {
+						continue;
+					}
 
-      try (FileInputStream fis = new FileInputStream(file)) {
-        byte[] b = new byte[(int) file.length()];
-        fis.read(b);
-        String code = Base64.getEncoder().encodeToString(b);
-        ow("main(\"" + code + "\", true);");
-      }
+					Path n = binClassPath.getParent().resolve(nested.getName() + ".class");
+					System.out.println("  " + n);
+					printBinClass(out, n);
+				}
+			}
 
-      ow("</script>");
+			if (sourceFile.comment.length() > 0) {
+				out.println("<h3>Comment</h3>");
+				out.println(sourceFile.comment.toString());
+				out.println("<br/>");
+			}
 
-      if (comment.length() > 0) {
-        ow("<h3>Comment</h3>");
-        ow(comment.toString());
-        ow("<br/>");
-      }
+			out.println("<br/>Java compiler version: <b>" + version + "</b><br/>");
 
-      ow("<br/>Java compiler version: <b>" + version + "</b><br/>");
+			out.println("<br/><b><a href=\"..\\examples\\index.html\">Other examples</a></b>");
+			out.println("&nbsp;&nbsp;<a href=\"..\\index.html\">Main page</a>");
 
-      ow("<br/><b><a href=\"..\\examples\\index.html\">Other examples</a></b>");
-      ow("&nbsp;&nbsp;<a href=\"..\\index.html\">Main page</a>");
+			out.println("</body></html>");
+			out.close();
+		} catch (Exception e) {
+		}
+	}
 
-      ow("</body></html>");
-      out.close();
+	private static void printBinClass(PrintWriter out, Path path) throws IOException {
+		String container = path.getFileName().toString().replace('.', '_').toLowerCase();
+		out.println("<div id=\"" + container + "\" style=\"border:1px solid #000000\"></div>");
+		out.println("<script src=\"../iceberg-min.js\"></script>");
+		out.println("<script>");
 
-    }
+		byte[] b = Files.readAllBytes(path);
+		String code = Base64.getEncoder().encodeToString(b);
+		out.println("main(\"" + code + "\", true,\"" + container + "\");");
 
-    examplesIndex.write("\n</ol>");
-    examplesIndex.write("<a href=\"..\\index.html\">Main page</a>");
-    examplesIndex.write("</body></html>");
+		out.println("</script>");
+	}
 
-    examplesIndex.close();
+	private static SourceFile getSourceFile(File srcFile) throws IOException {
+		if (!srcFile.exists()) {
+			return null;
+		}
 
-  }
+		final StringBuilder lines = new StringBuilder();
+		final StringBuilder comment = new StringBuilder();
 
-  private static void ow(String string) {
-    out.write(string + "\r\n");
-  }
+		lines.append("<h3>Source code</h3>\r\n");
+		lines.append("<table width=100% class=\"ct\">\r\n");
+		int lineCounter = 0;
+		try (BufferedReader br = new BufferedReader(new FileReader(srcFile))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				lineCounter++;
+				if (line.startsWith("//")) {
+					comment.append(line.substring(2));
+					comment.append(' ');
+					continue;
+				}
+
+				line = line.replace("<", "&lt;").replace("<", "&gt;");
+				line = line.replaceAll(
+						"(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while) ",
+						"<b class=\"keyword\">$1</b> ");
+
+				lines.append(String.format("<tr><td class=\"ln\">%s</td><td class=\"cl\">%s</td></tr>\r\n", lineCounter,
+						line));
+			}
+		}
+
+		lines.append("</table>");
+		return new SourceFile(comment, lines.toString());
+
+	}
+
+	static class SourceFile {
+		private final StringBuilder comment;
+		private final String lines;
+
+		public SourceFile(StringBuilder comment, String lines) {
+			this.comment = comment;
+			this.lines = lines;
+		}
+	}
 
 }

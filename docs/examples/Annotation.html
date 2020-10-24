@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Annotation.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h4>Annotation.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">import</b> <b class="keyword">static</b> java.lang.annotation.ElementType.FIELD;</td></tr>
+<tr><td class="ln">2</td><td class="cl"><b class="keyword">import</b> <b class="keyword">static</b> java.lang.annotation.ElementType.METHOD;</td></tr>
+<tr><td class="ln">3</td><td class="cl"><b class="keyword">import</b> <b class="keyword">static</b> java.lang.annotation.RetentionPolicy.RUNTIME;</td></tr>
+<tr><td class="ln">4</td><td class="cl"></td></tr>
+<tr><td class="ln">5</td><td class="cl"><b class="keyword">import</b> java.lang.annotation.Retention;</td></tr>
+<tr><td class="ln">6</td><td class="cl"><b class="keyword">import</b> java.lang.annotation.Target;</td></tr>
+<tr><td class="ln">7</td><td class="cl"></td></tr>
+<tr><td class="ln">8</td><td class="cl">@Target({ METHOD, FIELD })</td></tr>
+<tr><td class="ln">9</td><td class="cl">@Retention(RUNTIME)</td></tr>
+<tr><td class="ln">10</td><td class="cl">@<b class="keyword">interface</b> Annotation {</td></tr>
+<tr><td class="ln">11</td><td class="cl">	String name() <b class="keyword">default</b> "";</td></tr>
+<tr><td class="ln">12</td><td class="cl"></td></tr>
+<tr><td class="ln">13</td><td class="cl">	<b class="keyword">boolean</b> unique() <b class="keyword">default</b> false;</td></tr>
+<tr><td class="ln">14</td><td class="cl"></td></tr>
+<tr><td class="ln">15</td><td class="cl">	<b class="keyword">int</b> length() <b class="keyword">default</b> 255;</td></tr>
+<tr><td class="ln">16</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="annotation_class" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vv//ADsAHAcAAgEACkFubm90YXRpb24HAAQBABBqYXZhL2xhbmcvT2JqZWN0BwAGAQAfamF2YS9sYW5nL2Fubm90YXRpb24vQW5ub3RhdGlvbgEABG5hbWUBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEAEUFubm90YXRpb25EZWZhdWx0AQAAAQAGdW5pcXVlAQADKClaAwAAAAABAAZsZW5ndGgBAAMoKUkDAAAA/wEAClNvdXJjZUZpbGUBAA9Bbm5vdGF0aW9uLmphdmEBABlSdW50aW1lVmlzaWJsZUFubm90YXRpb25zAQAdTGphdmEvbGFuZy9hbm5vdGF0aW9uL1RhcmdldDsBAAV2YWx1ZQEAIkxqYXZhL2xhbmcvYW5ub3RhdGlvbi9FbGVtZW50VHlwZTsBAAZNRVRIT0QBAAVGSUVMRAEAIExqYXZhL2xhbmcvYW5ub3RhdGlvbi9SZXRlbnRpb247AQAmTGphdmEvbGFuZy9hbm5vdGF0aW9uL1JldGVudGlvblBvbGljeTsBAAdSVU5USU1FJgAAAQADAAEABQAAAAMEAQAHAAgAAQAJAAAAA3MACgQBAAsADAABAAkAAAADWgANBAEADgAPAAEACQAAAANJABAAAgARAAAAAgASABMAAAAgAAIAFAABABVbAAJlABYAF2UAFgAYABkAAQAVZQAaABs=", true,"annotation_class");
+</script>
+<br/>Java compiler version: <b>15</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

@@ -14,5 +14,5 @@ class InstanceInitializer {
     {x = 30;}
 }
 
-// Initialization of instance fields performed in body of each contructors.
+// Initialization of instance fields is performed in body of each contructor.
 // If there are several constructors - initialization code is duplicated.

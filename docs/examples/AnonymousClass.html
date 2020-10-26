@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AnonymousClass.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h4>AnonymousClass.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">import</b> java.util.Comparator;</td></tr>
+<tr><td class="ln">2</td><td class="cl"><b class="keyword">import</b> java.util.List;</td></tr>
+<tr><td class="ln">3</td><td class="cl"></td></tr>
+<tr><td class="ln">4</td><td class="cl"><b class="keyword">class</b> AnonymousClass {</td></tr>
+<tr><td class="ln">5</td><td class="cl"></td></tr>
+<tr><td class="ln">6</td><td class="cl">    <b class="keyword">void</b> m(List&lt;String> list) {</td></tr>
+<tr><td class="ln">7</td><td class="cl">        list.sort(<b class="keyword">new</b> Comparator&lt;String>() {</td></tr>
+<tr><td class="ln">8</td><td class="cl">            @Override</td></tr>
+<tr><td class="ln">9</td><td class="cl">            <b class="keyword">public</b> <b class="keyword">int</b> compare(String arg0, String arg1) {</td></tr>
+<tr><td class="ln">10</td><td class="cl">                <b class="keyword">return</b> 10;</td></tr>
+<tr><td class="ln">11</td><td class="cl">            }</td></tr>
+<tr><td class="ln">12</td><td class="cl">        });</td></tr>
+<tr><td class="ln">13</td><td class="cl">    }</td></tr>
+<tr><td class="ln">14</td><td class="cl"></td></tr>
+<tr><td class="ln">15</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="anonymousclass_class" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vv//ADsAJQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWBwAIAQAQQW5vbnltb3VzQ2xhc3MkMQoABwAKDAAFAAsBABMoTEFub255bW91c0NsYXNzOylWCwANAA4HAA8MABAAEQEADmphdmEvdXRpbC9MaXN0AQAEc29ydAEAGShMamF2YS91dGlsL0NvbXBhcmF0b3I7KVYHABMBAA5Bbm9ueW1vdXNDbGFzcwEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAQTEFub255bW91c0NsYXNzOwEAAW0BABMoTGphdmEvdXRpbC9MaXN0OylWAQAEbGlzdAEAEExqYXZhL3V0aWwvTGlzdDsBABZMb2NhbFZhcmlhYmxlVHlwZVRhYmxlAQAkTGphdmEvdXRpbC9MaXN0PExqYXZhL2xhbmcvU3RyaW5nOz47AQAJU2lnbmF0dXJlAQAnKExqYXZhL3V0aWwvTGlzdDxMamF2YS9sYW5nL1N0cmluZzs+OylWAQAKU291cmNlRmlsZQEAE0Fub255bW91c0NsYXNzLmphdmEBAAtOZXN0TWVtYmVycwEADElubmVyQ2xhc3NlcwAgABIAAgAAAAAAAgAAAAUABgABABQAAAAvAAEAAQAAAAUqtwABsQAAAAIAFQAAAAYAAQAAAAQAFgAAAAwAAQAAAAUAFwAYAAAAAAAZABoAAgAUAAAAWQAEAAIAAAAPK7sAB1kqtwAJuQAMAgCxAAAAAwAVAAAACgACAAAABwAOAA0AFgAAABYAAgAAAA8AFwAYAAAAAAAPABsAHAABAB0AAAAMAAEAAAAPABsAHgABAB8AAAACACAAAwAhAAAAAgAiACMAAAAEAAEABwAkAAAACgABAAcAAAAAAAA=", true,"anonymousclass_class");
+</script>
+<div id="anonymousclass$1_class" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vv//ADsAKwkAAgADBwAEDAAFAAYBABBBbm9ueW1vdXNDbGFzcyQxAQAGdGhpcyQwAQAQTEFub255bW91c0NsYXNzOwoACAAJBwAKDAALAAwBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWBwAOAQAQamF2YS9sYW5nL1N0cmluZwoAAgAQDAARABIBAAdjb21wYXJlAQAnKExqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xhbmcvU3RyaW5nOylJBwAUAQAUamF2YS91dGlsL0NvbXBhcmF0b3IBABMoTEFub255bW91c0NsYXNzOylWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABJMQW5vbnltb3VzQ2xhc3MkMTsBAARhcmcwAQASTGphdmEvbGFuZy9TdHJpbmc7AQAEYXJnMQEAJyhMamF2YS9sYW5nL09iamVjdDtMamF2YS9sYW5nL09iamVjdDspSQEACVNpZ25hdHVyZQEAPExqYXZhL2xhbmcvT2JqZWN0O0xqYXZhL3V0aWwvQ29tcGFyYXRvcjxMamF2YS9sYW5nL1N0cmluZzs+OwEAClNvdXJjZUZpbGUBABNBbm9ueW1vdXNDbGFzcy5qYXZhAQAPRW5jbG9zaW5nTWV0aG9kBwAlAQAOQW5vbnltb3VzQ2xhc3MMACcAKAEAAW0BABMoTGphdmEvdXRpbC9MaXN0OylWAQAITmVzdEhvc3QBAAxJbm5lckNsYXNzZXMAIAACAAgAAQATAAEQEAAFAAYAAAADAAAACwAVAAEAFgAAAD4AAgACAAAACiortQABKrcAB7EAAAACABcAAAAGAAEAAAAHABgAAAAWAAIAAAAKABkAGgAAAAAACgAFAAYAAQABABEAEgABABYAAABBAAEAAwAAAAMQCqwAAAACABcAAAAGAAEAAAAKABgAAAAgAAMAAAADABkAGgAAAAAAAwAbABwAAQAAAAMAHQAcAAIQQQARAB4AAQAWAAAANwADAAMAAAANKivAAA0swAANtgAPrAAAAAIAFwAAAAYAAQAAAAcAGAAAAAwAAQAAAA0AGQAaAAAABQAfAAAAAgAgACEAAAACACIAIwAAAAQAJAAmACkAAAACACQAKgAAAAoAAQACAAAAAAAA", true,"anonymousclass$1_class");
+</script>
+<br/>Java compiler version: <b>15</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

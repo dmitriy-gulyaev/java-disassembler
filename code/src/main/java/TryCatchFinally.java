@@ -1,13 +1,13 @@
 class TryCatchFinally {
 
-  void m(Object obj) {
-    try {
-      obj.hashCode();
-    } catch (StringIndexOutOfBoundsException e) {
-      e.getMessage();
-    } finally {
-      obj.getClass();
-    }
+    void m(Object o) {
+        try {
+            o.notify();
+        } catch (Exception e) {
+            e.notify();
+        } finally {
+            o.notifyAll();
+        }
 
-  }
+    }
 }

@@ -11,23 +11,23 @@
 <table width=100% class="ct">
 <tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> TryCatchFinally {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">  <b class="keyword">void</b> m(Object obj) {</td></tr>
-<tr><td class="ln">4</td><td class="cl">    <b class="keyword">try</b> {</td></tr>
-<tr><td class="ln">5</td><td class="cl">      obj.hashCode();</td></tr>
-<tr><td class="ln">6</td><td class="cl">    } <b class="keyword">catch</b> (StringIndexOutOfBoundsException e) {</td></tr>
-<tr><td class="ln">7</td><td class="cl">      e.getMessage();</td></tr>
-<tr><td class="ln">8</td><td class="cl">    } <b class="keyword">finally</b> {</td></tr>
-<tr><td class="ln">9</td><td class="cl">      obj.getClass();</td></tr>
-<tr><td class="ln">10</td><td class="cl">    }</td></tr>
+<tr><td class="ln">3</td><td class="cl">    <b class="keyword">void</b> m(Object o) {</td></tr>
+<tr><td class="ln">4</td><td class="cl">        <b class="keyword">try</b> {</td></tr>
+<tr><td class="ln">5</td><td class="cl">            o.notify();</td></tr>
+<tr><td class="ln">6</td><td class="cl">        } <b class="keyword">catch</b> (Exception e) {</td></tr>
+<tr><td class="ln">7</td><td class="cl">            e.notify();</td></tr>
+<tr><td class="ln">8</td><td class="cl">        } <b class="keyword">finally</b> {</td></tr>
+<tr><td class="ln">9</td><td class="cl">            o.notifyAll();</td></tr>
+<tr><td class="ln">10</td><td class="cl">        }</td></tr>
 <tr><td class="ln">11</td><td class="cl"></td></tr>
-<tr><td class="ln">12</td><td class="cl">  }</td></tr>
+<tr><td class="ln">12</td><td class="cl">    }</td></tr>
 <tr><td class="ln">13</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="trycatchfinally_class" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vv//ADsAJwoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgACAAgMAAkACgEACGhhc2hDb2RlAQADKClJCgACAAwMAA0ADgEACGdldENsYXNzAQATKClMamF2YS9sYW5nL0NsYXNzOwcAEAEAKWphdmEvbGFuZy9TdHJpbmdJbmRleE91dE9mQm91bmRzRXhjZXB0aW9uCgAPABIMABMAFAEACmdldE1lc3NhZ2UBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwcAFgEAD1RyeUNhdGNoRmluYWxseQEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQARTFRyeUNhdGNoRmluYWxseTsBAAFtAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWAQABZQEAK0xqYXZhL2xhbmcvU3RyaW5nSW5kZXhPdXRPZkJvdW5kc0V4Y2VwdGlvbjsBAANvYmoBABJMamF2YS9sYW5nL09iamVjdDsBAA1TdGFja01hcFRhYmxlBwAkAQATamF2YS9sYW5nL1Rocm93YWJsZQEAClNvdXJjZUZpbGUBABRUcnlDYXRjaEZpbmFsbHkuamF2YQAgABUAAgAAAAAAAgAAAAUABgABABcAAAAvAAEAAQAAAAUqtwABsQAAAAIAGAAAAAYAAQAAAAEAGQAAAAwAAQAAAAUAGgAbAAAAAAAcAB0AAQAXAAAArwABAAQAAAAkK7YAB1crtgALV6cAGU0stgARVyu2AAtXpwALTiu2AAtXLb+xAAMAAAAFAA0ADwAAAAUAGwAAAA0AEwAbAAAAAwAYAAAAKgAKAAAABQAFAAkACgAKAA0ABgAOAAcAEwAJABgACgAbAAkAIQAKACMADAAZAAAAIAADAA4ABQAeAB8AAgAAACQAGgAbAAAAAAAkACAAIQABACIAAAALAANNBwAPTQcAIwcAAQAlAAAAAgAm", true,"trycatchfinally_class");
+main("yv66vv//ADsAIQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgACAAgMAAkABgEABm5vdGlmeQoAAgALDAAMAAYBAAlub3RpZnlBbGwHAA4BABNqYXZhL2xhbmcvRXhjZXB0aW9uBwAQAQAPVHJ5Q2F0Y2hGaW5hbGx5AQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABFMVHJ5Q2F0Y2hGaW5hbGx5OwEAAW0BABUoTGphdmEvbGFuZy9PYmplY3Q7KVYBAAFlAQAVTGphdmEvbGFuZy9FeGNlcHRpb247AQABbwEAEkxqYXZhL2xhbmcvT2JqZWN0OwEADVN0YWNrTWFwVGFibGUHAB4BABNqYXZhL2xhbmcvVGhyb3dhYmxlAQAKU291cmNlRmlsZQEAFFRyeUNhdGNoRmluYWxseS5qYXZhACAADwACAAAAAAACAAAABQAGAAEAEQAAAC8AAQABAAAABSq3AAGxAAAAAgASAAAABgABAAAAAQATAAAADAABAAAABQAUABUAAAAAABYAFwABABEAAACqAAEABAAAAB8rtgAHK7YACqcAFk0stgAHK7YACqcACk4rtgAKLb+xAAMAAAAEAAsADQAAAAQAFwAAAAsAEAAXAAAAAwASAAAAKgAKAAAABQAEAAkACAAKAAsABgAMAAcAEAAJABQACgAXAAkAHAAKAB4ADAATAAAAIAADAAwABAAYABkAAgAAAB8AFAAVAAAAAAAfABoAGwABABwAAAALAANLBwANSwcAHQYAAQAfAAAAAgAg", true,"trycatchfinally_class");
 </script>
 <br/>Java compiler version: <b>15</b><br/>
 <br/><b><a href="..\examples\index.html">Other examples</a></b>

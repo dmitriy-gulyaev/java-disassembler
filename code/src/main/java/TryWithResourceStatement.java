@@ -1,30 +1,21 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
-
 class TryWithResourceStatement {
 
-  void m1() throws E {
-    try (A a = new A()) {
-      a.hashCode();
+    void m1() throws Exception {
+        try (AutoCloseable a = newA()) {
+            a.hashCode();
+        }
     }
-  }
 
-  void m2() throws E {
-    try (A a = new A()) {
-      a.hashCode();
-    } catch (Exception e) {
-        throw e;
+    void m2() {
+        try (AutoCloseable a = newA()) {
+            a.hashCode();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-  }
 
-  class A implements AutoCloseable {
-    public void close() throws E{
-      throw new E();
+    private AutoCloseable newA() {
+        return null;
     }
-  }
-
-  class E extends Exception {
-  }
 
 }

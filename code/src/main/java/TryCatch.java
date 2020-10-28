@@ -3,7 +3,7 @@ class TryCatch {
   void m(Object obj) {
     try {
       obj.hashCode();
-    } catch (StringIndexOutOfBoundsException e) {
+    } catch (Exception e) {
       e.getMessage();
     }
   }

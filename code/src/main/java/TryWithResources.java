@@ -1,4 +1,4 @@
-class TryWithResourceStatement {
+class TryWithResources {
 
     void m1() throws Exception {
         try (AutoCloseable a = newA()) {
@@ -11,6 +11,14 @@ class TryWithResourceStatement {
             a.hashCode();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    void m3() throws Exception {
+        try (
+            AutoCloseable a1 = newA();
+            AutoCloseable a2 = newA();
+            AutoCloseable a3 = newA();) {
         }
     }
 

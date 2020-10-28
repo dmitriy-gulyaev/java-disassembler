@@ -1147,18 +1147,14 @@ function main(dataView, isEmbedded, container) {
                         if (codeAttributeRecord.exception_table_length > 0) {
                             attributeValue = "";
 
-                            attributeValue = "<table class='tblexvar' " +
-                                " border='1'><tr><th width='50px'/><th width='60px'>start_pc</th><th width='50px'>end_pc</th><th width='120px'>handler_pc</th><th>catch_type</th</tr>";
                             for (var ln = 0; ln < codeAttributeRecord.exception_table_length; ln++) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
                                 var classOfException = lvtt.catch_type == 0 ? "any" : getClassName(lvtt.catch_type, false, true, false);
-                                attributeValue += "<tr>" +
-                                "<td/>" +
-                                "<td>" + lvtt.start_pc + "</td>" +
-                                "<td>" + lvtt.end_pc + "</td>" +
-                                "<td>" + lvtt.handler_pc + "</td>" +
-                                "<td style='text-align:left'>" + classOfException + "</td>" +
-                                "</tr>";
+                                attributeValue += 
+                                lvtt.start_pc + "-" +
+                                lvtt.end_pc + ": " +
+                                "<b>" + lvtt.handler_pc + "</b> - " +
+                                "<b>" + classOfException + "</b><br/>";
                                 for (var pc = lvtt.start_pc; pc <= lvtt.end_pc; pc++) {
                                     var trye = documentGetElementById("m-" + methodNumber + "-" + pc);
                                     if (trye) {
@@ -1173,7 +1169,6 @@ function main(dataView, isEmbedded, container) {
                                 }
 
                             }
-                            attributeValue += "</table>";
 
                             addKeyValue(tbody, "Exception table", attributeValue, null);
                         }

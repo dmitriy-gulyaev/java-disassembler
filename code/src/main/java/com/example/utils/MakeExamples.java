@@ -53,7 +53,7 @@ public class MakeExamples {
 			}
 
 			if (!htmlFileName.contains("$")) {
-				examplesIndex.write("\n<li><a href=\"" + htmlFileName + "\">" + htmlFileName + "</a></li>");
+				examplesIndex.write("\n<li><a href=\"" + htmlFileName + "\">" + htmlFileName.replace(".html", "") + "</a></li>");
 			} else {
 				return;
 			}

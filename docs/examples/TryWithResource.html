@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TryWithResource.class</title>
+<link type="text/css" rel="stylesheet" href="../iceberg.css"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h4>TryWithResource.class</h4><hr/>
+<h3>Source code</h3>
+<table width=100% class="ct">
+<tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> TryWithResource {</td></tr>
+<tr><td class="ln">2</td><td class="cl"></td></tr>
+<tr><td class="ln">3</td><td class="cl">    <b class="keyword">void</b> m1() <b class="keyword">throws</b> Exception {</td></tr>
+<tr><td class="ln">4</td><td class="cl">        <b class="keyword">try</b> (AutoCloseable a = newA()) {</td></tr>
+<tr><td class="ln">5</td><td class="cl">            a.hashCode();</td></tr>
+<tr><td class="ln">6</td><td class="cl">        }</td></tr>
+<tr><td class="ln">7</td><td class="cl">    }</td></tr>
+<tr><td class="ln">8</td><td class="cl"></td></tr>
+<tr><td class="ln">9</td><td class="cl">    <b class="keyword">void</b> m2() {</td></tr>
+<tr><td class="ln">10</td><td class="cl">        <b class="keyword">try</b> (AutoCloseable a = newA()) {</td></tr>
+<tr><td class="ln">11</td><td class="cl">            a.hashCode();</td></tr>
+<tr><td class="ln">12</td><td class="cl">        } <b class="keyword">catch</b> (Exception e) {</td></tr>
+<tr><td class="ln">13</td><td class="cl">            e.printStackTrace();</td></tr>
+<tr><td class="ln">14</td><td class="cl">        }</td></tr>
+<tr><td class="ln">15</td><td class="cl">    }</td></tr>
+<tr><td class="ln">16</td><td class="cl"></td></tr>
+<tr><td class="ln">17</td><td class="cl">    <b class="keyword">private</b> AutoCloseable newA() {</td></tr>
+<tr><td class="ln">18</td><td class="cl">        <b class="keyword">return</b> null;</td></tr>
+<tr><td class="ln">19</td><td class="cl">    }</td></tr>
+<tr><td class="ln">20</td><td class="cl"></td></tr>
+<tr><td class="ln">21</td><td class="cl">}</td></tr>
+</table>
+<h3>Bytecode</h3>
+<div id="trywithresource_class" style="border:1px solid #000000"></div>
+<script src="../iceberg-min.js"></script>
+<script>
+main("yv66vv//ADsAMAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAD1RyeVdpdGhSZXNvdXJjZQEABG5ld0EBABsoKUxqYXZhL2xhbmcvQXV0b0Nsb3NlYWJsZTsKAAIADgwADwAQAQAIaGFzaENvZGUBAAMoKUkLABIAEwcAFAwAFQAGAQAXamF2YS9sYW5nL0F1dG9DbG9zZWFibGUBAAVjbG9zZQcAFwEAE2phdmEvbGFuZy9UaHJvd2FibGUKABYAGQwAGgAbAQANYWRkU3VwcHJlc3NlZAEAGChMamF2YS9sYW5nL1Rocm93YWJsZTspVgcAHQEAE2phdmEvbGFuZy9FeGNlcHRpb24KABwAHwwAIAAGAQAPcHJpbnRTdGFja1RyYWNlAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABFMVHJ5V2l0aFJlc291cmNlOwEAAm0xAQABYQEAGUxqYXZhL2xhbmcvQXV0b0Nsb3NlYWJsZTsBAA1TdGFja01hcFRhYmxlAQAKRXhjZXB0aW9ucwEAAm0yAQABZQEAFUxqYXZhL2xhbmcvRXhjZXB0aW9uOwEAClNvdXJjZUZpbGUBABRUcnlXaXRoUmVzb3VyY2UuamF2YQAgAAgAAgAAAAAABAAAAAUABgABACEAAAAvAAEAAQAAAAUqtwABsQAAAAIAIgAAAAYAAQAAAAEAIwAAAAwAAQAAAAUAJAAlAAAAAAAmAAYAAgAhAAAAsQACAAQAAAAuKrYAB0wrtgANVyvGACIruQARAQCnABlNK8YAEiu5ABEBAKcACU4sLbYAGCy/sQACAAUACgAXABYAHAAiACUAFgADACIAAAAWAAUAAAAEAAUABQAKAAYAFwAEAC0ABwAjAAAAFgACAAUAKAAnACgAAQAAAC4AJAAlAAAAKQAAACkABP8AFwACBwAIBwASAAEHABb/AA0AAwcACAcAEgcAFgABBwAWBfkAAQAqAAAABAABABwAAAArAAYAAQAhAAAA3AACAAQAAAA2KrYAB0wrtgANVyvGACIruQARAQCnABlNK8YAEiu5ABEBAKcACU4sLbYAGCy/pwAITCu2AB6xAAMABQAKABcAFgAcACIAJQAWAAAALQAwABwAAwAiAAAAIgAIAAAACgAFAAsACgAMABcACgAtAA4AMAAMADEADQA1AA8AIwAAACAAAwAFACgAJwAoAAEAMQAEACwALQABAAAANgAkACUAAAApAAAALgAG/wAXAAIHAAgHABIAAQcAFv8ADQADBwAIBwASBwAWAAEHABYF+QABQgcAHAQAAgALAAwAAQAhAAAALAABAAEAAAACAbAAAAACACIAAAAGAAEAAAASACMAAAAMAAEAAAACACQAJQAAAAEALgAAAAIALw==", true,"trywithresource_class");
+</script>
+<br/>Java compiler version: <b>15</b><br/>
+<br/><b><a href="..\examples\index.html">Other examples</a></b>
+&nbsp;&nbsp;<a href="..\index.html">Main page</a>
+</body></html>

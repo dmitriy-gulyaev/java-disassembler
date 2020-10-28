@@ -11,39 +11,25 @@
 <table width=100% class="ct">
 <tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> TryWithResources {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">    <b class="keyword">void</b> m1() <b class="keyword">throws</b> Exception {</td></tr>
-<tr><td class="ln">4</td><td class="cl">        <b class="keyword">try</b> (AutoCloseable a = newA()) {</td></tr>
-<tr><td class="ln">5</td><td class="cl">            a.hashCode();</td></tr>
-<tr><td class="ln">6</td><td class="cl">        }</td></tr>
-<tr><td class="ln">7</td><td class="cl">    }</td></tr>
-<tr><td class="ln">8</td><td class="cl"></td></tr>
-<tr><td class="ln">9</td><td class="cl">    <b class="keyword">void</b> m2() {</td></tr>
-<tr><td class="ln">10</td><td class="cl">        <b class="keyword">try</b> (AutoCloseable a = newA()) {</td></tr>
-<tr><td class="ln">11</td><td class="cl">            a.hashCode();</td></tr>
-<tr><td class="ln">12</td><td class="cl">        } <b class="keyword">catch</b> (Exception e) {</td></tr>
-<tr><td class="ln">13</td><td class="cl">            e.printStackTrace();</td></tr>
-<tr><td class="ln">14</td><td class="cl">        }</td></tr>
-<tr><td class="ln">15</td><td class="cl">    }</td></tr>
-<tr><td class="ln">16</td><td class="cl"></td></tr>
-<tr><td class="ln">17</td><td class="cl">    <b class="keyword">void</b> m3() <b class="keyword">throws</b> Exception {</td></tr>
-<tr><td class="ln">18</td><td class="cl">        <b class="keyword">try</b> (</td></tr>
-<tr><td class="ln">19</td><td class="cl">            AutoCloseable a1 = newA();</td></tr>
-<tr><td class="ln">20</td><td class="cl">            AutoCloseable a2 = newA();</td></tr>
-<tr><td class="ln">21</td><td class="cl">            AutoCloseable a3 = newA();) {</td></tr>
-<tr><td class="ln">22</td><td class="cl">        }</td></tr>
-<tr><td class="ln">23</td><td class="cl">    }</td></tr>
-<tr><td class="ln">24</td><td class="cl"></td></tr>
-<tr><td class="ln">25</td><td class="cl">    <b class="keyword">private</b> AutoCloseable newA() {</td></tr>
-<tr><td class="ln">26</td><td class="cl">        <b class="keyword">return</b> null;</td></tr>
-<tr><td class="ln">27</td><td class="cl">    }</td></tr>
-<tr><td class="ln">28</td><td class="cl"></td></tr>
-<tr><td class="ln">29</td><td class="cl">}</td></tr>
+<tr><td class="ln">3</td><td class="cl">    <b class="keyword">void</b> m() <b class="keyword">throws</b> Exception {</td></tr>
+<tr><td class="ln">4</td><td class="cl">        <b class="keyword">try</b> (</td></tr>
+<tr><td class="ln">5</td><td class="cl">            AutoCloseable a1 = newA();</td></tr>
+<tr><td class="ln">6</td><td class="cl">            AutoCloseable a2 = newA();</td></tr>
+<tr><td class="ln">7</td><td class="cl">            AutoCloseable a3 = newA();) {</td></tr>
+<tr><td class="ln">8</td><td class="cl">        }</td></tr>
+<tr><td class="ln">9</td><td class="cl">    }</td></tr>
+<tr><td class="ln">10</td><td class="cl"></td></tr>
+<tr><td class="ln">11</td><td class="cl">    <b class="keyword">private</b> AutoCloseable newA() {</td></tr>
+<tr><td class="ln">12</td><td class="cl">        <b class="keyword">return</b> null;</td></tr>
+<tr><td class="ln">13</td><td class="cl">    }</td></tr>
+<tr><td class="ln">14</td><td class="cl"></td></tr>
+<tr><td class="ln">15</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="trywithresources_class" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vv//ADsANAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAEFRyeVdpdGhSZXNvdXJjZXMBAARuZXdBAQAbKClMamF2YS9sYW5nL0F1dG9DbG9zZWFibGU7CgACAA4MAA8AEAEACGhhc2hDb2RlAQADKClJCwASABMHABQMABUABgEAF2phdmEvbGFuZy9BdXRvQ2xvc2VhYmxlAQAFY2xvc2UHABcBABNqYXZhL2xhbmcvVGhyb3dhYmxlCgAWABkMABoAGwEADWFkZFN1cHByZXNzZWQBABgoTGphdmEvbGFuZy9UaHJvd2FibGU7KVYHAB0BABNqYXZhL2xhbmcvRXhjZXB0aW9uCgAcAB8MACAABgEAD3ByaW50U3RhY2tUcmFjZQEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQASTFRyeVdpdGhSZXNvdXJjZXM7AQACbTEBAAFhAQAZTGphdmEvbGFuZy9BdXRvQ2xvc2VhYmxlOwEADVN0YWNrTWFwVGFibGUBAApFeGNlcHRpb25zAQACbTIBAAFlAQAVTGphdmEvbGFuZy9FeGNlcHRpb247AQACbTMBAAJhMwEAAmEyAQACYTEBAApTb3VyY2VGaWxlAQAVVHJ5V2l0aFJlc291cmNlcy5qYXZhACAACAACAAAAAAAFAAAABQAGAAEAIQAAAC8AAQABAAAABSq3AAGxAAAAAgAiAAAABgABAAAAAQAjAAAADAABAAAABQAkACUAAAAAACYABgACACEAAACxAAIABAAAAC4qtgAHTCu2AA1XK8YAIiu5ABEBAKcAGU0rxgASK7kAEQEApwAJTiwttgAYLL+xAAIABQAKABcAFgAcACIAJQAWAAMAIgAAABYABQAAAAQABQAFAAoABgAXAAQALQAHACMAAAAWAAIABQAoACcAKAABAAAALgAkACUAAAApAAAAKQAE/wAXAAIHAAgHABIAAQcAFv8ADQADBwAIBwASBwAWAAEHABYF+QABACoAAAAEAAEAHAAAACsABgABACEAAADcAAIABAAAADYqtgAHTCu2AA1XK8YAIiu5ABEBAKcAGU0rxgASK7kAEQEApwAJTiwttgAYLL+nAAhMK7YAHrEAAwAFAAoAFwAWABwAIgAlABYAAAAtADAAHAADACIAAAAiAAgAAAAKAAUACwAKAAwAFwAKAC0ADgAwAAwAMQANADUADwAjAAAAIAADAAUAKAAnACgAAQAxAAQALAAtAAEAAAA2ACQAJQAAACkAAAAuAAb/ABcAAgcACAcAEgABBwAW/wANAAMHAAgHABIHABYAAQcAFgX5AAFCBwAcBAAAAC4ABgACACEAAAEwAAIABQAAAGIqtgAHTCq2AAdNKrYAB04txgAJLbkAEQEALMYAJCy5ABEBAKcAG04sxgAULLkAEQEApwALOgQtGQS2ABgtvyvGACIruQARAQCnABlNK8YAEiu5ABEBAKcACU4sLbYAGCy/sQAEAAoAGQAmABYAKwAxADQAFgAFAD4ASwAWAFAAVgBZABYAAwAiAAAAIgAIAAAAEwAFABQACgAVAA8AFgAmABIAPgAWAEsAEgBhABcAIwAAACoABAAPAAoALwAoAAMACgA0ADAAKAACAAUAXAAxACgAAQAAAGIAJAAlAAAAKQAAAEQACf0AGQcAEgcAEkwHABb/AA0ABAcACAcAEgcAEgcAFgABBwAWB/kAAUwHABb/AA0AAwcACAcAEgcAFgABBwAWBfkAAQAqAAAABAABABwAAgALAAwAAQAhAAAALAABAAEAAAACAbAAAAACACIAAAAGAAEAAAAaACMAAAAMAAEAAAACACQAJQAAAAEAMgAAAAIAMw==", true,"trywithresources_class");
+main("yv66vv//ADsAKAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAEFRyeVdpdGhSZXNvdXJjZXMBAARuZXdBAQAbKClMamF2YS9sYW5nL0F1dG9DbG9zZWFibGU7CwAOAA8HABAMABEABgEAF2phdmEvbGFuZy9BdXRvQ2xvc2VhYmxlAQAFY2xvc2UHABMBABNqYXZhL2xhbmcvVGhyb3dhYmxlCgASABUMABYAFwEADWFkZFN1cHByZXNzZWQBABgoTGphdmEvbGFuZy9UaHJvd2FibGU7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAEkxUcnlXaXRoUmVzb3VyY2VzOwEAAW0BAAJhMwEAGUxqYXZhL2xhbmcvQXV0b0Nsb3NlYWJsZTsBAAJhMgEAAmExAQANU3RhY2tNYXBUYWJsZQEACkV4Y2VwdGlvbnMHACUBABNqYXZhL2xhbmcvRXhjZXB0aW9uAQAKU291cmNlRmlsZQEAFVRyeVdpdGhSZXNvdXJjZXMuamF2YQAgAAgAAgAAAAAAAwAAAAUABgABABgAAAAvAAEAAQAAAAUqtwABsQAAAAIAGQAAAAYAAQAAAAEAGgAAAAwAAQAAAAUAGwAcAAAAAAAdAAYAAgAYAAABMAACAAUAAABiKrYAB0wqtgAHTSq2AAdOLcYACS25AA0BACzGACQsuQANAQCnABtOLMYAFCy5AA0BAKcACzoELRkEtgAULb8rxgAiK7kADQEApwAZTSvGABIruQANAQCnAAlOLC22ABQsv7EABAAKABkAJgASACsAMQA0ABIABQA+AEsAEgBQAFYAWQASAAMAGQAAACIACAAAAAUABQAGAAoABwAPAAgAJgAEAD4ACABLAAQAYQAJABoAAAAqAAQADwAKAB4AHwADAAoANAAgAB8AAgAFAFwAIQAfAAEAAABiABsAHAAAACIAAABEAAn9ABkHAA4HAA5MBwAS/wANAAQHAAgHAA4HAA4HABIAAQcAEgf5AAFMBwAS/wANAAMHAAgHAA4HABIAAQcAEgX5AAEAIwAAAAQAAQAkAAIACwAMAAEAGAAAACwAAQABAAAAAgGwAAAAAgAZAAAABgABAAAADAAaAAAADAABAAAAAgAbABwAAAABACYAAAACACc=", true,"trywithresources_class");
 </script>
 <br/>Java compiler version: <b>15</b><br/>
 <br/><b><a href="..\examples\index.html">Other examples</a></b>

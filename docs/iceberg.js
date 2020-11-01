@@ -832,6 +832,7 @@ function main(dataView, isEmbedded, container) {
                             var lvt = attributes[a].local_variable_table;
                             for (var v = 0; v < lvt.length; v++) {
                                 var tyu = lvt[v];
+                                // TODO start_pc,length
                                 if (tyu.index == variableIndex) {
                                     return (isStore ? "&rarr;" : "&larr;") + " <b title='" + getUTF8(tyu.descriptor_OR_signature_index) + "'>" + getUTF8(tyu.name_index) + "</b>";
                                 }

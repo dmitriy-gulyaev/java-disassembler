@@ -15,7 +15,8 @@ class TryWithResource {
     }
 
     private AutoCloseable newA() {
-        return null;
+        return new java.io.FileReader(
+                java.io.FileDescriptor.err);
     }
 
 }

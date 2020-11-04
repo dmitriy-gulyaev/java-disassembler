@@ -1151,7 +1151,7 @@ function main(dataView, isEmbedded, container) {
                             for (var ln = 0; ln < codeAttributeRecord.exception_table_length; ln++) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
                                 var classOfException = lvtt.catch_type == 0 ? "any" : getClassName(lvtt.catch_type, false, true, false);
-                                attributeValue += 
+                                attributeValue +=
                                 lvtt.start_pc + "-" +
                                 lvtt.end_pc + ": " +
                                 "<b>" + lvtt.handler_pc + "</b> - " +
@@ -1648,7 +1648,7 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tr, tdLN);
 
                 var td0 = documentCreateElement('td');
- 
+
                 if (isMaskSet(accessFlags, ACC_PUBLIC)) {
                     td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="green" stroke-width="1" fill="#006400"><title>public</title></circle></svg>';
                 } else if (isMaskSet(accessFlags, ACC_PRIVATE)) {
@@ -1793,9 +1793,10 @@ function main(dataView, isEmbedded, container) {
                 anchorTag.setAttribute('href', "#" + anchorName);
                 anchorTag.innerHTML = name;
                 li.appendChild(anchorTag);
-
             }
-            document.title = getClassName(classFile.this_class, true, true, false) + " - Iceberg - Online Java Disassembler";
+            if (!isEmbedded) {
+                document.title = getClassName(classFile.this_class, true, true, false) + " - Iceberg - Online Java Disassembler";
+            }
 
         }
 

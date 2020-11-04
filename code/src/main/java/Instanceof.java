@@ -1,4 +1,4 @@
-class InstanceOf {
+class Instanceof {
 
   void m(Object o) {
     if (o instanceof Number) {

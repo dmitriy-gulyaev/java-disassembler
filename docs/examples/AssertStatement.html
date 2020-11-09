@@ -11,30 +11,34 @@
 <table width=100% class="ct">
 <tr><td class="ln">1</td><td class="cl"><b class="keyword">class</b> AssertStatement {</td></tr>
 <tr><td class="ln">2</td><td class="cl"></td></tr>
-<tr><td class="ln">3</td><td class="cl">  <b class="keyword">void</b> m1(<b class="keyword">int</b> argument) {</td></tr>
-<tr><td class="ln">4</td><td class="cl">    <b class="keyword">assert</b> argument > 10;</td></tr>
+<tr><td class="ln">3</td><td class="cl">  <b class="keyword">static</b> {</td></tr>
+<tr><td class="ln">4</td><td class="cl">    <b class="keyword">assert</b> 1 == 2;</td></tr>
 <tr><td class="ln">5</td><td class="cl">  }</td></tr>
 <tr><td class="ln">6</td><td class="cl"></td></tr>
-<tr><td class="ln">7</td><td class="cl">  <b class="keyword">void</b> m2(<b class="keyword">int</b> argument) {</td></tr>
-<tr><td class="ln">8</td><td class="cl">    <b class="keyword">assert</b> argument > 20 : "abc";</td></tr>
+<tr><td class="ln">7</td><td class="cl">  <b class="keyword">void</b> m1(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">8</td><td class="cl">    <b class="keyword">assert</b> argument > 10;</td></tr>
 <tr><td class="ln">9</td><td class="cl">  }</td></tr>
 <tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">  <b class="keyword">void</b> m3(<b class="keyword">int</b> argument) {</td></tr>
-<tr><td class="ln">12</td><td class="cl">    <b class="keyword">assert</b> argument > 30 : 123;</td></tr>
+<tr><td class="ln">11</td><td class="cl">  <b class="keyword">void</b> m2(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">12</td><td class="cl">    <b class="keyword">assert</b> argument > 20 : "abc";</td></tr>
 <tr><td class="ln">13</td><td class="cl">  }</td></tr>
 <tr><td class="ln">14</td><td class="cl"></td></tr>
-<tr><td class="ln">15</td><td class="cl">  <b class="keyword">void</b> m4(<b class="keyword">int</b> argument) {</td></tr>
-<tr><td class="ln">16</td><td class="cl">    <b class="keyword">assert</b> argument > 40 : <b class="keyword">new</b> java.util.concurrent.DelayQueue();</td></tr>
+<tr><td class="ln">15</td><td class="cl">  <b class="keyword">void</b> m3(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">16</td><td class="cl">    <b class="keyword">assert</b> argument > 30 : 123;</td></tr>
 <tr><td class="ln">17</td><td class="cl">  }</td></tr>
 <tr><td class="ln">18</td><td class="cl"></td></tr>
-<tr><td class="ln">19</td><td class="cl">}</td></tr>
-<tr><td class="ln">20</td><td class="cl"></td></tr>
+<tr><td class="ln">19</td><td class="cl">  <b class="keyword">void</b> m4(<b class="keyword">int</b> argument) {</td></tr>
+<tr><td class="ln">20</td><td class="cl">    <b class="keyword">assert</b> argument > 40 : <b class="keyword">new</b> java.util.concurrent.DelayQueue();</td></tr>
+<tr><td class="ln">21</td><td class="cl">  }</td></tr>
+<tr><td class="ln">22</td><td class="cl"></td></tr>
+<tr><td class="ln">23</td><td class="cl">}</td></tr>
+<tr><td class="ln">24</td><td class="cl"></td></tr>
 </table>
 <h3>Bytecode</h3>
 <div id="assertstatement_class" style="border:1px solid #000000"></div>
 <script src="../iceberg-min.js"></script>
 <script>
-main("yv66vv//ADsAMAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCQAIAAkHAAoMAAsADAEAD0Fzc2VydFN0YXRlbWVudAEAEyRhc3NlcnRpb25zRGlzYWJsZWQBAAFaBwAOAQAYamF2YS9sYW5nL0Fzc2VydGlvbkVycm9yCgANAAMIABEBAANhYmMKAA0AEwwABQAUAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWCgANABYMAAUAFwEABChJKVYHABkBAB9qYXZhL3V0aWwvY29uY3VycmVudC9EZWxheVF1ZXVlCgAYAAMKABwAHQcAHgwAHwAgAQAPamF2YS9sYW5nL0NsYXNzAQAWZGVzaXJlZEFzc2VydGlvblN0YXR1cwEAAygpWgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQARTEFzc2VydFN0YXRlbWVudDsBAAJtMQEACGFyZ3VtZW50AQABSQEADVN0YWNrTWFwVGFibGUBAAJtMgEAAm0zAQACbTQBAAg8Y2xpbml0PgEAClNvdXJjZUZpbGUBABRBc3NlcnRTdGF0ZW1lbnQuamF2YQAgAAgAAgAAAAEQGAALAAwAAAAGAAAABQAGAAEAIQAAAC8AAQABAAAABSq3AAGxAAAAAgAiAAAABgABAAAAAQAjAAAADAABAAAABQAkACUAAAAAACYAFwABACEAAABWAAIAAgAAABWyAAeaABEbEAqjAAu7AA1ZtwAPv7EAAAADACIAAAAKAAIAAAAEABQABQAjAAAAFgACAAAAFQAkACUAAAAAABUAJwAoAAEAKQAAAAMAARQAAAAqABcAAQAhAAAAWAADAAIAAAAXsgAHmgATGxAUowANuwANWRIQtwASv7EAAAADACIAAAAKAAIAAAAIABYACQAjAAAAFgACAAAAFwAkACUAAAAAABcAJwAoAAEAKQAAAAMAARYAAAArABcAAQAhAAAAWAADAAIAAAAXsgAHmgATGxAeowANuwANWRB7twAVv7EAAAADACIAAAAKAAIAAAAMABYADQAjAAAAFgACAAAAFwAkACUAAAAAABcAJwAoAAEAKQAAAAMAARYAAAAsABcAAQAhAAAAXQAEAAIAAAAcsgAHmgAYGxAoowASuwANWbsAGFm3ABq3ABK/sQAAAAMAIgAAAAoAAgAAABAAGwARACMAAAAWAAIAAAAcACQAJQAAAAAAHAAnACgAAQApAAAAAwABGwAIAC0ABgABACEAAAA0AAEAAAAAABESCLYAG5oABwSnAAQDswAHsQAAAAIAIgAAAAYAAQAAAAEAKQAAAAUAAgxAAQABAC4AAAACAC8=", true,"assertstatement_class");
+main("yv66vv//ADsAMAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCQAIAAkHAAoMAAsADAEAD0Fzc2VydFN0YXRlbWVudAEAEyRhc3NlcnRpb25zRGlzYWJsZWQBAAFaBwAOAQAYamF2YS9sYW5nL0Fzc2VydGlvbkVycm9yCgANAAMIABEBAANhYmMKAA0AEwwABQAUAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWCgANABYMAAUAFwEABChJKVYHABkBAB9qYXZhL3V0aWwvY29uY3VycmVudC9EZWxheVF1ZXVlCgAYAAMKABwAHQcAHgwAHwAgAQAPamF2YS9sYW5nL0NsYXNzAQAWZGVzaXJlZEFzc2VydGlvblN0YXR1cwEAAygpWgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQARTEFzc2VydFN0YXRlbWVudDsBAAJtMQEACGFyZ3VtZW50AQABSQEADVN0YWNrTWFwVGFibGUBAAJtMgEAAm0zAQACbTQBAAg8Y2xpbml0PgEAClNvdXJjZUZpbGUBABRBc3NlcnRTdGF0ZW1lbnQuamF2YQAgAAgAAgAAAAEQGAALAAwAAAAGAAAABQAGAAEAIQAAAC8AAQABAAAABSq3AAGxAAAAAgAiAAAABgABAAAAAQAjAAAADAABAAAABQAkACUAAAAAACYAFwABACEAAABWAAIAAgAAABWyAAeaABEbEAqjAAu7AA1ZtwAPv7EAAAADACIAAAAKAAIAAAAIABQACQAjAAAAFgACAAAAFQAkACUAAAAAABUAJwAoAAEAKQAAAAMAARQAAAAqABcAAQAhAAAAWAADAAIAAAAXsgAHmgATGxAUowANuwANWRIQtwASv7EAAAADACIAAAAKAAIAAAAMABYADQAjAAAAFgACAAAAFwAkACUAAAAAABcAJwAoAAEAKQAAAAMAARYAAAArABcAAQAhAAAAWAADAAIAAAAXsgAHmgATGxAeowANuwANWRB7twAVv7EAAAADACIAAAAKAAIAAAAQABYAEQAjAAAAFgACAAAAFwAkACUAAAAAABcAJwAoAAEAKQAAAAMAARYAAAAsABcAAQAhAAAAXQAEAAIAAAAcsgAHmgAYGxAoowASuwANWbsAGFm3ABq3ABK/sQAAAAMAIgAAAAoAAgAAABQAGwAVACMAAAAWAAIAAAAcACQAJQAAAAAAHAAnACgAAQApAAAAAwABGwAIAC0ABgABACEAAABLAAIAAAAAAB8SCLYAG5oABwSnAAQDswAHsgAHmgALuwANWbcAD7+xAAAAAgAiAAAADgADAAAAAQAQAAQAHgAFACkAAAAGAAMMQAEQAAEALgAAAAIALw==", true,"assertstatement_class");
 </script>
 <h3>Comment</h3>
  Assert statement in method m2 results in invoke of AssertionError(Object) constructor since AssertionError(String) although exists but is private. 

@@ -1,5 +1,9 @@
 class AssertStatement {
 
+  static {
+    assert 1 == 2;
+  }
+
   void m1(int argument) {
     assert argument > 10;
   }

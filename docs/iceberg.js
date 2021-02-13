@@ -1795,7 +1795,7 @@ function main(dataView, isEmbedded, container) {
                 li.appendChild(anchorTag);
             }
             if (!isEmbedded) {
-                document.title = getClassName(classFile.this_class, true, true, false) + " - Iceberg - Online Java Disassembler";
+                document.title = getClassName(classFile.this_class, true, true, false) + " - Online Java Disassembler";
             }
 
         }

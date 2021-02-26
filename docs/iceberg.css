@@ -30,7 +30,7 @@ span {
   background: #eeeeee; color: #000000; padding-right: 5px; padding-left: 5px;
 }
 .oc {
-  float: left; width: 125px; text-align: center; border: 1px #777777 solid; font-weight: bold;
+  float: left; width: 90%; text-align: center; border: 1px #777777 solid; font-weight: bold;
 }
 .oc-cons {
   background: #999999; color: #000000; 

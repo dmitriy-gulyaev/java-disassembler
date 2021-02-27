@@ -176,7 +176,7 @@ public class MakeExamples {
 
         line = line.replace("<", "&lt;").replace("<", "&gt;");
         line = line.replaceAll(
-            "(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while) ",
+            "(record|sealed|permits|abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while) ",
             "<b class=\"keyword\">$1</b> ");
 
         lines.append(String.format("<tr><td class=\"ln\">%s</td><td class=\"cl\">%s</td></tr>\r\n", lineCounter,

@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>java-disassembler</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.javascript</groupId>
+			<artifactId>closure-compiler</artifactId>
+			<version>v20211107</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>com.github.blutorange</groupId>
+				<artifactId>closure-compiler-maven-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<!-- Base configuration for all executions (bundles) -->
+					<baseSourceDir>${project.basedir}/src/main/resources</baseSourceDir>
+					<baseTargetDir>${project.build.directory}/generated-resources</baseTargetDir>
+				</configuration>
+				<executions>
+					<!-- Process all files in the "includes" directory individually -->
+					<execution>
+						<id>default-minify</id>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<sourceDir>../../../docs</sourceDir>
+							<includes>
+								<include>iceberg.js</include>
+							</includes>
+							<skipMerge>true</skipMerge>
+							<closureLanguageOut>ECMASCRIPT5</closureLanguageOut>
+						</configuration>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

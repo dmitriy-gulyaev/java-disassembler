@@ -1,2 +1,4 @@
 images
 classes
+/target/
+.settings

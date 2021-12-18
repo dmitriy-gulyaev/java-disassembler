@@ -375,6 +375,16 @@ function main(dataView, isEmbedded, container) {
             }
         }
 
+
+        function read_ATTRIBUTES_MDLP(attribute_info) {
+            attribute_info.package_count = r2();
+            attribute_info.package_index = new Array(attribute_info.package_count);
+            for (var pi = 0; pi < attribute_info.package_count; pi++) {
+                var index = r2();
+                attribute_info.package_index[pi] = index;
+            }
+		}
+
         function read_ATTRIBUTES_MODL(attribute_info) {
             attribute_info.module_name_index = r2();
             attribute_info.module_flags = r2();
@@ -567,6 +577,9 @@ function main(dataView, isEmbedded, container) {
                 return attribute_info;
             } else if (ATTRIBUTES_MODL == attributeName) {
                 read_ATTRIBUTES_MODL(attribute_info);
+                return attribute_info;
+            } else if (ATTRIBUTES_MDLP == attributeName) {
+                read_ATTRIBUTES_MDLP(attribute_info);
                 return attribute_info;
             } else if (ATTRIBUTES_RCRD == attributeName) {
                 read_ATTRIBUTES_RCRD(attribute_info);
@@ -1304,27 +1317,17 @@ function main(dataView, isEmbedded, container) {
                         attributeComment = "JVMS: A class must have an EnclosingMethod attribute if and only if it represents a local class or an anonymous class";
                         break;
                     case ATTRIBUTES_BOOT:
-                        attributeValue = "<ol start='0'>";
-                        for (var methodIndex = 0; methodIndex < attribute.num_bootstrap_methods; methodIndex++) {
-                            var bootstrapMethod = attribute.bootstrap_methods[methodIndex];
-                            var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
-
-                            var methodArguments = "<ol>";
-                            for (var methodArgumentIndex = 0; methodArgumentIndex < bootstrapMethod.num_bootstrap_arguments; methodArgumentIndex++) {
-                                methodArguments += "<li>" + getArgumentTypeAndValue(bootstrapMethod.bootstrap_arguments[methodArgumentIndex]) + "</li>";
-                            }
-                            methodArguments += "</ol>";
-
-                            attributeValue += "<li>" +
-                            method +
-                            ",<br/><b>Method arguments:</b> " +
-                            methodArguments +
-                            "</li>";
-                        }
-                        attributeValue += "</ol>";
+                        attributeValue = array2String(attribute.bootstrap_methods, (bootstrapMethod) => {
+							var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
+							var methodArguments = array2String(bootstrapMethod.bootstrap_arguments, (ba) => getArgumentTypeAndValue(ba));
+							return method + ",<br/><b>Method arguments:</b> " + methodArguments;
+                        });
                         attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
                         break;
-                    case ATTRIBUTES_MODL:
+                    case ATTRIBUTES_MDLP:
+                        attributeValue = array2String(attribute.package_index, (pi) => getArgumentTypeAndValue(pi));
+                        break;
+					case ATTRIBUTES_MODL:
                         attributeValue = getAccessModifiers(ACCESS_MODULE, attribute.module_flags);
                         attributeValue += " name = " + getArgumentTypeAndValue(attribute.module_name_index);
                         if (attribute.module_version_index > 0) {
@@ -1762,11 +1765,8 @@ function main(dataView, isEmbedded, container) {
             addKeyValue(tbody, "Super class", getArgumentTypeAndValue(classFile.super_class), null);
 
             if (classFile.interfaces_count > 0) {
-                var intf = "";
-                for (var i = 0; i < classFile.interfaces_count; i++) {
-                    intf += getArgumentTypeAndValue(classFile.interfaces[i]);
-                }
-                addKeyValue(tbody, "Interfaces", intf, null);
+				var interfaces =  array2String(classFile.interfaces, (i) => getArgumentTypeAndValue(i));
+                addKeyValue(tbody, "Interfaces", interfaces, null);
             }
 
             printAttributes(classFile);

@@ -1,5 +1,5 @@
 /**
-@preserve Copyright 2017-2020 Dmitriy Gulyaev.
+@preserve Copyright 2017-2021 Dmitriy Gulyaev.
  */
 function main(dataView, isEmbedded, container) {
 
@@ -52,6 +52,10 @@ function main(dataView, isEmbedded, container) {
     var ACC_MANDATED = ["MANDATED", 0x8000];
     /** @const */
     var ACC_OPEN = ["OPEN", 0x0020];
+    /** @const */
+    var ACC_TRANSITIVE = ["TRANSITIVE", 0x0020];
+    /** @const */
+    var ACC_STATIC_PHASE = ["STATIC_PHASE", 0x0040];
 
     /** @const */
     var ACCESS_CLASS = [
@@ -103,6 +107,13 @@ function main(dataView, isEmbedded, container) {
     /** @const */
     var ACCESS_MODULE = [
         ACC_OPEN,
+        ACC_SYNTHETIC,
+        ACC_MANDATED
+    ];
+    /** @const */
+    var ACCESS_REQUIRES = [
+        ACC_TRANSITIVE,
+        ACC_STATIC_PHASE,
         ACC_SYNTHETIC,
         ACC_MANDATED
     ];
@@ -1315,24 +1326,55 @@ function main(dataView, isEmbedded, container) {
                         break;
                     case ATTRIBUTES_MODL:
                         attributeValue = getAccessModifiers(ACCESS_MODULE, attribute.module_flags);
-                        attributeValue += " " + getArgumentTypeAndValue(attribute.module_name_index);
+                        attributeValue += " name = " + getArgumentTypeAndValue(attribute.module_name_index);
                         if (attribute.module_version_index > 0) {
-                            attributeValue += ", module version = " + getUTF8(attribute.module_version_index);
+                            attributeValue += ", version = " + getUTF8(attribute.module_version_index);
                         }
+
+                        var requires = array2String(attribute.requires, (req) => {
+                            var r = getArgumentTypeAndValue(req.requires_index);
+                            var a = getAccessModifiers(ACCESS_REQUIRES, req.requires_flags);
+                            var v = "";
+                            if (req.requires_version_index != 0) {
+                                v = " " + getUTF8(req.requires_version_index);
+                            }
+                            return r + " " + a + v;
+                        });
+                        addKeyValue(tbody, attributeName + ".requires", requires, null);
+
+                        var exports = array2String(attribute.exports, (exp) => {
+                            var e = getArgumentTypeAndValue(exp.exports_index);
+                            var a = getAccessModifiers(ACCESS_REQUIRES, exp.exports_flags);
+                            return e + " " + a;
+                        });
+                        addKeyValue(tbody, attributeName + ".exports", exports, null);
+
+                        var opens = array2String(attribute.opens, (opn) => {
+                            var o = getArgumentTypeAndValue(opn.opens_index);
+                            var a = getAccessModifiers(ACCESS_REQUIRES, opn.opens_flags);
+                            return o + " " + a;
+                        });
+                        addKeyValue(tbody, attributeName + ".opens", opens, null);
+
+                        var provides = array2String(attribute.provides, (prv) => {
+                            return getArgumentTypeAndValue(prv.provides_index);
+                        });
+                        addKeyValue(tbody, attributeName + ".provides", provides, null);
+
                         break;
                     case ATTRIBUTES_RCRD:
                         attributeValue = array2String(attribute.components, (component) => {
-                                var componentName = getUTF8(component.name_index);
-                                var componentDesc = getUTF8(component.descriptor_index);
-                                return componentName + ": " + componentDesc;
-                            });
+                            var componentName = getUTF8(component.name_index);
+                            var componentDesc = getUTF8(component.descriptor_index);
+                            return componentName + ": " + componentDesc;
+                        });
                         break;
                     case ATTRIBUTES_MPRS:
                         attributeValue = array2String(attribute.parameters, (parameter) => {
-                                var name = getUTF8(parameter.name_index);
-                                var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
-                                return name + " " + accessFlags;
-                            });
+                            var name = getUTF8(parameter.name_index);
+                            var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
+                            return name + " " + accessFlags;
+                        });
 
                         break;
                     case ATTRIBUTES_CODE:
@@ -1354,17 +1396,11 @@ function main(dataView, isEmbedded, container) {
             }
 
             function array2String(arry, fnc) {
-                var result = "";
+                var result = "<ol>";
                 for (let i = 0; i < arry.length; i++) {
-                    var value = arry[i];
-                    if (i > 0) {
-                        //result += ", ";
-                        result += "<br/>";
-                    }
-                    result += "(" + (i + 1) + ") " + fnc(value);
-
+                    result += "<li>" + fnc(arry[i]) + "</li>";
                 }
-                return result;
+                return result + "</ol>";
             }
 
             function getClassAccessModifiers(accessFlags) {
@@ -1560,7 +1596,8 @@ function main(dataView, isEmbedded, container) {
                     return getClassName(cpIndex, false, true, false);
 
                 case CONSTANT_Module:
-                    return getUTF8(cpEntry.name_index);
+                case CONSTANT_Package:
+                    return getUTF8AsString(cpEntry.name_index);
 
                 case CONSTANT_String:
                     return getUTF8AsString(cpEntry.string_index);
@@ -1661,11 +1698,11 @@ function main(dataView, isEmbedded, container) {
                 }
 
                 td0.style.textAlign = 'center';
-                td0.style.verticalAlign='bottom';
+                td0.style.verticalAlign = 'bottom';
                 appendChild(tr, td0);
 
                 var td2 = documentCreateElement('td');
-                td2.style.verticalAlign='bottom';
+                td2.style.verticalAlign = 'bottom';
                 td2.innerHTML = (anchorName) ? "<a name='" + anchorName + "'>" + entityName + "</a>" : entityName;
                 td2.colSpan = 3;
                 appendChild(tr, td2);

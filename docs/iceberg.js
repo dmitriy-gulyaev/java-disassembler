@@ -375,7 +375,6 @@ function main(dataView, isEmbedded, container) {
             }
         }
 
-
         function read_ATTRIBUTES_MDLP(attribute_info) {
             attribute_info.package_count = r2();
             attribute_info.package_index = new Array(attribute_info.package_count);
@@ -383,7 +382,7 @@ function main(dataView, isEmbedded, container) {
                 var index = r2();
                 attribute_info.package_index[pi] = index;
             }
-		}
+        }
 
         function read_ATTRIBUTES_MODL(attribute_info) {
             attribute_info.module_name_index = r2();
@@ -615,24 +614,21 @@ function main(dataView, isEmbedded, container) {
         }
 
         function readFields() {
-            for (var f = 0; f < classFile.fields_count; f++) {
-                var field_info = new Object();
-                field_info.access_flags = r2();
-                field_info.name_index = r2();
-                field_info.descriptor_index = r2();
-                readAttributes(field_info);
-                classFile.fields[f] = field_info;
-            }
+            readFM(classFile.fields, classFile.fields_count);
         }
 
         function readMethods() {
-            for (var m = 0; m < classFile.methods_count; m++) {
-                var method_info = new Object();
-                method_info.access_flags = r2();
-                method_info.name_index = r2();
-                method_info.descriptor_index = r2();
-                readAttributes(method_info);
-                classFile.methods[m] = method_info;
+            readFM(classFile.methods, classFile.methods_count);
+        }
+
+        function readFM(arry, count) {
+            for (var f = 0; f < count; f++) {
+                var info = new Object();
+                info.access_flags = r2();
+                info.name_index = r2();
+                info.descriptor_index = r2();
+                readAttributes(info);
+                arry[f] = info;
             }
         }
 
@@ -1286,7 +1282,7 @@ function main(dataView, isEmbedded, container) {
                     var attribute = attributes[attributeIndex];
 
                     var attributeName = getConstantPoolItem(attribute.attribute_name_index).bytes;
-                    var attributeValue = "";
+                    var attributeValue = "// TODO";
                     var attributeComment = null;
 
                     switch (attributeName) {
@@ -1318,16 +1314,16 @@ function main(dataView, isEmbedded, container) {
                         break;
                     case ATTRIBUTES_BOOT:
                         attributeValue = array2String(attribute.bootstrap_methods, (bootstrapMethod) => {
-							var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
-							var methodArguments = array2String(bootstrapMethod.bootstrap_arguments, (ba) => getArgumentTypeAndValue(ba));
-							return method + ",<br/><b>Method arguments:</b> " + methodArguments;
+                            var method = getArgumentTypeAndValue(bootstrapMethod.bootstrap_method_ref);
+                            var methodArguments = array2String(bootstrapMethod.bootstrap_arguments, (ba) => getArgumentTypeAndValue(ba));
+                            return method + ",<br/><b>Method arguments:</b> " + methodArguments;
                         });
                         attributeComment = "JVMS: The BootstrapMethods attribute records bootstrap method specifiers referenced by invokedynamic instructions.";
                         break;
                     case ATTRIBUTES_MDLP:
                         attributeValue = array2String(attribute.package_index, (pi) => getArgumentTypeAndValue(pi));
                         break;
-					case ATTRIBUTES_MODL:
+                    case ATTRIBUTES_MODL:
                         attributeValue = getAccessModifiers(ACCESS_MODULE, attribute.module_flags);
                         attributeValue += " name = " + getArgumentTypeAndValue(attribute.module_name_index);
                         if (attribute.module_version_index > 0) {
@@ -1399,6 +1395,9 @@ function main(dataView, isEmbedded, container) {
             }
 
             function array2String(arry, fnc) {
+                if (arry.length == 1) {
+                    return fnc(arry[0]);
+                }
                 var result = "<ol>";
                 for (let i = 0; i < arry.length; i++) {
                     result += "<li>" + fnc(arry[i]) + "</li>";
@@ -1689,16 +1688,7 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tr, tdLN);
 
                 var td0 = documentCreateElement('td');
-
-                if (isMaskSet(accessFlags, ACC_PUBLIC)) {
-                    td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="green" stroke-width="1" fill="#006400"><title>public</title></circle></svg>';
-                } else if (isMaskSet(accessFlags, ACC_PRIVATE)) {
-                    td0.innerHTML = '<svg width="16" height="16"><rect x="2" y="2" width="10" height="10" style="fill:#8b0000;stroke-width:1;stroke:#ff0000"><title>private</title></rect></svg>';
-                } else if (isMaskSet(accessFlags, ACC_PROTECTED)) {
-                    td0.innerHTML = '<svg width="16" height="16"><circle cx="8" cy="8" r="5" stroke="#dddddd" stroke-width="1" fill="#ffff00"><title>protected</title></circle></svg>';
-                } else {
-                    td0.innerHTML = '<svg width="16" height="16"><polygon points="2,14 8,3 14,14" fill="rgb(34,104,165)" stroke="purple" stroke-width="1" /></svg>';
-                }
+                td0.innerHTML = getAccessIcon(accessFlags);
 
                 td0.style.textAlign = 'center';
                 td0.style.verticalAlign = 'bottom';
@@ -1711,6 +1701,25 @@ function main(dataView, isEmbedded, container) {
                 appendChild(tr, td2);
 
                 appendChild(tbody, tr);
+
+            }
+
+            function getAccessIcon(accessFlags) {
+                var result = '<svg width="16" height="16" fill="#ffffff">';
+                if (isMaskSet(accessFlags, ACC_PUBLIC)) {
+                    result += '<circle cx="8" cy="8" r="6" stroke="#ff0000" stroke-width="1" fill="#006400"><title>public</title></circle>';
+                } else if (isMaskSet(accessFlags, ACC_PRIVATE)) {
+                    result += '<rect x="2" y="2" width="12" height="12" stroke-width="1" fill="#8b0000" stroke="#ff0000"><title>private</title></rect>';
+                } else if (isMaskSet(accessFlags, ACC_PROTECTED)) {
+                    result += '<circle cx="8" cy="8" r="6" stroke="#dddddd" stroke-width="1" fill="#ffff00"><title>protected</title></circle>';
+                } else {
+                    result += '<polygon points="2,14 8,3 14,14" fill="rgb(34,104,165)" stroke="purple" stroke-width="1" />';
+                }
+                return result += '</svg>';
+
+                function getAccessTitle(accessType) {
+                    return '<title>' + accessType + '</title>';
+                }
             }
 
             function addKeyValue(tbody, key, value, keyComment) {
@@ -1749,7 +1758,7 @@ function main(dataView, isEmbedded, container) {
 
             var mv = classFile.major_version;
             var jdkv = '';
-            if (mv >= 49 && mv <= 60) {
+            if (mv >= 49 && mv <= 61) {
                 jdkv = 'Java ' + (mv - 44);
             } else if (mv >= 46 && mv <= 48) {
                 jdkv = 'Java 1.' + (mv - 44);
@@ -1765,7 +1774,7 @@ function main(dataView, isEmbedded, container) {
             addKeyValue(tbody, "Super class", getArgumentTypeAndValue(classFile.super_class), null);
 
             if (classFile.interfaces_count > 0) {
-				var interfaces =  array2String(classFile.interfaces, (i) => getArgumentTypeAndValue(i));
+                var interfaces = array2String(classFile.interfaces, (i) => getArgumentTypeAndValue(i));
                 addKeyValue(tbody, "Interfaces", interfaces, null);
             }
 
@@ -1787,7 +1796,7 @@ function main(dataView, isEmbedded, container) {
                         outline.appendChild(fol);
                     }
                 }
-                addItemToFMList(field_info, anchorName, fol);
+                addItemToFMList(field_info, anchorName, fol, field_info.access_flags);
             }
 
             for (var m = 0; m < classFile.methods_count; m++) {
@@ -1807,7 +1816,7 @@ function main(dataView, isEmbedded, container) {
                         outline.appendChild(mol);
                     }
                 }
-                addItemToFMList(method_info, anchorName, mol);
+                addItemToFMList(method_info, anchorName, mol, method_info.access_flags);
             }
             /*
             for (var cpIterator = 0; cpIterator < classFile.constant_pool_count; cpIterator++) {
@@ -1824,16 +1833,17 @@ function main(dataView, isEmbedded, container) {
             }
              */
 
-            function addItemToFMList(info, anchorName, olElement) {
+            function addItemToFMList(info, anchorName, olElement, accessFlags) {
                 var name = getFieldOrMethodPlainName(info);
                 var li = documentCreateElement('li');
                 olElement.appendChild(li);
 
                 var anchorTag = documentCreateElement('a');
                 anchorTag.setAttribute('href', "#" + anchorName);
-                anchorTag.innerHTML = name;
+                anchorTag.innerHTML = getAccessIcon(accessFlags) + " " + name;
                 li.appendChild(anchorTag);
             }
+
             if (!isEmbedded) {
                 document.title = getClassName(classFile.this_class, true, true, false) + " - Online Java Disassembler";
             }
@@ -1863,6 +1873,7 @@ function main(dataView, isEmbedded, container) {
         classFile.magic = magic;
         classFile.minor_version = r2();
         classFile.major_version = r2();
+
         classFile.constant_pool_count = r2();
         classFile.constant_pool = new Array(classFile.constant_pool_count - 1);
         read_cp();
@@ -1870,6 +1881,7 @@ function main(dataView, isEmbedded, container) {
         classFile.access_flags = r2();
         classFile.this_class = r2();
         classFile.super_class = r2();
+
         classFile.interfaces_count = r2();
         classFile.interfaces = new Array(classFile.interfaces_count);
         read_interfaces();

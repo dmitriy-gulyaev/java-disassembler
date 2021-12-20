@@ -35,7 +35,7 @@ public class MakeExamples {
       examplesIndex.println("<style>ol {margin-left:20px} li {margin: 3px}</style>");
       examplesIndex.println("</head>");
       examplesIndex.println("<body><h2>Examples</h2><ol>");
-      Files.list(Paths.get(binDir)).forEach(path -> each(path, examplesIndex));
+      Files.list(Paths.get(binDir)).sorted().forEach(path -> each(path, examplesIndex));
       examplesIndex.println("\n</ol>");
       examplesIndex.println("<div class='mainpage'><a href=\"..\\index.html\">Main page</a></div>");
       examplesIndex.println("</body></html>");

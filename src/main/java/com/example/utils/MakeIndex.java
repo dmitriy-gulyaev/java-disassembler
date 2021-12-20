@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 public class MakeIndex {
 
-	private final static String VERSION = "15";
+	private final static String VERSION = "17";
 
 	public static void main(String[] args) throws IOException {
 		make(false);
@@ -17,7 +17,7 @@ public class MakeIndex {
 
 	public static void make(boolean isBig) throws IOException {
 
-		Path cssFilePath = Paths.get(isBig ? "index-big.html" : "index.html");
+		Path cssFilePath = Paths.get(isBig ? "docs/index-big.html" : "docs/index.html");
 
 		try (PrintWriter pw = new PrintWriter(Files.newOutputStream(cssFilePath))) {
 

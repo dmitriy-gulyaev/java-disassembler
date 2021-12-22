@@ -1752,7 +1752,7 @@ function main(dataView, isEmbedded, container) {
 
             function printAccessFlags(accessFlagsString) {
                 if (accessFlagsString != "") {
-                    addKeyValue(tbody, "Access flags", accessFlagsString, null);
+                    addKeyValue(tbody, "Flags", accessFlagsString, null);
                 }
             }
 

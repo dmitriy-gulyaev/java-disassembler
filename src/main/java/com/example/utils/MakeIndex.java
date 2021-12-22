@@ -60,7 +60,7 @@ public class MakeIndex {
 			if (isBig) {
 				pw.write("<script src=\"iceberg.js\"></script>");
 			} else {
-				pw.write("<script src=\"iceberg-min.js\"></script>");
+				pw.write("<script src=\"iceberg.min.js\"></script>");
 			}
 
 			pw.write("</html>");

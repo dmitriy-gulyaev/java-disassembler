@@ -1,4 +1,4 @@
-class ConstructorBody extends AssertionError {
+class ConstructorBody extends java.lang.AssertionError {
 
   ConstructorBody(int param) {
   }

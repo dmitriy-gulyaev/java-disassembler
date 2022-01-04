@@ -1,5 +1,5 @@
 /**
-@preserve Copyright 2017-2021 Dmitriy Gulyaev.
+@preserve Copyright 2017-2022 Dmitriy Gulyaev.
  */
 function main(dataView, isEmbedded, container) {
 
@@ -272,9 +272,7 @@ function main(dataView, isEmbedded, container) {
         var c = 0;
 
         function r() {
-            var result = dataView.getUint8(c);
-            c += 1;
-            return result;
+            return dataView.getUint8(c++);
         }
 
         function r2() {
@@ -296,92 +294,67 @@ function main(dataView, isEmbedded, container) {
         function read_ATTRIBUTES_CODE(attribute_info) {
             attribute_info.max_stack = r2();
             attribute_info.max_locals = r2();
-            attribute_info.code_length = r4();
-            attribute_info.code = new Array(attribute_info.code_length);
-            for (var c = 0; c < attribute_info.code_length; c++) {
-                attribute_info.code[c] = r();
-            }
-            attribute_info.exception_table_length = r2();
-            attribute_info.exception_table = new Array(attribute_info.exception_table_length);
-            for (var e = 0; e < attribute_info.exception_table_length; e++) {
-                var exception_table_entry = new Object();
-                exception_table_entry.start_pc = r2();
-                exception_table_entry.end_pc = r2();
-                exception_table_entry.handler_pc = r2();
-                exception_table_entry.catch_type = r2();
-                attribute_info.exception_table[e] = exception_table_entry;
-            }
+            attribute_info.code = readArrayAttributes(r, r4);
+            attribute_info.exception_table = readArrayAttributes(exceptionTableEntry);
             readAttributes(attribute_info);
         }
 
+        function exceptionTableEntry() {
+            var result = new Object();
+            result.start_pc = r2();
+            result.end_pc = r2();
+            result.handler_pc = r2();
+            result.catch_type = r2();
+            return result;
+        }
+
         function read_ATTRIBUTES_INNR(attribute_info) {
-            //attribute_info.signature_index = r2();
-            attribute_info.number_of_classes = r2();
-            attribute_info.classes = new Array(attribute_info.number_of_classes);
-            for (var innr = 0; innr < attribute_info.number_of_classes; innr++) {
-                var iClass = {};
-                iClass.inner_class_info_index = r2();
-                iClass.outer_class_info_index = r2();
-                iClass.inner_name_index = r2();
-                iClass.inner_class_access_flags = r2();
-                attribute_info.classes[innr] = iClass;
-            }
+            attribute_info.classes = readArrayAttributes(function () {
+                var result = new Object();
+                result.inner_class_info_index = r2();
+                result.outer_class_info_index = r2();
+                result.inner_name_index = r2();
+                result.inner_class_access_flags = r2();
+                return result;
+            });
         }
 
         function read_ATTRIBUTES_LINE(attribute_info) {
-            attribute_info.line_number_table_length = r2();
-            attribute_info.line_number_table = new Array(attribute_info.line_number_table_length);
-            for (var aln = 0; aln < attribute_info.line_number_table_length; aln++) {
-                var line_number_tableEntry = new Object();
-                line_number_tableEntry.start_pc = r2();
-                line_number_tableEntry.line_number = r2();
-                attribute_info.line_number_table[aln] = line_number_tableEntry;
-            }
+            attribute_info.line_number_table = readArrayAttributes(function () {
+                var result = new Object();
+                result.start_pc = r2();
+                result.line_number = r2();
+                return result;
+            });
         }
 
         function read_ATTRIBUTES_EXCP(attribute_info) {
-            attribute_info.number_of_exceptions = r2();
-            attribute_info.exception_index_table = new Array(attribute_info.number_of_exceptions);
-            for (var aln = 0; aln < attribute_info.number_of_exceptions; aln++) {
-                attribute_info.exception_index_table[aln] = r2();
-            }
+            attribute_info.exception_index_table = readArrayAttributes(r2);
         }
+
         function read_ATTRIBUTES_LCVT_LCTT(attribute_info) {
-            attribute_info.local_variable_table_length = r2();
-            attribute_info.local_variable_table = new Array(attribute_info.local_variable_table_length);
-            for (var aln = 0; aln < attribute_info.local_variable_table_length; aln++) {
-                var local_variable_tableEntry = new Object();
-                local_variable_tableEntry.start_pc = r2();
-                local_variable_tableEntry.length = r2();
-                local_variable_tableEntry.name_index = r2();
-                local_variable_tableEntry.descriptor_OR_signature_index = r2();
-                local_variable_tableEntry.index = r2();
-                attribute_info.local_variable_table[aln] = local_variable_tableEntry;
-            }
+            attribute_info.local_variable_table = readArrayAttributes(function () {
+                var result = new Object();
+                result.start_pc = r2();
+                result.length = r2();
+                result.name_index = r2();
+                result.descriptor_OR_signature_index = r2();
+                result.index = r2();
+                return result;
+            });
         }
 
         function read_ATTRIBUTES_BOOT(attribute_info) {
-            attribute_info.num_bootstrap_methods = r2();
-            attribute_info.bootstrap_methods = new Array(attribute_info.num_bootstrap_methods);
-            for (var a = 0; a < attribute_info.num_bootstrap_methods; a++) {
+            attribute_info.bootstrap_methods = readArrayAttributes(function () {
                 var bootstrap_method = new Object();
                 bootstrap_method.bootstrap_method_ref = r2();
-                bootstrap_method.num_bootstrap_arguments = r2();
-                bootstrap_method.bootstrap_arguments = new Array(bootstrap_method.num_bootstrap_arguments);
-                for (var args = 0; args < bootstrap_method.num_bootstrap_arguments; args++) {
-                    bootstrap_method.bootstrap_arguments[args] = r2();
-                }
-                attribute_info.bootstrap_methods[a] = bootstrap_method;
-            }
+                bootstrap_method.bootstrap_arguments = readArrayAttributes(r2);
+                return bootstrap_method;
+            });
         }
 
         function read_ATTRIBUTES_MDLP(attribute_info) {
-            attribute_info.package_count = r2();
-            attribute_info.package_index = new Array(attribute_info.package_count);
-            for (var pi = 0; pi < attribute_info.package_count; pi++) {
-                var index = r2();
-                attribute_info.package_index[pi] = index;
-            }
+            attribute_info.package_index = readArrayAttributes(r2);
         }
 
         function read_ATTRIBUTES_MODL(attribute_info) {
@@ -389,26 +362,22 @@ function main(dataView, isEmbedded, container) {
             attribute_info.module_flags = r2();
             attribute_info.module_version_index = r2();
 
-            attribute_info.requires_count = r2();
-            attribute_info.requires = new Array(attribute_info.requires_count);
-            for (var amr = 0; amr < attribute_info.requires_count; amr++) {
+            attribute_info.requires = readArrayAttributes(function () {
                 var require = new Object();
                 require.requires_index = r2();
                 require.requires_flags = r2();
                 require.requires_version_index = r2();
-                attribute_info.requires[amr] = require;
-            }
+                return require;
+            });
 
-            attribute_info.exports_count = r2();
-            attribute_info.exports = new Array(attribute_info.exports_count);
-            for (var amr = 0; amr < attribute_info.exports_count; amr++) {
+            attribute_info.exports = readArrayAttributes(function () {
                 var exprt = new Object();
                 exprt.exports_index = r2();
                 exprt.exports_flags = r2();
                 exprt.exports_to_count = r2();
                 exprt.exports_to_index = readIndexArray(exprt.exports_to_count);
-                attribute_info.exports[amr] = exprt;
-            }
+                return exprt;
+            });
 
             attribute_info.opens_count = r2();
             attribute_info.opens = new Array(attribute_info.opens_count);
@@ -424,72 +393,61 @@ function main(dataView, isEmbedded, container) {
             attribute_info.uses_count = r2();
             attribute_info.uses_index = readIndexArray(attribute_info.uses_count);
 
-            attribute_info.provides_count = r2();
-            attribute_info.provides = new Array(attribute_info.provides_count);
-            for (var amr = 0; amr < attribute_info.provides_count; amr++) {
+            attribute_info.provides = readArrayAttributes(function () {
                 var provide = new Object();
                 provide.provides_index = r2();
                 provide.provides_with_count = r2();
                 provide.provides_with_index = readIndexArray(provide.provides_with_count);
-                attribute_info.provides[amr] = provide;
-            }
+                return provide;
+            });
+
         }
 
         function read_ATTRIBUTES_RCRD(attribute_info) {
             //https://bugs.openjdk.java.net/browse/JDK-8225058
-            attribute_info.components_count = r2();
-            attribute_info.components = new Array(attribute_info.components_count);
-            for (var aln = 0; aln < attribute_info.components_count; aln++) {
+            attribute_info.components = readArrayAttributes(fnc);
+            function fnc() {
                 var component_info = new Object();
                 component_info.name_index = r2();
                 component_info.descriptor_index = r2();
-                component_info.attributes_count = r2();
-                component_info.attributes = new Array(component_info.attributes_count);
-                for (var atr = 0; atr < component_info.attributes_count; atr++) {
+                component_info.attributes = readArrayAttributes(function () {
                     var attribute_info2 = new Object();
                     attribute_info2.attribute_name_index = r2();
                     attribute_info2.attribute_length = r4();
                     for (var a = 0; a < attribute_info2.attribute_length; a++) {
                         r();
                     }
-                    component_info.attributes[atr] = attribute_info2;
-                }
-                attribute_info.components[aln] = component_info;
+                    return attribute_info2;
+                });
+                return component_info;
             }
         }
 
         function read_ATTRIBUTES_MPRS(attribute_info) {
-            attribute_info.parameters_count = r();
-            attribute_info.parameters = new Array(attribute_info.parameters_count);
-            for (var i = 0; i < attribute_info.parameters_count; i++) {
+            function fnc() {
                 var parameter = new Object();
                 parameter.name_index = r2();
                 parameter.access_flags = r2();
-                attribute_info.parameters[i] = parameter;
+                return parameter;
             }
+            attribute_info.parameters = readArrayAttributes(fnc, r);
         }
 
         function readAnnotation() {
             var annotation = new Object();
             annotation.type_index = r2();
-            annotation.num_element_value_pairs = r2();
-            annotation.element_value_pairs = new Array(annotation.num_element_value_pairs);
-            for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+            annotation.element_value_pairs = readArrayAttributes(function () {
                 var valuePair = new Object();
                 valuePair.element_name_index = r2();
                 valuePair.value = read_element_value();
-                annotation.element_value_pairs[j] = valuePair;
-            }
+                return valuePair;
+            });
+
             return annotation;
         }
 
         function read_ATTRIBUTES_RVAN(attribute_info) {
-            attribute_info.num_annotations = r2();
-            var annotations = new Array(attribute_info.num_annotations);
-            for (var i = 0; i < attribute_info.num_annotations; i++) {
-                annotations[i] = readAnnotation();
-            }
-            attribute_info.annotations = annotations;
+            attribute_info.annotations = readArrayAttributes(readAnnotation);
         }
 
         function read_element_value() {
@@ -522,12 +480,7 @@ function main(dataView, isEmbedded, container) {
                 break;
             case '[':
                 var array_value = new Object();
-                array_value.num_values = r2();
-                var values = new Array(array_value.num_values);
-                for (var j = 0; j < array_value.num_values; j++) {
-                    values[j] = read_element_value();
-                }
-                array_value.values = values;
+                array_value.values = readArrayAttributes(read_element_value);
                 value.array_value = array_value;
                 break;
             default:
@@ -605,6 +558,15 @@ function main(dataView, isEmbedded, container) {
             return attribute_info;
         }
 
+        function readArrayAttributes(fnc, countFnc) {
+            var count = countFnc == null ? r2() : countFnc();
+            var result = new Array(count);
+            for (var i = 0; i < count; i++) {
+                result[i] = fnc();
+            }
+            return result;
+        }
+
         function readIndexArray(count) {
             var indxArray = new Array(count);
             for (var i = 0; i < count; i++) {
@@ -633,17 +595,8 @@ function main(dataView, isEmbedded, container) {
         }
 
         function readAttributes(info) {
-            info.attributes_count = r2();
-            info.attributes = new Array(info.attributes_count);
-            for (var a = 0; a < info.attributes_count; a++) {
-                info.attributes[a] = readAttribute();
-            }
-        }
-
-        function read_interfaces() {
-            for (var i = 0; i < classFile.interfaces_count; i++) {
-                classFile.interfaces[i] = r2();
-            }
+            info.attributes = readArrayAttributes(readAttribute);
+            info.attributes_count = info.attributes.length;
         }
 
         function read_cp() {
@@ -876,7 +829,7 @@ function main(dataView, isEmbedded, container) {
 
                         var isWide = false;
                         var code = method_info.attributes[methodAttributes].code;
-                        for (var oc = 0; oc < method_info.attributes[methodAttributes].code_length; oc++) {
+                        for (var oc = 0; oc < method_info.attributes[methodAttributes].code.length; oc++) {
                             var ocPlace = oc;
                             var opcode = code[oc];
                             var title = '';
@@ -1123,7 +1076,7 @@ function main(dataView, isEmbedded, container) {
 
                             if (ATTRIBUTES_LINE == codeAttributeName) {
                                 var ttt = method_info.attributes[methodAttributes].attributes[codeAttributes];
-                                for (var ln = 0; ln < ttt.line_number_table_length; ln++) {
+                                for (var ln = 0; ln < ttt.line_number_table.length; ln++) {
                                     var lineNumberTable = ttt.line_number_table[ln];
                                     var eid = "m-" + methodNumber + "-" + lineNumberTable.start_pc;
                                     var e = documentGetElementById(eid);
@@ -1141,11 +1094,11 @@ function main(dataView, isEmbedded, container) {
                             } else if (ATTRIBUTES_LCVT == codeAttributeName || ATTRIBUTES_LCTT == codeAttributeName) {
                                 var isATTRIBUTES_LCVT = ATTRIBUTES_LCVT == codeAttributeName;
                                 var localVariableTableAttribute = method_info.attributes[methodAttributes].attributes[codeAttributes];
-                                if (localVariableTableAttribute.local_variable_table_length > 0) {
+                                if (localVariableTableAttribute.local_variable_table.length > 0) {
                                     var descriptionOrSignature = isATTRIBUTES_LCVT ? "descriptor" : "signature";
                                     codeAttributeValue = codeAttributeValue + "<table class='tblexvar' " +
                                         " border='1'><tr><th width='50px'>index</th><th width='65px'>start_pc</th><th width='50px'>length</th><th width='120px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
-                                    for (var ln = 0; ln < localVariableTableAttribute.local_variable_table_length; ln++) {
+                                    for (var ln = 0; ln < localVariableTableAttribute.local_variable_table.length; ln++) {
                                         var lvtt = localVariableTableAttribute.local_variable_table[ln];
                                         codeAttributeValue = codeAttributeValue + "<tr>" +
                                             "<td>" + lvtt.index + "</td>" +
@@ -1165,10 +1118,10 @@ function main(dataView, isEmbedded, container) {
                             }
                         }
 
-                        if (codeAttributeRecord.exception_table_length > 0) {
+                        if (codeAttributeRecord.exception_table.length > 0) {
                             attributeValue = "";
 
-                            for (var ln = 0; ln < codeAttributeRecord.exception_table_length; ln++) {
+                            for (var ln = 0; ln < codeAttributeRecord.exception_table.length; ln++) {
                                 var lvtt = codeAttributeRecord.exception_table[ln];
                                 var classOfException = lvtt.catch_type == 0 ? "any" : getClassName(lvtt.catch_type, false, true, false);
                                 attributeValue +=
@@ -1263,7 +1216,7 @@ function main(dataView, isEmbedded, container) {
             function annotationToString(annotation) {
                 var annName = getUTF8(annotation.type_index);
                 var v = "";
-                for (var j = 0; j < annotation.num_element_value_pairs; j++) {
+                for (var j = 0; j < annotation.element_value_pairs.length; j++) {
                     if (j > 0) {
                         v += ", "
                     }
@@ -1773,7 +1726,7 @@ function main(dataView, isEmbedded, container) {
             printAccessFlags(getClassAccessModifiers(classFile.access_flags));
             addKeyValue(tbody, "Super class", getArgumentTypeAndValue(classFile.super_class), null);
 
-            if (classFile.interfaces_count > 0) {
+            if (classFile.interfaces.length > 0) {
                 var interfaces = array2String(classFile.interfaces, (i) => getArgumentTypeAndValue(i));
                 addKeyValue(tbody, "Interfaces", interfaces, null);
             }
@@ -1882,9 +1835,7 @@ function main(dataView, isEmbedded, container) {
         classFile.this_class = r2();
         classFile.super_class = r2();
 
-        classFile.interfaces_count = r2();
-        classFile.interfaces = new Array(classFile.interfaces_count);
-        read_interfaces();
+        classFile.interfaces = readArrayAttributes(r2);
 
         classFile.fields_count = r2();
         classFile.fields = new Array(classFile.fields_count);

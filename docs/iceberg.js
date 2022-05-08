@@ -496,62 +496,64 @@ function main(dataView, isEmbedded, container) {
 
             var attributeName = getConstantPoolItem(attribute_info.attribute_name_index).bytes;
 
-            if (ATTRIBUTES_CODE == attributeName) {
+            switch (attributeName) {
+            case ATTRIBUTES_CODE:
                 read_ATTRIBUTES_CODE(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_CONS == attributeName) {
+            case ATTRIBUTES_CONS:
                 attribute_info.constantvalue_index = r2();
                 return attribute_info;
-            } else if (ATTRIBUTES_SIGN == attributeName) {
+            case ATTRIBUTES_SIGN:
                 attribute_info.signature_index = r2();
                 return attribute_info;
-            } else if (ATTRIBUTES_ENCL == attributeName) {
+            case ATTRIBUTES_ENCL:
                 attribute_info.class_index = r2();
                 attribute_info.method_index = r2();
                 return attribute_info;
-            } else if (ATTRIBUTES_BOOT == attributeName) {
+            case ATTRIBUTES_BOOT:
                 read_ATTRIBUTES_BOOT(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_INNR == attributeName) {
+            case ATTRIBUTES_INNR:
                 read_ATTRIBUTES_INNR(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_EXCP == attributeName) {
+            case ATTRIBUTES_EXCP:
                 read_ATTRIBUTES_EXCP(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_LINE == attributeName) {
+            case ATTRIBUTES_LINE:
                 read_ATTRIBUTES_LINE(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_LCVT == attributeName || ATTRIBUTES_LCTT == attributeName) {
+            case ATTRIBUTES_LCVT:
+            case ATTRIBUTES_LCTT:
                 read_ATTRIBUTES_LCVT_LCTT(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_SRCF == attributeName) {
+            case ATTRIBUTES_SRCF:
                 attribute_info.sourcefile_index = r2();
                 return attribute_info;
-            } else if (ATTRIBUTES_MODL == attributeName) {
+            case ATTRIBUTES_MODL:
                 read_ATTRIBUTES_MODL(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_MDLP == attributeName) {
+            case ATTRIBUTES_MDLP:
                 read_ATTRIBUTES_MDLP(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_RCRD == attributeName) {
+            case ATTRIBUTES_RCRD:
                 read_ATTRIBUTES_RCRD(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_RVAN == attributeName) {
+            case ATTRIBUTES_RVAN:
                 read_ATTRIBUTES_RVAN(attribute_info);
                 return attribute_info;
-            } else if (ATTRIBUTES_NSTH == attributeName) {
+            case ATTRIBUTES_NSTH:
                 attribute_info.host_class_index = r2();
                 return attribute_info;
-            } else if (ATTRIBUTES_NSTM == attributeName || ATTRIBUTES_PSCL == attributeName) {
+            case ATTRIBUTES_NSTM:
+            case ATTRIBUTES_PSCL:
                 attribute_info.number_of_classes = r2();
                 attribute_info.classes = readIndexArray(attribute_info.number_of_classes);
                 return attribute_info;
-            } else if (ATTRIBUTES_MPRS == attributeName) {
+            case ATTRIBUTES_MPRS:
                 read_ATTRIBUTES_MPRS(attribute_info);
                 return attribute_info;
             }
 
-            //alert(attribute_info.attribute_length);
             for (var a = 0; a < attribute_info.attribute_length; a++) {
                 r();
             }
@@ -645,7 +647,6 @@ function main(dataView, isEmbedded, container) {
                 case CONSTANT_Utf8:
                     cpInfo.length = r2();
                     var bytes = "";
-                    var tempArray = new Array(cpInfo.length);
 
                     var x = -1;
                     for (var p = 0; p < cpInfo.length; p++) {

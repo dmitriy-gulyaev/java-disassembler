@@ -93,7 +93,7 @@ span {
   color: #0000ff; 
 }
 .attr {
-  color: #0000dd; text-align: right;
+  color: #0000dd; text-align: right; width: 320px;
 }
 .nmbr {
   background: #00dd00; color: #ffffff; padding-left:5px; padding-right:5px;

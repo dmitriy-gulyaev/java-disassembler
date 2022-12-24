@@ -450,6 +450,14 @@ function main(dataView, isEmbedded, container) {
             attribute_info.annotations = readArrayAttributes(readAnnotation);
         }
 
+        function read_ATTRIBUTES_RIPA(attribute_info) {
+            attribute_info.num_parameters = r();
+            attribute_info.parameter_annotations = new Array(attribute_info.num_parameters);
+            for (var i = 0; i < attribute_info.num_parameters; i++) {
+                attribute_info.parameter_annotations[i] = readArrayAttributes(readAnnotation);
+            }
+        }
+
         function read_element_value() {
             var value = new Object();
             value.tag = String.fromCharCode(r());
@@ -538,8 +546,13 @@ function main(dataView, isEmbedded, container) {
             case ATTRIBUTES_RCRD:
                 read_ATTRIBUTES_RCRD(attribute_info);
                 return attribute_info;
+            case ATTRIBUTES_RIAN:
             case ATTRIBUTES_RVAN:
                 read_ATTRIBUTES_RVAN(attribute_info);
+                return attribute_info;
+            case ATTRIBUTES_RIPA:
+            case ATTRIBUTES_RVPA:
+                read_ATTRIBUTES_RIPA(attribute_info);
                 return attribute_info;
             case ATTRIBUTES_NSTH:
                 attribute_info.host_class_index = r2();
@@ -1248,8 +1261,13 @@ function main(dataView, isEmbedded, container) {
                         attributeValue = getUTF8AsString(attribute.signature_index);
                         attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
                         break;
+                    case ATTRIBUTES_RIAN:
                     case ATTRIBUTES_RVAN:
                         attributeValue = array2String(attribute.annotations, (elmnt) => annotationToString(elmnt));
+                        break;
+                    case ATTRIBUTES_RIPA:
+                    case ATTRIBUTES_RVPA:
+                        attributeValue = array2String(attribute.parameter_annotations, (elmnt) => array2String(elmnt, (elmntNested) => annotationToString(elmntNested)));
                         break;
                     case ATTRIBUTES_SRCF:
                         attributeValue = getUTF8(attribute.sourcefile_index);

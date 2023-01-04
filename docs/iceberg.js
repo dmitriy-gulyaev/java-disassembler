@@ -1,5 +1,5 @@
 /**
-@preserve Copyright 2017-2022 Dmitriy Gulyaev.
+@preserve Copyright 2017-2023 Dmitriy Gulyaev.
  */
 function main(dataView, isEmbedded, container) {
 
@@ -188,6 +188,8 @@ function main(dataView, isEmbedded, container) {
     var ATTRIBUTES_RIPA = "RuntimeInvisibleParameterAnnotations";
     /** @const */
     var ATTRIBUTES_RVPA = "RuntimeVisibleParameterAnnotations";
+    /** @const */
+    var ATTRIBUTES_RVTA = "RuntimeVisibleTypeAnnotations";
 
     /** @const */
     var ATTRIBUTES_ANNT = "AnnotationDefault";
@@ -446,8 +448,99 @@ function main(dataView, isEmbedded, container) {
             return annotation;
         }
 
+        function readTypeAnnotation() {
+            var typeAnnotation = new Object();
+            var targetType = r();
+            typeAnnotation.target_type = targetType;
+            
+            var targetInfo = new Object();
+            switch(targetType) {
+
+                //type_parameter_target
+                case 0x00:
+                case 0x01:
+                    targetInfo.type_parameter_index = r();
+                    break;
+                //supertype_target
+                case 0x10:
+                    targetInfo.supertype_index = r2();
+                    break;
+                //type_parameter_bound_target
+                case 0x11:
+                case 0x12:
+                    targetInfo.type_parameter_index = r();
+                    targetInfo.bound_index = r();
+                    break;
+                //empty_target
+                case 0x13:
+                case 0x14:
+                case 0x15:
+                    break;
+                //formal_parameter_target
+                case 0x16:
+                    targetInfo.formal_parameter_index = r();
+                    break;
+                //throws_target
+                case 0x17:
+                    targetInfo.throws_type_index = r2();
+                    break;
+                //localvar_target
+                case 0x40:
+                case 0x41:
+                    targetInfo.localvar_target = new Object();
+                    targetInfo.localvar_target.table = readArrayAttributes(function () {
+                        var table = new Object();
+                        table.start_pc = r2();
+                        table.length = r2();
+                        table.index = r2();
+                        return table;
+                    });
+                    break;
+                //catch_target
+                case 0x42:
+                    targetInfo.exception_table_index = r2();
+                    break;
+                //offset_target
+                case 0x43:
+                case 0x44:
+                case 0x45:
+                case 0x46:
+                    targetInfo.offset = r2();
+                    break;
+                //type_argument_target
+                case 0x47:
+                case 0x48:
+                case 0x49:
+                case 0x4A:
+                case 0x4B:
+                    targetInfo.offset = r2();
+                    targetInfo.type_argument_index = r();
+                    break;
+            }
+            typeAnnotation.target_info = targetInfo;
+
+            var targetPath = new Object();
+            targetPath.path = readArrayAttributes(function () {
+                var path = new Object();
+                path.type_path_kind = r();
+                path.type_argument_index = r();
+                return path;
+            }, r);
+            typeAnnotation.target_path = targetPath;
+            
+            var annotation = readAnnotation();
+            typeAnnotation.type_index = annotation.type_index;
+            typeAnnotation.element_value_pairs = annotation.element_value_pairs;
+
+            return typeAnnotation;
+        }
+
         function read_ATTRIBUTES_RVAN(attribute_info) {
             attribute_info.annotations = readArrayAttributes(readAnnotation);
+        }
+
+        function read_ATTRIBUTES_RVTA(attribute_info) {
+            attribute_info.annotations = readArrayAttributes(readTypeAnnotation);
         }
 
         function read_ATTRIBUTES_RIPA(attribute_info) {
@@ -553,6 +646,9 @@ function main(dataView, isEmbedded, container) {
             case ATTRIBUTES_RIPA:
             case ATTRIBUTES_RVPA:
                 read_ATTRIBUTES_RIPA(attribute_info);
+                return attribute_info;
+            case ATTRIBUTES_RVTA:
+                read_ATTRIBUTES_RVTA(attribute_info);
                 return attribute_info;
             case ATTRIBUTES_NSTH:
                 attribute_info.host_class_index = r2();
@@ -1260,6 +1356,9 @@ function main(dataView, isEmbedded, container) {
                     case ATTRIBUTES_SIGN:
                         attributeValue = getUTF8AsString(attribute.signature_index);
                         attributeComment = "JVMS: A Signature attribute records a signature for a class, interface, constructor, method, or field whose declaration in the Java programming language uses type variables or parameterized types.";
+                        break;
+                    case ATTRIBUTES_RVTA:
+                        attributeValue = array2String(attribute.annotations, (elmnt) => annotationToString(elmnt) + ", "+JSON.stringify(elmnt.target_info));
                         break;
                     case ATTRIBUTES_RIAN:
                     case ATTRIBUTES_RVAN:

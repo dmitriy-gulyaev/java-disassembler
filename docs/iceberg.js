@@ -1,5 +1,5 @@
 /**
-@preserve Copyright 2017-2023 Dmitriy Gulyaev.
+@preserve Copyright 2017-2024 Dmitriy Gulyaev.
  */
 function main(dataView, isEmbedded, container) {
 
@@ -1324,7 +1324,7 @@ function main(dataView, isEmbedded, container) {
             }
 
             function annotationToString(annotation) {
-                var annName = getUTF8(annotation.type_index);
+                var annName = getClassNameByNameIndex(annotation.type_index, false, false, false)
                 var v = "";
                 for (var j = 0; j < annotation.element_value_pairs.length; j++) {
                     if (j > 0) {
@@ -1504,12 +1504,15 @@ function main(dataView, isEmbedded, container) {
 
             function getUTF8AsString(index) {
                 var result = getUTF8(index);
-                return "<code title='CP index=" + index + "' class='str'>" + result + "</code>";
+                return "<code title='CP index=" + index + "' class='str'>\"" + result + "\"</code>";
             }
 
             function getUTF8(index) {
                 var cpUtf8Entry = getConstantPoolItem(index);
-                return cpUtf8Entry.bytes.replace(new RegExp('<', 'g'), '&lt;');
+                return cpUtf8Entry.bytes
+                .replace(new RegExp('<', 'g'), '&lt;')
+                .replaceAll('\01', "\\u0001")
+                .replaceAll('\02', "\\u0002");
             }
 
             function getFieldOrMethodPlainName(info) {
@@ -1538,9 +1541,13 @@ function main(dataView, isEmbedded, container) {
                 return getClassName(index, false, true, false);
             }
             function getClassName(index, isOnlyName, addClassSuffux, isFullName) {
-                var prefix = "";
                 var cpEntryClass = getConstantPoolItem(index);
-                var className = getUTF8(cpEntryClass.name_index);
+                return getClassNameByNameIndex(cpEntryClass.name_index, isOnlyName, addClassSuffux, isFullName);
+            }
+
+            function getClassNameByNameIndex(nameIndex, isOnlyName, addClassSuffux, isFullName) {
+                var prefix = "";
+                var className = getUTF8(nameIndex);
                 className = className.replace(SLASH_TO_DOT_REG_EXP, '.');
                 var title = className;
 
@@ -1829,7 +1836,7 @@ function main(dataView, isEmbedded, container) {
 
             var mv = classFile.major_version;
             var jdkv = '';
-            if (mv >= 49 && mv <= 61) {
+            if (mv >= 49 && mv <= 67) {
                 jdkv = 'Java ' + (mv - 44);
             } else if (mv >= 46 && mv <= 48) {
                 jdkv = 'Java 1.' + (mv - 44);
@@ -1978,16 +1985,14 @@ window['main'] = main;
 
 if (window.FileReader) {
     function handleDragOver(evt) {
-        evt.stopPropagation();
         evt.preventDefault();
-        evt.dataTransfer.dropEffect = 'copy';
     }
 
     function handleFileSelect(evt) {
-        evt.stopPropagation();
+        //evt.stopPropagation();
         evt.preventDefault();
 
-        var files = (evt.type == "drop") ? evt.dataTransfer.files : evt.target.files; ;
+        var files = (evt.type == "drop") ? evt.dataTransfer.files : evt.target.files;
         var f = files[0];
         var output = [];
         var reader = new FileReader();
@@ -1998,7 +2003,7 @@ if (window.FileReader) {
         reader.readAsArrayBuffer(f);
     }
 
-    var dropZone = document.getElementById('drop_zone');
+    var dropZone = document;
     if (dropZone) {
         dropZone.addEventListener('dragover', handleDragOver, false);
         dropZone.addEventListener('drop', handleFileSelect, false);

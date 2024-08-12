@@ -2007,7 +2007,10 @@ if (window.FileReader) {
     if (dropZone) {
         dropZone.addEventListener('dragover', handleDragOver, false);
         dropZone.addEventListener('drop', handleFileSelect, false);
-        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+        var files = document.getElementById('files');
+        if (files) {
+            files.addEventListener('change', handleFileSelect, false);
+        }
     }
 
 }

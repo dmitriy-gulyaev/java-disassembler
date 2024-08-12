@@ -16,9 +16,4 @@ class AdditiveOperatorWithLongAndIntOperands {
     return (int) (long) (int) (long) (int) (long) (int1 + int2);
   }
 
-  
-  protected void name() {
-    
-  }
-  
 }

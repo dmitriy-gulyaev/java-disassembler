@@ -2,18 +2,23 @@ import java.util.Arrays;
 
 class VarArgs {
 
-  static void printVarArgs(String... args) {
-    System.out.println(Arrays.toString(args));
+  void accept(String... args) {
+    Arrays.toString(args);
   }
 
-  static void print(int i) {
-    String.format("Value of i = %s.", i);
+  void acceptOne() {
+    accept("one");
   }
 
-  private void doPrint() {
-    printVarArgs("one", "two");
-    printVarArgs(null);
-    printVarArgs();
+  void acceptTwo() {
+    accept("one", "two");
   }
 
+  void acceptNull() {
+    accept(null);
+  }
+
+  void acceptNone() {
+    accept();
+  }
 }

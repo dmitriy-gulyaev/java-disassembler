@@ -13,13 +13,13 @@
 <tr><td class="ln">2</td><td class="cl"></td></tr>
 <tr><td class="ln">3</td><td class="cl">    <b class="keyword">void</b> m() <b class="keyword">throws</b> Exception {</td></tr>
 <tr><td class="ln">4</td><td class="cl">        <b class="keyword">try</b> (</td></tr>
-<tr><td class="ln">5</td><td class="cl">            AutoCloseable a1 = newA();</td></tr>
-<tr><td class="ln">6</td><td class="cl">            AutoCloseable a2 = newA();</td></tr>
-<tr><td class="ln">7</td><td class="cl">            AutoCloseable a3 = newA();) {</td></tr>
+<tr><td class="ln">5</td><td class="cl">            AutoCloseable a1 = newAC();</td></tr>
+<tr><td class="ln">6</td><td class="cl">            AutoCloseable a2 = newAC();</td></tr>
+<tr><td class="ln">7</td><td class="cl">            AutoCloseable a3 = newAC();) {</td></tr>
 <tr><td class="ln">8</td><td class="cl">        }</td></tr>
 <tr><td class="ln">9</td><td class="cl">    }</td></tr>
 <tr><td class="ln">10</td><td class="cl"></td></tr>
-<tr><td class="ln">11</td><td class="cl">    <b class="keyword">private</b> AutoCloseable newA() {</td></tr>
+<tr><td class="ln">11</td><td class="cl">    <b class="keyword">private</b> AutoCloseable newAC() {</td></tr>
 <tr><td class="ln">12</td><td class="cl">        <b class="keyword">return</b> <b class="keyword">new</b> java.io.FileReader(</td></tr>
 <tr><td class="ln">13</td><td class="cl">                java.io.FileDescriptor.err);</td></tr>
 <tr><td class="ln">14</td><td class="cl">    }</td></tr>
@@ -27,10 +27,11 @@
 <tr><td class="ln">16</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
+<br/>
 <div id="trywithresources_class" style="border:1px solid #000000"></div>
 <script src="../iceberg.min.js"></script>
 <script>
-main("yv66vgAAAEEAMwoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAEFRyeVdpdGhSZXNvdXJjZXMBAARuZXdBAQAbKClMamF2YS9sYW5nL0F1dG9DbG9zZWFibGU7CwAOAA8HABAMABEABgEAF2phdmEvbGFuZy9BdXRvQ2xvc2VhYmxlAQAFY2xvc2UHABMBABNqYXZhL2xhbmcvVGhyb3dhYmxlCgASABUMABYAFwEADWFkZFN1cHByZXNzZWQBABgoTGphdmEvbGFuZy9UaHJvd2FibGU7KVYHABkBABJqYXZhL2lvL0ZpbGVSZWFkZXIJABsAHAcAHQwAHgAfAQAWamF2YS9pby9GaWxlRGVzY3JpcHRvcgEAA2VycgEAGExqYXZhL2lvL0ZpbGVEZXNjcmlwdG9yOwoAGAAhDAAFACIBABsoTGphdmEvaW8vRmlsZURlc2NyaXB0b3I7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEAEkxUcnlXaXRoUmVzb3VyY2VzOwEAAW0BAAJhMwEAGUxqYXZhL2xhbmcvQXV0b0Nsb3NlYWJsZTsBAAJhMgEAAmExAQANU3RhY2tNYXBUYWJsZQEACkV4Y2VwdGlvbnMHADABABNqYXZhL2xhbmcvRXhjZXB0aW9uAQAKU291cmNlRmlsZQEAFVRyeVdpdGhSZXNvdXJjZXMuamF2YQAgAAgAAgAAAAAAAwAAAAUABgABACMAAAAvAAEAAQAAAAUqtwABsQAAAAIAJAAAAAYAAQAAAAEAJQAAAAwAAQAAAAUAJgAnAAAAAAAoAAYAAgAjAAABMAACAAUAAABiKrYAB0wqtgAHTSq2AAdOLcYACS25AA0BACzGACQsuQANAQCnABtOLMYAFCy5AA0BAKcACzoELRkEtgAULb8rxgAiK7kADQEApwAZTSvGABIruQANAQCnAAlOLC22ABQsv7EABAAKABkAJgASACsAMQA0ABIABQA+AEsAEgBQAFYAWQASAAMAJAAAACIACAAAAAUABQAGAAoABwAPAAgAJgAEAD4ACABLAAQAYQAJACUAAAAqAAQADwAKACkAKgADAAoANAArACoAAgAFAFwALAAqAAEAAABiACYAJwAAAC0AAABEAAn9ABkHAA4HAA5MBwAS/wANAAQHAAgHAA4HAA4HABIAAQcAEgf5AAFMBwAS/wANAAMHAAgHAA4HABIAAQcAEgX5AAEALgAAAAQAAQAvAAIACwAMAAEAIwAAADUAAwABAAAAC7sAGFmyABq3ACCwAAAAAgAkAAAABgABAAAADAAlAAAADAABAAAACwAmACcAAAABADEAAAACADI=", true,"trywithresources_class");
+main("yv66vgAAAEEAMwoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAEFRyeVdpdGhSZXNvdXJjZXMBAAVuZXdBQwEAGygpTGphdmEvbGFuZy9BdXRvQ2xvc2VhYmxlOwsADgAPBwAQDAARAAYBABdqYXZhL2xhbmcvQXV0b0Nsb3NlYWJsZQEABWNsb3NlBwATAQATamF2YS9sYW5nL1Rocm93YWJsZQoAEgAVDAAWABcBAA1hZGRTdXBwcmVzc2VkAQAYKExqYXZhL2xhbmcvVGhyb3dhYmxlOylWBwAZAQASamF2YS9pby9GaWxlUmVhZGVyCQAbABwHAB0MAB4AHwEAFmphdmEvaW8vRmlsZURlc2NyaXB0b3IBAANlcnIBABhMamF2YS9pby9GaWxlRGVzY3JpcHRvcjsKABgAIQwABQAiAQAbKExqYXZhL2lvL0ZpbGVEZXNjcmlwdG9yOylWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBABJMVHJ5V2l0aFJlc291cmNlczsBAAFtAQACYTMBABlMamF2YS9sYW5nL0F1dG9DbG9zZWFibGU7AQACYTIBAAJhMQEADVN0YWNrTWFwVGFibGUBAApFeGNlcHRpb25zBwAwAQATamF2YS9sYW5nL0V4Y2VwdGlvbgEAClNvdXJjZUZpbGUBABVUcnlXaXRoUmVzb3VyY2VzLmphdmEAIAAIAAIAAAAAAAMAAAAFAAYAAQAjAAAALwABAAEAAAAFKrcAAbEAAAACACQAAAAGAAEAAAABACUAAAAMAAEAAAAFACYAJwAAAAAAKAAGAAIAIwAAATAAAgAFAAAAYiq2AAdMKrYAB00qtgAHTi3GAAktuQANAQAsxgAkLLkADQEApwAbTizGABQsuQANAQCnAAs6BC0ZBLYAFC2/K8YAIiu5AA0BAKcAGU0rxgASK7kADQEApwAJTiwttgAULL+xAAQACgAZACYAEgArADEANAASAAUAPgBLABIAUABWAFkAEgADACQAAAAiAAgAAAAFAAUABgAKAAcADwAIACYABAA+AAgASwAEAGEACQAlAAAAKgAEAA8ACgApACoAAwAKADQAKwAqAAIABQBcACwAKgABAAAAYgAmACcAAAAtAAAARAAJ/QAZBwAOBwAOTAcAEv8ADQAEBwAIBwAOBwAOBwASAAEHABIH+QABTAcAEv8ADQADBwAIBwAOBwASAAEHABIF+QABAC4AAAAEAAEALwACAAsADAABACMAAAA1AAMAAQAAAAu7ABhZsgAatwAgsAAAAAIAJAAAAAYAAQAAAAwAJQAAAAwAAQAAAAsAJgAnAAAAAQAxAAAAAgAy", true,"trywithresources_class");
 </script>
 <br/>Java compiler version: <b>21</b><br/>
 <div class='otherexm'><a href="..\examples\index.html">Other examples</a></div>

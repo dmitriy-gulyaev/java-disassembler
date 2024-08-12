@@ -13,27 +13,33 @@
 <tr><td class="ln">2</td><td class="cl"></td></tr>
 <tr><td class="ln">3</td><td class="cl"><b class="keyword">class</b> VarArgs {</td></tr>
 <tr><td class="ln">4</td><td class="cl"></td></tr>
-<tr><td class="ln">5</td><td class="cl">  <b class="keyword">static</b> <b class="keyword">void</b> printVarArgs(String... args) {</td></tr>
-<tr><td class="ln">6</td><td class="cl">    System.out.println(Arrays.toString(args));</td></tr>
+<tr><td class="ln">5</td><td class="cl">  <b class="keyword">void</b> accept(String... args) {</td></tr>
+<tr><td class="ln">6</td><td class="cl">    Arrays.toString(args);</td></tr>
 <tr><td class="ln">7</td><td class="cl">  }</td></tr>
 <tr><td class="ln">8</td><td class="cl"></td></tr>
-<tr><td class="ln">9</td><td class="cl">  <b class="keyword">static</b> <b class="keyword">void</b> print(<b class="keyword">int</b> i) {</td></tr>
-<tr><td class="ln">10</td><td class="cl">    String.format("Value of i = %s.", i);</td></tr>
+<tr><td class="ln">9</td><td class="cl">  <b class="keyword">void</b> acceptOne() {</td></tr>
+<tr><td class="ln">10</td><td class="cl">    accept("one");</td></tr>
 <tr><td class="ln">11</td><td class="cl">  }</td></tr>
 <tr><td class="ln">12</td><td class="cl"></td></tr>
-<tr><td class="ln">13</td><td class="cl">  <b class="keyword">private</b> <b class="keyword">void</b> doPrint() {</td></tr>
-<tr><td class="ln">14</td><td class="cl">    printVarArgs("one", "two");</td></tr>
-<tr><td class="ln">15</td><td class="cl">    printVarArgs(null);</td></tr>
-<tr><td class="ln">16</td><td class="cl">    printVarArgs();</td></tr>
-<tr><td class="ln">17</td><td class="cl">  }</td></tr>
-<tr><td class="ln">18</td><td class="cl"></td></tr>
-<tr><td class="ln">19</td><td class="cl">}</td></tr>
+<tr><td class="ln">13</td><td class="cl">  <b class="keyword">void</b> acceptTwo() {</td></tr>
+<tr><td class="ln">14</td><td class="cl">    accept("one", "two");</td></tr>
+<tr><td class="ln">15</td><td class="cl">  }</td></tr>
+<tr><td class="ln">16</td><td class="cl"></td></tr>
+<tr><td class="ln">17</td><td class="cl">  <b class="keyword">void</b> acceptNull() {</td></tr>
+<tr><td class="ln">18</td><td class="cl">    accept(null);</td></tr>
+<tr><td class="ln">19</td><td class="cl">  }</td></tr>
+<tr><td class="ln">20</td><td class="cl"></td></tr>
+<tr><td class="ln">21</td><td class="cl">  <b class="keyword">void</b> acceptNone() {</td></tr>
+<tr><td class="ln">22</td><td class="cl">    accept();</td></tr>
+<tr><td class="ln">23</td><td class="cl">  }</td></tr>
+<tr><td class="ln">24</td><td class="cl">}</td></tr>
 </table>
 <h3>Bytecode</h3>
+<br/>
 <div id="varargs_class" style="border:1px solid #000000"></div>
 <script src="../iceberg.min.js"></script>
 <script>
-main("yv66vgAAAEEAPwoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCQAIAAkHAAoMAAsADAEAEGphdmEvbGFuZy9TeXN0ZW0BAANvdXQBABVMamF2YS9pby9QcmludFN0cmVhbTsKAA4ADwcAEAwAEQASAQAQamF2YS91dGlsL0FycmF5cwEACHRvU3RyaW5nAQAnKFtMamF2YS9sYW5nL09iamVjdDspTGphdmEvbGFuZy9TdHJpbmc7CgAUABUHABYMABcAGAEAE2phdmEvaW8vUHJpbnRTdHJlYW0BAAdwcmludGxuAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWCAAaAQAQVmFsdWUgb2YgaSA9ICVzLgoAHAAdBwAeDAAfACABABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7CgAiACMHACQMACUAJgEAEGphdmEvbGFuZy9TdHJpbmcBAAZmb3JtYXQBADkoTGphdmEvbGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS9sYW5nL1N0cmluZzsIACgBAANvbmUIACoBAAN0d28KACwALQcALgwALwAwAQAHVmFyQXJncwEADHByaW50VmFyQXJncwEAFihbTGphdmEvbGFuZy9TdHJpbmc7KVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEACUxWYXJBcmdzOwEABGFyZ3MBABNbTGphdmEvbGFuZy9TdHJpbmc7AQAFcHJpbnQBAAQoSSlWAQABaQEAAUkBAAdkb1ByaW50AQAKU291cmNlRmlsZQEADFZhckFyZ3MuamF2YQAgACwAAgAAAAAABAAAAAUABgABADEAAAAvAAEAAQAAAAUqtwABsQAAAAIAMgAAAAYAAQAAAAMAMwAAAAwAAQAAAAUANAA1AAAAiAAvADAAAQAxAAAAOQACAAEAAAALsgAHKrgADbYAE7EAAAACADIAAAAKAAIAAAAGAAoABwAzAAAADAABAAAACwA2ADcAAAAIADgAOQABADEAAABAAAUAAQAAABISGQS9AAJZAxq4ABtTuAAhV7EAAAACADIAAAAKAAIAAAAKABEACwAzAAAADAABAAAAEgA6ADsAAAACADwABgABADEAAABTAAQAAQAAAB0FvQAiWQMSJ1NZBBIpU7gAKwG4ACsDvQAiuAArsQAAAAIAMgAAABIABAAAAA4AEQAPABUAEAAcABEAMwAAAAwAAQAAAB0ANAA1AAAAAQA9AAAAAgA+", true,"varargs_class");
+main("yv66vgAAAEEAJgoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAEGphdmEvdXRpbC9BcnJheXMBAAh0b1N0cmluZwEAJyhbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvU3RyaW5nOwcADgEAEGphdmEvbGFuZy9TdHJpbmcIABABAANvbmUKABIAEwcAFAwAFQAWAQAHVmFyQXJncwEABmFjY2VwdAEAFihbTGphdmEvbGFuZy9TdHJpbmc7KVYIABgBAAN0d28BAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEACUxWYXJBcmdzOwEABGFyZ3MBABNbTGphdmEvbGFuZy9TdHJpbmc7AQAJYWNjZXB0T25lAQAJYWNjZXB0VHdvAQAKYWNjZXB0TnVsbAEACmFjY2VwdE5vbmUBAApTb3VyY2VGaWxlAQAMVmFyQXJncy5qYXZhACAAEgACAAAAAAAGAAAABQAGAAEAGQAAAC8AAQABAAAABSq3AAGxAAAAAgAaAAAABgABAAAAAwAbAAAADAABAAAABQAcAB0AAACAABUAFgABABkAAAA+AAEAAgAAAAYruAAHV7EAAAACABoAAAAKAAIAAAAGAAUABwAbAAAAFgACAAAABgAcAB0AAAAAAAYAHgAfAAEAAAAgAAYAAQAZAAAAPAAFAAEAAAAOKgS9AA1ZAxIPU7YAEbEAAAACABoAAAAKAAIAAAAKAA0ACwAbAAAADAABAAAADgAcAB0AAAAAACEABgABABkAAABBAAUAAQAAABMqBb0ADVkDEg9TWQQSF1O2ABGxAAAAAgAaAAAACgACAAAADgASAA8AGwAAAAwAAQAAABMAHAAdAAAAAAAiAAYAAQAZAAAANAACAAEAAAAGKgG2ABGxAAAAAgAaAAAACgACAAAAEgAFABMAGwAAAAwAAQAAAAYAHAAdAAAAAAAjAAYAAQAZAAAANwACAAEAAAAJKgO9AA22ABGxAAAAAgAaAAAACgACAAAAFgAIABcAGwAAAAwAAQAAAAkAHAAdAAAAAQAkAAAAAgAl", true,"varargs_class");
 </script>
 <br/>Java compiler version: <b>21</b><br/>
 <div class='otherexm'><a href="..\examples\index.html">Other examples</a></div>

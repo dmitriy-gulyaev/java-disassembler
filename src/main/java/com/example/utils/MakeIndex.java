@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 public class MakeIndex {
 
-	private final static String VERSION = "17";
+	private final static String VERSION = "21";
 
 	public static void main(String[] args) throws IOException {
 		make(false);

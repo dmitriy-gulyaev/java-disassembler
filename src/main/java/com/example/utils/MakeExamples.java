@@ -31,6 +31,7 @@ public class MakeExamples {
       examplesIndex.println("<!DOCTYPE html>");
       examplesIndex.println("<html>");
       examplesIndex.println("<head>");
+      examplesIndex.println("<title>Examples</title>");
       examplesIndex.println("<link type=\"text/css\" rel=\"stylesheet\" href=\"../iceberg.css\"/>");
       examplesIndex.println("<style>ol {margin-left:20px} li {margin: 3px}</style>");
       examplesIndex.println("</head>");
@@ -142,6 +143,7 @@ public class MakeExamples {
 
   private static void printBinClass(PrintWriter out, Path path) throws IOException {
     String container = path.getFileName().toString().replace('.', '_').toLowerCase();
+    out.println("<br/>");
     out.println("<div id=\"" + container + "\" style=\"border:1px solid #000000\"></div>");
     out.println("<script src=\"../iceberg.min.js\"></script>");
     out.println("<script>");

@@ -1,5 +1,5 @@
 /**
-@preserve Copyright 2017-2024 Dmitriy Gulyaev.
+@preserve Copyright 2017-2025 Dmitriy Gulyaev.
  */
 function main(dataView, isEmbedded, container) {
 
@@ -1207,14 +1207,14 @@ function main(dataView, isEmbedded, container) {
                                 if (localVariableTableAttribute.local_variable_table.length > 0) {
                                     var descriptionOrSignature = isATTRIBUTES_LCVT ? "descriptor" : "signature";
                                     codeAttributeValue = codeAttributeValue + "<table class='tblexvar' " +
-                                        " border='1'><tr><th width='50px'>index</th><th width='65px'>start_pc</th><th width='50px'>length</th><th width='120px'>name</th><th>" + descriptionOrSignature + "</th></tr>";
+                                        " border='1'><tr><th width='50px'>index</th><th width='65px'>start_pc</th><th width='50px'>length</th><th width='30%'>name</th><th>" + descriptionOrSignature + "</th></tr>";
                                     for (var ln = 0; ln < localVariableTableAttribute.local_variable_table.length; ln++) {
                                         var lvtt = localVariableTableAttribute.local_variable_table[ln];
                                         codeAttributeValue = codeAttributeValue + "<tr>" +
                                             "<td>" + lvtt.index + "</td>" +
                                             "<td>" + lvtt.start_pc + "</td>" +
                                             "<td>" + lvtt.length + "</td>" +
-                                            "<td>" + getUTF8AsString(lvtt.name_index) + "</td>" +
+                                            "<td style='text-align:left'>" + getUTF8AsString(lvtt.name_index) + "</td>" +
                                             "<td style='text-align:left'>" + getUTF8AsString(lvtt.descriptor_OR_signature_index) + "</td>" +
                                             "</tr>";
                                     }
@@ -1441,8 +1441,8 @@ function main(dataView, isEmbedded, container) {
                         break;
                     case ATTRIBUTES_MPRS:
                         attributeValue = array2String(attribute.parameters, (parameter) => {
-                            var name = getUTF8(parameter.name_index);
-                            var accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
+                            const name = parameter.name_index == 0 ? "parameter with no name" : getUTF8(parameter.name_index);
+                            const accessFlags = getAccessModifiers(ACCESS_PARAMETER, parameter.access_flags);
                             return name + " " + accessFlags;
                         });
 

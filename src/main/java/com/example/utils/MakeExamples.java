@@ -16,7 +16,6 @@ import java.util.Locale;
 
 public class MakeExamples {
 
-  private static String version = System.getProperty("java.version");
   private static final String srcDir = "src/main/java/";
   private static final String binDir = "target/classes/";
   private static final String outDir = "docs/examples/";
@@ -111,7 +110,7 @@ public class MakeExamples {
         out.println("<br/>");
       }
 
-      out.println("<br/>Java compiler version: <b>" + version + "</b><br/>");
+      out.println("<br/>");
 
       out.println("<div class='otherexm'><a href=\"..\\examples\\index.html\">Other examples</a></div>");
       out.println("<div class='mainpage'><a href=\"..\\index.html\">Main page</a></div>");
